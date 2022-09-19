@@ -1,31 +1,38 @@
 <template>
   <div>
     <img
-      src="LogoOdontología.jpg"
+      src="Logo-unal.png"
       alt="Universidad Nacional de Colombia"
       width="”500″"
       height="”600″"
     />
     <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
   </div>
-  <div class="center">
-    <div class="input_label">
-      <h2>Inicio de Sesión</h2>
-      <label for="namef" id="namef">Usuario </label><br />
-      <input type="text" id="user" class="fname" /><br />
-      <label for="namel" id="namel">Contraseña </label><br />
-      <input type="text" id="password" class="lname" /><br /><br />
-    </div>
-    <div class="input_label">
-      <button for="accept" id="acceptButton">Aceptar</button><br />
-      <label>¿Sin Usuario? Registrarse</label>
-      <br /><br />
-    </div>
-  </div>
+  <login ref="loginPage" v-show="loginShow" />
+  <registro ref="registry" v-show="registryShow" />
 </template>
 
 <script>
-export default {};
+//import { ref } from "vue";
+//import Vue from "vue";
+import registro from "./components/registroEstudiante.vue";
+import login from "./components/login.vue";
+
+export default {
+  name: "SPO-UN",
+  components: { registro, login },
+  mounted() {
+    //this.$refs.loginPage.registerButton;
+    console.log(this.$refs.loginPage);
+  },
+  data() {
+    return {
+      loginShow: true,
+      registryShow: false,
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style>
