@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div id="errors" class="errors" role="alert"></div>
     <div class="input_label">
       <h2>Registro estudiantes</h2>
       <br />
@@ -7,12 +8,12 @@
     <div class="input_label">
       <label for="namef" id="namef">Nombre </label>
       <label for="namel" id="namel">Apellido </label><br />
-      <input type="text" id="fname" class="fname" />
-      <input type="text" id="lname" class="lname" /><br /><br />
+      <input type="text" id="fnameR" class="fname" />
+      <input type="text" id="lnameR" class="lname" /><br /><br />
     </div>
     <div class="input_label">
       <label for="email">Correo </label><br />
-      <input type="text" id="email" name="email" />
+      <input type="text" id="emailR" name="email" />
       <label>@unal.edu.co </label><br />
       <br /><br />
     </div>
@@ -21,10 +22,10 @@
       <label for="pass2" id="confirPassLabel">Confirmar Contraseña </label
       ><br /><br />
       <div class="margin-down">
-        <input type="text" id="password" name="password" />
+        <input type="text" id="passwordR" name="password" />
         <input
           type="text"
-          id="confirmPassword"
+          id="confirmPasswordR"
           name="confirmPassword"
           class="lname"
         /><br /><br />
@@ -53,16 +54,41 @@ export default {
       this.$root.$data.registryShow = false;
     },
     register() {
-      var name = document.getElementById("namef").value;
-      var lastName = document.getElementById("namel").value;
-      if (name == null || lastName == null) {
-        console.log("No se ha puesto ningun dato");
+      var name = document.getElementById("fnameR").value;
+      var lastName = document.getElementById("lnameR").value;
+      var email = document.getElementById("emailR").value;
+      var password = document.getElementById("passwordR").value;
+      var confirmPassword = document.getElementById("confirmPasswordR").value;
+      console.log(name);
+      if (
+        name == "" ||
+        lastName == "" ||
+        email == "" ||
+        password == "" ||
+        confirmPassword == ""
+      ) {
+        console.log("No se han puesto datos");
+        errorFunction("Faltan datos por llenar");
       } else {
-        console.log("Datos Enviados");
+        if (password !== confirmPassword) {
+          console.log("Constraseñas son diferentes");
+          errorFunction("Las constraseñas no coinciden");
+        } else {
+          console.log("Enviar Datos");
+        }
       }
     },
   },
 };
+
+function errorFunction(messageText) {
+  //set the error div to be visible and message not
+  let errorDiv = document.getElementById("errors");
+  //errorDiv.css("display", "block");
+  //update the content of the error message
+  errorDiv.innerHTML = messageText;
+  //schedule a deactivation
+}
 </script>
 
 <style>
