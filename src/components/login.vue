@@ -49,6 +49,7 @@ export default {
       emptyInput: false,
     };
   },
+  //functions for the inputs
   methods: {
     clickRegisterButton() {
       console.log("You clicked the button!");
