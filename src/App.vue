@@ -1,10 +1,10 @@
 <template>
   <div>
     <img
-      src="Logo-unal.png"
+      src="./assets/Logo-unal.png"
       alt="Universidad Nacional de Colombia"
-      width="”500″"
-      height="”600″"
+      width="175"
+      height="150"
     />
     <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
   </div>

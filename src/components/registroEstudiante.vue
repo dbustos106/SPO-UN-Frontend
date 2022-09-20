@@ -1,19 +1,39 @@
 <template>
   <div>
-    <div id="errors" class="errors" role="alert"></div>
+    <div
+      id="errors"
+      class="errors"
+      role="alert"
+      v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+    ></div>
     <div class="input_label">
       <h2>Registro estudiantes</h2>
       <br />
     </div>
     <div class="input_label">
       <label for="namef" id="namef">Nombre </label>
-      <label for="namel" id="namel">Apellido </label><br />
-      <input type="text" id="fnameR" class="fname" />
-      <input type="text" id="lnameR" class="lname" /><br /><br />
+      <label for="namel" id="namelR">Apellido </label><br />
+      <input
+        type="text"
+        id="fnameR"
+        class="fname"
+        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+      />
+      <input
+        type="text"
+        id="lnameR"
+        class="lname"
+        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+      /><br /><br />
     </div>
     <div class="input_label">
       <label for="email">Correo </label><br />
-      <input type="text" id="emailR" name="email" />
+      <input
+        type="text"
+        id="emailR"
+        name="email"
+        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+      />
       <label>@unal.edu.co </label><br />
       <br /><br />
     </div>
@@ -22,12 +42,18 @@
       <label for="pass2" id="confirPassLabel">Confirmar Contraseña </label
       ><br /><br />
       <div class="margin-down">
-        <input type="text" id="passwordR" name="password" />
+        <input
+          type="text"
+          id="passwordR"
+          name="password"
+          v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+        />
         <input
           type="text"
           id="confirmPasswordR"
           name="confirmPassword"
           class="lname"
+          v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
         /><br /><br />
       </div>
       <button for="Regresar" v-on:click="returnToPage" id="returnButton">
@@ -72,11 +98,17 @@ export default {
       } else {
         if (password !== confirmPassword) {
           console.log("Constraseñas son diferentes");
-          errorFunction("Las constraseñas no coinciden");
+          errorFunction("Las contraseñas no coinciden");
         } else {
+          errorFunction("Registro Exitoso");
           console.log("Enviar Datos");
         }
       }
+    },
+    data() {
+      return {
+        emptyInput: false,
+      };
     },
   },
 };
@@ -87,6 +119,7 @@ function errorFunction(messageText) {
   //errorDiv.css("display", "block");
   //update the content of the error message
   errorDiv.innerHTML = messageText;
+  this.emptyInput = true;
   //schedule a deactivation
 }
 </script>
@@ -104,8 +137,8 @@ function errorFunction(messageText) {
 .namef {
   margin-left: 50px;
 }
-#namel {
-  margin-left: 130px;
+#namelR {
+  margin-left: 120px;
 }
 .lname {
   margin-left: 10px;
