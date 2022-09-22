@@ -41,8 +41,8 @@
       <label for="Cedula">Cédula </label><br />
       <input list="browsersE" />
       <datalist id="browsersE">
-        <option value="CC"></option>
-        <option value="CE"></option>
+        <option value="CC">CC</option>
+        <option value="CE">CE</option>
       </datalist>
 
       <input
@@ -105,9 +105,13 @@ export default {
       var email = document.getElementById("emailER").value;
       var password = document.getElementById("passwordER").value;
       var confirmPassword = document.getElementById("confirmPasswordER").value;
-      var tipoCedula = document.getElementById("browsersE").value;
       var cedula = document.getElementById("cedulaER").value;
-      console.log(name);
+      var tipoCedula = "cc";
+      /*
+      var tipoCedula = document.getElementById("browsersE").value;
+      tipoCedula = document.querySelector(
+        "#tipoCedula" + " option[value='" + tipoCedula + "']"
+      ).dataset.value;*/
       if (
         name == "" ||
         lastName == "" ||
@@ -123,7 +127,6 @@ export default {
           console.log("Constraseñas son diferentes");
           this.errorFunction("Las contraseñas no coinciden");
         } else {
-          this.errorFunction("Registro Exitoso");
           this.sendData(name, lastName, email, password, cedula, tipoCedula);
           console.log("Enviar Datos");
         }
@@ -133,12 +136,16 @@ export default {
       let datos = {
         username: email,
         password: password,
-        name: name + lastName,
+        name: name + " " + lastName,
         document_type: tipoCedula,
         document_number: cedula,
+        professor_id: 1,
       };
 
-      let formBody = this.$root.toUrlEncoded(datos);
+      console.log(datos);
+
+      let formBody = JSON.stringify(datos);
+      console.log(formBody);
 
       axios
         .post(
@@ -148,17 +155,19 @@ export default {
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.Token,
             },
           }
         )
         .then((response) => {
+          this.errorFunction("Registro Exitoso");
           console.log("Register complete");
           console.log(response);
           //localStorage.setItem("Token", response.token);
         })
         .catch((err) => {
-          console.log("Falló login");
+          console.log("Falló registro");
           console.log(err);
         });
     },
