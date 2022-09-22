@@ -70,30 +70,33 @@ export default {
         console.log("No hay datos en el login");
         this.errorFunction("No ha ingresado los datos");
       } else {
-        console.log("Logged in");
         this.askLogintoBack(user, password);
       }
     },
     async askLogintoBack(user, password) {
-      let datos = {};
-      datos.username = user;
-      datos.password = password;
-      datos = JSON.stringify(datos);
+      let datos = {
+        username: user,
+        password: password,
+      };
+      let formBody = this.$root.toUrlEncoded(datos);
       axios
         .post(
           "http://localhost:8081/login",
 
-          datos,
+          formBody,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
             },
           }
         )
+
         .then((response) => {
-          console.log(response);
-          //localStorage.setItem("Token", response.token_type);
+          console.log(response.data);
+          console.log(response.data.access_token);
+          sessionStorage.setItem("Token", response.data.access_token);
+          console.log("Logged in");
         })
         .catch((err) => {
           console.log("Falló login");

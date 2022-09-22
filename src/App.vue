@@ -31,7 +31,20 @@ export default {
       registryShow: false,
     };
   },
-  methods: {},
+  methods: {
+    toUrlEncoded(datos) {
+      var formBody = [];
+      for (var property in datos) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(datos[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+
+      console.log(formBody);
+      return formBody;
+    },
+  },
 };
 </script>
 

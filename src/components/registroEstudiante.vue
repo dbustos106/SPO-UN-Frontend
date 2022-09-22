@@ -38,6 +38,22 @@
       <br /><br />
     </div>
     <div class="input_label">
+      <label for="Cedula">Cédula </label><br />
+      <input list="browsers" />
+      <datalist id="browsers">
+        <option value="CC"></option>
+        <option value="CE"></option>
+      </datalist>
+
+      <input
+        type="text"
+        id="cedulaR"
+        name="cedula"
+        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
+      />
+      <br /><br />
+    </div>
+    <div class="input_label">
       <label for="pass1">Contraseña </label>
       <label for="pass2" id="confirPassLabel">Confirmar Contraseña </label
       ><br /><br />
@@ -89,13 +105,15 @@ export default {
       var email = document.getElementById("emailR").value;
       var password = document.getElementById("passwordR").value;
       var confirmPassword = document.getElementById("confirmPasswordR").value;
+      var cedula = document.getElementById("cedulaR").value;
       console.log(name);
       if (
         name == "" ||
         lastName == "" ||
         email == "" ||
         password == "" ||
-        confirmPassword == ""
+        confirmPassword == "" ||
+        cedula == ""
       ) {
         console.log("No se han puesto datos");
         this.errorFunction("Faltan datos por llenar");
@@ -105,21 +123,22 @@ export default {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
           this.errorFunction("Registro Exitoso");
-          this.sendData(name, lastName, email, password);
+          this.sendData(name, lastName, email, password, cedula);
           console.log("Enviar Datos");
         }
       }
     },
-    async sendData(name, lastName, email, password) {
+    async sendData(name, lastName, email, password, cedula) {
       let datos = {};
       datos.name = name;
       datos.lastName = lastName;
       datos.email = email;
       datos.password = password;
+      datos.cedula = cedula;
       datos = JSON.stringify(datos);
       axios
         .post(
-          "http://localhost:8081/student",
+          "http://localhost:8081/student/save",
 
           datos,
           { useCredentials: true }
