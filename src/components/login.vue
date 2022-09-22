@@ -76,19 +76,24 @@ export default {
     },
     async askLogintoBack(user, password) {
       let datos = {};
-      datos.client_id = user;
-      datos.client_secret = password;
+      datos.username = user;
+      datos.password = password;
       datos = JSON.stringify(datos);
       axios
         .post(
-          "http://localhost:8081/oauth/user_credential/accesstoken?grant_type=client_credentials",
+          "http://localhost:8081/login",
 
           datos,
-          { useCredentials: true }
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
         )
         .then((response) => {
           console.log(response);
-          localStorage.setItem("Token", response.token_type);
+          //localStorage.setItem("Token", response.token_type);
         })
         .catch((err) => {
           console.log("Falló login");
