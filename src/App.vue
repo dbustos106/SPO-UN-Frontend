@@ -9,18 +9,27 @@
     <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
   </div>
   <login ref="loginPage" v-show="loginShow" />
-  <registro ref="registry" v-show="registryShow" />
+  <!--<registroEstudiante ref="registry" v-show="registryStudentShow" />-->
+  <registroPaciente ref="registryPatient" v-show="registryShow" />
+  <profesorComponent ref="ProfesorArea" v-show="profesorAreaShow" />
 </template>
 
 <script>
 //import { ref } from "vue";
 //import Vue from "vue";
-import registro from "./components/registroEstudiante.vue";
+//import registroEstudiante from "./components/registroEstudiante.vue";
+import registroPaciente from "./components/registroPaciente.vue";
 import login from "./components/login.vue";
+import profesorComponent from "./components/profesorComponent.vue";
 
 export default {
   name: "SPO-UN",
-  components: { registro, login },
+  components: {
+    //registroEstudiante,
+    registroPaciente,
+    login,
+    profesorComponent,
+  },
   mounted() {
     //this.$refs.loginPage.registerButton;
     console.log(this.$refs.loginPage);
@@ -29,6 +38,7 @@ export default {
     return {
       loginShow: true,
       registryShow: false,
+      profesorAreaShow: false,
     };
   },
   methods: {

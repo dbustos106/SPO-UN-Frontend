@@ -97,12 +97,17 @@ export default {
           console.log(response.data.access_token);
           sessionStorage.setItem("Token", response.data.access_token);
           console.log("Logged in");
+          this.openUserComponent();
         })
         .catch((err) => {
           console.log("Falló login");
           console.log(err);
           this.errorFunction("Usuario o contraseña incorrectos");
         });
+    },
+    openUserComponent() {
+      this.$root.$data.loginShow = false;
+      this.$root.$data.profesorAreaShow = true;
     },
     errorFunction(messageText) {
       //set the error div to be visible and message not

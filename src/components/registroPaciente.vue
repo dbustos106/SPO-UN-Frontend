@@ -1,27 +1,27 @@
 <template>
   <div>
     <div
-      id="errorsE"
+      id="errors"
       class="errors"
       role="alert"
       v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
     ></div>
     <div class="input_label">
-      <h2>Registro estudiantes</h2>
+      <h2>Registro paciente</h2>
       <br />
     </div>
     <div class="input_label">
-      <label for="namef" id="nameEf">Nombre </label>
-      <label for="namel" id="namelER">Apellido </label><br />
+      <label for="namef" id="namef">Nombre </label>
+      <label for="namel" id="namelR">Apellido </label><br />
       <input
         type="text"
-        id="fnameER"
+        id="fnameR"
         class="fname"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <input
         type="text"
-        id="lnameER"
+        id="lnameR"
         class="lname"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       /><br /><br />
@@ -30,24 +30,23 @@
       <label for="email">Correo </label><br />
       <input
         type="text"
-        id="emailER"
+        id="emailR"
         name="email"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
-      <label>@unal.edu.co </label><br />
       <br /><br />
     </div>
     <div class="input_label">
       <label for="Cedula">Cédula </label><br />
-      <input list="browsersE" />
-      <datalist id="browsersE">
+      <input list="browsers" />
+      <datalist id="browsers">
         <option value="CC"></option>
         <option value="CE"></option>
       </datalist>
 
       <input
         type="text"
-        id="cedulaER"
+        id="cedulaR"
         name="cedula"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
@@ -55,27 +54,27 @@
     </div>
     <div class="input_label">
       <label for="pass1">Contraseña </label>
-      <label for="pass2" id="confirPassLabelE">Confirmar Contraseña </label
+      <label for="pass2" id="confirPassLabel">Confirmar Contraseña </label
       ><br /><br />
       <div class="margin-down">
         <input
           type="password"
-          id="passwordER"
+          id="passwordR"
           name="password"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
           type="password"
-          id="confirmPasswordER"
+          id="confirmPasswordR"
           name="confirmPassword"
           class="lname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         /><br /><br />
       </div>
-      <button for="Regresar" v-on:click="returnToPage" id="returnButtonE">
+      <button for="Regresar" v-on:click="returnToPage" id="returnButton">
         Regresar</button
       ><br />
-      <button for="accept" v-on:click="register" id="acceptButtonE">
+      <button for="accept" v-on:click="register" id="acceptButton">
         Aceptar</button
       ><br />
     </div>
@@ -86,7 +85,7 @@
 import axios from "axios";
 
 export default {
-  name: "registro-estudiante",
+  name: "registro-paciente",
   data() {
     return {
       emptyInput: false,
@@ -96,17 +95,17 @@ export default {
     returnToPage() {
       console.log("You clicked the button!");
       //console.log(this.$root.$data.registryShow);
-      //this.$root.$data.loginShow = true;
-      this.$parent.$data.registryStudentShow = false;
+      this.$root.$data.loginShow = true;
+      this.$root.$data.registryShow = false;
     },
     register() {
-      var name = document.getElementById("fnameER").value;
-      var lastName = document.getElementById("lnameER").value;
-      var email = document.getElementById("emailER").value;
-      var password = document.getElementById("passwordER").value;
-      var confirmPassword = document.getElementById("confirmPasswordER").value;
-      var tipoCedula = document.getElementById("browsersE").value;
-      var cedula = document.getElementById("cedulaER").value;
+      var name = document.getElementById("fnameR").value;
+      var lastName = document.getElementById("lnameR").value;
+      var email = document.getElementById("emailR").value;
+      var password = document.getElementById("passwordR").value;
+      var confirmPassword = document.getElementById("confirmPasswordR").value;
+      var tipoCedula = document.getElementById("browsers").value;
+      var cedula = document.getElementById("cedulaR").value;
       console.log(name);
       if (
         name == "" ||
@@ -164,7 +163,7 @@ export default {
     },
     errorFunction(messageText) {
       //set the error div to be visible and message not
-      let errorDiv = document.getElementById("errorsE");
+      let errorDiv = document.getElementById("errors");
       //errorDiv.css("display", "block");
       //update the content of the error message
       errorDiv.innerHTML = messageText;
