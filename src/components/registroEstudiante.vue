@@ -4,7 +4,7 @@
       id="errors"
       class="errors"
       role="alert"
-      v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+      v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
     ></div>
     <div class="input_label">
       <h2>Registro estudiantes</h2>
@@ -17,13 +17,13 @@
         type="text"
         id="fnameR"
         class="fname"
-        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <input
         type="text"
         id="lnameR"
         class="lname"
-        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       /><br /><br />
     </div>
     <div class="input_label">
@@ -32,7 +32,7 @@
         type="text"
         id="emailR"
         name="email"
-        v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <label>@unal.edu.co </label><br />
       <br /><br />
@@ -43,17 +43,17 @@
       ><br /><br />
       <div class="margin-down">
         <input
-          type="text"
+          type="password"
           id="passwordR"
           name="password"
-          v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
-          type="text"
+          type="password"
           id="confirmPasswordR"
           name="confirmPassword"
           class="lname"
-          v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         /><br /><br />
       </div>
       <button for="Regresar" v-on:click="returnToPage" id="returnButton">
@@ -67,10 +67,14 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "registro-estudiante",
   data() {
-    return {};
+    return {
+      emptyInput: false,
+    };
   },
   methods: {
     returnToPage() {
@@ -94,34 +98,51 @@ export default {
         confirmPassword == ""
       ) {
         console.log("No se han puesto datos");
-        errorFunction("Faltan datos por llenar");
+        this.errorFunction("Faltan datos por llenar");
       } else {
         if (password !== confirmPassword) {
           console.log("Constraseñas son diferentes");
-          errorFunction("Las contraseñas no coinciden");
+          this.errorFunction("Las contraseñas no coinciden");
         } else {
-          errorFunction("Registro Exitoso");
+          this.errorFunction("Registro Exitoso");
+          this.sendData(name, lastName, email, password);
           console.log("Enviar Datos");
         }
       }
     },
-    data() {
-      return {
-        emptyInput: false,
-      };
+    async sendData(name, lastName, email, password) {
+      let datos = {};
+      datos.name = name;
+      datos.lastName = lastName;
+      datos.email = email;
+      datos.password = password;
+      datos = JSON.stringify(datos);
+      axios
+        .post(
+          "http://localhost:8081/student",
+
+          datos,
+          { useCredentials: true }
+        )
+        .then((response) => {
+          localStorage.setItem("Token", response.token);
+        })
+        .catch((err) => {
+          console.log("Falló login");
+          console.log(err);
+        });
+    },
+    errorFunction(messageText) {
+      //set the error div to be visible and message not
+      let errorDiv = document.getElementById("errors");
+      //errorDiv.css("display", "block");
+      //update the content of the error message
+      errorDiv.innerHTML = messageText;
+      this.$data.emptyInput = true;
+      //schedule a deactivation
     },
   },
 };
-
-function errorFunction(messageText) {
-  //set the error div to be visible and message not
-  let errorDiv = document.getElementById("errors");
-  //errorDiv.css("display", "block");
-  //update the content of the error message
-  errorDiv.innerHTML = messageText;
-  this.emptyInput = true;
-  //schedule a deactivation
-}
 </script>
 
 <style>

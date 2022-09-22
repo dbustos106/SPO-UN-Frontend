@@ -4,7 +4,7 @@
       id="loginError"
       class="loginError"
       role="alert"
-      v-bind:style="{ color: emptyInput ? 'black' : 'red' }"
+      v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
     ></div>
     <div class="center">
       <div class="input_label">
@@ -39,8 +39,10 @@
   </div>
 </template>
 
+<!---<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>--->
 <script>
 //import { vShow } from "vue";
+import axios from "axios";
 
 export default {
   name: "login-page",
@@ -50,6 +52,7 @@ export default {
     };
   },
   //functions for the inputs
+  //
   methods: {
     clickRegisterButton() {
       console.log("You clicked the button!");
@@ -64,23 +67,45 @@ export default {
 
       if (user == "" || password == "") {
         console.log("No hay datos en el login");
-        errorFunction("No ha ingresado los datos");
+        this.errorFunction("No ha ingresado los datos");
       } else {
         console.log("Logged in");
+        this.askLogintoBack(user, password);
       }
+    },
+    async askLogintoBack(user, password) {
+      let datos = {};
+      datos.client_id = user;
+      datos.client_secret = password;
+      datos = JSON.stringify(datos);
+      axios
+        .post(
+          "http://localhost:8081/oauth/user_credential/accesstoken?grant_type=client_credentials",
+
+          datos,
+          { useCredentials: true }
+        )
+        .then((response) => {
+          console.log(response);
+          localStorage.setItem("Token", response.token_type);
+        })
+        .catch((err) => {
+          console.log("Falló login");
+          console.log(err);
+          this.errorFunction("Usuario o contraseña incorrectos");
+        });
+    },
+    errorFunction(messageText) {
+      //set the error div to be visible and message not
+      let errorDiv = document.getElementById("loginError");
+      //errorDiv.css("display", "block");
+      //update the content of the error message
+      errorDiv.innerHTML = messageText;
+      this.$data.emptyInput = true;
+      //schedule a deactivation
     },
   },
 };
-
-function errorFunction(messageText) {
-  //set the error div to be visible and message not
-  let errorDiv = document.getElementById("loginError");
-  //errorDiv.css("display", "block");
-  //update the content of the error message
-  errorDiv.innerHTML = messageText;
-  this.emptyInput = true;
-  //schedule a deactivation
-}
 </script>
 
 <style>
