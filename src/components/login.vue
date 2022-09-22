@@ -54,6 +54,7 @@ export default {
   //functions for the inputs
   //
   methods: {
+    //functions
     clickRegisterButton() {
       console.log("You clicked the button!");
       //console.log(this.$root.$data.registryShow);
