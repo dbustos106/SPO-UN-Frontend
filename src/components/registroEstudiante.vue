@@ -139,7 +139,7 @@ export default {
         name: name + " " + lastName,
         document_type: tipoCedula,
         document_number: cedula,
-        professor_id: 1,
+        professor_id: parseInt(sessionStorage.Id),
       };
 
       console.log(sessionStorage.Token);

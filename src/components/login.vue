@@ -93,11 +93,12 @@ export default {
         )
 
         .then((response) => {
-          console.log(response.data);
-          console.log(response.data.access_token);
+          let loginInfo = this.$root.jwtDecode(response.data.access_token);
           sessionStorage.setItem("Token", response.data.access_token);
+          sessionStorage.setItem("Id", loginInfo.payload.roles[0]);
+          sessionStorage.setItem("Role", loginInfo.payload.roles[1]);
           console.log("Logged in");
-          this.openUserComponent(response.data.roles);
+          this.openUserComponent(sessionStorage.Role);
         })
         .catch((err) => {
           console.log("Falló login");
