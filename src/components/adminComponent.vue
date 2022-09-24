@@ -5,36 +5,36 @@
       v-on:click="openRegistry"
       id="registryStudentButton"
     >
-      Registrar Estudiante
+      Registrar Profesor
     </button>
     <button for="closeSession" v-on:click="closeSession" id="closeSession">
       Cerrar Sesión
     </button>
-    <registroEstudiante ref="registryE" v-show="registryStudentShow" />
+    <registroProfesor ref="registryP" v-show="registryProfesorShow" />
   </div>
 </template>
 
 <script>
-import registroEstudiante from "./registroEstudiante.vue";
+import registroProfesor from "./registroProfesor.vue";
 export default {
   name: "Area_Profesor",
   components: {
-    registroEstudiante,
+    registroProfesor,
   },
   data() {
     return {
-      registryStudentShow: false,
+      registryProfesorShow: false,
     };
   },
   methods: {
     openRegistry() {
-      this.$data.registryStudentShow = true;
+      this.$data.registryProfesorShow = true;
     },
     closeSession() {
       sessionStorage.removeItem("Token");
       this.$root.$data.loginShow = true;
-      this.$root.$data.profesorAreaShow = false;
-      this.$data.registryStudentShow = false;
+      this.$root.$data.adminAreaShow = false;
+      this.$data.registryProfesorShow = false;
       document.getElementById("user").value = "";
       document.getElementById("password").value = "";
     },

@@ -12,6 +12,9 @@
   <!--<registroEstudiante ref="registry" v-show="registryStudentShow" />-->
   <registroPaciente ref="registryPatient" v-show="registryShow" />
   <profesorComponent ref="ProfesorArea" v-show="profesorAreaShow" />
+  <studentComponent ref="StudentArea" v-show="studentAreaShow" />
+  <patientComponent ref="PatientArea" v-show="patientAreaShow" />
+  <adminComponent ref="AdminArea" v-show="adminAreaShow" />
 </template>
 
 <script>
@@ -21,6 +24,9 @@
 import registroPaciente from "./components/registroPaciente.vue";
 import login from "./components/login.vue";
 import profesorComponent from "./components/profesorComponent.vue";
+import patientComponent from "./components/patientComponent.vue";
+import studentComponent from "./components/studentComponent.vue";
+import adminComponent from "./components/adminComponent.vue";
 
 export default {
   name: "SPO-UN",
@@ -29,6 +35,9 @@ export default {
     registroPaciente,
     login,
     profesorComponent,
+    patientComponent,
+    studentComponent,
+    adminComponent,
   },
   mounted() {
     //this.$refs.loginPage.registerButton;
@@ -39,6 +48,9 @@ export default {
       loginShow: true,
       registryShow: false,
       profesorAreaShow: false,
+      studentAreaShow: false,
+      patientAreaShow: false,
+      adminAreaShow: false,
     };
   },
   methods: {

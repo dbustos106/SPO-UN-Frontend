@@ -107,7 +107,7 @@ export default {
     },
     openUserComponent() {
       this.$root.$data.loginShow = false;
-      this.$root.$data.profesorAreaShow = true;
+      this.$root.$data.adminAreaShow = true;
     },
     errorFunction(messageText) {
       //set the error div to be visible and message not
