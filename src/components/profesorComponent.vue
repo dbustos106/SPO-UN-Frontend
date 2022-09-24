@@ -7,6 +7,9 @@
     >
       Registrar Estudiante
     </button>
+    <button for="closeSession" v-on:click="closeSession" id="closeSession">
+      Cerrar Sesión
+    </button>
     <registroEstudiante ref="registry" v-show="registryStudentShow" />
   </div>
 </template>
@@ -27,8 +30,19 @@ export default {
     openRegistry() {
       this.$data.registryStudentShow = true;
     },
+    closeSession() {
+      sessionStorage.removeItem("Token");
+      this.$root.$data.loginShow = true;
+      this.$root.$data.profesorAreaShow = false;
+      document.getElementById("user").value = "";
+      document.getElementById("password").value = "";
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+#closeSession {
+  margin-left: 500px;
+}
+</style>
