@@ -97,7 +97,7 @@ export default {
           console.log(response.data.access_token);
           sessionStorage.setItem("Token", response.data.access_token);
           console.log("Logged in");
-          this.openUserComponent();
+          this.openUserComponent(response.data.roles);
         })
         .catch((err) => {
           console.log("Falló login");
@@ -105,9 +105,17 @@ export default {
           this.errorFunction("Usuario o contraseña incorrectos");
         });
     },
-    openUserComponent() {
+    openUserComponent(role) {
       this.$root.$data.loginShow = false;
-      this.$root.$data.adminAreaShow = true;
+      if (role == "Professor") {
+        this.$root.$data.profesorAreaShow = true;
+      } else if (role == "Student") {
+        this.$root.$data.studentAreaShow = true;
+      } else if (role == "Patient") {
+        this.$root.$data.patientAreaShow = true;
+      } else if (role == "Admin") {
+        this.$root.$data.adminAreaShow = true;
+      }
     },
     errorFunction(messageText) {
       //set the error div to be visible and message not

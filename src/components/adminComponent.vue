@@ -17,7 +17,7 @@
 <script>
 import registroProfesor from "./registroProfesor.vue";
 export default {
-  name: "Area_Profesor",
+  name: "Area_Administrador",
   components: {
     registroProfesor,
   },
