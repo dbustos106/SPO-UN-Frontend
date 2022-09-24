@@ -142,7 +142,7 @@ export default {
         professor_id: 1,
       };
 
-      console.log(datos);
+      console.log(sessionStorage.Token);
 
       let formBody = JSON.stringify(datos);
       console.log(formBody);

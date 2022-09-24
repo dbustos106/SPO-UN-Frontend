@@ -71,6 +71,34 @@
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         /><br /><br />
       </div>
+      <br />
+    </div>
+
+    <div class="input_label">
+      <label for="edad">Edad </label>
+      <label for="genero" id="labelGender">Género </label>
+      <label for="RH" id="RHLabel">RH </label><br /><br />
+      <div class="margin-down">
+        <input
+          type="number"
+          id="ageR"
+          name="age"
+          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
+        />
+        <input
+          type="text"
+          id="genderR"
+          name="gender"
+          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
+        />
+        <input
+          type="text"
+          id="RHR"
+          name="RH"
+          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
+        />
+      </div>
+
       <button for="Regresar" v-on:click="returnToPage" id="returnButton">
         Regresar</button
       ><br />
@@ -106,6 +134,9 @@ export default {
       var confirmPassword = document.getElementById("confirmPasswordR").value;
       var tipoCedula = document.getElementById("browsers").value;
       var cedula = document.getElementById("cedulaR").value;
+      var genero = document.getElementById("genderR").value;
+      var edad = document.getElementById("ageR").value;
+      var RH = document.getElementById("RHR").value;
       console.log(name);
       if (
         name == "" ||
@@ -113,7 +144,10 @@ export default {
         email == "" ||
         password == "" ||
         confirmPassword == "" ||
-        cedula == ""
+        cedula == "" ||
+        genero == "" ||
+        edad == "" ||
+        RH == ""
       ) {
         console.log("No se han puesto datos");
         this.errorFunction("Faltan datos por llenar");
@@ -122,22 +156,47 @@ export default {
           console.log("Constraseñas son diferentes");
           this.errorFunction("Las contraseñas no coinciden");
         } else {
-          this.errorFunction("Registro Exitoso");
-          this.sendData(name, lastName, email, password, cedula, tipoCedula);
+          this.sendData(
+            name,
+            lastName,
+            email,
+            password,
+            cedula,
+            tipoCedula,
+            genero,
+            edad,
+            RH
+          );
           console.log("Enviar Datos");
         }
       }
     },
-    async sendData(name, lastName, email, password, cedula, tipoCedula) {
+    async sendData(
+      name,
+      lastName,
+      email,
+      password,
+      cedula,
+      tipoCedula,
+      genero,
+      edad,
+      RH
+    ) {
+      var user = email.substring(0, email.indexOf("@"));
       let datos = {
-        username: email,
+        username: user,
         password: password,
-        name: name + lastName,
-        document_type: tipoCedula,
+        name: name + " " + lastName,
+        email: email,
+        document_type: "cc",
         document_number: cedula,
+        age: parseInt(edad),
+        gender: genero,
+        blood_type: RH,
       };
 
-      let formBody = this.$root.toUrlEncoded(datos);
+      let formBody = JSON.stringify(datos);
+      console.log(formBody);
 
       axios
         .post(
@@ -147,14 +206,16 @@ export default {
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-              //"Content-Type": "application/json",
+              //"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+              "Content-Type": "application/json",
+              Authorization: "Bearer e",
             },
           }
         )
         .then((response) => {
           console.log("Register complete");
           console.log(response);
+          this.errorFunction("Registro Exitoso");
           //localStorage.setItem("Token", response.token);
         })
         .catch((err) => {
@@ -199,5 +260,11 @@ export default {
 }
 .margin-down {
   margin-top: 0px;
+}
+#labelGender {
+  margin-left: 140px;
+}
+#RHLabel {
+  margin-left: 140px;
 }
 </style>
