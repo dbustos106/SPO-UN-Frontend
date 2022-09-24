@@ -141,7 +141,7 @@ export default {
 
       axios
         .post(
-          "http://localhost:8081/student/save",
+          "http://localhost:8081/register/patient",
 
           formBody,
           {

@@ -81,7 +81,7 @@ export default {
       let formBody = this.$root.toUrlEncoded(datos);
       axios
         .post(
-          "http://localhost:8081/login",
+          "http://localhost:8081/auth/login",
 
           formBody,
           {
