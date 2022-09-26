@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <img
         src="./assets/Logo-unal.png"
         alt="Universidad Nacional de Colombia"
@@ -8,8 +8,11 @@
         height="150"
       />
     </div>
-    <div class="col-6">
+    <div class="col-4">
       <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
+    </div>
+    <div class="col-4">
+      <img src="./assets/LogoSPOUN.png" alt="SPO-UN" width="175" height="150" />
     </div>
   </div>
   <login ref="loginPage" v-show="loginShow" />
