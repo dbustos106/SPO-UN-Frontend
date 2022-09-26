@@ -3,54 +3,26 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign in</h1>
-          <form @submit.prevent="onSubmit(user, password)">
-            <fieldset class="form-group">
+          <img src="" width="150" height="150">
+           <fieldset class="form-group">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                v-model="user"
-                placeholder="User"
+                placeholder="Usuario"
               />
             </fieldset>
             <fieldset class="form-group">
               <input
                 class="form-control form-control-lg"
                 type="password"
-                v-model="password"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">Sign in</button>
-          </form>
+            <button class="btn btn-lg btn-primary pull-xs-right">Ingresar</button>
         </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'loginView',
-  data() {
-    return {
-      user: null,
-      password: null,
-    };
-  },
-  methods: {
-    onSubmit(user, password) {
-      if (user === 'admin' && password === '12345') {
-        sessionStorage.setItem('user', JSON.stringify({ username: user }));
-        sessionStorage.setItem('token', 'your auth token here');
-        window.history.pushState(null, null, '/');
-      } else {
-        this.$toastr.e('Invalid credentials');
-      }
-    },
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 .auth-page {
     height: 100vh;
@@ -63,16 +35,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .container{
-      .row{
-        h1{
-          margin-bottom: 30px;
-        }
-        form{
-            button{
-                margin-top: 30px;
-            }
-        }
-    }
+  	margin-bottom: 30px
 }
 </style>
