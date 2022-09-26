@@ -105,7 +105,7 @@ export default {
       console.log("You clicked the button!");
       //console.log(this.$root.$data.registryShow);
       //this.$root.$data.loginShow = true;
-      this.$parent.$data.registryStudentShow = false;
+      this.$parent.$data.registryProfesorShow = false;
     },
     register() {
       var name = document.getElementById("fnamePR").value;

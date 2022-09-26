@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <img
-      src="./assets/Logo-unal.png"
-      alt="Universidad Nacional de Colombia"
-      width="175"
-      height="150"
-    />
-    <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
+  <div class="row">
+    <div class="col-6">
+      <img
+        src="./assets/Logo-unal.png"
+        alt="Universidad Nacional de Colombia"
+        width="175"
+        height="150"
+      />
+    </div>
+    <div class="col-6">
+      <h1>Sistema de Practicas Odontológicas SPO-UN</h1>
+    </div>
   </div>
   <login ref="loginPage" v-show="loginShow" />
   <!--<registroEstudiante ref="registry" v-show="registryStudentShow" />-->
