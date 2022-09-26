@@ -1,23 +1,22 @@
 <template>
-  <div>
+  <main>
     <div
       id="loginError"
       class="loginError"
       role="alert"
       v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
     ></div>
-    <div class="center">
-      <div class="input_label">
+    <div class="container">
+      <div class="col-4"></div>
+      <div class="col-4 bg-success">
         <h2>Inicio de Sesión</h2>
         <label for="namef" id="namef">Usuario </label><br />
         <input type="text" id="user" class="fname" /><br />
         <label for="namel" id="namel">Contraseña </label><br />
         <input type="password" id="password" class="lname" /><br /><br />
-      </div>
-      <div class="input_label">
         <button for="accept" id="acceptButton" v-on:click="loginFunction">
           Aceptar</button
-        ><br />
+        ><br /><br />
         <label>¿Sin Usuario?</label>
         <button
           v-on:click="clickRegisterButton"
@@ -28,6 +27,8 @@
         </button>
         <br /><br />
       </div>
+      <div class="col-4"></div>
+      <div class="input_label"></div>
     </div>
     <div>
       <b-list-group>
@@ -36,7 +37,7 @@
         </b-list-group-item>
       </b-list-group>
     </div>
-  </div>
+  </main>
 </template>
 
 <!---<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>--->

@@ -72,12 +72,20 @@
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         /><br /><br />
       </div>
-      <button for="Regresar" v-on:click="returnToPage" id="returnButtonE">
-        Regresar</button
-      ><br />
-      <button for="accept" v-on:click="register" id="acceptButtonE">
-        Aceptar</button
-      ><br />
+      <div class="row">
+        <div class="col-3">
+          <button for="Regresar" v-on:click="returnToPage" id="returnButtonE">
+            Regresar</button
+          ><br />
+        </div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3">
+          <button for="accept" v-on:click="register" id="acceptButtonE">
+            Aceptar</button
+          ><br />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -197,13 +205,13 @@ export default {
 .namef {
   margin-left: 50px;
 }
-#namelR {
-  margin-left: 120px;
+#namelER {
+  margin-left: 130px;
 }
 .lname {
   margin-left: 10px;
 }
-#confirPassLabel {
+#confirPassLabelE {
   margin-left: 110px;
 }
 .margin-down {

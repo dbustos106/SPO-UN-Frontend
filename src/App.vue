@@ -18,6 +18,7 @@
 </template>
 
 <script>
+//import bootstrap from "bootstrap";
 //import { ref } from "vue";
 //import Vue from "vue";
 //import registroEstudiante from "./components/registroEstudiante.vue";
@@ -102,4 +103,5 @@ export default {
 .margin-down {
   margin-top: 0px;
 }
+@import "~bootstrap/dist/css/bootstrap.css";
 </style>
