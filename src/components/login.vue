@@ -1,63 +1,104 @@
 <template>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inicia Sesión</title>
-    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/login.css">
-  </head>
-  <main>
-    <div
-      id="loginError"
-      class="loginError"
-      role="alert"
-      v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-    ></div>
-    <div class="container">
+  <div>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Inicia Sesión</title>
+      <link
+        href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      />
+      <link rel="stylesheet" href="assets/css/login.css" />
+    </head>
+    <main>
+      <div
+        id="loginError"
+        class="loginError"
+        role="alert"
+        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
+      ></div>
+      <div class="container">
         <div class="card login-card">
           <div class="row no-gutters">
             <div class="col-md-5">
-              <img src="../assets/login.jpg" alt="login" class="login-card-img">
+              <img
+                src="../assets/login.jpg"
+                alt="login"
+                class="login-card-img"
+              />
             </div>
             <div class="col-md-7">
               <div class="card-body">
                 <div class="brand-wrapper">
-                  <img src="../assets/LogoSPOUN.png" alt="logo" class="logo">
+                  <img src="../assets/LogoSPOUN.png" alt="logo" class="logo" />
                 </div>
                 <p class="login-card-description">Iniciar sesión</p>
                 <form action="#!">
-                    <div class="form-group">
-                      <label for="user" class="sr-only">Usuario</label>
-                      <input type="text" name="user" id="user" class="form-control" placeholder="Usuario">
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="password" class="sr-only">Password</label>
-                      <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
-                    </div>
-                    <input name="accept" id="acceptButton" class="btn btn-block login-btn mb-4" type="button" value="Ingresar" v-on:click="loginFunction">
-                  </form>
-                  <a href="#!" class="forgot-password-link">¿Olvidaste la contraseña?</a>
-                  <p class="login-card-footer-text">¿No tienes una cuenta? <a href="#!" class="text-reset">Regístrate</a></p>
-                  <nav class="login-card-footer-nav">
-                    <a href="#!">Terms of use.</a>
-                    <a href="#!">Privacy policy</a>
-                  </nav>
+                  <div class="form-group">
+                    <label for="user" class="sr-only">Usuario</label>
+                    <input
+                      type="text"
+                      name="user"
+                      id="user"
+                      class="form-control"
+                      placeholder="Usuario"
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="sr-only">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Contraseña"
+                    />
+                  </div>
+                  <input
+                    name="accept"
+                    id="acceptButton"
+                    class="btn btn-block login-btn mb-4"
+                    type="button"
+                    value="Ingresar"
+                    v-on:click="loginFunction"
+                  />
+                </form>
+                <a href="#!" class="forgot-password-link"
+                  >¿Olvidaste la contraseña?</a
+                >
+                <p class="login-card-footer-text">
+                  ¿No tienes una cuenta?
+                  <a v-on:click="clickRegisterButton" class="text-reset"
+                    >Regístrate</a
+                  >
+                </p>
+                <nav class="login-card-footer-nav">
+                  <a href="#!">Terms of use.</a>
+                  <a href="#!">Privacy policy</a>
+                </nav>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <div>
-      <b-list-group>
-        <b-list-group-item v-for="item in items" v-bind:key="item.id">
-          {{ item.nombre }}
-        </b-list-group-item>
-      </b-list-group>
-    </div>
-  </main>
+      <div>
+        <b-list-group>
+          <b-list-group-item v-for="item in items" v-bind:key="item.id">
+            {{ item.nombre }}
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+    </main>
+  </div>
 </template>
 
 <!---<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>--->
@@ -150,7 +191,6 @@ export default {
     },
   },
 };
-
 </script>
 <style>
 body {
@@ -160,88 +200,109 @@ body {
 }
 
 .brand-wrapper {
-  margin-bottom: 19px; }
-  .brand-wrapper .logo {
-    height: 50px; }
+  margin-bottom: 19px;
+}
+.brand-wrapper .logo {
+  height: 50px;
+}
 .login-card {
   position: relative;
   width: 100%;
   border: 0;
   border-radius: 27.5px;
   box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
-  overflow: hidden; }
+  overflow: hidden;
+}
 
-  .login-card-img {
-    border-radius: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover; }
+.login-card-img {
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
 
-  img.login-card-img{
-    transition: 0.5s all ease-in-out;
-  }
-  
-  img.login-card-img:hover{
-    transform: scale(1.5);
+img.login-card-img {
+  transition: 0.5s all ease-in-out;
+}
 
-  }
+img.login-card-img:hover {
+  transform: scale(1.5);
+}
+.login-card .card-body {
+  padding: 85px 160px 60px;
+}
+@media (max-width: 422px) {
   .login-card .card-body {
-    padding: 85px 160px 60px; }
-    @media (max-width: 422px) {
-      .login-card .card-body {
-        padding: 35px 24px; } }
-  .login-card-description {
-    font-size: 25px;
-    color: #000;
-    font-weight: normal;
-    margin-bottom: 23px; }
-  .login-card form {
-    max-width: 326px; }
-  .login-card .form-control {
-    border: 1px solid #d5dae2;
-    padding: 15px 25px;
-    margin-bottom: 20px;
-    min-height: 45px;
-    font-size: 13px;
-    line-height: 15;
-    font-weight: normal; }
-    .login-card .form-control::-webkit-input-placeholder {
-      color: #919aa3; }
-    .login-card .form-control::-moz-placeholder {
-      color: #919aa3; }
-    .login-card .form-control:-ms-input-placeholder {
-      color: #919aa3; }
-    .login-card .form-control::-ms-input-placeholder {
-      color: #919aa3; }
-    .login-card .form-control::placeholder {
-      color: #919aa3; }
-  .login-card .login-btn {
-    padding: 13px 20px 12px;
-    background-color: #000;
-    border-radius: 4px;
-    font-size: 17px;
-    font-weight: bold;
-    line-height: 20px;
-    color: #fff;
-    margin-bottom: 24px; }
-    .login-card .login-btn:hover {
-      border: 1px solid #000;
-      background-color: transparent;
-      color: #000; }
-  .login-card .forgot-password-link {
-    font-size: 14px;
-    color: #919aa3;
-    margin-bottom: 12px; }
+    padding: 35px 24px;
+  }
+}
+.login-card-description {
+  font-size: 25px;
+  color: #000;
+  font-weight: normal;
+  margin-bottom: 23px;
+}
+.login-card form {
+  max-width: 326px;
+}
+.login-card .form-control {
+  border: 1px solid #d5dae2;
+  padding: 15px 25px;
+  margin-bottom: 20px;
+  min-height: 45px;
+  font-size: 13px;
+  line-height: 15;
+  font-weight: normal;
+}
+.login-card .form-control::-webkit-input-placeholder {
+  color: #919aa3;
+}
+.login-card .form-control::-moz-placeholder {
+  color: #919aa3;
+}
+.login-card .form-control:-ms-input-placeholder {
+  color: #919aa3;
+}
+.login-card .form-control::-ms-input-placeholder {
+  color: #919aa3;
+}
+.login-card .form-control::placeholder {
+  color: #919aa3;
+}
+.login-card .login-btn {
+  padding: 13px 20px 12px;
+  background-color: #000;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.login-card .login-btn:hover {
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
+}
+.login-card .forgot-password-link {
+  font-size: 14px;
+  color: #919aa3;
+  margin-bottom: 12px;
+}
+.login-card-footer-text {
+  font-size: 14px;
+  color: #0d2366;
+  margin-bottom: 60px;
+}
+@media (max-width: 767px) {
   .login-card-footer-text {
-    font-size: 14px;
-    color: #0d2366;
-    margin-bottom: 60px; }
-    @media (max-width: 767px) {
-      .login-card-footer-text {
-        margin-bottom: 24px; } }
-  .login-card-footer-nav a {
-    font-size: 14px;
-    color: #919aa3; }
+    margin-bottom: 24px;
+  }
+}
+.login-card-footer-nav a {
+  font-size: 14px;
+  color: #919aa3;
+}
 </style>

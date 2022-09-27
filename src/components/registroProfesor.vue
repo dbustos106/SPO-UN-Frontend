@@ -11,8 +11,8 @@
       <br />
     </div>
     <div class="input_label">
-      <label for="namef" id="namePf">Nombre </label>
-      <label for="namel" id="namelPR">Apellido </label><br />
+      <label for="namef" id="namePf" class="label1">Nombre </label>
+      <label for="namel" id="namelPR" class="label2">Apellido </label><br />
       <input
         type="text"
         id="fnamePR"
@@ -27,41 +27,39 @@
       /><br /><br />
     </div>
     <div class="input_label">
-      <label for="email">Correo </label><br />
+      <label for="email" class="label1">Correo </label><br />
       <input
         type="text"
         id="emailPR"
         name="email"
+        class="fname"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <label>@unal.edu.co </label><br />
       <br /><br />
     </div>
     <div class="input_label">
-      <label for="Cedula">Cédula </label><br />
-      <input list="browsersP" />
+      <label for="Cedula" class="label1">Cédula </label><br />
+      <input list="browsersP" class="fname" />
       <datalist id="browsersP">
         <option value="CC">CC</option>
         <option value="CE">CE</option>
       </datalist>
 
-      <input
-        type="text"
-        id="cedulaPR"
-        name="cedula"
-        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-      />
+      <input type="text" id="cedulaPR" name="cedula" class="lname" />
       <br /><br />
     </div>
     <div class="input_label">
-      <label for="pass1">Contraseña </label>
-      <label for="pass2" id="confirPassLabelP">Confirmar Contraseña </label
+      <label for="pass1" class="label1">Contraseña </label>
+      <label for="pass2" id="confirPassLabelP" class="label2"
+        >Confirmar Contraseña </label
       ><br /><br />
       <div class="margin-down">
         <input
           type="password"
           id="passwordPR"
           name="password"
+          class="fname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
@@ -204,16 +202,41 @@ export default {
 .namef {
   margin-left: 50px;
 }
-#namelPR {
-  margin-left: 120px;
+.label1 {
+  margin-left: 10px;
+}
+.label2 {
+  margin-left: 150px;
+}
+.fname {
+  margin-left: 8px;
+  border: 1px solid #070707;
+  padding: 10px 25px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: normal;
 }
 .lname {
   margin-left: 10px;
+  border: 1px solid #070707;
+  padding: 10px 25px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: normal;
 }
 #confirPassLabelP {
-  margin-left: 110px;
+  margin-left: 135px;
 }
 .margin-down {
   margin-top: 0px;
+}
+.form-control {
+  border: 1px solid #d5dae2;
+  padding: 15px 25px;
+  margin-bottom: 20px;
+  min-height: 45px;
+  font-size: 13px;
+  line-height: 15;
+  font-weight: normal;
 }
 </style>

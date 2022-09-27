@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <div class="col-12 bg-success">
+    <div class="col-12">
       <div class="row">
         <div class="col-3">
           <button
             for="registryStudent"
             v-on:click="openRegistry"
             id="registryStudentButton"
+            class="btn btn-block admin-btn mb-4"
+            type="button"
           >
             Registrar Profesor
           </button>
@@ -16,6 +18,8 @@
             for="closeSession"
             v-on:click="closeSession"
             id="closeSession"
+            class="btn btn-block admin-btn mb-4"
+            type="button"
           >
             Cerrar Sesión
           </button>
@@ -59,5 +63,15 @@ export default {
 <style>
 #closeSession {
   margin-left: 500px;
+}
+.col-3 .admin-btn {
+  padding: 13px 20px 12px;
+  background-color: #000;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  margin-bottom: 24px;
 }
 </style>

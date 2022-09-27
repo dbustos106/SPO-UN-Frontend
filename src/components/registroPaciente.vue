@@ -11,8 +11,8 @@
       <br />
     </div>
     <div class="input_label">
-      <label for="namef" id="namef">Nombre </label>
-      <label for="namel" id="namelR">Apellido </label><br />
+      <label for="namef" id="namef" class="label1">Nombre </label>
+      <label for="namel" id="namelR" class="label2">Apellido </label><br />
       <input
         type="text"
         id="fnameR"
@@ -27,18 +27,19 @@
       /><br /><br />
     </div>
     <div class="input_label">
-      <label for="email">Correo </label><br />
+      <label for="email" class="label1">Correo </label><br />
       <input
         type="text"
         id="emailR"
         name="email"
+        class="fname"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <br /><br />
     </div>
     <div class="input_label">
-      <label for="Cedula">Cédula </label><br />
-      <input list="browsers" />
+      <label for="Cedula" class="label1">Cédula </label><br />
+      <input list="browsers" class="fname" />
       <datalist id="browsers">
         <option value="CC"></option>
         <option value="CE"></option>
@@ -48,19 +49,22 @@
         type="text"
         id="cedulaR"
         name="cedula"
+        class="lname"
         v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
       />
       <br /><br />
     </div>
     <div class="input_label">
-      <label for="pass1">Contraseña </label>
-      <label for="pass2" id="confirPassLabel">Confirmar Contraseña </label
+      <label for="pass1" class="label1">Contraseña </label>
+      <label for="pass2" id="confirPassLabel" class="label2"
+        >Confirmar Contraseña </label
       ><br /><br />
       <div class="margin-down">
         <input
           type="password"
           id="passwordR"
           name="password"
+          class="fname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
@@ -75,36 +79,46 @@
     </div>
 
     <div class="input_label">
-      <label for="edad">Edad </label>
-      <label for="genero" id="labelGender">Género </label>
+      <label for="edad" class="label1">Edad </label>
+      <label for="genero" id="labelGender" class="label2">Género </label>
       <label for="RH" id="RHLabel">RH </label><br /><br />
       <div class="margin-down">
         <input
           type="number"
           id="ageR"
           name="age"
+          class="lname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
           type="text"
           id="genderR"
           name="gender"
+          class="fname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
         <input
           type="text"
           id="RHR"
           name="RH"
+          class="fname"
           v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
         />
       </div>
-
-      <button for="Regresar" v-on:click="returnToPage" id="returnButton">
-        Regresar</button
-      ><br />
-      <button for="accept" v-on:click="register" id="acceptButton">
-        Aceptar</button
-      ><br />
+      <div class="row">
+        <div class="col-3">
+          <button for="Regresar" v-on:click="returnToPage" id="returnButton">
+            Regresar</button
+          ><br />
+        </div>
+        <div class="col-3"></div>
+        <div class="col-3">
+          <button for="accept" v-on:click="register" id="acceptButton">
+            Aceptar</button
+          ><br />
+        </div>
+        <div class="col-3"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -256,15 +270,15 @@ export default {
   margin-left: 10px;
 }
 #confirPassLabel {
-  margin-left: 110px;
+  margin-left: 120px;
 }
 .margin-down {
   margin-top: 0px;
 }
 #labelGender {
-  margin-left: 140px;
+  margin-left: 170px;
 }
 #RHLabel {
-  margin-left: 140px;
+  margin-left: 165px;
 }
 </style>
