@@ -1,4 +1,14 @@
 <template>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicia Sesión</title>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+  </head>
   <main>
     <div
       id="loginError"
@@ -7,29 +17,39 @@
       v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
     ></div>
     <div class="container">
-      <div class="col-4"></div>
-      <div class="col-4 bg-success">
-        <h2>Inicio de Sesión</h2>
-        <label for="namef" id="namef">Usuario </label><br />
-        <input type="text" id="user" class="fname" /><br />
-        <label for="namel" id="namel">Contraseña </label><br />
-        <input type="password" id="password" class="lname" /><br /><br />
-        <button for="accept" id="acceptButton" v-on:click="loginFunction">
-          Aceptar</button
-        ><br /><br />
-        <label>¿Sin Usuario?</label>
-        <button
-          v-on:click="clickRegisterButton"
-          ref="registerButton"
-          id="registerButton"
-        >
-          Registrarse
-        </button>
-        <br /><br />
+        <div class="card login-card">
+          <div class="row no-gutters">
+            <div class="col-md-5">
+              <img src="../assets/login.jpg" alt="login" class="login-card-img">
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <div class="brand-wrapper">
+                  <img src="../assets/LogoSPOUN.png" alt="logo" class="logo">
+                </div>
+                <p class="login-card-description">Iniciar sesión</p>
+                <form action="#!">
+                    <div class="form-group">
+                      <label for="user" class="sr-only">Usuario</label>
+                      <input type="text" name="user" id="user" class="form-control" placeholder="Usuario">
+                    </div>
+                    <div class="form-group mb-4">
+                      <label for="password" class="sr-only">Password</label>
+                      <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
+                    </div>
+                    <input name="accept" id="acceptButton" class="btn btn-block login-btn mb-4" type="button" value="Ingresar" v-on:click="loginFunction">
+                  </form>
+                  <a href="#!" class="forgot-password-link">¿Olvidaste la contraseña?</a>
+                  <p class="login-card-footer-text">¿No tienes una cuenta? <a href="#!" class="text-reset">Regístrate</a></p>
+                  <nav class="login-card-footer-nav">
+                    <a href="#!">Terms of use.</a>
+                    <a href="#!">Privacy policy</a>
+                  </nav>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-4"></div>
-      <div class="input_label"></div>
-    </div>
     <div>
       <b-list-group>
         <b-list-group-item v-for="item in items" v-bind:key="item.id">
@@ -130,35 +150,98 @@ export default {
     },
   },
 };
-</script>
 
+</script>
 <style>
-.center {
-  margin: auto;
-  width: 60%;
-  border: 3px solid #315203;
-  padding: 10px;
+body {
+  font-family: "Karla", sans-serif;
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  animation: fondoAnimado 20s ease infinite;
 }
-.input_label {
-  margin-left: 50px;
-}
-.namef {
-  margin-left: 50px;
-}
-#namel {
-  margin-left: 130px;
-}
-.lname {
-  margin-left: 10px;
-}
-#confirPassLabel {
-  margin-left: 110px;
-}
-.margin-down {
-  margin-top: 0px;
-}
-button.link {
-  background: none;
-  border: none;
-}
+
+.brand-wrapper {
+  margin-bottom: 19px; }
+  .brand-wrapper .logo {
+    height: 50px; }
+.login-card {
+  position: relative;
+  width: 100%;
+  border: 0;
+  border-radius: 27.5px;
+  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+  overflow: hidden; }
+
+  .login-card-img {
+    border-radius: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
+
+  img.login-card-img{
+    transition: 0.5s all ease-in-out;
+  }
+  
+  img.login-card-img:hover{
+    transform: scale(1.5);
+
+  }
+  .login-card .card-body {
+    padding: 85px 160px 60px; }
+    @media (max-width: 422px) {
+      .login-card .card-body {
+        padding: 35px 24px; } }
+  .login-card-description {
+    font-size: 25px;
+    color: #000;
+    font-weight: normal;
+    margin-bottom: 23px; }
+  .login-card form {
+    max-width: 326px; }
+  .login-card .form-control {
+    border: 1px solid #d5dae2;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    min-height: 45px;
+    font-size: 13px;
+    line-height: 15;
+    font-weight: normal; }
+    .login-card .form-control::-webkit-input-placeholder {
+      color: #919aa3; }
+    .login-card .form-control::-moz-placeholder {
+      color: #919aa3; }
+    .login-card .form-control:-ms-input-placeholder {
+      color: #919aa3; }
+    .login-card .form-control::-ms-input-placeholder {
+      color: #919aa3; }
+    .login-card .form-control::placeholder {
+      color: #919aa3; }
+  .login-card .login-btn {
+    padding: 13px 20px 12px;
+    background-color: #000;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #fff;
+    margin-bottom: 24px; }
+    .login-card .login-btn:hover {
+      border: 1px solid #000;
+      background-color: transparent;
+      color: #000; }
+  .login-card .forgot-password-link {
+    font-size: 14px;
+    color: #919aa3;
+    margin-bottom: 12px; }
+  .login-card-footer-text {
+    font-size: 14px;
+    color: #0d2366;
+    margin-bottom: 60px; }
+    @media (max-width: 767px) {
+      .login-card-footer-text {
+        margin-bottom: 24px; } }
+  .login-card-footer-nav a {
+    font-size: 14px;
+    color: #919aa3; }
 </style>
