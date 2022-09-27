@@ -4,7 +4,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title>Inicia Sesión</title>
+      <title>SPO UN - Inicia sesión</title>
       <link
         href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
         rel="stylesheet"
@@ -17,7 +17,6 @@
         rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       />
-      <link rel="stylesheet" href="assets/css/login.css" />
     </head>
     <main>
       <div
@@ -77,7 +76,7 @@
                 >
                 <p class="login-card-footer-text">
                   ¿No tienes una cuenta?
-                  <a v-on:click="clickRegisterButton" class="text-reset"
+                  <a href="#" v-on:click="clickRegisterButton" class="text-reset"
                     >Regístrate</a
                   >
                 </p>
@@ -105,7 +104,6 @@
 <script>
 //import { vShow } from "vue";
 import axios from "axios";
-
 export default {
   name: "login-page",
   data() {
@@ -117,6 +115,7 @@ export default {
   //
   methods: {
     //functions
+    
     clickRegisterButton() {
       console.log("You clicked the button!");
       //console.log(this.$root.$data.registryShow);
@@ -196,7 +195,10 @@ export default {
 body {
   font-family: "Karla", sans-serif;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  animation: fondoAnimado 20s ease infinite;
+}
+
+.container{
+  margin-top : 15px;
 }
 
 .brand-wrapper {
@@ -231,7 +233,7 @@ img.login-card-img:hover {
   transform: scale(1.5);
 }
 .login-card .card-body {
-  padding: 85px 160px 60px;
+  padding: 85px 160px 20px;
 }
 @media (max-width: 422px) {
   .login-card .card-body {
