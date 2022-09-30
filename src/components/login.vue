@@ -6,13 +6,12 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>SPO UN - Inicia sesión</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" />
-      <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css" />
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
     </head>
     <main>
-      <div id="loginError" class="loginError" role="alert" v-bind:style="{ color: emptyInput ? 'red' : 'black' }"></div>
+      <div></div>
       <div class="container">
         <div class="card login-card">
           <div class="row no-gutters">
@@ -26,7 +25,7 @@
                 </div>
                 <p class="login-card-description">Iniciar sesión</p>
                 <form action="#!">
-                  <div class="form-group">
+                  <div class="form-group needs-validation" novalidate>
                     <label for="user" class="sr-only">Usuario</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -34,7 +33,7 @@
                           <i class="fa fa-user-circle" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input type="text" name="user" id="user" class="form-control" placeholder="Usuario" />
+                      <input type="text" name="user" id="user" class="form-control" placeholder="Usuario" v-model="Usuario" required/>
                     </div>
                   </div>
                   <div class="form-group mb-4">
@@ -45,7 +44,7 @@
                           <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" />
+                      <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" v-model="Contraseña" required/>
                     </div>
                   </div>
                   <input name="accept" id="acceptButton" class="btn btn-block login-btn mb-4" type="submit" value="Ingresar" v-on:click="loginFunction" />
@@ -93,8 +92,24 @@
         this.$root.$data.loginShow = false;
         this.$root.$data.registryShow = true;
       },
+      validate() {
+        let valid = true
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function(form) {
+          form.addEventListener('button', function(event) {
+            if (!form.loginFunction()) {
+              valid = false
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+        return valid
+      },
       loginFunction() {
         console.log("Logging in");
+        let pass = false;
         var user = document.getElementById("user").value;
         var password = document.getElementById("password").value;
         if (user == "" || password == "") {
@@ -102,7 +117,9 @@
           this.errorFunction("No ha ingresado los datos");
         } else {
           this.askLogintoBack(user, password);
+          pass != pass;
         }
+        return pass
       },
       async askLogintoBack(user, password) {
         let datos = {
@@ -146,8 +163,9 @@
         //errorDiv.css("display", "block");
         //update the content of the error message
         errorDiv.innerHTML = messageText;
-        this.$data.emptyInput = true;
+        this.$data.emptyInput = true
         //schedule a deactivation
+
       },
     },
   };
@@ -156,11 +174,6 @@
   body {
     font-family: "Karla", sans-serif;
     background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  }
-
-  .input-group-text {
-    color: #ff0000;
-    background-color: #ffffff;
   }
 
   .container {
@@ -258,7 +271,7 @@
 
   .login-card .login-btn {
     padding: 13px 20px 12px;
-    background-color: #000;
+    background-color: #1a1d53;
     border-radius: 4px;
     font-size: 17px;
     font-weight: bold;
@@ -267,15 +280,14 @@
     margin-bottom: 24px;
   }
 
-  .login-card .login-btn:hover {
-    border: 1px solid #000;
-    background-color: transparent;
-    color: #000;
+  #acceptButton:hover {
+    border-color: #1a1d53;
+    color: #1a1d53;
   }
 
   .login-card .forgot-password-link {
     font-size: 14px;
-    color: #919aa3;
+    color: #47637e;
     margin-bottom: 12px;
   }
 
@@ -294,5 +306,23 @@
   .login-card-footer-nav a {
     font-size: 14px;
     color: #919aa3;
+  }
+
+  .form-control.is-valid, .was-validated .form-control:valid {
+    border-color: #198754;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+  }
+
+  .form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
   }
 </style>
