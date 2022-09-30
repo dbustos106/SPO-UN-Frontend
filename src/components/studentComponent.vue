@@ -1,18 +1,36 @@
 <template>
   <div>
-    <button for="programHours" id="programHours">Programar horarios</button>
-    <button for="closeSession" v-on:click="closeSession" id="closeSession">
-      Cerrar Sesión
-    </button>
+    <div class="row">
+      <div class="col-3">
+        <button for="programHours" id="programHours">Programar horarios</button>
+      </div>
+      <div class="col-3">
+        <button for="watchHours" v-on:click="openCalendar" id="watchHours">
+          Ver horarios
+        </button>
+      </div>
+      <div class="col-3">
+        <button for="closeSession" v-on:click="closeSession" id="closeSession">
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <CalendarStudent ref="calendarStudent" v-show="calendarStudentShow" />
+    </div>
   </div>
 </template>
 
 <script>
+import CalendarStudent from "./calendar.vue";
+
 export default {
   name: "Area_Estudiante",
-  components: {},
+  components: { CalendarStudent },
   data() {
-    return {};
+    return {
+      calendarStudentShow: false,
+    };
   },
   methods: {
     closeSession() {
@@ -21,6 +39,9 @@ export default {
       this.$root.$data.studentAreaShow = false;
       document.getElementById("user").value = "";
       document.getElementById("password").value = "";
+    },
+    openCalendar() {
+      this.$data.calendarStudentShow = true;
     },
   },
 };
