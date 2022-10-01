@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import registroProfesor from "./registroProfesor.vue";
+import registroProfesor from "../registries/registroProfesor.vue";
 export default {
   name: "Area_Administrador",
   components: {

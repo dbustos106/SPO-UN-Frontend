@@ -33,7 +33,6 @@
       </div>
     </div>
 
-    <!--
     <div class="row">
       <table>
         <thead>
@@ -45,12 +44,11 @@
         </thead>
       </table>
     </div>
-    -->
   </div>
 </template>
 
 <script>
-import registroEstudiante from "./registroEstudiante.vue";
+import registroEstudiante from "../registries/registroEstudiante.vue";
 export default {
   name: "Area_Profesor",
   components: {

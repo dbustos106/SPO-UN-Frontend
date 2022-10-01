@@ -13,12 +13,12 @@
 //import { ref } from "vue";
 //import Vue from "vue";
 //import registroEstudiante from "./components/registroEstudiante.vue";
-import registroPaciente from "./components/registroPaciente.vue";
+import registroPaciente from "./components/registries/registroPaciente.vue";
 import login from "./components/login.vue";
-import profesorComponent from "./components/profesorComponent.vue";
-import patientComponent from "./components/patientComponent.vue";
-import studentComponent from "./components/studentComponent.vue";
-import adminComponent from "./components/adminComponent.vue";
+import profesorComponent from "./components/mainComponents/profesorComponent.vue";
+import patientComponent from "./components/mainComponents/patientComponent.vue";
+import studentComponent from "./components/mainComponents/studentComponent.vue";
+import adminComponent from "./components/mainComponents/adminComponent.vue";
 
 export default {
   name: "SPO-UN",
