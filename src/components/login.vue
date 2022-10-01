@@ -184,6 +184,7 @@ export default {
         })
         .then((response) => {
           let loginInfo = this.$root.jwtDecode(response.data.access_token);
+          console.log(loginInfo);
           sessionStorage.setItem("Token", response.data.access_token);
           sessionStorage.setItem("Id", loginInfo.payload.roles[0]);
           sessionStorage.setItem("Role", loginInfo.payload.roles[1]);
