@@ -1,118 +1,120 @@
 <template>
-  <div>
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title>SPO UN - Inicia sesión</title>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
-      />
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      />
-    </head>
-    <main>
-      <div></div>
-      <div class="container">
-        <div class="card login-card">
-          <div class="row no-gutters">
-            <div class="col-md-5">
-              <img
-                src="../assets/login.jpg"
-                alt="login"
-                class="login-card-img"
-              />
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <div class="brand-wrapper">
-                  <img src="../assets/LogoSPOUN.png" alt="logo" class="logo" />
-                </div>
-                <p class="login-card-description">Iniciar sesión</p>
-                <form action="#!">
-                  <div class="form-group needs-validation" novalidate>
-                    <label for="user" class="sr-only">Usuario</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputUser">
-                          <i class="fa fa-user-circle" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        name="user"
-                        id="user"
-                        class="form-control"
-                        placeholder="Usuario"
-                        v-model="Usuario"
-                        required
-                      />
-                    </div>
+  <body id="loginbody">
+    <div>
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>SPO UN - Inicia sesión</title>
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+      </head>
+      <main>
+        <div></div>
+        <div class="container">
+          <div class="card login-card">
+            <div class="row no-gutters">
+              <div class="col-md-5">
+                <img
+                  src="../assets/login.jpg"
+                  alt="login"
+                  class="login-card-img"
+                />
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <div class="brand-wrapper">
+                    <img
+                      src="../assets/LogoSPOUN.png"
+                      alt="logo"
+                      class="logo"
+                    />
                   </div>
-                  <div class="form-group mb-4">
-                    <label for="password" class="sr-only">Password</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputPassword">
-                          <i class="fa fa-key" aria-hidden="true"></i>
-                        </span>
+                  <p class="login-card-description">Iniciar sesión</p>
+                  <form action="#!">
+                    <div class="form-group needs-validation" novalidate>
+                      <label for="user" class="sr-only">Usuario</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputUser">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          name="user"
+                          id="user"
+                          class="form-control"
+                          placeholder="Usuario"
+                          v-model="Usuario"
+                          required
+                        />
                       </div>
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        class="form-control"
-                        placeholder="Contraseña"
-                        v-model="Contraseña"
-                        required
-                      />
                     </div>
-                  </div>
-                  <input
-                    name="accept"
-                    id="acceptButton"
-                    class="btn btn-block login-btn mb-4"
-                    value="Ingresar"
-                    v-on:click="loginFunction"
-                  />
-                </form>
-                <a href="#!" class="forgot-password-link"
-                  >¿Olvidaste la contraseña?</a
-                >
-                <p class="login-card-footer-text">
-                  ¿No tienes una cuenta?
-                  <a
-                    href="#"
-                    v-on:click="clickRegisterButton"
-                    class="text-reset"
-                    >Regístrate</a
+                    <div class="form-group mb-4">
+                      <label for="password" class="sr-only">Password</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputPassword">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          class="form-control"
+                          placeholder="Contraseña"
+                          v-model="Contraseña"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <input
+                      name="accept"
+                      id="acceptButton"
+                      class="btn btn-block login-btn mb-4"
+                      value="Ingresar"
+                      v-on:click="loginFunction"
+                    />
+                  </form>
+                  <a href="#!" class="forgot-password-link"
+                    >¿Olvidaste la contraseña?</a
                   >
-                </p>
-                <nav class="login-card-footer-nav">
-                  <a href="#!">Terms of use.</a>
-                  <a href="#!">Privacy policy</a>
-                </nav>
+                  <p class="login-card-footer-text">
+                    ¿No tienes una cuenta?
+                    <a
+                      href="#"
+                      v-on:click="clickRegisterButton"
+                      class="text-reset"
+                      >Regístrate</a
+                    >
+                  </p>
+                  <nav class="login-card-footer-nav">
+                    <a href="#!">Terms of use.</a>
+                    <a href="#!">Privacy policy</a>
+                  </nav>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <b-list-group>
-          <b-list-group-item v-for="item in items" v-bind:key="item.id">
-            {{ item.nombre }}
-          </b-list-group-item>
-        </b-list-group>
-      </div>
-    </main>
-  </div>
+        <div>
+          <b-list-group>
+            <b-list-group-item v-for="item in items" v-bind:key="item.id">
+              {{ item.nombre }}
+            </b-list-group-item>
+          </b-list-group>
+        </div>
+      </main>
+    </div>
+  </body>
 </template>
 <!---<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>--->
 <script>
@@ -222,11 +224,23 @@ export default {
 };
 </script>
 <style>
-body {
-  font-family: "Karla", sans-serif;
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+#loginbody {
+  animation: color-change-2x 2s linear infinite alternate both;
 }
 
+@keyframes color-change-2x {
+  0% {
+    background: #84fab0;
+  }
+  100% {
+    background: #8fd3f4;
+  }
+}
+
+#acceptButton:hover {
+  border-color: #1a1d53;
+  color: #1a1d53;
+}
 .container {
   display: flex;
   align-items: center;
@@ -330,10 +344,7 @@ img.login-card-img:hover {
   margin-bottom: 24px;
 }
 
-#acceptButton:hover {
-  border-color: #1a1d53;
-  color: #1a1d53;
-}
+
 
 .login-card .forgot-password-link {
   font-size: 14px;
@@ -356,29 +367,5 @@ img.login-card-img:hover {
 .login-card-footer-nav a {
   font-size: 14px;
   color: #919aa3;
-}
-
-.form-control.is-valid,
-.was-validated .form-control:valid {
-  border-color: #198754;
-  padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.1875rem) center;
-  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-}
-
-.form-control.is-invalid,
-.was-validated .form-control:invalid {
-  border-color: #dc3545;
-  padding-right: calc(1.5em + 0.75rem);
-  /*
-  background-image: url(
-    data:image/svg + xml,
-    %3csvgxmlns="http://www.w3.org/2000/svg"viewBox="0 0 12 12"width="12"height="12"fill="none"stroke="%23dc3545"%3e%3ccirclecx="6"cy="6"r="4.5"/%3e%3cpathstroke-linejoin="round"d="M5.8 3.6h.4L6 6.5z"/%3e%3ccirclecx="6"cy="8.2"r=".6"fill="%23dc3545"stroke="none"/%3e%3c/svg%3e
-  );*/
-  background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.1875rem) center;
-  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 </style>
