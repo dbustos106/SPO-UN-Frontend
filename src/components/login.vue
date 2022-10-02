@@ -130,8 +130,8 @@ export default {
   methods: {
     //functions
     clickRegisterButton() {
-      
       //console.log(this.$root.$data.registryShow);
+      
       this.$root.$data.loginShow = false;
       this.$root.$data.registryShow = true;
     },
