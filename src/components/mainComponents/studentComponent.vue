@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import CalendarStudent from "../calendar.vue";
+import CalendarStudent from "../commonResources/calendar.vue";
 
 export default {
   name: "Area_Estudiante",
