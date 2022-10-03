@@ -81,6 +81,7 @@
                       id="acceptButton"
                       class="btn btn-block login-btn mb-4"
                       value="Ingresar"
+                      type="submit"
                       v-on:click="loginFunction"
                     />
                   </form>
