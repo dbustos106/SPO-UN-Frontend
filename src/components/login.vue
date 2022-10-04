@@ -37,8 +37,8 @@
                     />
                   </div>
                   <p class="login-card-description">Iniciar sesión</p>
-                  <form action="#!">
-                    <div class="form-group needs-validation" novalidate>
+                  <div>
+                    <div class="form-group needs-validation" >
                       <label for="user" class="sr-only">Usuario</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -48,7 +48,6 @@
                         </div>
                         <input
                           type="text"
-                          name="user"
                           id="user"
                           class="form-control"
                           placeholder="Usuario"
@@ -67,7 +66,6 @@
                         </div>
                         <input
                           type="password"
-                          name="password"
                           id="password"
                           class="form-control"
                           placeholder="Contraseña"
@@ -76,22 +74,18 @@
                         />
                       </div>
                     </div>
-                    <input
-                      name="accept"
+                    <button
                       id="acceptButton"
                       class="btn btn-block login-btn mb-4"
-                      value="Ingresar"
-                      type="submit"
                       v-on:click="loginFunction"
-                    />
-                  </form>
-                  <a href="#!" class="forgot-password-link"
+                    >Aceptar</button>
+                  </div>
+                  <a  class="forgot-password-link"
                     >¿Olvidaste la contraseña?</a
                   >
                   <p class="login-card-footer-text">
                     ¿No tienes una cuenta?
                     <a
-                      href="#"
                       v-on:click="clickRegisterButton"
                       class="text-reset"
                       >Regístrate</a
@@ -138,26 +132,7 @@ export default {
       this.$root.$data.loginShow = false;
       this.$root.$data.registryShow = true;
     },
-    /*
-    validate() {
-      let valid = true;
-      const forms = document.querySelectorAll(".needs-validation");
-      Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener(
-          "button",
-          function (event) {
-            if (!form.loginFunction()) {
-              valid = false;
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-      return valid;
-    },*/
+
     loginFunction() {
       console.log("Logging in");
       let pass = false;
