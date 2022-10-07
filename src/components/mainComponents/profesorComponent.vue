@@ -84,6 +84,14 @@ export default {
       this.$root.$data.loginShow = true;
       this.$root.$data.profesorAreaShow = false;
       this.$data.registryStudentShow = false;
+      this.$data.tableStudentsShow = false;
+      this.$data.studentsLoaded = false;
+      this.$refs.StudentProfesor.$data.students=[];
+      let tableRows=this.$refs.StudentProfesor.$refs.tableOfStudentsRef;
+      for(var i=tableRows.rows.length-1; i>1;i--){
+        //console.log(tableRows.rows[i]);
+        tableRows.rows[i].remove();
+      }
       document.getElementById("user").value = "";
       document.getElementById("password").value = "";
     },

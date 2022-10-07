@@ -2,7 +2,7 @@
   <div class="container">
     <div class="col-12">
       <div class="row">
-        <table id="tableOfStudents">
+        <table id="tableOfStudents" ref="tableOfStudentsRef">
           <thead>
             <tr>
               <td>Nombre</td>
@@ -34,12 +34,14 @@
 </template>
 
 <script>
+  import axios from "axios";
 export default {
   name: "studentTable",
   components: {},
   data() {
     return {
-      students: {
+      students: [
+        /*
         1: {
           id: 1,
           name: "Gustavo Escobar",
@@ -67,8 +69,8 @@ export default {
           email: "laespinosabo@unal.edu.co",
           age: 25,
           cedula: 102489,
-        },
-      },
+        },*/
+      ],
     };
   },
   methods: {
@@ -76,27 +78,54 @@ export default {
       let table = document.getElementById("tableOfStudents");
 
       //Back petition goes here
+      axios
+        .get("http://localhost:8081/professor/students/"+sessionStorage.Id, {
+          headers:{
+            "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.Token,
+          }
+         
+        })
+        .then((response) => {
+          let studentInfo=response.data.message.content;
+          console.log(studentInfo);
+          for (var i in studentInfo){
+            this.$data.students.push({
+              "id":studentInfo[i].id ,
+              "name":studentInfo[i].name,
+              "email":studentInfo[i].username+"@unal.edu.co",
+              "age":22,
+              "cedula":studentInfo[i].document_number,
+            })
+          }
+          console.log(this.$data.students);
+          for (var j in this.$data.students) {
+            console.log(this.$data.students[j].name);
+            let row = table.insertRow();
+            let nameCell = row.insertCell();
+            let emailCell = row.insertCell();
+            let ageCell = row.insertCell();
+            let cedulaCell = row.insertCell();
+            nameCell.appendChild(
+              document.createTextNode(this.$data.students[j].name)
+            );
+            emailCell.appendChild(
+              document.createTextNode(this.$data.students[j].email)
+            );
+            ageCell.appendChild(
+              document.createTextNode(this.$data.students[j].age)
+            );
+            cedulaCell.appendChild(
+              document.createTextNode(this.$data.students[j].cedula)
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-      for (var i in this.$data.students) {
-        console.log(this.$data.students[i].name);
-        let row = table.insertRow();
-        let nameCell = row.insertCell();
-        let emailCell = row.insertCell();
-        let ageCell = row.insertCell();
-        let cedulaCell = row.insertCell();
-        nameCell.appendChild(
-          document.createTextNode(this.$data.students[i].name)
-        );
-        emailCell.appendChild(
-          document.createTextNode(this.$data.students[i].email)
-        );
-        ageCell.appendChild(
-          document.createTextNode(this.$data.students[i].age)
-        );
-        cedulaCell.appendChild(
-          document.createTextNode(this.$data.students[i].cedula)
-        );
-      }
+      
     },
     closeStudentTable() {
       this.$root.$refs.ProfesorArea.$data.tableStudentsShow = false;
