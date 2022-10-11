@@ -2,7 +2,7 @@
   <login ref="loginPage" v-show="loginShow" />
   <!--<StudentTemplate ref="StudentTemplate" v-show="StudentTemplateShow" />-->
   <registroPaciente ref="registryPatient" v-show="registryShow" />
-  <profesorComponent ref="ProfesorArea" v-show="profesorAreaShow" />
+  <profesorComponent ref="ProfesorArea" id="ProfesorArea" v-show="profesorAreaShow" />
   <studentComponent ref="StudentArea" v-show="studentAreaShow" />
   <patientComponent ref="PatientArea" v-show="patientAreaShow" />
   <adminComponent ref="AdminArea" v-show="adminAreaShow" />

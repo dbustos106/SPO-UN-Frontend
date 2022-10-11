@@ -70,11 +70,11 @@ export default {
     },
     menuLogo: {
       type: String,
-      default: require("../assets/login.jpg"),
+      default: require("../../assets/login.jpg"),
     },
     menuIcon: {
       type: String,
-      default: require("../assets/login.jpg"),
+      default: require("../../assets/login.jpg"),
     },
     isPaddingLeft: {
       type: Boolean,
@@ -128,7 +128,7 @@ export default {
     //! Profile detailes
     profileImg: {
       type: String,
-      default: require("../assets/login.jpg"),
+      default: require("../../assets/login.jpg"),
     },
     profileName: {
       type: String,

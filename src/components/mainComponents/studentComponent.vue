@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <!--<StudentTemplate ref="bar"/>-->
+    </div>
     <div class="row">
       <div class="col-3">
         <button for="programHours" id="programHours">Programar horarios</button>
@@ -15,21 +18,25 @@
         </button>
       </div>
     </div>
-    <div class="row">
-      <CalendarStudent ref="calendarStudent" v-show="calendarStudentShow" />
+    <div  v-show="calendarStudentShow" class="row">
+      <CalendarStudent ref="calendarStudent" />
     </div>
+    
   </div>
 </template>
 
 <script>
+//import StudentTemplate from "../commonResources/StudentTemplate.vue";
 import CalendarStudent from "../commonResources/calendar.vue";
 
 export default {
   name: "Area_Estudiante",
-  components: { CalendarStudent },
+  components: { CalendarStudent,
+              //StudentTemplate 
+              },
   data() {
     return {
-      calendarStudentShow: false,
+      calendarStudentShow: true,
     };
   },
   methods: {
@@ -42,6 +49,9 @@ export default {
     },
     openCalendar() {
       this.$data.calendarStudentShow = true;
+      this.$refs.calendarStudent.getStudentSchedule();
+      this.$refs.calendarStudent.$data.calendarOptions.height = 1000;
+      this.$refs.calendarStudent.$data.calendarOptions.width = 1500;
     },
   },
 };

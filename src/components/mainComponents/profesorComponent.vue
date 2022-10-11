@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <ProfessorBar ref="professorBar"></ProfessorBar>
     <div class="row">
       <div class="col-12">
         <div class="row">
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import ProfessorBar from "../commonResources/ProfessorBar.vue";
 import registroEstudiante from "../registries/registroEstudiante.vue";
 import studentTable from "../commonResources/studentTable.vue";
 export default {
@@ -56,6 +58,7 @@ export default {
   components: {
     registroEstudiante,
     studentTable,
+    ProfessorBar,
   },
   data() {
     return {
