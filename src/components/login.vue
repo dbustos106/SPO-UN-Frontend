@@ -166,6 +166,8 @@ export default {
           sessionStorage.setItem("Token", response.data.access_token);
           sessionStorage.setItem("Id", loginInfo.payload.roles[0]);
           sessionStorage.setItem("Role", loginInfo.payload.roles[1]);
+          sessionStorage.setItem("Username", loginInfo.payload.sub);
+          document.getElementById("professorUsername").innerHTML=sessionStorage.Username;
           console.log("Logged in");
           this.openUserComponent(sessionStorage.Role);
         })

@@ -29,15 +29,29 @@
       >
         <div id="my-scroll" style="margin: 6px 14px 0 14px">
           <ul class="nav-list" id="list" style="overflow: visible">
-            <span v-for="(menuItem, index) in menuItems" :key="index">
+            <span>
               <li>
-                <a id="listItem">
-                  <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
-                  <span class="links_name" @click="menuItem.onClick()">{{ menuItem.name }}</span>
+                <a id="listItem1">
+                  <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
+                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openRegistry()>Registrar Esudiantes</span>
                 </a>
-                <span class="tooltip">{{
-                  menuItem.tooltip || menuItem.name
-                }}</span>
+                <span class="tooltip">
+                  menuItem.tooltip || Registrar Esudiantes
+                </span>
+                <a id="listItem2">
+                  <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
+                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openStudentTable()>Ver Estudiantes</span>
+                </a>
+                <span class="tooltip">
+                  menuItem.tooltip || Ver Estudiantes
+                </span>
+                <a id="listItem3">
+                  <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
+                  <span class="links_name" >Ajustes</span>
+                </a>
+                <span class="tooltip">
+                  menuItem.tooltip || Ajustes
+                </span>
               </li>
             </span>
           </ul>
@@ -45,10 +59,10 @@
             <div class="profile-details">
               <i class="bx bx-user-circle"></i>
               <div class="name">
-                <div class="name">Fayzullo </div>
+                <div class="name" id="professorUsername"></div>
               </div>
             </div>
-            <i id="log_out" class="bx bx-log-out"></i>
+            <i id="log_out" class="bx bx-log-out" v-on:click=this.$root.$refs.ProfesorArea.closeSessionProfesor()></i>
           </div>
         </div>
       </div>

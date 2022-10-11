@@ -79,7 +79,7 @@ export default {
 
       //Back petition goes here
       axios
-        .get("http://localhost:8081/professor/students/"+sessionStorage.Id, {
+        .get("http://localhost:8081/professor/"+sessionStorage.Id+"/students/", {
           headers:{
             "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",

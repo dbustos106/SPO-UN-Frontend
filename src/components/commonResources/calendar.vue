@@ -51,7 +51,6 @@ export default {
         height: 650,
         //width: 700,
         events: [
-          //{ title: 'First Event', date: '1980-05-12' },
         ]
       },
       

@@ -5,26 +5,6 @@
       <div class="col-12">
         <div class="row">
           <div class="col-2">
-            <button
-              for="registryStudent"
-              v-on:click="openRegistry"
-              id="registryStudentButton"
-              class="btn btn-block professor-btn mb-4"
-              type="button"
-            >
-              Registrar Estudiante
-            </button>
-          </div>
-          <div class="col-2">
-            <button
-              for="openTable"
-              v-on:click="openStudentTable"
-              id="openStudentTable"
-              class="btn btn-block professor-btn mb-4"
-              type="button"
-            >
-              Ver Estudiantes
-            </button>
           </div>
           <div class="col-2">
             <button
