@@ -128,7 +128,7 @@
                       <option selected disabled value="">Género</option>
                       <option value="hombre">Hombre</option>
                       <option value="mujer">Mujer</option>
-                      <option value="secreto">Secreto</option>
+                      <option value="noEspecifica">Sin especificar</option>
                     </select>
                     <div class="valid-feedback">Válido</div>
                     <div class="invalid-feedback">Elije una opción</div>
