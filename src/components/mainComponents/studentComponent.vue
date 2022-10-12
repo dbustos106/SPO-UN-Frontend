@@ -27,6 +27,7 @@ export default {
     return {
       calendarStudentShow: false,
       createAppointmentShow: false,
+      calendarInfoShown: false,
     };
   },
   methods: {
@@ -39,13 +40,18 @@ export default {
       this.$root.$data.loginShow = true;
       this.$root.$data.studentAreaShow = false;
       this.$data.createAppointmentShow = false;
+      this.$data.calendarInfoShown = false;
+      this.$refs.calendarStudent.$data.calendarOptions.events=[];
       document.getElementById("user").value = "";
       document.getElementById("password").value = "";
     },
     openCalendar() {
       this.$data.calendarStudentShow = true;
       this.$data.createAppointmentShow = false;
-      this.$refs.calendarStudent.getStudentSchedule();
+      if(!this.$data.calendarInfoShown){
+        this.$refs.calendarStudent.getStudentSchedule();
+        this.$data.calendarInfoShown=true;
+      }
       this.$refs.calendarStudent.$data.calendarOptions.height = 1000;
       this.$refs.calendarStudent.$data.calendarOptions.width = 1500;
     },

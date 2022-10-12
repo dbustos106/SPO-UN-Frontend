@@ -17,33 +17,8 @@ export default {
   components: { FullCalendar },
   data() {
     return {
-      schedule: {
-        1: {
-          id: 1,
-          nombrePaciente: "Viserys Targaryen",
-          date: "2022-10-01T15:00:00",
-        },
-        2: {
-          id: 2,
-          nombrePaciente: "Walter White",
-          date: "2022-10-17T08:00:00",
-        },
-        3: {
-          id: 3,
-          nombrePaciente: "James McGill",
-          date: "2022-10-31T14:30:00",
-        },
-        4: {
-          id: 4,
-          nombrePaciente: "Tony Stark",
-          date: "2022-11-11T17:30:00",
-        },
-        5: {
-          id: 5,
-          nombrePaciente: "Tony Stark",
-          date: "2022-10-31T16:30:00",
-        },
-      },
+      schedule: [],
+      unconfirmedSchedule:[],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
         initialView: "dayGridMonth",
@@ -59,7 +34,7 @@ export default {
   methods: {
     getStudentSchedule(){
       
-      axios.get("http://localhost:8081/student/1/schedule",{
+      axios.get("http://localhost:8081/student/"+sessionStorage.Id+"/schedule",{
         headers:{
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -67,18 +42,58 @@ export default {
           }
       }).then((response) => {
         console.log(response);
+        let appointments=response.data.message;
+        for(var i in appointments){
+          console.log(appointments[i]);
+          var appointmentTime=appointments[i].start_time.replace(" ","T")
+          console.log(appointmentTime);
+          this.$data.schedule.push({
+            "nombrePaciente":"Cita 1",
+            "date":appointmentTime,
+          });
+        }
+
+        //Add events to calendar  
+        for(var j in this.$data.schedule){
+          this.calendarOptions.events = [
+            ...this.calendarOptions.events,//Adds all the previous events
+            {title:this.$data.schedule[j].nombrePaciente, date:this.$data.schedule[j].date, color:"green"}
+          ]
+        }  
       })
       .catch((err) => {
           console.log(err);
        });
        
-      //Add events to calendar  
-      for(var j in this.$data.schedule){
-        this.calendarOptions.events = [
-          ...this.calendarOptions.events,//Adds all the previous events
-          {title:this.$data.schedule[j].nombrePaciente, date:this.$data.schedule[j].date}
-        ]
-      }  
+      axios.get("http://localhost:8081/student/"+sessionStorage.Id+"/unconfirmedSchedule",{
+        headers:{
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+             Authorization: "Bearer " + sessionStorage.Token,
+          }
+      }).then((response) => {
+          console.log(response);
+          let unconfirmedAppointments=response.data.message;
+          for(var i in unconfirmedAppointments){
+            console.log(unconfirmedAppointments[i]);
+            var unAppointmentTime=unconfirmedAppointments[i].start_time.replace(" ","T")
+            console.log(unAppointmentTime);
+            this.$data.unconfirmedSchedule.push({
+              "nombrePaciente":"Cita "+unconfirmedAppointments[i].appointment_id,
+              "date":unAppointmentTime,
+            });
+          }
+
+          //Add events to calendar  
+          for(var j in this.$data.unconfirmedSchedule){
+            this.calendarOptions.events = [
+              ...this.calendarOptions.events,//Adds all the previous events
+              {title:this.$data.unconfirmedSchedule[j].nombrePaciente, date:this.$data.unconfirmedSchedule[j].date, color:"yellow"}
+            ]
+          }  
+      }).catch((err) => {
+          console.log(err);
+       });
     },
   },
 };
