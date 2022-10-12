@@ -1,123 +1,178 @@
 <template>
   <div>
-    <div
-      id="errors"
-      class="errors"
-      role="alert"
-      v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-    ></div>
-    <div class="input_label">
-      <h2>Registro paciente</h2>
-      <br />
-    </div>
-    <div class="input_label">
-      <label for="namef" id="namef" class="label1">Nombre </label>
-      <label for="namel" id="namelR" class="label2">Apellido </label><br />
-      <input
-        type="text"
-        id="fnameR"
-        class="fname"
-        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-      />
-      <input
-        type="text"
-        id="lnameR"
-        class="lname"
-        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-      /><br /><br />
-    </div>
-    <div class="input_label">
-      <label for="email" class="label1">Correo </label><br />
-      <input
-        type="text"
-        id="emailR"
-        name="email"
-        class="fname"
-        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-      />
-      <br /><br />
-    </div>
-    <div class="input_label">
-      <label for="Cedula" class="label1">Cédula </label><br />
-      <input list="browsers" class="fname" />
-      <datalist id="browsers">
-        <option value="CC"></option>
-        <option value="CE"></option>
-      </datalist>
+    <div class="container" id="conRegPaciente">
+      <div class="card login-card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img
+              src="../../assets/login.jpg"
+              alt="login"
+              class="login-card-img"
+            />
+          </div>
+          <div class="col">
+            <div class="card-body">
+              <p class="login-card-description">Registra tus datos</p>
+              <div class="form-group needs-validation" id="form">
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    placeholder="Nombre"
+                    id="fnameR"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="lastName"
+                    placeholder="Apellido"
+                    id="lnameR"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="emailR"
+                    name="email"
+                    placeholder="Correo electrónico"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
 
-      <input
-        type="text"
-        id="cedulaR"
-        name="cedula"
-        class="lname"
-        v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-      />
-      <br /><br />
-    </div>
-    <div class="input_label">
-      <label for="pass1" class="label1">Contraseña </label>
-      <label for="pass2" id="confirPassLabel" class="label2"
-        >Confirmar Contraseña </label
-      ><br /><br />
-      <div class="margin-down">
-        <input
-          type="password"
-          id="passwordR"
-          name="password"
-          class="fname"
-          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-        />
-        <input
-          type="password"
-          id="confirmPasswordR"
-          name="confirmPassword"
-          class="lname"
-          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-        /><br /><br />
-      </div>
-      <br />
-    </div>
+                <div class="col-md-12">
+                  <select class="form-select mt-3" required id="browsers">
+                    <option selected disabled value="">
+                      Tipo de documento
+                    </option>
+                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="TI">Tarjeta de Identidad</option>
+                    <option value="CE">Cédula Extranjera</option>
+                    <option value="TE">Tarjeta Extranjera</option>
+                  </select>
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">Elije una opción</div>
+                </div>
 
-    <div class="input_label">
-      <label for="edad" class="label1">Edad </label>
-      <label for="genero" id="labelGender" class="label2">Género </label>
-      <label for="RH" id="RHLabel">RH </label><br /><br />
-      <div class="margin-down">
-        <input
-          type="number"
-          id="ageR"
-          name="age"
-          class="lname"
-          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-        />
-        <input
-          type="text"
-          id="genderR"
-          name="gender"
-          class="fname"
-          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-        />
-        <input
-          type="text"
-          id="RHR"
-          name="RH"
-          class="fname"
-          v-bind:style="{ color: emptyInput ? 'red' : 'black' }"
-        />
-      </div>
-      <div class="row">
-        <div class="col-3">
-          <button for="Regresar" v-on:click="returnToPage" id="returnButton">
-            Regresar</button
-          ><br />
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="cedulaR"
+                    min="1"
+                    pattern="^[0-9]+"
+                    onpaste="return false;"
+                    onDrop="return false;"
+                    autocomplete="off"
+                    name="ID"
+                    placeholder="Número de documento"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="ageR"
+                    min="1"
+                    max="200"
+                    onpaste="return false;"
+                    onDrop="return false;"
+                    autocomplete="off"
+                    name="age"
+                    placeholder="Edad"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    id="passwordR"
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-md-12 mt-5">
+                    <select class="form-select mt-3" required id="genderR">
+                      <option selected disabled value="">Género</option>
+                      <option value="hombre">Hombre</option>
+                      <option value="mujer">Mujer</option>
+                      <option value="secreto">Secreto</option>
+                    </select>
+                    <div class="valid-feedback">Válido</div>
+                    <div class="invalid-feedback">Elije una opción</div>
+                </div>
+
+                <div class="col-md-12">
+                    <select class="form-select mt-3" required id="RHR">
+                      <option selected disabled value="">Tipo de sangre</option>
+                      <option value="A+">A positivo</option>
+                      <option value="A-">A negativo</option>
+                      <option value="B+">B positivo</option>
+                      <option value="B-">B negativo</option>
+                      <option value="AB+">AB positivo</option>
+                      <option value="AB-">AB negativo</option>
+                      <option value="O+">O positivo</option>
+                      <option value="O-">O negativo</option>
+                    </select>
+                    <div class="valid-feedback">Válido</div>
+                    <div class="invalid-feedback">Elije una opción</div>
+                </div>
+
+                <div class="row-md-12 mt-3">
+                    <button
+                      id="returnButton"
+                      type="submit"
+                      class="btn btn-secondary"
+                      v-on:click="returnToPage"
+                    >
+                      Regresar
+                    </button>
+                    <button
+                      id="registerButton"
+                      type="submit"
+                      class="btn btn-primary"
+                      v-on:click="register"
+                    >
+                      Registrar
+                    </button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-3"></div>
-        <div class="col-3">
-          <button for="accept" v-on:click="register" id="acceptButton">
-            Aceptar</button
-          ><br />
-        </div>
-        <div class="col-3"></div>
       </div>
     </div>
   </div>
@@ -249,36 +304,102 @@ export default {
   },
 };
 </script>
-
 <style>
-.center {
-  margin: auto;
-  width: 60%;
-  border: 3px solid #315203;
-  padding: 10px;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.input_label {
-  margin-left: 50px;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
-.namef {
-  margin-left: 50px;
+
+#registerButton {
+  margin-left: 130px;
 }
-#namelR {
-  margin-left: 120px;
+
+#conRegPaciente {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
-.lname {
-  margin-left: 10px;
+
+.login-card {
+  position: relative;
+  width: 100%;
+  border: 0;
+  border-radius: 27.5px;
+  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+  overflow: hidden;
 }
-#confirPassLabel {
-  margin-left: 120px;
+
+.login-card-img {
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
-.margin-down {
-  margin-top: 0px;
+
+img.login-card-img {
+  transition: 0.5s all ease-in-out;
 }
-#labelGender {
-  margin-left: 170px;
+
+img.login-card-img:hover {
+  transform: scale(1.5);
 }
-#RHLabel {
-  margin-left: 165px;
+
+.login-card .card-body {
+  padding: 85px 160px 20px;
 }
+
+@media (max-width: 422px) {
+  .login-card .card-body {
+    padding: 35px 24px;
+  }
+}
+
+.login-card-description {
+  font-size: 25px;
+  color: #000;
+  font-weight: normal;
+  margin-bottom: 23px;
+}
+
+#form {
+  max-width: 326px;
+}
+
+.login-card .form-control {
+  border: 1px solid #d5dae2;
+  padding: 15px 25px;
+  margin-bottom: 20px;
+  min-height: 45px;
+  font-size: 13px;
+  line-height: 15;
+  font-weight: normal;
+}
+
+.login-card .form-control::-webkit-input-placeholder {
+  color: #919aa3;
+}
+
+.login-card .form-control::-moz-placeholder {
+  color: #919aa3;
+}
+
+.login-card .form-control:-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-card .form-control::-ms-input-placeholder {
+  color: #919aa3;
+}
+
+.login-card .form-control::placeholder {
+  color: #919aa3;
+}
+
 </style>

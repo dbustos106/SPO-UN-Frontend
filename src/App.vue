@@ -1,6 +1,5 @@
 <template>
   <login ref="loginPage" v-show="loginShow" />
-  <!--<StudentTemplate ref="StudentTemplate" v-show="StudentTemplateShow" />-->
   <registroPaciente ref="registryPatient" v-show="registryShow" />
   <profesorComponent ref="ProfesorArea" id="ProfesorArea" v-show="profesorAreaShow" />
   <studentComponent ref="StudentArea" v-show="studentAreaShow" />
@@ -12,7 +11,6 @@
 //import bootstrap from "bootstrap";
 //import { ref } from "vue";
 //import Vue from "vue";
-//import StudentTemplate from "./components/StudentTemplate.vue";
 import registroPaciente from "./components/registries/registroPaciente.vue";
 import login from "./components/login.vue";
 import profesorComponent from "./components/mainComponents/profesorComponent.vue";
@@ -23,7 +21,6 @@ import adminComponent from "./components/mainComponents/adminComponent.vue";
 export default {
   name: "SPO-UN",
   components: {
-    //StudentTemplate,
     registroPaciente,
     login,
     profesorComponent,
@@ -38,7 +35,6 @@ export default {
   data() {
     return {
       loginShow: true,
-      //StudentTemplateShow: true,
       registryShow: false,
       profesorAreaShow: false,
       studentAreaShow: false,

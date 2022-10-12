@@ -1,63 +1,65 @@
 <template>
-  <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
-    <div class="logo-details" style="margin: 6px 14px 0 14px">
-      <img
-        v-if="menuLogo"
-        :src="menuLogo"
-        alt="menu-logo"
-        class="menu-logo icon"
-      />
-      <i v-else class="bx icon" :class="menuIcon" />
-      <div class="logo_name">
-        {{ menuTitle }}
-      </div>
-      <i
-        class="bx"
-        :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'"
-        id="btn"
-        @click="isOpened = !isOpened"
-      />
-    </div>
-    <div
-      style="
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex-grow: 1;
-        max-height: calc(100% - 60px);
-      "
-    >
-      <div id="my-scroll" style="margin: 6px 14px 0 14px">
-        <ul class="nav-list" id="list" style="overflow: visible">
-          <span v-for="(menuItem, index) in menuItems" :key="index">
-            <li>
-              <a :href="menuItem.link">
-                <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
-                <span class="links_name">{{ menuItem.name }}</span>
-              </a>
-              <span class="tooltip">{{
-                menuItem.tooltip || menuItem.name
-              }}</span>
-            </li>
-          </span>
-        </ul>
-        <div class="profile" id="profile">
-          <div class="profile-details">
-            <i class="bx bx-user-circle"></i>
-            <div class="name">
-              <div class="name">Fayzullo </div>
+      <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
+        <div class="logo-details" style="margin: 6px 14px 0 14px">
+          <img
+            v-if="menuLogo"
+            :src="menuLogo"
+            alt="menu-logo"
+            class="menu-logo icon"
+          />
+          <i v-else class="bx icon" :class="menuIcon" />
+          <div class="logo_name">
+            {{ menuTitle }}
+          </div>
+          <i
+            class="bx"
+            :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'"
+            id="btn"
+            @click="isOpened = !isOpened"
+          />
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            max-height: calc(100% - 60px);
+          "
+        >
+          <div id="my-scroll" style="margin: 6px 14px 0 14px">
+            <ul class="nav-list" id="list" style="overflow: visible">
+              <span v-for="(menuItem, index) in menuItems" :key="index">
+                <li>
+                  <a :href="menuItem.link">
+                    <i
+                      class="bx"
+                      :class="menuItem.icon || 'bx-square-rounded'"
+                    />
+                    <span class="links_name">{{ menuItem.name }}</span>
+                  </a>
+                  <span class="tooltip">{{
+                    menuItem.tooltip || menuItem.name
+                  }}</span>
+                </li>
+              </span>
+            </ul>
+            <div class="profile" id="profile">
+              <div class="profile-details">
+                <i class="bx bx-user-circle"></i>
+                <div class="name">
+                  <div class="name">Fayzullo</div>
+                </div>
+              </div>
+              <i id="log_out" class="bx bx-log-out"></i>
             </div>
           </div>
-          <i id="log_out" class="bx bx-log-out"></i>
         </div>
       </div>
-    </div>
-  </div>
 </template>
-
 <script>
 export default {
-  name: "SidebarMenuAkahon",
+  name: "StudentView",
   props: {
     //! Menu settings
     isMenuOpen: {
@@ -105,6 +107,12 @@ export default {
           icon: "bx-user",
         },
         {
+          link: "/Citas",
+          name: "Citas",
+          tooltip: "Citas",
+          icon: "bx-spreadsheet",
+        },
+        {
           link: "/Reseñas",
           name: "Reseñas",
           tooltip: "Reseñas",
@@ -132,11 +140,11 @@ export default {
     },
     profileName: {
       type: String,
-      default: "Fayzullo Saidakbarov",
+      default: "Usuario",
     },
     profileRole: {
       type: String,
-      default: "Frontend vue developer",
+      default: "Rol",
     },
     isExitButton: {
       type: Boolean,
@@ -145,11 +153,11 @@ export default {
     //! Styles
     bgColor: {
       type: String,
-      default: "#11101d",
+      default: "#1a1d53",
     },
     secondaryColor: {
       type: String,
-      default: "#11101d",
+      default: "#1a1d53",
     },
     homeSectionColor: {
       type: String,
@@ -221,7 +229,7 @@ export default {
   margin: 0 10px 0 10px;
 }
 
-#profile{
+#profile {
   margin-bottom: 0px;
   width: 222px;
 }
@@ -230,19 +238,10 @@ export default {
   padding: 0px 180px 5px 0px;
 }
 
-.sidebar {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  min-height: min-content;
-  width: 78px;
-  background: var(--bg-color);
-  z-index: 99;
-  transition: all 0.5s ease;
+.sidebar,
+.sidebar.open {
+  height: 98% !important;
+  float: left;
 }
 
 .sidebar .logo-details {
@@ -251,10 +250,12 @@ export default {
   align-items: center;
   position: relative;
 }
+
 .sidebar .logo-details .icon {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar .logo-details .logo_name {
   color: var(--logo-title-color);
   font-size: 20px;
@@ -262,10 +263,12 @@ export default {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name {
   opacity: 1;
 }
+
 .sidebar .logo-details #btn {
   position: absolute;
   top: 50%;
@@ -278,9 +281,11 @@ export default {
   cursor: pointer;
   transition: all 0.5s ease;
 }
+
 .sidebar.open .logo-details #btn {
   text-align: right;
 }
+
 .sidebar i {
   color: var(--icons-color);
   height: 60px;
@@ -295,6 +300,7 @@ export default {
   margin: 8px 0;
   list-style: none;
 }
+
 .sidebar li .tooltip {
   position: absolute;
   top: -20px;
@@ -311,6 +317,7 @@ export default {
   pointer-events: none;
   transition: 0s;
 }
+
 .sidebar li:hover .tooltip {
   opacity: 1;
   pointer-events: auto;
@@ -318,26 +325,11 @@ export default {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .sidebar.open li .tooltip {
   display: none;
 }
-.sidebar input {
-  font-size: 15px;
-  color: var(--serach-input-text-color);
-  font-weight: 400;
-  outline: none;
-  height: 50px;
-  width: 100%;
-  width: 50px;
-  border: none;
-  border-radius: 12px;
-  transition: all 0.5s ease;
-  background: var(--secondary-color);
-}
-.sidebar.open input {
-  padding: 0 20px 0 50px;
-  width: 100%;
-}
+
 .sidebar .bx-search {
   position: absolute;
   top: 50%;
@@ -347,14 +339,17 @@ export default {
   background: var(--secondary-color);
   color: var(--icons-color);
 }
+
 .sidebar.open .bx-search:hover {
   background: var(--secondary-color);
   color: var(--icons-color);
 }
+
 .sidebar .bx-search:hover {
   background: var(--menu-items-hover-color);
   color: var(--bg-color);
 }
+
 .sidebar li a {
   display: flex;
   height: 100%;
@@ -365,9 +360,11 @@ export default {
   transition: all 0.4s ease;
   background: var(--bg-color);
 }
+
 .sidebar li a:hover {
   background: var(--menu-items-hover-color);
 }
+
 .sidebar li a .links_name {
   color: var(--menu-items-text-color);
   font-size: 15px;
@@ -377,21 +374,25 @@ export default {
   pointer-events: none;
   transition: 0.4s;
 }
+
 .sidebar.open li a .links_name {
   opacity: 1;
   pointer-events: auto;
 }
+
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
   transition: all 0.5s ease;
   color: var(--bg-color);
 }
+
 .sidebar li i {
   height: 50px;
   line-height: 50px;
   font-size: 18px;
   border-radius: 12px;
 }
+
 .sidebar div.profile {
   position: relative;
   height: 60px;
@@ -401,14 +402,17 @@ export default {
   transition: all 0.5s ease;
   overflow: hidden;
 }
+
 .sidebar.open div.profile {
   width: 100%;
 }
+
 .sidebar div .profile-details {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
 }
+
 .sidebar div img {
   height: 45px;
   width: 45px;
@@ -416,6 +420,7 @@ export default {
   border-radius: 6px;
   margin-right: 10px;
 }
+
 .sidebar div.profile .name,
 .sidebar div.profile .job {
   font-size: 15px;
@@ -423,9 +428,11 @@ export default {
   color: var(--menu-footer-text-color);
   white-space: nowrap;
 }
+
 .sidebar div.profile .job {
   font-size: 12px;
 }
+
 .sidebar .profile #log_out {
   position: absolute;
   top: 50%;
@@ -438,21 +445,26 @@ export default {
   border-radius: 0px;
   transition: all 0.5s ease;
 }
+
 .sidebar.open .profile #log_out {
   width: 50px;
   background: var(--secondary-color);
   opacity: 0;
 }
+
 .sidebar.open .profile:hover #log_out {
   opacity: 1;
 }
+
 .sidebar.open .profile #log_out:hover {
   opacity: 1;
   color: red;
 }
+
 .sidebar .profile #log_out:hover {
   color: red;
 }
+
 .home-section {
   position: relative;
   background: var(--home-section-color);
@@ -463,10 +475,18 @@ export default {
   transition: all 0.5s ease;
   z-index: 2;
 }
+
+.sidebar.open,
+.sidebar {
+  border-radius: 15px;
+  margin: 4px;
+}
+
 .sidebar.open ~ .home-section {
   left: 250px;
   width: calc(100% - 250px);
 }
+
 .home-section .text {
   display: inline-block;
   color: var(--bg-color);
@@ -474,29 +494,20 @@ export default {
   font-weight: 500;
   margin: 18px;
 }
+
 .my-scroll-active {
   overflow-y: auto;
 }
+
 #my-scroll {
   overflow-y: auto;
   height: calc(100% - 60px);
 }
+
 #my-scroll::-webkit-scrollbar {
   display: none;
-  /* background-color: rgba(255, 255, 255, 0.2); 
-    width: 10px;
-    border-radius:5px  */
 }
-/* #my-scroll::-webkit-scrollbar-thumb{
-    background-color: red;
-    border-radius:5px 
-  }
-  #my-scroll::-webkit-scrollbar-button:vertical:start:decrement{
-    display:none;
-  }
-  #my-scroll::-webkit-scrollbar-button:vertical:end:increment{
-    display:none;
-  } */
+
 @media (max-width: 420px) {
   .sidebar li .tooltip {
     display: none;
