@@ -17,17 +17,6 @@
         </table>
       </div>
       <div class="row">
-        <div class="col-3">
-          <button
-            for="closeTable"
-            v-on:click="closeStudentTable"
-            id="closeStudentTable"
-            class="btn btn-block professor-btn mb-4"
-            type="button"
-          >
-            Cerrar
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -98,9 +87,6 @@ export default {
         });
 
       
-    },
-    closeStudentTable() {
-      this.$root.$refs.ProfesorArea.$data.tableStudentsShow = false;
     },
   },
 };

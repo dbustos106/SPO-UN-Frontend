@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div
       id="errorsP"
       class="errors"
@@ -190,6 +190,9 @@ export default {
 </script>
 
 <style>
+.container{
+  background-color: #54585d
+}
 .center {
   margin: auto;
   width: 60%;
