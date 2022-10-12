@@ -33,7 +33,7 @@
               <li>
                 <a id="listItemS1">
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                  <span class="links_name" >Programar Horarios</span>
+                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.crearCita()>Programar Horarios</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Programar Horarios
