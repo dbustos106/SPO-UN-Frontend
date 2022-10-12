@@ -1,5 +1,6 @@
 <template>
-  <div class="container" style="background-image: url(OdontologiaConsultorio.jpg)">
+  <div class="container" style="background-image: url(panorámicaUnal.jpg); width: 100%;
+  height: 100%; background-size: cover;">
     <ProfessorBar ref="professorBar"></ProfessorBar>
     <div class="row">
       <div class="col-12">
@@ -7,15 +8,7 @@
           <div class="col-2">
           </div>
           <div class="col-2">
-            <button
-              for="closeSession"
-              v-on:click="closeSessionProfesor"
-              id="closeSession"
-              class="btn btn-block professor-btn mb-4"
-              type="button"
-            >
-              Cerrar Sesión
-            </button>
+          
           </div>
         </div>
         <div class="row">
@@ -62,7 +55,6 @@ export default {
       this.$data.tableStudentsShow = true;
     },
     closeSessionProfesor() {
-      console.log("Here");
       sessionStorage.removeItem("Token");
       this.$root.$data.loginShow = true;
       this.$root.$data.profesorAreaShow = false;
