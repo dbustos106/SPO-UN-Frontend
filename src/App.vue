@@ -37,10 +37,10 @@ export default {
   },
   data() {
     return {
-      loginShow: true,
+      loginShow: false,
       //StudentTemplateShow: true,
       registryShow: false,
-      profesorAreaShow: false,
+      profesorAreaShow: true,
       studentAreaShow: false,
       patientAreaShow: false,
       adminAreaShow: false,

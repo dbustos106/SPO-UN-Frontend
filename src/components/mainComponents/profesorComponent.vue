@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-image: url(OdontologiaConsultorio.jpg)">
     <ProfessorBar ref="professorBar"></ProfessorBar>
     <div class="row">
       <div class="col-12">
