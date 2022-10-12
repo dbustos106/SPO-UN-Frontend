@@ -123,6 +123,20 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    id="confirmPasswordR"
+                    type="password"
+                    name="confirmPasswordR"
+                    placeholder="Confirmar Contraseña"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
                 <div class="col-md-12 mt-5">
                     <select class="form-select mt-3" required id="genderR">
                       <option selected disabled value="">Género</option>
@@ -275,7 +289,6 @@ export default {
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              //"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
               "Content-Type": "application/json",
               Authorization: "Bearer e",
             },
@@ -285,10 +298,9 @@ export default {
           console.log("Register complete");
           console.log(response);
           this.errorFunction("Registro Exitoso");
-          //localStorage.setItem("Token", response.token);
         })
         .catch((err) => {
-          console.log("Falló login");
+          console.log("Falló registro");
           console.log(err);
         });
     },

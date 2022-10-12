@@ -95,6 +95,13 @@ export default {
 </script>
 
 <style>
+.container2{
+  background-color: #e0e5eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 table {
   border-collapse: collapse;
   font-family: Tahoma, Geneva, sans-serif;

@@ -5,13 +5,6 @@
     <div class="row">
       <div class="col-12">
         <div class="row">
-          <div class="col-2">
-          </div>
-          <div class="col-2">
-          
-          </div>
-        </div>
-        <div class="row">
           <registroEstudiante ref="registryE" v-show="registryStudentShow" />
         </div>
         <div class="row">
@@ -75,9 +68,6 @@ export default {
 </script>
 
 <style>
-#closeSession {
-  margin-left: 500px;
-}
 .col-2 .professor-btn {
   padding: 13px 20px 12px;
   background-color: #000;
