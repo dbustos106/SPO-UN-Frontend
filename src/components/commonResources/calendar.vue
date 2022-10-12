@@ -10,7 +10,7 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "CalendarioEstudiante",
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     getStudentSchedule(){
-      /*
+      
       axios.get("http://localhost:8081/student/1/schedule",{
         headers:{
             "Access-Control-Allow-Origin": "*",
@@ -70,7 +70,7 @@ export default {
       })
       .catch((err) => {
           console.log(err);
-       });*/
+       });
        
       //Add events to calendar  
       for(var j in this.$data.schedule){

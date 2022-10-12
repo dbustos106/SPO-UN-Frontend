@@ -41,35 +41,7 @@ export default {
   data() {
     return {
       students: [
-        /*
-        1: {
-          id: 1,
-          name: "Gustavo Escobar",
-          email: "gescobar@unal.edu.co",
-          age: 22,
-          cedula: 4294,
-        },
-        2: {
-          id: 2,
-          name: "Daniel Santiago Delgadillo",
-          email: "dsdelgadillo@unal.edu.co",
-          age: 23,
-          cedula: 9045,
-        },
-        3: {
-          id: 3,
-          name: "Jose Luis Pulido",
-          email: "jlpulido@unal.edu.co",
-          age: 22,
-          cedula: 10469,
-        },
-        4: {
-          id: 4,
-          name: "Laura Espinosa Botero",
-          email: "laespinosabo@unal.edu.co",
-          age: 25,
-          cedula: 102489,
-        },*/
+        
       ],
     };
   },

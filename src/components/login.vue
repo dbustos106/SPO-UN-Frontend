@@ -167,7 +167,7 @@ export default {
           sessionStorage.setItem("Id", loginInfo.payload.roles[0]);
           sessionStorage.setItem("Role", loginInfo.payload.roles[1]);
           sessionStorage.setItem("Username", loginInfo.payload.sub);
-          document.getElementById("professorUsername").innerHTML=sessionStorage.Username;
+          
           console.log("Logged in");
           this.openUserComponent(sessionStorage.Role);
         })
@@ -182,8 +182,10 @@ export default {
       this.$root.$data.loginShow = false;
       if (role == "Professor") {
         this.$root.$data.profesorAreaShow = true;
+        document.getElementById("professorUsername").innerHTML=sessionStorage.Username;
       } else if (role == "Student") {
         this.$root.$data.studentAreaShow = true;
+        document.getElementById("studentUsername").innerHTML=sessionStorage.Username;
       } else if (role == "Patient") {
         this.$root.$data.patientAreaShow = true;
       } else if (role == "Admin") {
