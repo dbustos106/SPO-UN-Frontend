@@ -31,21 +31,21 @@
           <ul class="nav-list" id="list" style="overflow: visible">
             <span>
               <li>
-                <a id="listItem1">
+                <a id="listItemS1">
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openRegistry()>Registrar Esudiantes</span>
+                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.crearCita()>Programar Horarios</span>
                 </a>
                 <span class="tooltip">
-                  menuItem.tooltip || Registrar Esudiantes
+                  menuItem.tooltip || Programar Horarios
                 </span>
-                <a id="listItem2">
+                <a id="listItemS2">
                   <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openStudentTable()>Ver Estudiantes</span>
+                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.openCalendar()>Ver Horarios</span>
                 </a>
                 <span class="tooltip">
-                  menuItem.tooltip || Ver Estudiantes
+                  menuItem.tooltip || Ver Horarios
                 </span>
-                <a id="listItem3">
+                <a id="listItemS3">
                   <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                   <span class="links_name" >Ajustes</span>
                 </a>
@@ -59,10 +59,10 @@
             <div class="profile-details">
               <i class="bx bx-user-circle"></i>
               <div class="name">
-                <div class="name" id="professorUsername"></div>
+                <div class="name" id="studentUsername"></div>
               </div>
             </div>
-            <i id="log_out" class="bx bx-log-out" v-on:click=this.$root.$refs.ProfesorArea.closeSessionProfesor()></i>
+            <i id="log_out" class="bx bx-log-out" v-on:click=this.$root.$refs.StudentArea.closeSession()></i>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@
   //import AppVue from '@/App.vue';
 
   export default {
-    name: "SidebarMenuAkahonProfessor",
+    name: "SidebarMenuAkahonStudent",
     props: {
       //! Menu settings
       isMenuOpen: {
@@ -86,11 +86,11 @@
       },
       menuLogo: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       menuIcon: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       isPaddingLeft: {
         type: Boolean,
@@ -111,7 +111,7 @@
           {
             link: "/RegistroEstudiantes",
             name: "Registrar Esudiantes",
-            tooltip: "Registro Estudiantes",
+            tooltip: "Programar Horarios",
             icon: "bx-grid-alt",
             onClick: function() {
               this.$refs.ProfesorArea.open();
@@ -120,7 +120,7 @@
           {
             link: "/VerEstudiantes",
             name: "Ver Estudiantes",
-            tooltip: "Ver Estudiantes",
+            tooltip: "Ver Horarios",
             icon: "bx-task",
           },
           {
@@ -135,7 +135,7 @@
       //! Profile detailes
       profileImg: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       profileName: {
         type: String,

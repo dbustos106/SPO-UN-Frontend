@@ -135,6 +135,7 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response);
           let roomInfo = response.data.message;
           for (var i in roomInfo) {
             let newOption = document.createElement("option");

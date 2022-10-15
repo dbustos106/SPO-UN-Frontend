@@ -188,6 +188,7 @@ export default {
         document.getElementById("studentUsername").innerHTML=sessionStorage.Username;
       } else if (role == "Patient") {
         this.$root.$data.patientAreaShow = true;
+        document.getElementById("patientUsername").innerHTML=sessionStorage.Username;
       } else if (role == "Admin") {
         this.$root.$data.adminAreaShow = true;
       }

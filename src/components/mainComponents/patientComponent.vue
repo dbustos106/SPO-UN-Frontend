@@ -1,22 +1,31 @@
 <template>
-  <div>
-    <button for="scheduleAppointment" id="scheduleAppointment">
-      Programar cita
-    </button>
-    <button for="closeSession" v-on:click="closeSession" id="closeSession">
-      Cerrar Sesión
-    </button>
+  <div class="container">
+    <div class="col-12">
+    <patientBar ref="patientBar"></patientBar>
+  </div>
+  <div></div><!--Component for calendar-->
+  <div></div><!--Component for procedures search-->
   </div>
 </template>
 
 <script>
+import patientBar from "../commonResources/patient/patientBar.vue";
 export default {
   name: "Area_Paciente",
-  components: {},
+  components: {patientBar},
   data() {
-    return {};
+    return {
+      patientCalendarShow: false,
+      patientProcedureSearchShow:false,
+    };
   },
   methods: {
+    openSearch(){
+      console.log("Open procedure search")
+    },
+    openPatientCalendar(){
+      console.log("Open patient calendar")
+    },
     closeSession() {
       sessionStorage.removeItem("Token");
       this.$root.$data.loginShow = true;

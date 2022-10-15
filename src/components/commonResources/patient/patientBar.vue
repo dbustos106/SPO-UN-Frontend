@@ -33,17 +33,17 @@
               <li>
                 <a id="listItemS1">
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.crearCita()>Programar Horarios</span>
+                  <span class="links_name" v-on:click=this.$root.$refs.PatientArea.openSearch()>Citas programadas</span>
                 </a>
                 <span class="tooltip">
-                  menuItem.tooltip || Programar Horarios
+                  menuItem.tooltip || Citas Programadas
                 </span>
                 <a id="listItemS2">
                   <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.openCalendar()>Ver Horarios</span>
+                  <span class="links_name" v-on:click=this.$root.$refs.PatientArea.openPatientCalendar()>Buscar procedimientos y citas</span>
                 </a>
                 <span class="tooltip">
-                  menuItem.tooltip || Ver Horarios
+                  menuItem.tooltip || Buscar procedimientos
                 </span>
                 <a id="listItemS3">
                   <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
@@ -59,10 +59,10 @@
             <div class="profile-details">
               <i class="bx bx-user-circle"></i>
               <div class="name">
-                <div class="name" id="studentUsername"></div>
+                <div class="name" id="patientUsername"></div>
               </div>
             </div>
-            <i id="log_out" class="bx bx-log-out" v-on:click=this.$root.$refs.StudentArea.closeSession()></i>
+            <i id="log_out" class="bx bx-log-out" v-on:click=this.$root.$refs.PatientArea.closeSession()></i>
           </div>
         </div>
       </div>
@@ -86,11 +86,11 @@
       },
       menuLogo: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       menuIcon: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       isPaddingLeft: {
         type: Boolean,
@@ -111,7 +111,7 @@
           {
             link: "/RegistroEstudiantes",
             name: "Registrar Esudiantes",
-            tooltip: "Programar Horarios",
+            tooltip: "Programar Citas",
             icon: "bx-grid-alt",
             onClick: function() {
               this.$refs.ProfesorArea.open();
@@ -120,7 +120,7 @@
           {
             link: "/VerEstudiantes",
             name: "Ver Estudiantes",
-            tooltip: "Ver Horarios",
+            tooltip: "Ver C",
             icon: "bx-task",
           },
           {
@@ -135,7 +135,7 @@
       //! Profile detailes
       profileImg: {
         type: String,
-        default: require("../../assets/login.jpg"),
+        default: require("../../../assets/login.jpg"),
       },
       profileName: {
         type: String,

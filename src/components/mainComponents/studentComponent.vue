@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import StudentBar from "../commonResources/StudentBar.vue";
-import CalendarStudent from "../commonResources/calendar.vue";
-import createAppointment from "../commonResources/createAppointment.vue";
+import StudentBar from "../commonResources/student/StudentBar.vue";
+import CalendarStudent from "../commonResources/student/calendar.vue";
+import createAppointment from "../commonResources/student/createAppointment.vue";
 export default {
   name: "Area_Estudiante",
   components: { 

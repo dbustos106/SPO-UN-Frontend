@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import ProfessorBar from "../commonResources/ProfessorBar.vue";
+import ProfessorBar from "../commonResources/professor/ProfessorBar.vue";
 import registroEstudiante from "../registries/registroEstudiante.vue";
-import studentTable from "../commonResources/studentTable.vue";
+import studentTable from "../commonResources/professor/studentTable.vue";
 export default {
   name: "Area_Profesor",
   components: {
