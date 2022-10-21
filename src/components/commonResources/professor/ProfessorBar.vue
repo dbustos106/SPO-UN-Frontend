@@ -31,21 +31,21 @@
           <ul class="nav-list" id="list" style="overflow: visible">
             <span>
               <li>
-                <a id="listItem1">
+                <a class="box-hover" id="listItem1" v-on:click=this.$root.$refs.ProfesorArea.openRegistry()>
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openRegistry()>Registrar Esudiantes</span>
+                  <span class="links_name" >Registrar Estudiantes</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Registrar Esudiantes
                 </span>
-                <a id="listItem2">
+                <a class="box-hover" id="listItem2" v-on:click=this.$root.$refs.ProfesorArea.openStudentTable()>
                   <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.ProfesorArea.openStudentTable()>Ver Estudiantes</span>
+                  <span class="links_name" >Ver Estudiantes</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Ver Estudiantes
                 </span>
-                <a id="listItem3">
+                <a class="box-hover" id="listItem3">
                   <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                   <span class="links_name" >Ajustes</span>
                 </a>
@@ -236,6 +236,7 @@
   
   .bx-log-out:before {
     padding: 0px 180px 5px 0px;
+    cursor:pointer;
   }
   
   .sidebar {
@@ -484,6 +485,9 @@
   }
   .my-scroll-active {
     overflow-y: auto;
+  }
+  .box-hover{
+    cursor:pointer
   }
   #my-scroll {
     overflow-y: auto;

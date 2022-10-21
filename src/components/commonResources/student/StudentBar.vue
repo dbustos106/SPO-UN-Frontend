@@ -31,21 +31,21 @@
           <ul class="nav-list" id="list" style="overflow: visible">
             <span>
               <li>
-                <a id="listItemS1">
+                <a id="listItemS1" class="box-hover" v-on:click=this.$root.$refs.StudentArea.crearCita()>
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.crearCita()>Programar Horarios</span>
+                  <span class="links_name" >Programar Horarios</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Programar Horarios
                 </span>
-                <a id="listItemS2">
+                <a id="listItemS2" class="box-hover" v-on:click=this.$root.$refs.StudentArea.openCalendar()>
                   <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
-                  <span class="links_name" v-on:click=this.$root.$refs.StudentArea.openCalendar()>Ver Horarios</span>
+                  <span class="links_name" >Ver Horarios</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Ver Horarios
                 </span>
-                <a id="listItemS3">
+                <a id="listItemS3" class="box-hover">
                   <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                   <span class="links_name" >Ajustes</span>
                 </a>
@@ -460,6 +460,9 @@
   }
   .sidebar .profile #log_out:hover {
     color: red;
+  }
+  .box-hover{
+    cursor:pointer
   }
   .home-section {
     position: relative;
