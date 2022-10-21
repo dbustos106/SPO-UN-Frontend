@@ -33,7 +33,9 @@ export default {
   },
   methods: {
     getStudentSchedule(){
-      
+      console.log("Help");
+              
+      //Get confirmed appointments
       axios.get("http://localhost:8081/student/"+sessionStorage.Id+"/schedule",{
         headers:{
             "Access-Control-Allow-Origin": "*",
@@ -42,29 +44,32 @@ export default {
           }
       }).then((response) => {
         console.log(response);
+        
         let appointments=response.data.message;
+
         for(var i in appointments){
           console.log(appointments[i]);
-          var appointmentTime=appointments[i].start_time.replace(" ","T")
+          
+          var appointmentTime=appointments[i].start_time.replace(" ","T");
           console.log(appointmentTime);
+          
           this.$data.schedule.push({
             "nombrePaciente":"Cita 1",
             "date":appointmentTime,
           });
-        }
-
-        //Add events to calendar  
-        for(var j in this.$data.schedule){
+          
           this.calendarOptions.events = [
             ...this.calendarOptions.events,//Adds all the previous events
-            {title:this.$data.schedule[j].nombrePaciente, date:this.$data.schedule[j].date, color:"green"}
+            {title:"Cita 1", date:appointmentTime, color:"green"}
           ]
-        }  
+        }
+        
       })
       .catch((err) => {
           console.log(err);
        });
        
+       //Get unconfirmed appointments
       axios.get("http://localhost:8081/student/"+sessionStorage.Id+"/unconfirmedSchedule",{
         headers:{
             "Access-Control-Allow-Origin": "*",
@@ -73,6 +78,7 @@ export default {
           }
       }).then((response) => {
           console.log(response);
+          
           let unconfirmedAppointments=response.data.message;
           for(var i in unconfirmedAppointments){
             console.log(unconfirmedAppointments[i]);
@@ -83,7 +89,7 @@ export default {
               "date":unAppointmentTime,
             });
           }
-
+          
           //Add events to calendar  
           for(var j in this.$data.unconfirmedSchedule){
             this.calendarOptions.events = [

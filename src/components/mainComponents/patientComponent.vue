@@ -10,6 +10,7 @@
 
 <script>
 import patientBar from "../commonResources/patient/patientBar.vue";
+import axios from "axios";
 export default {
   name: "Area_Paciente",
   components: {patientBar},
@@ -21,10 +22,14 @@ export default {
   },
   methods: {
     openSearch(){
-      console.log("Open procedure search")
+      console.log("Open procedure search");
+      axios.get("http://localhost:8081/appointment/all")
+      .then(response => {
+          console.log(response);
+      })
     },
     openPatientCalendar(){
-      console.log("Open patient calendar")
+      console.log("Open patient calendar");
     },
     closeSession() {
       sessionStorage.removeItem("Token");

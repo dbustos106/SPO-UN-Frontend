@@ -15,8 +15,20 @@
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </head>
+
       <main>
-        <div></div>
+        <section v-show="errorShow">
+          <div class="alert error">
+                <span title="error" id="errorNotification" class="alert-message">
+                  <i class="bowtie-icon bowtie-status-failure error_col large"></i> 
+                  This is an error message with
+                  but you can also revert this issue.
+                </span>
+            <span class="alert-dismiss">
+            <a class="cta" ></a>
+            </span>
+          </div>
+        </section>
         <div class="container">
           <div class="card login-card">
             <div class="row no-gutters">
@@ -115,11 +127,13 @@
 <script>
 //import { vShow } from "vue";
 import axios from "axios";
+
 export default {
   name: "login-page",
   data() {
     return {
       emptyInput: false,
+      errorShow: false
     };
   },
   //functions for the inputs
@@ -161,6 +175,7 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response);
           let loginInfo = this.$root.jwtDecode(response.data.access_token);
           console.log(loginInfo);
           sessionStorage.setItem("Token", response.data.access_token);
@@ -195,12 +210,15 @@ export default {
     },
     errorFunction(messageText) {
       //set the error div to be visible and message not
-      let errorDiv = document.getElementById("loginError");
+      let errorDiv = document.getElementById("errorNotification");
       //errorDiv.css("display", "block");
       //update the content of the error message
       errorDiv.innerHTML = messageText;
-      this.$data.emptyInput = true;
-      //schedule a deactivation
+      this.$data.errorShow = true;
+
+      setTimeout(() => {
+        //Close the message
+      }, 1000);
     },
   },
 };
@@ -350,4 +368,163 @@ img.login-card-img:hover {
   font-size: 14px;
   color: #919aa3;
 }
+
+section {
+  width: 95vw;
+  overflow: hidden;
+  border-bottom: 1px solid #efefef;
+}
+
+.large {
+  font-size: 18px !important;
+}
+
+.alert {
+  color: #fff;
+  margin-bottom: 5px;
+  line-height: 30px;
+  animation: reveal 1 1s;
+  border: 1px solid rgba(32, 32, 32, .15);
+  .alert-info {
+    display: inline-block;
+    padding: 5px 2.5em 5px 10px;
+    color: red;
+    vertical-align: middle;
+  }
+  .alert-details {
+    display: none;
+  }
+  .more,
+  .cta {
+    color: #007ACC !important;
+  }
+  .alert-message {
+    padding-right: 1em;
+    text-overflow: ellipsis;
+    color: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    /***************HACK*******************/
+    max-width: 900px;
+    /*************************************/
+    a {
+      color: #007ACC;
+      &:hover {
+        color: #007ACC;
+        strong {
+          font-weight: 400;
+          color: inherit;
+        }
+      }
+      strong {
+        font-weight: 400;
+        color: inherit;
+      }
+    }
+  }
+  .alert-dismiss {
+    float: right;
+    line-height: 15px;
+    a {
+      color: #000000;
+      display: inline-block;
+      padding: 14px;
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0px, -50px);
+  }
+  50% {
+    transform: translate(0px, -50px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes collapse {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(0px, -50px);
+  }
+  100% {
+    transform: translate(0px, -50px);
+  }
+}
+
+pre {
+  margin: 0px 10px 10px;
+  line-height: 18px;
+  font-family: monospace;
+}
+
+i {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+  -webkit-font-smoothing: none;
+}
+
+.largeBut {
+  font-size: 20px;
+}
+
+.success_blue {
+  color: #1BA1E2;
+}
+
+.success_green {
+  color: #339933;
+}
+
+.warning_col {
+  color: #F8A800;
+}
+
+.error_col {
+  color: #BA141A;
+}
+
+.success {
+  background: #F5F5F5;
+  color:#222;
+  border : 1px solid #E6E6E6;
+  
+}
+
+.success_confirm {
+  background: #EFF8FD;
+  color:#222;
+  border : 1px solid #D8EFFA;
+  
+}
+
+.warning {
+  background: #FFF9EE;
+  color:#222;
+  border : 1px solid #FEF0D4;
+}
+
+.error {
+  background: #FDF2F3;
+  color:#222;
+  border : 1px solid #F9D5D3;
+}
+
+.form-section>p:first-child {
+  padding: 0 0 8px 0;
+}
+
 </style>

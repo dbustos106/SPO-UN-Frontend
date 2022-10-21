@@ -31,21 +31,21 @@
           <ul class="nav-list" id="list" style="overflow: visible">
             <span>
               <li>
-                <a id="listItemS1">
+                <a id="listItemP1">
                   <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
                   <span class="links_name" v-on:click=this.$root.$refs.PatientArea.openSearch()>Citas programadas</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Citas Programadas
                 </span>
-                <a id="listItemS2">
+                <a id="listItemP2">
                   <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
                   <span class="links_name" v-on:click=this.$root.$refs.PatientArea.openPatientCalendar()>Buscar procedimientos y citas</span>
                 </a>
                 <span class="tooltip">
                   menuItem.tooltip || Buscar procedimientos
                 </span>
-                <a id="listItemS3">
+                <a id="listItemP3">
                   <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                   <span class="links_name" >Ajustes</span>
                 </a>

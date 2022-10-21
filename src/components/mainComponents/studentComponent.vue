@@ -52,9 +52,12 @@ export default {
         this.$refs.calendarStudent.getStudentSchedule();
         this.$data.calendarInfoShown=true;
       }
-      this.$refs.calendarStudent.$data.calendarOptions.height = 1000;
-      this.$refs.calendarStudent.$data.calendarOptions.width = 1500;
+      
     },
+  },
+  mounted(){
+    this.$refs.calendarStudent.$data.calendarOptions.height = 1000;
+    this.$refs.calendarStudent.$data.calendarOptions.width = 1500;
   },
 };
 </script>
