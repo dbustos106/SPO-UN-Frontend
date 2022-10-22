@@ -14,17 +14,20 @@
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
+        <link 
+          rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          />
       </head>
 
       <main>
         <section v-show="errorShow">
-          <div class="alert error">
-                <span title="error" id="errorNotification" class="alert-message">
-                  <i class="bowtie-icon bowtie-status-failure error_col large"></i> 
-                  This is an error message with
-                  but you can also revert this issue.
+          <div class="alertBar error">
+                <span title="error"  class="alertBar-message">
+                  <i class="fa fa-exclamation-circle"></i> 
+                  <span id="errorNotification"></span>
                 </span>
-            <span class="alert-dismiss">
+            <span class="alertBar-dismiss">
             <a class="cta" ></a>
             </span>
           </div>
@@ -154,7 +157,7 @@ export default {
       var password = document.getElementById("password").value;
       if (user == "" || password == "") {
         console.log("No hay datos en el login");
-        this.errorFunction("No ha ingresado los datos");
+        this.errorFunction(" No ha ingresado los datos");
       } else {
         this.askLogintoBack(user, password);
         pass != pass;
@@ -175,6 +178,7 @@ export default {
           },
         })
         .then((response) => {
+          this.$data.errorShow = false;
           console.log(response);
           let loginInfo = this.$root.jwtDecode(response.data.access_token);
           console.log(loginInfo);
@@ -189,7 +193,7 @@ export default {
         .catch((err) => {
           console.log("Falló login");
           console.log(err);
-          this.errorFunction("Usuario o contraseña incorrectos");
+          this.errorFunction(" Usuario o contraseña incorrectos");
         });
     },
     openUserComponent(role) {
@@ -214,6 +218,7 @@ export default {
       //errorDiv.css("display", "block");
       //update the content of the error message
       errorDiv.innerHTML = messageText;
+
       this.$data.errorShow = true;
 
       setTimeout(() => {
@@ -379,8 +384,8 @@ section {
   font-size: 18px !important;
 }
 
-.alert {
-  color: #fff;
+.alertBar {
+  color: rgb(245, 140, 140);
   margin-bottom: 5px;
   line-height: 30px;
   animation: reveal 1 1s;
@@ -518,7 +523,7 @@ i {
 }
 
 .error {
-  background: #FDF2F3;
+  background: #fc9494;
   color:#222;
   border : 1px solid #F9D5D3;
 }
