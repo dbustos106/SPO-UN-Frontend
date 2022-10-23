@@ -182,10 +182,11 @@ export default {
           console.log(response);
           let loginInfo = this.$root.jwtDecode(response.data.access_token);
           console.log(loginInfo);
+          let userInfo = loginInfo.payload.sub.split(",");
           sessionStorage.setItem("Token", response.data.access_token);
-          sessionStorage.setItem("Id", loginInfo.payload.roles[0]);
-          sessionStorage.setItem("Role", loginInfo.payload.roles[1]);
-          sessionStorage.setItem("Username", loginInfo.payload.sub);
+          sessionStorage.setItem("Id", userInfo[1]);
+          sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
+          sessionStorage.setItem("Username", userInfo[0]);
           
           console.log("Logged in");
           this.openUserComponent(sessionStorage.Role);

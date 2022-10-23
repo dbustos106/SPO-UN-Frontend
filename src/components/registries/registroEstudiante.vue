@@ -149,6 +149,7 @@ export default {
         username: email,
         password: password,
         name: name + " " + lastName,
+        email: email+"@unal.edu.co",
         document_type: tipoCedula,
         document_number: cedula,
         professor_id: parseInt(sessionStorage.Id),
@@ -176,7 +177,6 @@ export default {
           this.errorFunction("Registro Exitoso");
           console.log("Register complete");
           console.log(response);
-          //localStorage.setItem("Token", response.token);
         })
         .catch((err) => {
           console.log("Falló registro");

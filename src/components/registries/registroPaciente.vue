@@ -270,7 +270,7 @@ export default {
         username: user,
         password: password,
         name: name + " " + lastName,
-        email: email,
+        email: email+"@unal.edu.co",
         document_type: "cc",
         document_number: cedula,
         age: parseInt(edad),

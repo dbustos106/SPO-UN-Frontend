@@ -1,5 +1,5 @@
 <template>
-  <div class="container2">
+  <div class="container">
     <div
       id="errorsP"
       class="errors"
@@ -143,6 +143,7 @@ export default {
         username: email,
         password: password,
         name: name + " " + lastName,
+        email: email+"@unal.edu.co",
         document_type: tipoCedula,
         document_number: cedula,
       };
