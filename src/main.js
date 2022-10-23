@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
-//import bootstrap from 'bootstrap'
+import router from './router'
+//import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
 
-createApp(App).mount('#app')
-App.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
+createApp(App).use(router).mount('#app')
+//App.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);

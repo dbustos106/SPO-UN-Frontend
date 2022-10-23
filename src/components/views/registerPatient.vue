@@ -1,20 +1,34 @@
 <template>
-  <div>
-    <div class="container" id="conRegPaciente">
+  <body id="signUp">
+    <div>
+      <!-- <meta charset="UTF-8" /> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>SPO UN - Inicia sesión</title>
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+    </div>
+    <div id="marcoReg" class="container">
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
             <img
-              src="../../assets/login.jpg"
+              src="../../assets/img/login.jpg"
               alt="login"
               class="login-card-img"
             />
           </div>
           <div class="col">
-            <div class="card-body">
-              <p class="login-card-description">Registra tus datos</p>
-              <div class="form-group needs-validation" id="form">
-                <div class="col-md-12">
+            <p class="login-card-description mt-5">Registra tus datos</p>
+            <div class="form-group needs-validation" id="form">
+              <div class="row mx-auto">
+                <div class="col-sm-5 ml-auto">
                   <input
                     class="form-control"
                     type="text"
@@ -28,7 +42,7 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-5 mr-auto">
                   <input
                     class="form-control"
                     type="text"
@@ -42,23 +56,11 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <input
-                    class="form-control"
-                    type="email"
-                    id="emailR"
-                    name="email"
-                    placeholder="Correo electrónico"
-                    required
-                  />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
-                </div>
+              </div>
 
-                <div class="col-md-12">
-                  <select class="form-select mt-3" required id="browsers">
+              <div class="row mx-auto">
+                <div class="col-md-5 ml-auto">
+                  <select class="form-select mx-auto" required id="browsers">
                     <option selected disabled value="">
                       Tipo de documento
                     </option>
@@ -70,8 +72,7 @@
                   <div class="valid-feedback">Válido</div>
                   <div class="invalid-feedback">Elije una opción</div>
                 </div>
-
-                <div class="col-md-12">
+                <div class="col-md-5 mr-auto">
                   <input
                     class="form-control"
                     type="number"
@@ -90,7 +91,24 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12">
+              </div>
+
+              <div class="row mx-auto">
+                <div class="col-sm-5 ml-auto">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="emailR"
+                    name="email"
+                    placeholder="Correo electrónico"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+                <div class="col-sm-5 mr-auto">
                   <input
                     class="form-control"
                     type="number"
@@ -109,7 +127,10 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12">
+              </div>
+
+              <div class="row mx-auto">
+                <div class="col-sm-5 ml-auto">
                   <input
                     class="form-control"
                     id="passwordR"
@@ -123,7 +144,7 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-5 mr-auto">
                   <input
                     class="form-control"
                     id="confirmPasswordR"
@@ -137,78 +158,65 @@
                     No puede estar vacía la casilla
                   </div>
                 </div>
-                <div class="col-md-12 mt-5">
-                    <select class="form-select mt-3" required id="genderR">
-                      <option selected disabled value="">Género</option>
-                      <option value="hombre">Hombre</option>
-                      <option value="mujer">Mujer</option>
-                      <option value="noEspecifica">Sin especificar</option>
-                    </select>
-                    <div class="valid-feedback">Válido</div>
-                    <div class="invalid-feedback">Elije una opción</div>
-                </div>
+              </div>
 
-                <div class="col-md-12">
-                    <select class="form-select mt-3" required id="RHR">
-                      <option selected disabled value="">Tipo de sangre</option>
-                      <option value="A+">A positivo</option>
-                      <option value="A-">A negativo</option>
-                      <option value="B+">B positivo</option>
-                      <option value="B-">B negativo</option>
-                      <option value="AB+">AB positivo</option>
-                      <option value="AB-">AB negativo</option>
-                      <option value="O+">O positivo</option>
-                      <option value="O-">O negativo</option>
-                    </select>
-                    <div class="valid-feedback">Válido</div>
-                    <div class="invalid-feedback">Elije una opción</div>
+              <div class="row mx-auto">
+                <div class="col-md-5 ml-auto">
+                  <select class="form-select mx-auto" required id="genderR">
+                    <option selected disabled value="">Género</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                    <option value="noEspecifica">Sin especificar</option>
+                  </select>
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">Elije una opción</div>
                 </div>
+                <div class="col-md-5 mr-auto">
+                  <select class="form-select mx-auto" required id="RHR">
+                    <option selected disabled value="">Tipo de sangre</option>
+                    <option value="A+">A positivo</option>
+                    <option value="A-">A negativo</option>
+                    <option value="B+">B positivo</option>
+                    <option value="B-">B negativo</option>
+                    <option value="AB+">AB positivo</option>
+                    <option value="AB-">AB negativo</option>
+                    <option value="O+">O positivo</option>
+                    <option value="O-">O negativo</option>
+                  </select>
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">Elije una opción</div>
+                </div>
+              </div>
 
-                <div class="row-md-12 mt-3">
-                    <button
-                      id="returnButton"
-                      type="submit"
-                      class="btn btn-secondary"
-                      v-on:click="returnToPage"
-                    >
-                      Regresar
-                    </button>
-                    <button
-                      id="registerButton"
-                      type="submit"
-                      class="btn btn-primary"
-                      v-on:click="register"
-                    >
-                      Registrar
-                    </button>
-                </div>
-                
+              <div class="row mx-auto">
+                <button
+                  id="registerButton"
+                  type="submit"
+                  class="btn btn-primary mx-auto mb-5"
+                  v-on:click="register"
+                >
+                  Registrar
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </body>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  name: "registro-paciente",
+  name: "registerPatient",
   data() {
     return {
       emptyInput: false,
     };
   },
   methods: {
-    returnToPage() {
-      console.log("You clicked the button!");
-      //console.log(this.$root.$data.registryShow);
-      this.$root.$data.loginShow = true;
-      this.$root.$data.registryShow = false;
-    },
     register() {
       var name = document.getElementById("fnameR").value;
       var lastName = document.getElementById("lnameR").value;
@@ -316,21 +324,35 @@ export default {
   },
 };
 </script>
+
 <style>
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+#signUp {
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/img/panoramicaUnal.jpg") top center;
+  background-size: cover;
+  position: relative;
+  border-top: 100px;
 }
 
-#registerButton {
-  margin-left: 130px;
+#signUp:before {
+  content: "";
+  background: rgba(45, 53, 69, 0.7);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
-#conRegPaciente {
+/*--------------------------------------------------------------
+# MarcoReg
+--------------------------------------------------------------*/
+
+#marcoReg {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -339,6 +361,7 @@ input[type="number"] {
 
 .login-card {
   position: relative;
+  margin-top: 40px;
   width: 100%;
   border: 0;
   border-radius: 27.5px;
@@ -355,39 +378,33 @@ input[type="number"] {
   object-fit: cover;
 }
 
-img.login-card-img {
+img .login-card-img {
   transition: 0.5s all ease-in-out;
 }
 
-img.login-card-img:hover {
+img .login-card-img:hover {
   transform: scale(1.5);
-}
-
-.login-card .card-body {
-  padding: 85px 160px 20px;
-}
-
-@media (max-width: 422px) {
-  .login-card .card-body {
-    padding: 35px 24px;
-  }
 }
 
 .login-card-description {
   font-size: 25px;
   color: #000;
   font-weight: normal;
+  text-align: center;
   margin-bottom: 23px;
 }
 
-#form {
-  max-width: 326px;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .login-card .form-control {
   border: 1px solid #d5dae2;
-  padding: 15px 25px;
-  margin-bottom: 20px;
   min-height: 45px;
   font-size: 13px;
   line-height: 15;
@@ -414,4 +431,9 @@ img.login-card-img:hover {
   color: #919aa3;
 }
 
+#registerButton {
+  margin-top: 40px;
+  position: center;
+  max-width: 100px;
+}
 </style>
