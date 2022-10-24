@@ -1,48 +1,14 @@
 <template>
-  <login ref="loginPage" v-show="loginShow" />
-  <registroPaciente ref="registryPatient" v-show="registryShow" />
-  <profesorComponent ref="ProfesorArea" id="ProfesorArea" v-show="profesorAreaShow" />
-  <studentComponent ref="StudentArea" v-show="studentAreaShow" />
-  <patientComponent ref="PatientArea" v-show="patientAreaShow" />
-  <adminComponent ref="AdminArea" v-show="adminAreaShow" />
+  <!-- ======= Router view ======= -->
+  <router-view></router-view>
+  <!-- End router view -->
 </template>
 
 <script>
-//import bootstrap from "bootstrap";
-//import { ref } from "vue";
-//import Vue from "vue";
-import registroPaciente from "./components/registries/registroPaciente.vue";
-import login from "./components/login.vue";
-import profesorComponent from "./components/mainComponents/profesorComponent.vue";
-import patientComponent from "./components/mainComponents/patientComponent.vue";
-import studentComponent from "./components/mainComponents/studentComponent.vue";
-import adminComponent from "./components/mainComponents/adminComponent.vue";
+import axios from "axios";
 
 export default {
-  name: "SPO-UN",
-  components: {
-    registroPaciente,
-    login,
-    profesorComponent,
-    patientComponent,
-    studentComponent,
-    adminComponent,
-  },
-  mounted() {
-    //this.$refs.loginPage.registerButton;
-    console.log(this.$refs.loginPage);
-  },
-  data() {
-    return {
-      loginShow: false,
-      //StudentTemplateShow: true,
-      registryShow: false,
-      profesorAreaShow: false,
-      studentAreaShow: false,
-      patientAreaShow: true,
-      adminAreaShow: false,
-    };
-  },
+  name: "initPage",
   methods: {
     toUrlEncoded(datos) {
       var formBody = [];
@@ -52,7 +18,6 @@ export default {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-
       console.log(formBody);
       return formBody;
     },
@@ -63,10 +28,42 @@ export default {
       token.payload = JSON.parse(window.atob(t.split(".")[1]));
       return token;
     },
+    requestRefreshToken() {
+      axios
+        .get("http://localhost:8081/auth/refreshToken", {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.RefreshToken,
+          },
+        })
+        .then((response) => {
+          let loginInfo = this.jwtDecode(response.data.access_token);
+          let userInfo = loginInfo.payload.sub.split(",");
+          sessionStorage.setItem("AccessToken", response.data.access_token);
+          sessionStorage.setItem("RefreshToken", response.data.refresh_token);
+          sessionStorage.setItem("Id", userInfo[1]);
+          sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
+          sessionStorage.setItem("Username", userInfo[0]);
+          return true;
+        })
+        .catch(() => {
+          return false;
+        });
+    },
   },
 };
 </script>
 
-<style>
+<style scope>
 @import "~bootstrap/dist/css/bootstrap.css";
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+#app {
+  font-family: Avenir, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(255, 255, 255);
+}
 </style>

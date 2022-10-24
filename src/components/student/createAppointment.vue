@@ -1,34 +1,34 @@
 <template>
-  <div>
-    <div class="form-container" style="text-align: center">
-      <h4>Información de la cita</h4>
-      <div class="form-horizontal">
-        <div class="form-group">
-          <span>Describa el tipo de procedimiento a realizar:</span>
-          <textarea
-            class="textarea"
-            rows="4"
-            cols="40"
-            id="description"
-          ></textarea>
-        </div>
-        <div class="form-group">
-          <label>Consultorio</label>
-          <select class="form-control text-center" id="roomSelect">
-          </select>
-        </div>
-        <button class="btn signup" v-on:click="crearCita">Crear cita</button>
+  <!-- ======= CreateContainer div ======= -->
+  <div id="createContainer" class="form-container" style="text-align: center">
+    <h4>Información de la cita</h4>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <span>Describa el tipo de procedimiento a realizar:</span>
+        <textarea
+          class="textarea"
+          rows="4"
+          cols="40"
+          id="description"
+        ></textarea>
       </div>
+      <div class="form-group">
+        <label>Consultorio</label>
+        <select class="form-control text-center" id="roomSelect"></select>
+      </div>
+      <button class="btn signup" v-on:click="crearCita">Crear cita</button>
     </div>
   </div>
+  <!-- End CreateContainer -->
 </template>
 
 <script>
 import axios from "axios";
+import App from "../../App.vue";
+
 export default {
   name: "createAppointment",
   mounted() {
-    console.log("Component has been created!");
     this.createOptions();
   },
   components: {},
@@ -125,31 +125,34 @@ export default {
         });
     },*/
     createOptions() {
-      let tablaRoom = document.getElementById('roomSelect');
+      let tablaRoom = document.getElementById("roomSelect");
       axios
         .get("http://localhost:8081/room/all", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.Token,
+            Authorization: "Bearer " + sessionStorage.AccessToken,
           },
         })
         .then((response) => {
-          console.log(response);
           let roomInfo = response.data.message;
           for (var i in roomInfo) {
             let newOption = document.createElement("option");
             newOption.value = roomInfo[i].roomDTO.id;
-            newOption.innerHTML = roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
+            newOption.innerHTML =
+              roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
             tablaRoom.append(newOption);
           }
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.status == 403) {
+            if (App.methods.requestRefreshToken()) {
+              this.createOptions();
+            } else {
+              this.$router.push("/login");
+            }
+          }
         });
-    },
-    closecreateAppointment() {
-      this.$root.$refs.EstudianteArea.$data.createAppointmentShow = false;
     },
   },
 };
