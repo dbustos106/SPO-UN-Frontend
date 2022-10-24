@@ -34,12 +34,12 @@ export default {
   },
   data() {
     return {
-      loginShow: true,
+      loginShow: false,
       //StudentTemplateShow: true,
       registryShow: false,
       profesorAreaShow: false,
       studentAreaShow: false,
-      patientAreaShow: false,
+      patientAreaShow: true,
       adminAreaShow: false,
     };
   },

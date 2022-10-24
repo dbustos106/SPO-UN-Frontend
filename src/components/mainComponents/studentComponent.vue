@@ -58,6 +58,7 @@ export default {
   mounted(){
     this.$refs.calendarStudent.$data.calendarOptions.height = 1000;
     this.$refs.calendarStudent.$data.calendarOptions.width = 1500;
+    //this.$refs.calendarStudent.style.
   },
 };
 </script>

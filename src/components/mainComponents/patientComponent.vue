@@ -6,7 +6,7 @@
   <div class="patientContainer">
     <div class="row">
         <div><PatientProcedureSearch ref="patientSearch" v-show="patientProcedureSearchShow"></PatientProcedureSearch></div>
-        <div><PatientProcedureTable ref="patientTable" v-show="patientProcedureTableShow"></PatientProcedureTable></div>
+        <div><PatientProcedureCalendar ref="patientCalendar" v-show="patientProcedureCalendarShow"></PatientProcedureCalendar></div>
     </div>
     <div></div><!--Component for calendar-->
   </div>
@@ -18,15 +18,15 @@
 import patientBar from "../commonResources/patient/patientBar.vue";
 import axios from "axios";
 import PatientProcedureSearch from "../commonResources/patient/patientProcedureSearch.vue";
-import PatientProcedureTable from "../commonResources/patient/patientProcedureTable.vue";
+import PatientProcedureCalendar from "../commonResources/patient/patientProcedureCalendar.vue";
 export default {
   name: "Area_Paciente",
-  components: { patientBar,  PatientProcedureSearch, PatientProcedureTable },
+  components: { patientBar,  PatientProcedureSearch, PatientProcedureCalendar },
   data() {
     return {
       patientCalendarShow: false,
       patientProcedureSearchShow: false,
-      patientProcedureTableShow: false,
+      patientProcedureCalendarShow: false,
     };
   },
   methods: {
@@ -37,6 +37,7 @@ export default {
     },
     searchProcedure(){
       var procedureTypeSearch=this.$refs.patientSearch.$refs.procedureType.value;
+      this.$data.patientProcedureCalendarShow=true;
       axios.get("http://localhost:8081/appointment/allAvailable",{
         headers:{
             "Access-Control-Allow-Origin": "*",
@@ -67,7 +68,7 @@ export default {
               );
             }
           }
-          this.$data.patientProcedureTableShow=true;
+          
       })
     },
     openPatientCalendar(){
