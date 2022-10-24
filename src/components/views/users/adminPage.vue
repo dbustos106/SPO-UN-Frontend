@@ -39,11 +39,11 @@ export default {
 
 <style>
 #adminSection {
-  height: 100vh;
   max-width: 100vw;
+  height: 101vh;
   background: url("../../../assets/img/panoramicaUnal.jpg") top center;
   background-size: cover;
-  position: relative;
+  position: absolute;
 }
 
 #adminSection:before {

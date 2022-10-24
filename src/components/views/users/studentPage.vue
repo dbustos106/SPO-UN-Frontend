@@ -39,11 +39,11 @@ export default {
 
 <style>
 #studentSection {
-  height: 100vh;
   max-width: 100vw;
+  height: 101vh;
   background: url("../../../assets/img/panoramicaUnal.jpg") top center;
   background-size: cover;
-  position: relative;
+  position: absolute;
 }
 
 #studentSection:before {
@@ -58,7 +58,6 @@ export default {
 
 .ing2 {
   animation: aumWidth 0.7s forwards;
-  color: #ffc107;
 }
 
 @keyframes aumWidth {

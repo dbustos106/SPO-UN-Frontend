@@ -82,10 +82,10 @@ export default {
 <style>
 #patientSection {
   max-width: 100vw;
-  height: 200vh;
+  height: 180vh;
   background: url("../../../assets/img/panoramicaUnal.jpg") top center;
   background-size: cover;
-  position: relative;
+  position: absolute;
 }
 
 #patientSection:before {
@@ -100,7 +100,6 @@ export default {
 
 .ing2 {
   animation: aumWidth 0.7s forwards;
-  color: #ffc107;
 }
 
 @keyframes aumWidth {

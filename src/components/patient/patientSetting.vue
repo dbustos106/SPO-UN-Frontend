@@ -412,4 +412,9 @@ export default {
   font: 300% sans-serif;
   color: rgb(3, 0, 78);
 }
+a,
+h2 {
+  color: rgb(3, 0, 78);
+  text-decoration: none;
+}
 </style>

@@ -41,15 +41,15 @@
         </div>
         <hr width="100%" />
         <div class="col-12 mx-auto">
-          <!-- ======= CalendarContainer section ======= -->
-          <div id="calendarContainer" class="container">
+          <!-- ======= PatientCalendarContainer section ======= -->
+          <div id="patientCalendarContainer" class="container">
             <FullCalendar
               id="calendar"
               class="mx-auto"
               :options="calendarOptions"
             />
           </div>
-          <!-- End CalendarContainer -->
+          <!-- End PatientCalendarContainer -->
         </div>
       </div>
     </div>
@@ -197,24 +197,6 @@ export default {
 </script>
 
 <style>
-#calendarContainer {
-  width: 100%;
-  margin-top: 40px;
-  color: rgb(17, 0, 50);
-  background: rgb(131, 130, 132);
-  height: fit-content;
-  position: relative;
-}
-
-a,
-h2 {
-  color: rgb(232, 232, 232);
-  text-decoration: none;
-}
-.fc-daygrid-body {
-  width: 100%;
-}
-
 #AppointmentsContainer {
   width: 70%;
 }
@@ -223,5 +205,27 @@ h2 {
   width: 90%;
   margin-left: 50px;
   margin-bottom: 50px;
+}
+#patientCalendarContainer {
+  width: 90%;
+  margin-top: 40px;
+  color: rgb(17, 0, 50);
+  height: fit-content;
+  position: relative;
+  padding: 20px 20px;
+}
+
+a,
+h2 {
+  color: rgb(0, 11, 44);
+  text-decoration: none;
+}
+.fc-daygrid-body {
+  width: 100%;
+}
+
+.fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
 }
 </style>

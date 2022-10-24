@@ -1,13 +1,40 @@
 <template>
-  <!-- ======= CalendarContainer section ======= -->
-  <div id="calendarContainer" class="container">
-    <FullCalendar
-      id="calendar"
-      class="mx-auto my-auto"
-      :options="calendarOptions"
+  <!-- ======= Meta datos ======= -->
+  <div>
+    <!-- <meta charset="UTF-8" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SPO UN - Inicia sesión</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </div>
-  <!-- End CalendarContainer -->
+  <!-- End Meta datos -->
+
+  <!-- ======= TableContainer ======= -->
+  <div id="AppointmentsContainer" class="container">
+    <div class="card login-card">
+      <div class="row no-gutters">
+        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
+        <div class="col-12 mx-auto">
+          <!-- ======= StudentCalendarContainer section ======= -->
+          <div id="studentCalendarContainer" class="container">
+            <FullCalendar
+              id="calendar"
+              class="mx-auto my-auto"
+              :options="calendarOptions"
+            />
+          </div>
+          <!-- End StudentCalendarContainer -->
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -141,11 +168,21 @@ export default {
 </script>
 
 <style>
-#calendarContainer {
-  width: 80%;
-  margin-top: 40px;
+#AppointmentsContainer {
+  width: 70%;
+}
+#studentCalendarContainer {
+  width: 90%;
+  height: 100%;
   color: rgb(17, 0, 50);
   height: fit-content;
+  position: relative;
+  padding: 20px 20px;
+}
+#calendar {
+  height: 40%;
+  max-height: 500px;
+  position: relative;
 }
 
 a,
@@ -155,5 +192,9 @@ h2 {
 }
 .fc-daygrid-body {
   width: 100%;
+}
+.fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
 }
 </style>
