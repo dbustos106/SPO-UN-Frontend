@@ -1,5 +1,6 @@
 <template>
-  <body id="signUp">
+  <section id="signUp">
+    <!-- ======= Meta datos ======= -->
     <div>
       <!-- <meta charset="UTF-8" /> -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +15,10 @@
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       />
     </div>
-    <div id="marcoReg" class="container">
+    <!-- End Meta datos -->
+
+    <!-- ======= MarcoReg section ======= -->
+    <section id="marcoReg" class="container">
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
@@ -27,6 +31,23 @@
           <div class="col">
             <p class="login-card-description mt-5">Registra tus datos</p>
             <div class="form-group needs-validation" id="form">
+              <div class="row mx-auto">
+                <div class="col-sm-10 mx-auto">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    id="fusernameR"
+                    required
+                  />
+                  <div class="valid-feedback">Válido</div>
+                  <div class="invalid-feedback">
+                    No puede estar vacía la casilla
+                  </div>
+                </div>
+              </div>
+
               <div class="row mx-auto">
                 <div class="col-sm-5 ml-auto">
                   <input
@@ -160,7 +181,7 @@
                 </div>
               </div>
 
-              <div class="row mx-auto">
+              <div class="row mx-auto mb-3">
                 <div class="col-md-5 ml-auto">
                   <select class="form-select mx-auto" required id="genderR">
                     <option selected disabled value="">Género</option>
@@ -188,11 +209,36 @@
                 </div>
               </div>
 
+              <div class="col-sm-8 mx-auto">
+                <section v-show="errorShow">
+                  <div class="alertBar error">
+                    <span title="error" class="alertBar-message">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <span id="errorNotification"></span>
+                    </span>
+                    <span class="alertBar-dismiss">
+                      <a class="cta"></a>
+                    </span>
+                  </div>
+                </section>
+                <section v-show="successShow">
+                  <div class="success_green">
+                    <span title="success" class="alertBar-message">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <span id="successNotification"></span>
+                    </span>
+                    <span class="alertBar-dismiss">
+                      <a class="cta"></a>
+                    </span>
+                  </div>
+                </section>
+              </div>
+
               <div class="row mx-auto">
                 <button
                   id="registerButton"
                   type="submit"
-                  class="btn btn-primary mx-auto mb-5"
+                  class="btn btn-primary mx-auto mb-3"
                   v-on:click="register"
                 >
                   Registrar
@@ -202,22 +248,25 @@
           </div>
         </div>
       </div>
-    </div>
-  </body>
+    </section>
+    <!-- End MarcoReg -->
+  </section>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  name: "registerPatient",
+  name: "signUpPage",
   data() {
     return {
-      emptyInput: false,
+      errorShow: false,
+      successShow: false,
     };
   },
   methods: {
     register() {
+      var username = document.getElementById("fusernameR").value;
       var name = document.getElementById("fnameR").value;
       var lastName = document.getElementById("lnameR").value;
       var email = document.getElementById("emailR").value;
@@ -228,8 +277,8 @@ export default {
       var genero = document.getElementById("genderR").value;
       var edad = document.getElementById("ageR").value;
       var RH = document.getElementById("RHR").value;
-      console.log(name);
       if (
+        username == "" ||
         name == "" ||
         lastName == "" ||
         email == "" ||
@@ -240,14 +289,13 @@ export default {
         edad == "" ||
         RH == ""
       ) {
-        console.log("No se han puesto datos");
         this.errorFunction("Faltan datos por llenar");
       } else {
         if (password !== confirmPassword) {
-          console.log("Constraseñas son diferentes");
           this.errorFunction("Las contraseñas no coinciden");
         } else {
           this.sendData(
+            username,
             name,
             lastName,
             email,
@@ -258,11 +306,11 @@ export default {
             edad,
             RH
           );
-          console.log("Enviar Datos");
         }
       }
     },
     async sendData(
+      username,
       name,
       lastName,
       email,
@@ -273,13 +321,12 @@ export default {
       edad,
       RH
     ) {
-      var user = email.substring(0, email.indexOf("@"));
       let datos = {
-        username: user,
+        username: username,
         password: password,
-        name: name + " " + lastName,
+        name: name + "-" + lastName,
         email: email,
-        document_type: "cc",
+        document_type: tipoCedula,
         document_number: cedula,
         age: parseInt(edad),
         gender: genero,
@@ -287,39 +334,35 @@ export default {
       };
 
       let formBody = JSON.stringify(datos);
-      console.log(formBody);
 
       axios
-        .post(
-          "http://localhost:8081/register/patient",
-
-          formBody,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer e",
-            },
-          }
-        )
-        .then((response) => {
-          console.log("Register complete");
-          console.log(response);
-          this.errorFunction("Registro Exitoso");
+        .post("http://localhost:8081/register/patient", formBody, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer e",
+          },
         })
-        .catch((err) => {
-          console.log("Falló registro");
-          console.log(err);
+        .then(() => {
+          this.successFunction("Registro Exitoso");
+        })
+        .catch(() => {
+          this.errorFunction("Error, correo o documento ya registrado");
         });
     },
-    errorFunction(messageText) {
-      //set the error div to be visible and message not
-      let errorDiv = document.getElementById("errors");
-      //errorDiv.css("display", "block");
-      //update the content of the error message
+    successFunction(messageText) {
+      this.$data.errorShow = false;
+      this.$data.successShow = true;
+      let errorDiv = document.getElementById("successNotification");
       errorDiv.innerHTML = messageText;
-      this.$data.emptyInput = true;
-      //schedule a deactivation
+      setTimeout(() => {}, 1000);
+    },
+    errorFunction(messageText) {
+      this.$data.errorShow = true;
+      this.$data.successShow = false;
+      let errorDiv = document.getElementById("errorNotification");
+      errorDiv.innerHTML = messageText;
+      setTimeout(() => {}, 1000);
     },
   },
 };
@@ -432,8 +475,145 @@ input[type="number"] {
 }
 
 #registerButton {
-  margin-top: 40px;
+  margin-top: 20px;
   position: center;
   max-width: 100px;
+}
+
+/*--------------------------------------------------------------
+# Error
+--------------------------------------------------------------*/
+
+.large {
+  font-size: 18px !important;
+}
+.alertBar {
+  color: rgb(245, 140, 140);
+  margin-bottom: 5px;
+  line-height: 30px;
+  animation: reveal 1 1s;
+  border: 1px solid rgba(32, 32, 32, 0.15);
+}
+
+.alert-info {
+  display: inline-block;
+  padding: 5px 2.5em 5px 10px;
+  color: red;
+  vertical-align: middle;
+}
+.alert-details {
+  display: none;
+}
+.more,
+.cta {
+  color: #007acc !important;
+}
+.alert-message {
+  padding-right: 1em;
+  text-overflow: ellipsis;
+  color: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 900px;
+}
+a {
+  color: #007acc;
+}
+
+:hover {
+  color: #007acc;
+}
+strong {
+  font-weight: 400;
+  color: inherit;
+}
+
+.alert-dismiss {
+  float: right;
+  line-height: 15px;
+}
+.a {
+  color: #000000;
+  display: inline-block;
+  padding: 14px;
+}
+.hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0px, -50px);
+  }
+  50% {
+    transform: translate(0px, -50px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes collapse {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(0px, -50px);
+  }
+  100% {
+    transform: translate(0px, -50px);
+  }
+}
+pre {
+  margin: 0px 10px 10px;
+  line-height: 18px;
+  font-family: monospace;
+}
+i {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+  -webkit-font-smoothing: none;
+}
+.largeBut {
+  font-size: 20px;
+}
+.success_blue {
+  color: #1ba1e2;
+}
+.success_green {
+  color: #339933;
+}
+.warning_col {
+  color: #f8a800;
+}
+.error_col {
+  color: #ba141a;
+}
+.success {
+  background: #f5f5f5;
+  color: #222;
+  border: 1px solid #e6e6e6;
+}
+.success_confirm {
+  background: #eff8fd;
+  color: #222;
+  border: 1px solid #d8effa;
+}
+.warning {
+  background: #fff9ee;
+  color: #222;
+  border: 1px solid #fef0d4;
+}
+.error {
+  background: #fc9494;
+  color: #222;
+  border: 1px solid #f9d5d3;
+}
+.form-section > p:first-child {
+  padding: 0 0 8px 0;
 }
 </style>

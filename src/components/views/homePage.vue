@@ -1,57 +1,22 @@
 <template>
-  <body id="home">
+  <section id="home">
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center justify-content-center">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
-        <h2>Su cuenta ha sido verificada con exito!</h2>
+        <h2>
+          Sistema de prácticas odontológicas de la Universidad Nacional de
+          Colombia
+        </h2>
+        <router-link class="btn-sign-up scrollto" to="/signUp"
+          >Sign up</router-link
+        >
         <router-link class="btn-login scrollto" to="/login">Login</router-link>
       </div>
     </section>
     <!-- End Hero -->
-  </body>
+  </section>
 </template>
-
-<script>
-import axios from "axios";
-
-export default {
-  name: "verifyAccount",
-  data() {
-    return {
-      typeUser: null,
-      code: null,
-    };
-  },
-  mounted() {
-    let typeUser = this.$route.params.user;
-    let code = this.$route.params.code;
-    axios
-      .put(
-        "http://localhost:8081/register/verifyAccount/" +
-          typeUser +
-          "?code=" +
-          code,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer e",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("Verification complete");
-        console.log(response);
-        this.errorFunction("Registro Exitoso");
-      })
-      .catch((err) => {
-        console.log("Falló registro");
-        console.log(err);
-      });
-  },
-};
-</script>
 
 <style scoped>
 /*--------------------------------------------------------------
@@ -60,21 +25,6 @@ export default {
 #home {
   font-family: "Open Sans", sans-serif;
   color: #d3d35b;
-}
-
-a {
-  color: #ffc107;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ffce3a;
-  text-decoration: none;
-}
-
-h1,
-h2 {
-  font-family: "Raleway", sans-serif;
 }
 
 /*--------------------------------------------------------------
