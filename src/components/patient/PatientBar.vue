@@ -67,7 +67,7 @@
           <div class="profile-details">
             <i class="bx bx-user-circle"></i>
             <div class="name">
-              <div class="name" id="patientUsername"></div>
+              <div class="name" id="patientUsername" ref="patientUsername"></div>
             </div>
           </div>
           <i

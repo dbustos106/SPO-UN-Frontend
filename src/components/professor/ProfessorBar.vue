@@ -76,7 +76,7 @@
           <div class="profile-details">
             <i class="bx bx-user-circle"></i>
             <div class="name">
-              <div class="name" id="professorUsername"></div>
+              <div class="name" id="professorUsername" ref="professorUsername"></div>
             </div>
           </div>
           <i

@@ -67,7 +67,7 @@
           <div class="profile-details">
             <i class="bx bx-user-circle"></i>
             <div class="name">
-              <div class="name" id="studentUsername"></div>
+              <div class="name" id="studentUsername" ref="studentUsername"></div>
             </div>
           </div>
           <i id="log_out" class="bx bx-log-out" v-on:click="closeSession()"></i>

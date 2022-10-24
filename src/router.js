@@ -20,6 +20,7 @@ import StudentSetting from './components/student/studentSetting.vue'
 import PatientPage from './components/views/users/patientPage.vue'
 import PatientCalendar from './components/patient/patientCalendar.vue'
 import PatientSetting from './components/patient/patientSetting.vue'
+import PatientSearch from './components/patient/patientProcedureSearch.vue'
 
 import AdminPage from './components/views/users/adminPage.vue'
 import RegisterProfessor from './components/admin/registerProfessor.vue'
@@ -117,6 +118,11 @@ const routes = [
         path: 'patientSetting',
         name: 'PatientSetting',
         component: PatientSetting
+      },
+      {
+        path: 'searchAppointment',
+        name: 'PatientSearch',
+        component: PatientSearch
       },
     ]
   },

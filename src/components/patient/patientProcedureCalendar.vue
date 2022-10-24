@@ -5,7 +5,7 @@
   <body>
     <div class="tableContainer">
       <div>
-        <modalWindow></modalWindow>
+        <!--<modalWindow></modalWindow>-->
       </div>
     <div class="col-12">
       <div class="row">
@@ -26,10 +26,10 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import modalWindow from "./modalWindow.vue";
+//import modalWindow from "./modalWindow.vue";
 export default {
   name: "CalendarioEstudiante",
-  components: { FullCalendar,modalWindow },
+  components: { FullCalendar},
   data() {
     return {
       showModal: false,

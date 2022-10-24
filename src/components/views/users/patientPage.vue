@@ -1,5 +1,5 @@
 <template>
-  <PatientBar></PatientBar>
+  <PatientBar ref="PatientBar"></PatientBar>
 
   <section
     id="patientSection"
@@ -75,6 +75,7 @@ export default {
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
+    this.$refs.PatientBar.$refs.patientUsername.innerHTML=sessionStorage.Username;
   },
 };
 </script>

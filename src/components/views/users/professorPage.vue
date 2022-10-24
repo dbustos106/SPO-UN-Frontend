@@ -1,5 +1,5 @@
 <template>
-  <ProfessorBar></ProfessorBar>
+  <ProfessorBar ref="ProfessorBar"></ProfessorBar>
 
   <section
     id="professorSection"
@@ -21,7 +21,7 @@ export default {
     ProfessorBar,
   },
   data() {
-    return {
+    return { 
       sideBarIsOpen: 1,
     };
   },
@@ -33,6 +33,7 @@ export default {
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
+    this.$refs.ProfessorBar.$refs.professorUsername.innerHTML=sessionStorage.Username;
   },
 };
 </script>

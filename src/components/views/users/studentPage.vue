@@ -1,5 +1,5 @@
 <template>
-  <StudentBar></StudentBar>
+  <StudentBar ref="StudentBar"></StudentBar>
 
   <section
     id="studentSection"
@@ -33,6 +33,7 @@ export default {
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
+    this.$refs.StudentBar.$refs.studentUsername.innerHTML=sessionStorage.Username;
   },
 };
 </script>
