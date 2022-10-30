@@ -1,15 +1,17 @@
 <template>
-  <AdminBar></AdminBar>
+  <div>
+    <AdminBar ref="AdminBar"></AdminBar>
 
-  <section
-    id="adminSection"
-    class="container"
-    :class="{ ing2: sideBarIsOpen == 1 }"
-  >
-    <!-- ======= Router view ======= -->
-    <router-view></router-view>
-    <!-- End Router view -->
-  </section>
+    <section
+      id="adminSection"
+      class="container"
+      :class="{ ing2: sideBarIsOpen == 1 }"
+    >
+      <!-- ======= Router view ======= -->
+      <router-view></router-view>
+      <!-- End Router view -->
+    </section>
+  </div>
 </template>
 
 <script>

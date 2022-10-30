@@ -38,6 +38,7 @@
     <!-- End confirmWindow -->
   </div>
 
+  <!-- ======= ProcedureSearchCalendarContainer ======= -->
   <div id="ProcedureSearchCalendarContainer" class="container">
     <div class="card login-card">
       <div class="row no-gutters">
@@ -70,6 +71,7 @@
       </div>
     </div>
   </div>
+  <!-- End ProcedureSearchCalendarContainer -->
 </template>
 
 <script>

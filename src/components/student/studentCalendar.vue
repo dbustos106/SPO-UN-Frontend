@@ -1,21 +1,4 @@
 <template>
-  <!-- ======= Meta datos ======= -->
-  <div>
-    <!-- <meta charset="UTF-8" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>SPO UN - Inicia sesión</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </div>
-  <!-- End Meta datos -->
-
   <!-- ======= TableContainer ======= -->
   <div id="AppointmentsContainer" class="container">
     <div class="card login-card">
@@ -114,12 +97,12 @@
           <div id="deleteWindow" class="modal-mask" v-if="deleteWindow">
             <h1>Confirmación</h1>
 
-            <p>¿Desea eliminar la cita?</p>
+            <p>¿Desea cancelar la cita?</p>
             <button id="closeDeleteWindow" @click="deleteWindow = false">
               Cerrar
             </button>
             <button id="confirmDelete" @click="deleteStudentAppointment">
-              Eliminar
+              Cancelar
             </button>
           </div>
         </transition>
@@ -142,7 +125,7 @@
                 <td>Fecha de fin</td>
                 <td>Tipo de procedimiento</td>
                 <td>Detalle</td>
-                <td>Eliminar</td>
+                <td>Cancelar</td>
               </tr>
             </thead>
             <tbody>
@@ -272,7 +255,7 @@ export default {
 
         // button delete
         let newButtonDelete = document.createElement("button");
-        newButtonDelete.innerHTML = "Eliminar";
+        newButtonDelete.innerHTML = "Cancelar";
         newButtonDelete.addEventListener(
           "click",
           function () {

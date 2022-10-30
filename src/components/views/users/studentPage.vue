@@ -1,15 +1,17 @@
 <template>
-  <StudentBar ref="StudentBar"></StudentBar>
+  <div>
+    <StudentBar ref="StudentBar"></StudentBar>
 
-  <section
-    id="studentSection"
-    class="container"
-    :class="{ ing2: sideBarIsOpen == 1 }"
-  >
-    <!-- ======= Router view ======= -->
-    <router-view></router-view>
-    <!-- End Router view -->
-  </section>
+    <section
+      id="studentSection"
+      class="container"
+      :class="{ ing2: sideBarIsOpen == 1 }"
+    >
+      <!-- ======= Router view ======= -->
+      <router-view></router-view>
+      <!-- End Router view -->
+    </section>
+  </div>
 </template>
 
 <script>
