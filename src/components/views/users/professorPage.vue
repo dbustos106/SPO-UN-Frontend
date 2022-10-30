@@ -1,5 +1,6 @@
 <template>
-  <ProfessorBar ref="ProfessorBar"></ProfessorBar>
+  <div>
+    <ProfessorBar ref="ProfessorBar"></ProfessorBar>
 
   <section
     id="professorSection"
@@ -10,6 +11,8 @@
     <router-view></router-view>
     <!-- End Router view -->
   </section>
+  </div>
+  
 </template>
 
 <script>

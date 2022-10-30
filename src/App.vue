@@ -1,6 +1,7 @@
 <template>
+  
   <!-- ======= Router view ======= -->
-  <router-view></router-view>
+    <router-view></router-view>
   <!-- End router view -->
 </template>
 
@@ -9,6 +10,13 @@ import axios from "axios";
 
 export default {
   name: "initPage",
+  data() {
+    return {
+      showModal:false,
+    }
+  },
+  components: {
+    },
   methods: {
     toUrlEncoded(datos) {
       var formBody = [];
@@ -51,6 +59,15 @@ export default {
           return false;
         });
     },
+    insensitiveCase(str){
+      str=str.toLowerCase();
+      str=str.replaceAll("á","a");
+      str=str.replaceAll("é","e");
+      str=str.replaceAll("í","i");
+      str=str.replaceAll("ó","o");
+      str=str.replaceAll("ú","u");
+      return str;
+    }
   },
 };
 </script>
@@ -65,5 +82,28 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: rgb(255, 255, 255);
+  z-index: 19980;
+}
+
+.modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #FFF;
+  padding: 20px;
+  border-radius: 15px; 
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.4); 
+  z-index: 98;
+}
+
+.modal-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.4);
 }
 </style>
