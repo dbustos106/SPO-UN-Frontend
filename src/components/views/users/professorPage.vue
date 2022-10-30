@@ -21,7 +21,7 @@ export default {
     ProfessorBar,
   },
   data() {
-    return { 
+    return {
       sideBarIsOpen: 1,
     };
   },
@@ -33,7 +33,8 @@ export default {
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
-    this.$refs.ProfessorBar.$refs.professorUsername.innerHTML=sessionStorage.Username;
+    this.$refs.ProfessorBar.$refs.professorUsername.innerHTML =
+      sessionStorage.Username;
   },
 };
 </script>
@@ -41,7 +42,7 @@ export default {
 <style>
 #professorSection {
   max-width: 100vw;
-  height: 101vh;
+  height: 180vh;
   background: url("../../../assets/img/panoramicaUnal.jpg") top center;
   background-size: cover;
   position: absolute;

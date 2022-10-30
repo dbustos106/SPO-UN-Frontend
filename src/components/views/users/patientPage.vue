@@ -68,14 +68,14 @@ export default {
               );
             }
           }
-          this.$data.patientProcedureTableShow = true;
         });
     },
   },
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
-    this.$refs.PatientBar.$refs.patientUsername.innerHTML=sessionStorage.Username;
+    this.$refs.PatientBar.$refs.patientUsername.innerHTML =
+      sessionStorage.Username;
   },
 };
 </script>
