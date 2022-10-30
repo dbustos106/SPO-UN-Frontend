@@ -71,12 +71,13 @@ export default {
             "Content-Type": "application/json",
             Authorization: "Bearer " + sessionStorage.AccessToken,
           },
-          //params:{page:10, size:10},
         })
         .then((response) => {
           let roomInfo = response.data.message;
+          console.log(roomInfo);
           for (var i in roomInfo) {
             let newOption = document.createElement("option");
+            console.log(roomInfo[i].roomDTO.id);
             newOption.value = roomInfo[i].roomDTO.id;
             newOption.innerHTML =
               roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
@@ -90,15 +91,57 @@ export default {
     addDate() {
       console.log(this.date[1] != null);
       if(this.date[1] != null){
-      var table = document.getElementById("fechas-tentativas");
-      var row = table.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      console.log("agregando!");
-      //2022-11-1T10:00:00;
-      cell1.innerHTML = this.date[0].replace(' ','T');
-      cell2.innerHTML = this.date[1].replace(' ','T');
-    }
+        var table = document.getElementById("fechas-tentativas");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        console.log("agregando!");
+        //2022-11-1T10:00:00;
+        cell1.innerHTML = this.date[0].replace(' ','T');
+        cell2.innerHTML = this.date[1].replace(' ','T');
+      }
+    },
+    crearCita(){
+      
+      let selectedRoom = document.getElementById("roomSelect").value;
+      let procedureType = document.getElementById("description").value;
+      let tentativeSchedules = [];
+      let schedulesTable=document.getElementById("fechas-tentativas").children
+      for(var i = 1; i<schedulesTable.length; i++){
+        let startTime=schedulesTable[i].children[0].innerHTML;
+        let endTime=schedulesTable[i].children[1].innerHTML;
+        tentativeSchedules.push({"start_time":startTime.replace("T"," "),"end_time":endTime.replace("T"," ")})
+      }
+      console.log(tentativeSchedules);
+
+      let appointments={
+        "appointmentDTO": {
+            "procedure_type": procedureType,
+            "room_id": parseInt(selectedRoom)
+        },
+        "tentativeSchedules":tentativeSchedules,
+        "students": [sessionStorage.Username]
+      }
+
+      let formAppointmentsBody = JSON.stringify(appointments);
+
+      console.log(formAppointmentsBody);
+
+      
+      axios
+        .post("http://localhost:8081/appointment/save",formAppointmentsBody,{
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.AccessToken,
+          },
+        })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     deleteDate() {
       document.getElementById("fechas-tentativas").deleteRow(1);

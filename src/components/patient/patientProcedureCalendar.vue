@@ -8,11 +8,12 @@
     <div>
       
       <transition name="fade">
-        <div class="modal-overlay" v-if="showModal"></div>
+        <div class="modal-overlay" v-show="showModal"></div>
       </transition>
       <transition name="fade">
-        <div class="modal-mask" v-if="showModal">
+        <div class="modal-mask" v-show="showModal">
           <div class="row">
+            <label id="modalAppointmentTitle">Hola</label>
             <label>
               ¿Desea reservar esta cita?
             </label>
@@ -91,6 +92,7 @@ export default {
       selectedInitialDate: "",
       selectedEndDate:"",
       selectedAppointmentId:"",
+      selectedAppointmentType:"",
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
         initialView: "timeGridWeek",
@@ -107,22 +109,14 @@ export default {
         ],
         eventClick: function(info) {
           console.log("Click evento")
-          console.log(info.event.title);
+          console.log(info.event.id);
           this.$data.selectedInitialDate=info.event.start;
           this.$data.selectedEndDate=info.event.end;
-          this.$data.selectedAppointmentId=info.event.title;
+          this.$data.selectedAppointmentId=info.event.id;
+          this.$data.selectedAppointmentType=info.event.title;
           console.log(this.$data.selectedAppointmentId);
           this.$data.showModal=true;
-          //App.data.showModal=true;
-          /*
-          this.$FModal.show(
-            { 
-              component: FullCalendar 
-            }, 
-            { 
-              msg: "Welcome to Your Vue.js App" 
-            }
-          )*/
+          document.getElementById("modalAppointmentTitle").innerHTML="Cita para el día "+ this.formatDate(this.$data.selectedInitialDate) + " para "+this.$data.selectedAppointmentType.toLowerCase();
           
           //this.$refs.modalAppontmentReserveWindow.$refs.modalAppointmentStartTime.innerHTML=info.event.start;
         }.bind(this)
@@ -148,7 +142,7 @@ export default {
       }).then((response) => {
         console.log(response);
         window.scroll({ //Scroll down to the calendar
-            top: 170,
+            top: 250,
             left: 0,
             behavior: 'smooth'
         });
@@ -156,6 +150,32 @@ export default {
         this.$data.showConfirmMessage=true;
       });
     },
+    formatDate(inputDate){
+      let date, month, year, hour, minutes;
+
+      date = inputDate.getDate();
+      month = inputDate.getMonth() + 1;
+      year = inputDate.getFullYear();
+      hour = inputDate.getHours();
+      minutes = inputDate.getMinutes()
+
+      date = date
+            .toString()
+            .padStart(2, '0');
+
+      month = month
+            .toString()
+            .padStart(2, '0');
+
+      if(hour>=13){
+        hour=hour-12;
+        hour=hour.toString().padStart(2, '0')+":"+minutes.toString().padStart(2, '0')+"PM"
+      }else{
+        hour=hour.toString().padStart(2, '0')+":"+minutes.toString().padStart(2, '0')+"AM"
+      }
+
+      return `${date}/${month}/${year} a las ${hour}`;
+    }
 
   }
 };

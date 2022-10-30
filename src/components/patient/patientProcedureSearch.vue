@@ -58,6 +58,7 @@
             searchProcedure() {
                 this.$data.patientProcedureCalendarShow = true;
                 var procedureTypeSearch =this.$refs.procedureType.value;
+                sessionStorage.setItem("procedureTypeSearch", procedureTypeSearch);
                 console.log(procedureTypeSearch)
                 let datos2 = {
                     page: 0,
@@ -84,7 +85,7 @@
                         this.$refs.patientProcedureCalendar.calendarOptions.events = [];
                         for (var i in appointmentsSearch) {
                             console.log(appointmentsSearch[i].appointmentDTO.procedure_type)
-                            if (App.methods.insensitiveCase(appointmentsSearch[i].appointmentDTO.procedure_type) == App.methods.insensitiveCase(procedureTypeSearch)) {
+                            if (App.methods.insensitiveCase(appointmentsSearch[i].appointmentDTO.procedure_type) == App.methods.insensitiveCase(procedureTypeSearch) || procedureTypeSearch=="") {
                                 for(var j in appointmentsSearch[i].tentativeSchedules ){
                                     console.log(appointmentsSearch[i].tentativeSchedules[j])
                                     if(new Date(appointmentsSearch[i].tentativeSchedules[j].start_time).getTime()<new Date(earliestDate).getTime()){
@@ -95,7 +96,7 @@
                                         ...this.$refs.patientProcedureCalendar.calendarOptions.events, //Adds all the previous events
                                         {
                                             id: appointmentsSearch[i].tentativeSchedules[j].appointment_id,
-                                            title: appointmentsSearch[i].tentativeSchedules[j].appointment_id,
+                                            title: appointmentsSearch[i].appointmentDTO.procedure_type,
                                             start: appointmentsSearch[i].tentativeSchedules[j].start_time.replace(" ","T"),
                                             end: appointmentsSearch[i].tentativeSchedules[j].end_time.replace(" ","T"),
                                             start_time:appointmentsSearch[i].tentativeSchedules[j].start_time.replace(" ","T"),
