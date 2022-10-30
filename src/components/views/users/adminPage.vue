@@ -1,5 +1,6 @@
 <template>
-  <AdminBar></AdminBar>
+  <div>
+    <AdminBar></AdminBar>
 
   <section
     id="adminSection"
@@ -10,6 +11,8 @@
     <router-view></router-view>
     <!-- End Router view -->
   </section>
+  </div>
+  
 </template>
 
 <script>

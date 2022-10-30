@@ -1,5 +1,6 @@
 <template>
-  <section id="login">
+  <div>
+    <section id="login">
     <!-- ======= Meta datos ======= -->
     <div>
       <meta charset="UTF-8" />
@@ -108,6 +109,8 @@
     </section>
     <!-- End MarcoLog -->
   </section>
+  </div>
+  
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
-  <!-- ======= Meta datos ======= -->
+  <div>
+    <!-- ======= Meta datos ======= -->
   <div>
     <!-- <meta charset="UTF-8" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -165,6 +166,8 @@
       </div>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script>

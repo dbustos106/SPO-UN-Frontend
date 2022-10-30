@@ -1,6 +1,7 @@
 <template>
-  <!-- ======= Header ======= -->
-  <header
+  <div>
+    <!-- ======= Header ======= -->
+    <header
     id="header"
     class="fixed-top header-transparent"
     :class="{ ing: scrollPosition > 10 }"
@@ -61,6 +62,9 @@
     </div>
   </footer>
   <!-- End Footer -->
+  </div>
+  
+  
 </template>
 
 <script>

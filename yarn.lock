@@ -3871,6 +3871,11 @@
   "resolved" "https://registry.npmjs.org/javascript-stringify/-/javascript-stringify-2.1.0.tgz"
   "version" "2.1.0"
 
+"jenesius-vue-modal@^1.8.0":
+  "integrity" "sha512-cuBhcuZTAfWKrrVKs7Rqyb7dRBRa1L1qDS/qt65O6jVegI22Rb9DNrE/dXP9UfuNBLdppczixBY71WZVhaS06A=="
+  "resolved" "https://registry.npmjs.org/jenesius-vue-modal/-/jenesius-vue-modal-1.8.0.tgz"
+  "version" "1.8.0"
+
 "jest-worker@^27.0.2", "jest-worker@^27.4.5":
   "integrity" "sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg=="
   "resolved" "https://registry.npmjs.org/jest-worker/-/jest-worker-27.5.1.tgz"
@@ -5911,6 +5916,13 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
 
+"v-easy-dialog@^1.0.6":
+  "integrity" "sha512-PwhFJohjFAS/rbA1qKa3ML7TIcC3A2mWh+I7pfW/aOjqH/HWXEPtCqPqmMIU2yFceRsdy4inZQaeA0mwHKQqZw=="
+  "resolved" "https://registry.npmjs.org/v-easy-dialog/-/v-easy-dialog-1.0.6.tgz"
+  "version" "1.0.6"
+  dependencies:
+    "portal-vue" "^2.1.7"
+
 "validate-npm-package-license@^3.0.1":
   "integrity" "sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew=="
   "resolved" "https://registry.npmjs.org/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz"
@@ -5936,6 +5948,13 @@
     "esquery" "^1.4.0"
     "lodash" "^4.17.21"
     "semver" "^7.3.6"
+
+"vue-fullpage-modal@^0.5.3":
+  "integrity" "sha512-Npfgh7pZyra5ToGNybpvYMPV0WYcoYslRVeCpWT2b+cjCmRUFJuewbobhpZNeF+1VEAN8ue5EKx1kpZyiJ5KZA=="
+  "resolved" "https://registry.npmjs.org/vue-fullpage-modal/-/vue-fullpage-modal-0.5.3.tgz"
+  "version" "0.5.3"
+  dependencies:
+    "vue" "^2.5.2"
 
 "vue-functional-data-merge@^3.1.0":
   "integrity" "sha512-leT4kdJVQyeZNY1kmnS1xiUlQ9z1B/kdBFCILIjYYQDqZgLqCLa0UhjSSeRX6c3mUe6U5qYeM8LrEqkHJ1B4LA=="
@@ -5984,7 +6003,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@*", "vue@^2 || ^3.2.13", "vue@^3.0.11", "vue@^3.2.0", "vue@3.2.40":
+"vue@*", "vue@^2 || ^3.2.13", "vue@^3.0.0", "vue@^3.0.11", "vue@^3.2.0", "vue@3.2.40":
   "integrity" "sha512-1mGHulzUbl2Nk3pfvI5aXYYyJUs1nm4kyvuz38u4xlQkLUn1i2R7nDbI4TufECmY8v1qNBHYy62bCaM+3cHP2A=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.40.tgz"
   "version" "3.2.40"
@@ -5996,6 +6015,14 @@
     "@vue/shared" "3.2.40"
 
 "vue@^2.5.18":
+  "integrity" "sha512-QnM6ULTNnPmn71eUO+4hdjfBIA3H0GLsBnchnI/kS678tjI45GOUZhXd0oP/gX9isikXz1PAzSnkPspp9EUNfQ=="
+  "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.13.tgz"
+  "version" "2.7.13"
+  dependencies:
+    "@vue/compiler-sfc" "2.7.13"
+    "csstype" "^3.1.0"
+
+"vue@^2.5.2":
   "integrity" "sha512-QnM6ULTNnPmn71eUO+4hdjfBIA3H0GLsBnchnI/kS678tjI45GOUZhXd0oP/gX9isikXz1PAzSnkPspp9EUNfQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.13.tgz"
   "version" "2.7.13"
