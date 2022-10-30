@@ -500,20 +500,7 @@ export default {
 }
 #my-scroll::-webkit-scrollbar {
   display: none;
-  /* background-color: rgba(255, 255, 255, 0.2); 
-      width: 10px;
-      border-radius:5px  */
 }
-/* #my-scroll::-webkit-scrollbar-thumb{
-      background-color: red;
-      border-radius:5px 
-    }
-    #my-scroll::-webkit-scrollbar-button:vertical:start:decrement{
-      display:none;
-    }
-    #my-scroll::-webkit-scrollbar-button:vertical:end:increment{
-      display:none;
-    } */
 @media (max-width: 420px) {
   .sidebar li .tooltip {
     display: none;

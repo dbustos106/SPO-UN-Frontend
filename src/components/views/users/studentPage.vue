@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <StudentBar ref="StudentBar"></StudentBar>
+  <StudentBar ref="StudentBar"></StudentBar>
 
   <section
     id="studentSection"
@@ -11,8 +10,6 @@
     <router-view></router-view>
     <!-- End Router view -->
   </section>
-  </div>
-  
 </template>
 
 <script>

@@ -1,7 +1,6 @@
 <template>
-  
   <!-- ======= Router view ======= -->
-    <router-view></router-view>
+  <router-view></router-view>
   <!-- End router view -->
 </template>
 
@@ -12,11 +11,10 @@ export default {
   name: "initPage",
   data() {
     return {
-      showModal:false,
-    }
+      showModal: false,
+    };
   },
-  components: {
-    },
+  components: {},
   methods: {
     toUrlEncoded(datos) {
       var formBody = [];
@@ -59,15 +57,15 @@ export default {
           return false;
         });
     },
-    insensitiveCase(str){
-      str=str.toLowerCase();
-      str=str.replaceAll("á","a");
-      str=str.replaceAll("é","e");
-      str=str.replaceAll("í","i");
-      str=str.replaceAll("ó","o");
-      str=str.replaceAll("ú","u");
+    insensitiveCase(str) {
+      str = str.toLowerCase();
+      str = str.replaceAll("á", "a");
+      str = str.replaceAll("é", "e");
+      str = str.replaceAll("í", "i");
+      str = str.replaceAll("ó", "o");
+      str = str.replaceAll("ú", "u");
       return str;
-    }
+    },
   },
 };
 </script>
@@ -84,20 +82,7 @@ export default {
   color: rgb(255, 255, 255);
   z-index: 19980;
 }
-
-.modal{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  background: #FFF;
-  padding: 20px;
-  border-radius: 15px; 
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4); 
-  z-index: 98;
-}
-
-.modal-overlay{
+.modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -105,5 +90,17 @@ export default {
   right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-mask {
+  width: 50%;
+  position: fixed;
+  top: 30%;
+  left: 33%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+  z-index: 101;
 }
 </style>

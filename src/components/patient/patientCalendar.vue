@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- ======= Meta datos ======= -->
+  <!-- ======= Meta datos ======= -->
   <div>
     <!-- <meta charset="UTF-8" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -538,28 +537,6 @@ h2 {
 .fc .fc-col-header-cell-cushion {
   display: inline-block;
   padding: 2px 4px;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.modal-mask {
-  width: 50%;
-  position: fixed;
-  top: 30%;
-  left: 33%;
-  background: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
-  z-index: 101;
 }
 
 #deleteWindow {

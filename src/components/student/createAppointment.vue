@@ -65,7 +65,7 @@ export default {
     createOptions() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
-        .get("http://localhost:8081/room/all",{
+        .get("http://localhost:8081/room/all", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -90,46 +90,45 @@ export default {
     },
     addDate() {
       console.log(this.date[1] != null);
-      if(this.date[1] != null){
+      if (this.date[1] != null) {
         var table = document.getElementById("fechas-tentativas");
         var row = table.insertRow(-1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         console.log("agregando!");
         //2022-11-1T10:00:00;
-        cell1.innerHTML = this.date[0].replace(' ','T');
-        cell2.innerHTML = this.date[1].replace(' ','T');
+        cell1.innerHTML = this.date[0].replace(" ", "T");
+        cell2.innerHTML = this.date[1].replace(" ", "T");
       }
     },
-    crearCita(){
-      
+    crearCita() {
       let selectedRoom = document.getElementById("roomSelect").value;
       let procedureType = document.getElementById("description").value;
       let tentativeSchedules = [];
-      let schedulesTable=document.getElementById("fechas-tentativas").children
-      for(var i = 1; i<schedulesTable.length; i++){
-        let startTime=schedulesTable[i].children[0].innerHTML;
-        let endTime=schedulesTable[i].children[1].innerHTML;
-        tentativeSchedules.push({"start_time":startTime.replace("T"," "),"end_time":endTime.replace("T"," ")})
+      let schedulesTable =
+        document.getElementById("fechas-tentativas").children;
+      for (var i = 1; i < schedulesTable.length; i++) {
+        let startTime = schedulesTable[i].children[0].innerHTML;
+        let endTime = schedulesTable[i].children[1].innerHTML;
+        tentativeSchedules.push({
+          start_time: startTime.replace("T", " "),
+          end_time: endTime.replace("T", " "),
+        });
       }
       console.log(tentativeSchedules);
-
-      let appointments={
-        "appointmentDTO": {
-            "procedure_type": procedureType,
-            "room_id": parseInt(selectedRoom)
+      let appointments = {
+        appointmentDTO: {
+          procedure_type: procedureType,
+          room_id: parseInt(selectedRoom),
         },
-        "tentativeSchedules":tentativeSchedules,
-        "students": [sessionStorage.Username]
-      }
-
+        tentativeSchedules: tentativeSchedules,
+        students: [sessionStorage.Username],
+      };
       let formAppointmentsBody = JSON.stringify(appointments);
-
       console.log(formAppointmentsBody);
 
-      
       axios
-        .post("http://localhost:8081/appointment/save",formAppointmentsBody,{
+        .post("http://localhost:8081/appointment/save", formAppointmentsBody, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -137,7 +136,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response)
+          console.log(response);
         })
         .catch((err) => {
           console.log(err);
@@ -168,7 +167,6 @@ export default {
   top: 50px;
   left: 260px;
 }
-
 .table-container {
   background-color: #fff;
   padding: 30px;
@@ -185,28 +183,23 @@ export default {
   top: 18px;
   left: 785px;
 }
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   border: 1px solid #ddd;
 }
-
 th,
 td {
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
 .form-container .form-horizontal {
   font-size: 15px;
 }
-
 .textarea {
   resize: none;
   border-radius: 4px;
@@ -215,7 +208,6 @@ tr:nth-child(even) {
   padding: 10px;
   margin-left: -25%;
 }
-
 .form-container .form-horizontal {
   color: #333;
   width: 50%;
@@ -223,16 +215,13 @@ tr:nth-child(even) {
   margin: 0 0 15px;
   display: inline-block;
 }
-
 .form-container .form-horizontal .form-group:nth-child(4) {
   margin-bottom: 30px;
 }
-
 .form-container .form-horizontal .form-group label {
   font-size: 15px;
   font-weight: 400;
 }
-
 .form-container .form-horizontal .form-control {
   color: #888;
   background: #fff;
@@ -246,11 +235,9 @@ tr:nth-child(even) {
   box-shadow: none;
   margin: 0px auto;
 }
-
 .form-container .form-horizontal .form-control:focus {
   box-shadow: 0 0 5px #dcdcdc;
 }
-
 .form-container .signin-link {
   color: #333;
   font-size: 14px;
@@ -259,17 +246,14 @@ tr:nth-child(even) {
   display: inline-block;
   vertical-align: top;
 }
-
 .form-container .signin-link a {
   color: #00a9ef;
   font-weight: 600;
   transition: all 0.3s ease 0s;
 }
-
 .form-container .signin-link a:hover {
   text-decoration: underline;
 }
-
 .form-container .form-horizontal .btn,
 .table-container .btn {
   padding: 13px 20px 12px;
@@ -282,7 +266,6 @@ tr:nth-child(even) {
   margin-bottom: 24px;
   margin-top: 24px;
 }
-
 .form-container .form-horizontal .btn:hover,
 .table-container .btn:hover {
   border-color: #1a1d53 !important;
