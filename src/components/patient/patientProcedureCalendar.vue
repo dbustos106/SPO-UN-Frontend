@@ -6,23 +6,31 @@
   </head>
   <body>
     <div>
-      <!--
+      
       <transition name="fade">
         <div class="modal-overlay" v-if="showModal"></div>
       </transition>
       <transition name="fade">
-        <div class="modal" v-if="showModal">
-          <label>
-            ¿Desea reservar esta cita?
-          </label>
-          <button class="modalButton">
-            Si
-          </button>
-          <button class="modalButton">
-            No
-          </button>
+        <div class="modal-mask" v-if="showModal">
+          <div class="row">
+            <label>
+              ¿Desea reservar esta cita?
+            </label>
+          </div>
+            <div class="row">
+              <div class="col-6">
+                <button id="makeReservation" class="modalButton" v-on:click="reserveAppointment()">
+                  Si
+                </button>
+              </div>
+              <div class="col-6">
+                <button id="return" class="modalButton" v-on:click="showModal=false">
+                  No
+                </button>
+              </div>
+            </div>
         </div>
-      </transition>-->
+      </transition>
     </div>
     
     <div id="ProcedureSearchCalendarContainer" class="container">
@@ -37,32 +45,13 @@
           <label class="login-card-description" id="labelUp2">Haga click sobre el horario deseado para reservar la cita</label>
           <div class="col-12 mx-auto">
             <div class="tableContainer">
-              <div>
-               <!--<modal id="modalAppontmentReserveWindow" ref="modalAppontmentReserveWindow" v-show="false"></modal>-->
-              </div>
               <div class="col-12">
                 <div class="row">
                   
                   <FullCalendar ref="procedureCalendar" id="patientProcedureCalendar" :options="calendarOptions" />
                 </div>
                 <div class="row" v-if="showModal">
-                  <div class="row">
-                    <label>
-                      ¿Desea reservar esta cita?
-                    </label>
-                  </div>
-                  <div class="row">
-                    <div class="col-6">
-                    <button id="makeReservation" class="modalButton" v-on:click="reserveAppointment()">
-                      Si
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button id="return" class="modalButton" v-on:click="showModal=false">
-                      No
-                    </button>
-                  </div>
-                  </div>
+                  
                 </div>
                 <div class="row">
                   <span class="col-12" id="AppointmetReserveSuccessMessage" v-if="showConfirmMessage">
@@ -158,6 +147,11 @@ export default {
         },
       }).then((response) => {
         console.log(response);
+        window.scroll({ //Scroll down to the calendar
+            top: 170,
+            left: 0,
+            behavior: 'smooth'
+        });
         this.$data.showModal=false;
         this.$data.showConfirmMessage=true;
       });
@@ -181,30 +175,27 @@ export default {
 
   #labelUp1 {
     font-size: 1.3em;
-    float: left;
   }
 
   #labelUp2 {
     font-size: 1.3em;
-    float: left;
   }
 
   #labelUp3 {
     font-size: 1.3em;
-    float: left;
     color: rgb(98, 228, 65);
   }
 
-  .modal{
+  .modal-mask{
+    width: 20%;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
     background: #FFF;
     padding: 20px;
     border-radius: 15px; 
     box-shadow: 3px 3px rgba(0, 0, 0, 0.4); 
-    z-index: 19999;
+    z-index: 101;
   }
 
   .modal-overlay{
@@ -213,7 +204,7 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 19998;
+    z-index: 100;
     background: rgba(0, 0, 0, 0.4);
   }
 

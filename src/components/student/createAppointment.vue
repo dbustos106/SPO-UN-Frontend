@@ -1,31 +1,57 @@
 <template>
-  <!-- ======= CreateContainer div ======= -->
-  <div id="createContainer" class="form-container" style="text-align: center">
-    <h4>Información de la cita</h4>
-    <div class="form-horizontal">
-      <div class="form-group">
-        <span>Describa el tipo de procedimiento a realizar:</span>
-        <textarea
-          class="textarea"
-          rows="4"
-          cols="40"
-          id="description"
-        ></textarea>
+  <div>
+    <div class="form-container" style="text-align: center">
+      <h4>Información de la cita</h4>
+      <Datepicker
+        id="datePicker"
+        v-model="date"
+        placeholder="Selecciona el rango de las fechas y hora de la cita"
+        range
+        showNowButton
+        modelType="yyyy-MM-dd HH:mm:ss"
+        :minDate="new Date()"
+        @update:modelValue="addDate"
+      >
+      </Datepicker>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <span>Describa el tipo de procedimiento a realizar:</span>
+          <textarea
+            class="textarea"
+            rows="4"
+            cols="40"
+            id="description"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label>Consultorio</label>
+          <select class="form-control text-center" id="roomSelect"></select>
+        </div>
+        <button class="btn signup" v-on:click="crearCita">Crear cita</button>
       </div>
-      <div class="form-group">
-        <label>Consultorio</label>
-        <select class="form-control text-center" id="roomSelect"></select>
+    </div>
+    <div class="table-container" style="text-align: center">
+      <h4>Fechas tentativas</h4>
+      <div style="overflow-x: auto">
+        <table id="fechas-tentativas">
+          <tr>
+            <th>Fecha inicio</th>
+            <th>Fecha final</th>
+          </tr>
+        </table>
       </div>
-      <button class="btn signup" v-on:click="crearCita">Crear cita</button>
+      <button class="btn signup" v-on:click="deleteDate">Eliminar fecha</button>
     </div>
   </div>
-  <!-- End CreateContainer -->
 </template>
-
+<script setup>
+import { ref } from "vue";
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+const date = ref();
+</script>
 <script>
 import axios from "axios";
-import App from "../../App.vue";
-
 export default {
   name: "createAppointment",
   mounted() {
@@ -36,103 +62,16 @@ export default {
     return {};
   },
   methods: {
-    /*register() {
-      
-      var edad = document.getElementById("ageR").value;
-      var RH = document.getElementById("RHR").value;
-      console.log(name);
-      if (
-        name == "" ||
-        lastName == "" ||
-        email == "" ||
-        password == "" ||
-        confirmPassword == "" ||
-        cedula == "" ||
-        genero == "" ||
-        edad == "" ||
-        RH == ""
-      ) {
-        console.log("No se han puesto datos");
-        this.errorFunction("Faltan datos por llenar");
-      } else {
-        if (password !== confirmPassword) {
-          console.log("Constraseñas son diferentes");
-          this.errorFunction("Las contraseñas no coinciden");
-        } else {
-          this.sendData(
-            name,
-            lastName,
-            email,
-            password,
-            cedula,
-            tipoCedula,
-            genero,
-            edad,
-            RH
-          );
-          console.log("Enviar Datos");
-        }
-      }
-    },
-    async sendData(
-      name,
-      lastName,
-      email,
-      password,
-      cedula,
-      tipoCedula,
-      genero,
-      edad,
-      RH
-    ) {
-      var user = email.substring(0, email.indexOf("@"));
-      let datos = {
-        username: user,
-        password: password,
-        name: name + " " + lastName,
-        email: email,
-        document_type: "cc",
-        document_number: cedula,
-        age: parseInt(edad),
-        gender: genero,
-        blood_type: RH,
-      };
-
-      let formBody = JSON.stringify(datos);
-      console.log(formBody);
-
-      axios
-        .post(
-          "http://localhost:8081/appointment/save",
-
-          formBody,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              //"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-              "Content-Type": "application/json",
-              Authorization: "Bearer e",
-            },
-          }
-        )
-        .then((response) => {
-          console.log("Cita creada");
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log("Fallo creación");
-          console.log(err);
-        });
-    },*/
     createOptions() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
-        .get("http://localhost:8081/room/all", {
+        .get("http://localhost:8081/room/all",{
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
             Authorization: "Bearer " + sessionStorage.AccessToken,
           },
+          //params:{page:10, size:10},
         })
         .then((response) => {
           let roomInfo = response.data.message;
@@ -145,14 +84,27 @@ export default {
           }
         })
         .catch((err) => {
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.createOptions();
-            } else {
-              this.$router.push("/login");
-            }
-          }
+          console.log(err);
         });
+    },
+    addDate() {
+      console.log(this.date[1] != null);
+      if(this.date[1] != null){
+      var table = document.getElementById("fechas-tentativas");
+      var row = table.insertRow(-1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      console.log("agregando!");
+      //2022-11-1T10:00:00;
+      cell1.innerHTML = this.date[0].replace(' ','T');
+      cell2.innerHTML = this.date[1].replace(' ','T');
+    }
+    },
+    deleteDate() {
+      document.getElementById("fechas-tentativas").deleteRow(1);
+    },
+    closecreateAppointment() {
+      this.$root.$refs.EstudianteArea.$data.createAppointmentShow = false;
     },
   },
 };
@@ -172,6 +124,40 @@ export default {
   position: fixed;
   top: 50px;
   left: 260px;
+}
+
+.table-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);
+  color: #000;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 0 25px;
+  width: 500px;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 18px;
+  left: 785px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .form-container .form-horizontal {
@@ -241,7 +227,8 @@ export default {
   text-decoration: underline;
 }
 
-.form-container .form-horizontal .btn {
+.form-container .form-horizontal .btn,
+.table-container .btn {
   padding: 13px 20px 12px;
   background-color: #1a1d53;
   border-radius: 4px;
@@ -250,11 +237,12 @@ export default {
   line-height: 20px;
   color: #fff;
   margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .form-container .form-horizontal .btn:hover,
-.form-container .form-horizontal .btn:focus {
-  border-color: #1a1d53;
-  color: #1a1d53;
+.table-container .btn:hover {
+  border-color: #1a1d53 !important;
+  color: #1a1d53 !important;
 }
 </style>
