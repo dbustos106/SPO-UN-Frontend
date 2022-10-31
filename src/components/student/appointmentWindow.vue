@@ -131,7 +131,7 @@
         id="createAppointment"
         ref="createAppointment"
         class="btnBlue mx-auto"
-        v-on:click="crearCita"
+        v-on:click="sendAppointment"
       >
         Crear cita
       </button>
@@ -155,6 +155,7 @@ export default {
   },
   data() {
     return {
+      rooms: {},
       errorShow: false,
       successShow: false,
       startDate: ref(),
@@ -181,6 +182,7 @@ export default {
         })
         .then((response) => {
           let roomInfo = response.data.message;
+          this.$data.rooms = {};
           for (var i in roomInfo) {
             let newOption = document.createElement("option");
             newOption.value =
@@ -188,6 +190,9 @@ export default {
             newOption.innerHTML =
               roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
             tablaRoom.append(newOption);
+            this.$data.rooms[
+              roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name
+            ] = roomInfo[i].roomDTO.id;
           }
         })
         .catch((err) => {
@@ -210,7 +215,14 @@ export default {
         cell2.innerHTML = this.endDate;
       }
     },
-    crearCita() {
+    sendAppointment() {
+      if (this.id != -1) {
+        this.updateAppointment();
+      } else {
+        this.createAppointment();
+      }
+    },
+    createAppointment() {
       let selectedRoom = document.getElementById("roomSelect").value;
       let procedureType = document.getElementById("description").value;
       if (selectedRoom != "Lugar de atención" && procedureType != "") {
@@ -228,32 +240,79 @@ export default {
         let newAppointment = {
           appointmentDTO: {
             procedure_type: procedureType,
-            room_id: parseInt(selectedRoom),
+            room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
           tentativeSchedules: tentativeSchedules,
           students: [sessionStorage.Username],
         };
-        let formAppointmentsBody = JSON.stringify(newAppointment);
+        let formAppointmentBody = JSON.stringify(newAppointment);
 
         axios
-          .post(
-            "http://localhost:8081/appointment/save",
-            formAppointmentsBody,
-            {
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.AccessToken,
-              },
-            }
-          )
+          .post("http://localhost:8081/appointment/save", formAppointmentBody, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          })
           .then(() => {
             this.successFunction("Cita creada con éxito");
           })
           .catch((err) => {
             if (err.response.status == 403) {
               if (App.methods.requestRefreshToken()) {
-                this.crearCita();
+                this.createAppointment();
+              } else {
+                this.$router.push("/login");
+              }
+            }
+          });
+      } else {
+        this.errorFunction("Faltan datos por llenar");
+      }
+    },
+    updateAppointment() {
+      let selectedRoom = document.getElementById("roomSelect").value;
+      let procedureType = document.getElementById("description").value;
+      if (selectedRoom != "Lugar de atención" && procedureType != "") {
+        let tentativeSchedules = [];
+        let schedulesTable =
+          document.getElementById("fechas-tentativas").children;
+        for (var i = 2; i < schedulesTable.length; i++) {
+          let startTime = schedulesTable[i].children[0].innerHTML;
+          let endTime = schedulesTable[i].children[1].innerHTML;
+          tentativeSchedules.push({
+            start_time: startTime.replace("T", " "),
+            end_time: endTime.replace("T", " "),
+          });
+        }
+        let newAppointment = {
+          appointmentDTO: {
+            id: this.id,
+            procedure_type: procedureType,
+            room_id: parseInt(this.$data.rooms[selectedRoom]),
+          },
+          tentativeSchedules: tentativeSchedules,
+          students: [sessionStorage.Username],
+        };
+        let formAppointmentBody = JSON.stringify(newAppointment);
+        console.log(formAppointmentBody);
+
+        axios
+          .put("http://localhost:8081/appointment/edit", formAppointmentBody, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          })
+          .then(() => {
+            this.successFunction("Cita creada con éxito");
+          })
+          .catch((err) => {
+            if (err.response.status == 403) {
+              if (App.methods.requestRefreshToken()) {
+                this.createAppointment();
               } else {
                 this.$router.push("/login");
               }
