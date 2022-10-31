@@ -338,14 +338,18 @@ export default {
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
       errorDiv.innerHTML = messageText;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.successShow = false;
+      }, 3000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
       errorDiv.innerHTML = messageText;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.errorShow = false;
+      }, 3000);
     },
   },
 };
