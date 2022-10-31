@@ -80,11 +80,7 @@
             </div>
 
             <div class="row mx-auto">
-              <button
-                class="mx-auto"
-                id="closeDetailWindow"
-                @click="detailWindow = false"
-              >
+              <button class="btnGris mx-auto" @click="detailWindow = false">
                 Cerrar
               </button>
             </div>
@@ -108,7 +104,7 @@
                 <td>Fecha de inicio</td>
                 <td>Fecha de fin</td>
                 <td>Tipo de procedimiento</td>
-                <td>Detalle</td>
+                <td>Detalles</td>
               </tr>
             </thead>
             <tbody>
@@ -119,17 +115,9 @@
         <!-- End TableOfAppointments -->
 
         <!-- ======= Buttons ======= -->
-        <div class="row ml-auto">
-          <div class="col-1 ml-4">
-            <button id="backButton" class="btn btn-block" v-on:click="backPage">
-              &lt;
-            </button>
-          </div>
-          <div class="col-1">
-            <button id="nextButton" class="btn btn-block" v-on:click="nextPage">
-              &gt;
-            </button>
-          </div>
+        <div class="row ml-5 mb-3">
+          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
         </div>
         <!-- End Buttons -->
 
@@ -139,7 +127,7 @@
         <!-- ======= ProfessorCalendarContainer section ======= -->
         <div class="row mx-auto">
           <!-- ======= ProfessorCalendarContainer section ======= -->
-          <div id="professorCalendarContainer" class="container">
+          <div id="calendarContainer" class="container">
             <FullCalendar
               id="calendar"
               class="mx-auto my-auto"
@@ -224,7 +212,7 @@ export default {
 
         // button detail
         let newButtonDetail = document.createElement("button");
-        newButtonDetail.innerHTML = "Detalle";
+        newButtonDetail.innerHTML = "Detalles";
         newButtonDetail.addEventListener(
           "click",
           function () {
@@ -317,7 +305,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 10 },
+            params: { page: page, size: 6 },
           }
         )
         .then((response) => {
@@ -400,31 +388,5 @@ export default {
 <style>
 #AppointmentsContainer {
   width: 70%;
-}
-#professorCalendarContainer {
-  width: 90%;
-  height: 100%;
-  color: rgb(17, 0, 50);
-  height: fit-content;
-  position: relative;
-  padding: 20px 20px;
-}
-#calendar {
-  height: 40%;
-  max-height: 500px;
-  position: relative;
-}
-
-a,
-h2 {
-  color: rgb(17, 0, 50);
-  text-decoration: none;
-}
-.fc-daygrid-body {
-  width: 100%;
-}
-.fc .fc-col-header-cell-cushion {
-  display: inline-block;
-  padding: 2px 4px;
 }
 </style>

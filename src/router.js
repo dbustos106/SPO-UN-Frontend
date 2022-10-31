@@ -13,7 +13,6 @@ import ProfessorCalendar from './components/professor/professorCalendar.vue'
 import ProfessorSetting from './components/professor/professorSetting.vue'
 
 import StudentPage from './components/views/users/studentPage.vue'
-import CreateAppointment from './components/student/createAppointment.vue'
 import StudentCalendar from './components/student/studentCalendar.vue'
 import StudentSetting from './components/student/studentSetting.vue'
 
@@ -87,11 +86,6 @@ const routes = [
     name: "Student",
     component: StudentPage,
     children: [
-      {
-        path: 'createAppointment',
-        name: 'CreateAppointment',
-        component: CreateAppointment
-      },
       {
         path: 'studentCalendar',
         name: 'StudentCalendar',

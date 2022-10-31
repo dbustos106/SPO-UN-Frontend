@@ -1,6 +1,6 @@
 <template>
-  <!-- ======= FormContainer ======= -->
-  <div id="formContainer" class="container">
+  <!-- ======= StudentsContainer ======= -->
+  <div id="studentsContainer" class="container">
     <div class="card login-card">
       <div class="row no-gutters">
         <div class="col">
@@ -158,7 +158,7 @@
       </div>
     </div>
   </div>
-  <!-- End FormContainer -->
+  <!-- End StudentsContainer -->
 </template>
 
 <script>
@@ -252,7 +252,7 @@ export default {
 </script>
 
 <style>
-#formContainer {
+#studentsContainer {
   width: 80%;
   margin-top: 40px;
   height: fit-content;

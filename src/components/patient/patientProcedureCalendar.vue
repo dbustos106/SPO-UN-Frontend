@@ -8,30 +8,16 @@
 
     <!-- ======= confirmWindow ======= -->
     <transition name="fade">
-      <div class="modal-mask" v-show="showModal">
+      <div id="confirmWindow" class="modal-mask" v-show="showModal">
         <div class="row">
           <label id="modalAppointmentTitle">Hola</label>
           <label> ¿Desea reservar esta cita? </label>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <button
-              id="makeReservation"
-              class="modalButton"
-              v-on:click="reserveAppointment()"
-            >
-              Si
-            </button>
-          </div>
-          <div class="col-6">
-            <button
-              id="return"
-              class="modalButton"
-              v-on:click="showModal = false"
-            >
-              No
-            </button>
-          </div>
+        <div class="row-10 mx-auto">
+          <button class="btnGreen mr-3" v-on:click="reserveAppointment()">
+            Si
+          </button>
+          <button class="btnRed" v-on:click="showModal = false">No</button>
         </div>
       </div>
     </transition>
@@ -106,13 +92,10 @@ export default {
         eventTextColor: "black",
         events: [],
         eventClick: function (info) {
-          console.log("Click evento");
-          console.log(info.event.id);
           this.$data.selectedInitialDate = info.event.start;
           this.$data.selectedEndDate = info.event.end;
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
-          console.log(this.$data.selectedAppointmentId);
           this.$data.showModal = true;
           document.getElementById("modalAppointmentTitle").innerHTML =
             "Cita para el día " +
@@ -138,8 +121,6 @@ export default {
           .replace("T", " "),
       };
       let reserveDataBody = JSON.stringify(reserveData);
-      console.log(reserveData);
-      //console.log(sess)
       axios
         .put(
           "http://localhost:8081/appointment/" +
@@ -227,25 +208,7 @@ export default {
   color: rgb(98, 228, 65);
 }
 
-.modalButton {
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 15px;
-
-  display: block;
-  padding: 10px 25px;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 20000;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
-}
-
-#makeReservation {
-  background: rgb(147, 247, 80);
-}
-
-#return {
-  background: rgb(255, 19, 19);
+#confirmWindow {
+  text-align: center;
 }
 </style>

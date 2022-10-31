@@ -7,101 +7,44 @@
 
         <!-- ======= Overlay ======= -->
         <transition name="fade">
-          <div class="modal-overlay" v-if="detailWindow || deleteWindow"></div>
+          <div
+            class="modal-overlay"
+            v-if="deleteWindowShow || appointmentWindowShow"
+          ></div>
         </transition>
         <!-- End Overlay -->
 
-        <!-- ======= detailWindow ======= -->
+        <!-- ======= appointmentWindow ======= -->
         <transition name="fade">
-          <div id="detailWindow" class="modal-mask" v-if="detailWindow">
-            <h1 class="ml-1">Cita</h1>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Tipo de procedimiento:</a>
-              </div>
-              <div class="col-sm-7">
-                <a id="procedure_type">Tipo de procedimiento:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Cita número:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idAppointment">Cita número:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora inicio:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="start_time">Hora inicio:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora fin:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="end_time">Hora fin:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Lugar:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idPlace">Lugar:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Estudiantes:</a>
-              </div>
-              <div class="col-sm-7">
-                <a id="students">Estudiantes:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Professor:</a>
-              </div>
-              <div class="col-sm-5 mb-3">
-                <a id="professor">Professor</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
+          <div
+            id="appointmentWindow"
+            class="modal-mask"
+            v-if="appointmentWindowShow"
+          >
+            <h1>Cita</h1>
+            <appointmentWindow ref="appointmentWindow"> </appointmentWindow>
+            <div class="row">
               <button
-                class="mx-auto"
-                id="closeDetailWindow"
-                @click="detailWindow = false"
+                class="btnGris mx-auto"
+                @click="appointmentWindowShow = false"
               >
                 Cerrar
               </button>
             </div>
           </div>
         </transition>
-        <!-- End detailWindow -->
+        <!-- End appointmentWindow -->
 
         <!-- ======= deleteWindow ======= -->
         <transition name="fade">
-          <div id="deleteWindow" class="modal-mask" v-if="deleteWindow">
+          <div id="deleteWindow" class="modal-mask" v-if="deleteWindowShow">
             <h1>Confirmación</h1>
-
             <p>¿Desea cancelar la cita?</p>
-            <button id="closeDeleteWindow" @click="deleteWindow = false">
+            <button class="btnGris mr-4" @click="deleteWindowShow = false">
               Cerrar
             </button>
-            <button id="confirmDelete" @click="deleteStudentAppointment">
+
+            <button class="btnRed" @click="deleteStudentAppointment">
               Cancelar
             </button>
           </div>
@@ -124,7 +67,7 @@
                 <td>Fecha de inicio</td>
                 <td>Fecha de fin</td>
                 <td>Tipo de procedimiento</td>
-                <td>Detalle</td>
+                <td>Detalles</td>
                 <td>Cancelar</td>
               </tr>
             </thead>
@@ -136,15 +79,12 @@
         <!-- End TableOfAppointments -->
 
         <!-- ======= Buttons ======= -->
-        <div class="row ml-auto">
-          <div class="col-1 ml-4">
-            <button id="backButton" class="btn btn-block" v-on:click="backPage">
-              &lt;
-            </button>
-          </div>
-          <div class="col-1">
-            <button id="nextButton" class="btn btn-block" v-on:click="nextPage">
-              &gt;
+        <div class="row ml-5 mb-3">
+          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
+          <div class="col-lg">
+            <button class="btnBlue" @click="appointmentWindowShow = true">
+              Crear cita
             </button>
           </div>
         </div>
@@ -154,11 +94,11 @@
         <hr width="100%" />
 
         <!-- ======= StudentCalendarContainer section ======= -->
-        <div class="col-12 mx-auto">
-          <div id="studentCalendarContainer" class="container">
+        <div class="row mx-auto">
+          <div id="calendarContainer" class="container">
             <FullCalendar
               id="calendar"
-              class="mx-auto my-auto"
+              class="mx-auto"
               ref="fullCalendar"
               :options="calendarOptions"
             />
@@ -171,27 +111,31 @@
 </template>
 
 <script>
+import axios from "axios";
+import App from "../../App.vue";
+
 import "@fullcalendar/core/vdom";
+import appointmentWindow from "./appointmentWindow.vue";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import axios from "axios";
-import App from "../../App.vue";
-
 export default {
   name: "studentCalendar",
 
-  components: { FullCalendar },
+  components: {
+    FullCalendar,
+    appointmentWindow,
+  },
   data() {
     return {
       idPage: 0,
       lastPage: 0,
       idAppointment: 0,
       btnSelected: null,
-      detailWindow: false,
-      deleteWindow: false,
+      deleteWindowShow: false,
+      appointmentWindowShow: false,
       appointments: [],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
@@ -242,12 +186,12 @@ export default {
 
         // button detail
         let newButtonDetail = document.createElement("button");
-        newButtonDetail.innerHTML = "Detalle";
+        newButtonDetail.innerHTML = "Detalles";
         newButtonDetail.addEventListener(
           "click",
           function () {
             this.$data.idAppointment = id;
-            this.$data.detailWindow = true;
+            this.$data.appointmentWindowShow = true;
             this.getStudentAppointmentById();
           }.bind(this)
         );
@@ -261,7 +205,7 @@ export default {
           function () {
             this.$data.idAppointment = id;
             this.$data.btnSelected = newButtonDelete;
-            this.$data.deleteWindow = true;
+            this.$data.deleteWindowShow = true;
           }.bind(this)
         );
         btnDeleteCell.appendChild(newButtonDelete);
@@ -306,14 +250,11 @@ export default {
               this.$router.push("/login");
             }
           }
-          if (err.response.status == 400) {
-            this.$data.idPage = this.$data.lastPage;
-          }
         });
     },
     deleteStudentAppointment() {
       // close modal window
-      this.$data.deleteWindow = false;
+      this.$data.deleteWindowShow = false;
       // delete row from table
       this.$data.btnSelected.parentElement.parentElement.remove();
 
@@ -420,7 +361,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 10 },
+            params: { page: page, size: 6 },
           }
         )
         .then((response) => {
@@ -449,9 +390,6 @@ export default {
             } else {
               this.$router.push("/login");
             }
-          }
-          if (err.response.status == 400) {
-            this.$data.idPage = this.$data.lastPage;
           }
         });
     },
@@ -508,30 +446,11 @@ export default {
 #AppointmentsContainer {
   width: 70%;
 }
-#studentCalendarContainer {
-  width: 90%;
-  height: 100%;
-  color: rgb(17, 0, 50);
-  height: fit-content;
-  position: relative;
-  padding: 20px 20px;
-}
-#calendar {
-  height: 40%;
-  max-height: 500px;
-  position: relative;
-}
 
-a,
-h2 {
-  color: rgb(17, 0, 50);
-  text-decoration: none;
-}
-.fc-daygrid-body {
-  width: 100%;
-}
-.fc .fc-col-header-cell-cushion {
-  display: inline-block;
-  padding: 2px 4px;
+#appointmentWindow {
+  top: 2%;
+  left: 24%;
+  width: 65%;
+  height: 95%;
 }
 </style>

@@ -31,25 +31,9 @@
           <!-- End TableOfStudents -->
 
           <!-- ======= Buttons ======= -->
-          <div class="row ml-auto">
-            <div class="col-1 ml-5">
-              <button
-                id="backButton"
-                class="btn btn-block"
-                v-on:click="backPage"
-              >
-                &lt;
-              </button>
-            </div>
-            <div class="col-1">
-              <button
-                id="nextButton"
-                class="btn btn-block"
-                v-on:click="nextPage"
-              >
-                &gt;
-              </button>
-            </div>
+          <div class="row ml-5 mb-3">
+            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
           </div>
           <!-- End Buttons -->
         </div>
@@ -102,7 +86,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 20 },
+            params: { page: page, size: 10 },
           }
         )
         .then((response) => {
@@ -192,30 +176,5 @@ export default {
   height: fit-content;
   position: center;
   padding: 20px 20px;
-}
-
-table {
-  border-collapse: collapse;
-  font-family: Tahoma, Geneva, sans-serif;
-}
-table td {
-  padding: 15px;
-}
-table thead td {
-  background-color: #54585d;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 13px;
-  border: 1px solid #54585d;
-}
-table tbody td {
-  color: #636363;
-  border: 1px solid #dddfe1;
-}
-table tbody tr {
-  background-color: #f9fafb;
-}
-table tbody tr:nth-child(odd) {
-  background-color: #ffffff;
 }
 </style>

@@ -255,7 +255,6 @@ export default {
         })
         .then((response) => {
           let patient = response.data.message;
-          console.log(patient);
           let name = patient.name.split("-");
           document.getElementById("fusernameR").value = patient.username;
           document.getElementById("fnameR").value = name[0];
@@ -383,21 +382,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#formContainer {
-  width: 80%;
-  margin-top: 10px;
-  height: fit-content;
-}
-
-.login-card-description {
-  font: 300% sans-serif;
-  color: rgb(3, 0, 78);
-}
-a,
-h2 {
-  color: rgb(3, 0, 78);
-  text-decoration: none;
-}
-</style>

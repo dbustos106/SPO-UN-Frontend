@@ -40,13 +40,10 @@ export default {
           },
         }
       )
-      .then((response) => {
-        console.log("Verification complete");
-        console.log(response);
-        this.errorFunction("Registro Exitoso");
+      .then((message) => {
+        console.log(message);
       })
       .catch((err) => {
-        console.log("Falló registro");
         console.log(err);
       });
   },

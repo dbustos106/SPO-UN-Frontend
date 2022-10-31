@@ -3,17 +3,20 @@
   <div id="AppointmentsContainer" class="container">
     <div class="card login-card">
       <div class="row no-gutters">
-        <p class="login-card-description mt-5 mx-auto mb-5">Citas</p>
+        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
 
         <!-- ======= Overlay ======= -->
         <transition name="fade">
-          <div class="modal-overlay" v-if="detailWindow || deleteWindow"></div>
+          <div
+            class="modal-overlay"
+            v-if="detailWindowShow || deleteWindowShow"
+          ></div>
         </transition>
         <!-- End Overlay -->
 
         <!-- ======= detailWindow ======= -->
         <transition name="fade">
-          <div id="detailWindow" class="modal-mask" v-if="detailWindow">
+          <div id="detailWindow" class="modal-mask" v-if="detailWindowShow">
             <h1 class="ml-1">Cita</h1>
 
             <div class="row mx-auto">
@@ -80,11 +83,7 @@
             </div>
 
             <div class="row mx-auto">
-              <button
-                class="mx-auto"
-                id="closeDetailWindow"
-                @click="detailWindow = false"
-              >
+              <button class="btnGris mx-auto" @click="detailWindowShow = false">
                 Cerrar
               </button>
             </div>
@@ -94,14 +93,14 @@
 
         <!-- ======= deleteWindow ======= -->
         <transition name="fade">
-          <div id="deleteWindow" class="modal-mask" v-if="deleteWindow">
+          <div id="deleteWindow" class="modal-mask" v-if="deleteWindowShow">
             <h1>Confirmación</h1>
 
             <p>¿Desea cancelar la cita?</p>
-            <button id="closeDeleteWindow" @click="deleteWindow = false">
+            <button class="btnGris mr-4" @click="deleteWindowShow = false">
               Cerrar
             </button>
-            <button id="confirmDelete" @click="deletePatientAppointment">
+            <button class="btnRed" @click="deletePatientAppointment">
               Cancelar
             </button>
           </div>
@@ -124,7 +123,7 @@
                 <td>Fecha de inicio</td>
                 <td>Fecha de fin</td>
                 <td>Tipo de procedimiento</td>
-                <td>Detalle</td>
+                <td>Detalles</td>
                 <td>Cancelar</td>
               </tr>
             </thead>
@@ -136,17 +135,9 @@
         <!-- End TableOfAppointments -->
 
         <!-- ======= Buttons ======= -->
-        <div class="row ml-auto">
-          <div class="col-1 ml-4">
-            <button id="backButton" class="btn btn-block" v-on:click="backPage">
-              &lt;
-            </button>
-          </div>
-          <div class="col-1">
-            <button id="nextButton" class="btn btn-block" v-on:click="nextPage">
-              &gt;
-            </button>
-          </div>
+        <div class="row ml-5 mb-3">
+          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
         </div>
         <!-- End Buttons -->
 
@@ -155,7 +146,7 @@
 
         <!-- ======= PatientCalendarContainer section ======= -->
         <div class="row mx-auto">
-          <div id="patientCalendarContainer" class="container">
+          <div id="calendarContainer" class="container">
             <FullCalendar
               id="calendar"
               class="mx-auto"
@@ -190,8 +181,8 @@ export default {
       lastPage: 0,
       idAppointment: 0,
       btnSelected: null,
-      detailWindow: false,
-      deleteWindow: false,
+      detailWindowShow: false,
+      deleteWindowShow: false,
       appointments: [],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
@@ -242,12 +233,12 @@ export default {
 
         // button detail
         let newButtonDetail = document.createElement("button");
-        newButtonDetail.innerHTML = "Detalle";
+        newButtonDetail.innerHTML = "Detalles";
         newButtonDetail.addEventListener(
           "click",
           function () {
             this.$data.idAppointment = id;
-            this.$data.detailWindow = true;
+            this.$data.detailWindowShow = true;
             this.getPatientAppointmentById();
           }.bind(this)
         );
@@ -261,7 +252,7 @@ export default {
           function () {
             this.$data.idAppointment = id;
             this.$data.btnSelected = newButtonDelete;
-            this.$data.deleteWindow = true;
+            this.$data.deleteWindowShow = true;
           }.bind(this)
         );
         btnDeleteCell.appendChild(newButtonDelete);
@@ -310,7 +301,7 @@ export default {
     },
     deletePatientAppointment() {
       // close modal window
-      this.$data.deleteWindow = false;
+      this.$data.deleteWindowShow = false;
       // delete row from table
       this.$data.btnSelected.parentElement.parentElement.remove();
 
@@ -386,7 +377,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 10 },
+            params: { page: page, size: 6 },
           }
         )
         .then((response) => {
@@ -478,77 +469,8 @@ export default {
   margin-left: 50px;
   padding: 20px 20px;
 }
-#patientCalendarContainer {
-  width: 90%;
-  margin-top: 10px;
-  color: rgb(17, 0, 50);
-  height: fit-content;
-  position: relative;
-  padding: 20px 20px;
-}
-
-#backButton {
-  width: 100%;
-  margin-top: 10px;
-  background-color: rgba(87, 89, 94, 0.7);
-  border-radius: 4px;
-  font-size: 13px;
-  color: #fff;
-  margin-bottom: 15px;
-}
-
-#nextButton {
-  width: 100%;
-  margin-top: 10px;
-  background-color: rgba(87, 89, 94, 0.7);
-  border-radius: 4px;
-  font-size: 13px;
-  line-height: 20px;
-  color: #fff;
-  margin-bottom: 15px;
-}
-
-a,
-h2 {
-  color: rgb(0, 11, 44);
-  text-decoration: none;
-}
-.fc-daygrid-body {
-  width: 100%;
-}
-
-.fc .fc-col-header-cell-cushion {
-  display: inline-block;
-  padding: 2px 4px;
-}
 
 #deleteWindow {
   text-align: center;
-}
-
-#closeDetailWindow {
-  background: rgb(200, 197, 197);
-  border-color: rgb(0, 0, 0);
-  border-radius: 5px;
-  width: 100px;
-  color: #fff;
-}
-
-#closeDeleteWindow {
-  background: rgb(200, 197, 197);
-  border-color: rgb(0, 0, 0);
-  border-radius: 5px;
-  color: #fff;
-  padding: 5px;
-  margin-right: 20px;
-}
-
-#confirmDelete {
-  background: rgb(148, 1, 1);
-  border-color: rgb(61, 0, 0);
-  border-radius: 5px;
-  color: #fff;
-  padding: 5px;
-  margin-left: 20px;
 }
 </style>

@@ -81,7 +81,6 @@ export default {
         ];
       }
 
-      console.log("temp", this.$data.earliestDate);
       calendarApi.gotoDate(this.$data.earliestDate); //Go to min date
 
       if (

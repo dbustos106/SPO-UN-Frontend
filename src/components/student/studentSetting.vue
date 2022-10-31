@@ -228,7 +228,6 @@ export default {
           this.successFunction("Registro Exitoso");
         })
         .catch((err) => {
-          console.log(err);
           this.errorFunction("Error, correo o documento ya registrado");
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
@@ -263,19 +262,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#formContainer {
-  width: 80%;
-  margin-top: 40px;
-  height: fit-content;
-}
-.login-card-description {
-  font: 300% sans-serif;
-  color: rgb(3, 0, 78);
-}
-
-.form-select {
-  height: 44px;
-}
-</style>

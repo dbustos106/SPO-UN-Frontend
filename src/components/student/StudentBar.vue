@@ -32,23 +32,12 @@
           <span>
             <li>
               <a
-                id="listItemS1"
-                class="box-hover"
-                v-on:click="createAppointment()"
-              >
-                <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                <span class="links_name">Programar Horarios</span>
-              </a>
-              <span class="tooltip">
-                menuItem.tooltip || Programar Horarios
-              </span>
-              <a
                 id="listItemS2"
                 class="box-hover"
                 v-on:click="openStudentCalendar()"
               >
                 <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
-                <span class="links_name">Ver Cronograma</span>
+                <span class="links_name">Ver Citas</span>
               </a>
               <span class="tooltip"> menuItem.tooltip || Ver Horarios </span>
               <a
@@ -212,9 +201,6 @@ export default {
     this.isOpened = this.isMenuOpen;
   },
   methods: {
-    createAppointment() {
-      this.$router.push("/student/createAppointment");
-    },
     openStudentCalendar() {
       this.$router.push("/student/studentCalendar");
     },
