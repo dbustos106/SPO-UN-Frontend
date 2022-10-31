@@ -340,7 +340,6 @@ export default {
               });
             }
             this.$data.lastPage += 1;
-            console.log("llega aqui?");
             this.putStudentAppointmentInTable(appointments);
           } else {
             this.$data.idPage = this.$data.lastPage;
