@@ -22,7 +22,8 @@
             v-if="appointmentWindowShow"
           >
             <h1>Cita</h1>
-            <appointmentWindow ref="appointmentWindow"> </appointmentWindow>
+            <appointmentWindow ref="appointmentWindow" :id="idAppointment">
+            </appointmentWindow>
             <div class="row">
               <button
                 class="btnGris mx-auto"
@@ -83,7 +84,7 @@
           <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
           <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
           <div class="col-lg">
-            <button class="btnBlue" @click="appointmentWindowShow = true">
+            <button class="btnBlue" @click="createAppointment">
               Crear cita
             </button>
           </div>
@@ -132,7 +133,7 @@ export default {
     return {
       idPage: 0,
       lastPage: 0,
-      idAppointment: 0,
+      idAppointment: -1,
       btnSelected: null,
       deleteWindowShow: false,
       appointmentWindowShow: false,
@@ -192,7 +193,6 @@ export default {
           function () {
             this.$data.idAppointment = id;
             this.$data.appointmentWindowShow = true;
-            this.getStudentAppointmentById();
           }.bind(this)
         );
         btnDetailCell.appendChild(newButtonDetail);
@@ -210,47 +210,6 @@ export default {
         );
         btnDeleteCell.appendChild(newButtonDelete);
       }
-    },
-    getStudentAppointmentById() {
-      axios
-        .get("http://localhost:8081/appointment/" + this.$data.idAppointment, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
-        .then((response) => {
-          let fullAppointment = response.data.message;
-          document.getElementById("idAppointment").textContent =
-            fullAppointment.appointmentDTO.id;
-          document.getElementById("start_time").textContent =
-            fullAppointment.appointmentDTO.start_time;
-          document.getElementById("end_time").textContent =
-            fullAppointment.appointmentDTO.end_time;
-          document.getElementById("procedure_type").textContent =
-            fullAppointment.appointmentDTO.procedure_type;
-          document.getElementById("idPlace").textContent =
-            fullAppointment.building + " - " + fullAppointment.room;
-          document.getElementById("professor").textContent =
-            fullAppointment.professor;
-
-          let students = "";
-          for (var student of fullAppointment.students) {
-            students += "(" + student + "@unal.edu.co) ";
-          }
-
-          document.getElementById("students").textContent = students;
-        })
-        .catch((err) => {
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.getStudentAppointmentById();
-            } else {
-              this.$router.push("/login");
-            }
-          }
-        });
     },
     deleteStudentAppointment() {
       // close modal window
@@ -319,7 +278,6 @@ export default {
         });
     },
     getStudentUnconfirmedSchedule() {
-      //Get unconfirmed appointments
       axios
         .get(
           "http://localhost:8081/student/" +
@@ -392,6 +350,10 @@ export default {
             }
           }
         });
+    },
+    createAppointment() {
+      this.$data.idAppointment = -1;
+      this.$data.appointmentWindowShow = true;
     },
     backPage() {
       let table = document.getElementById("tableOfAppointments");

@@ -2,7 +2,7 @@
   <div class="row">
     <!-- ====== DataAppointment ====== -->
     <div id="dataAppointment" class="col-5 mx-auto" style="text-align: center">
-      <h4 class="text mb-3">Información de la cita</h4>
+      <h4 ref="id" class="text mb-3">Información de la cita</h4>
       <div class="form-horizontal">
         <div class="form-group">
           <div class="col-12">
@@ -11,6 +11,7 @@
           <div class="col-12">
             <textarea
               class="textarea"
+              ref="procedure_type"
               rows="5"
               cols="40"
               id="description"
@@ -22,7 +23,12 @@
             <label>Consultorio</label>
           </div>
           <div class="col-12">
-            <select class="form-select mx-auto" required id="roomSelect">
+            <select
+              ref="place"
+              class="form-select mx-auto"
+              required
+              id="roomSelect"
+            >
               <option selected disabled value="Lugar de atención">
                 Lugar de atención
               </option>
@@ -122,8 +128,9 @@
     <!-- ====== btnCrear ====== -->
     <div class="row mx-auto">
       <button
-        class="btnBlue mx-auto"
+        id="createAppointment"
         ref="createAppointment"
+        class="btnBlue mx-auto"
         v-on:click="crearCita"
       >
         Crear cita
@@ -143,9 +150,6 @@ import "@vuepic/vue-datepicker/dist/main.css";
 
 export default {
   name: "createAppointment",
-  mounted() {
-    this.getRoomOptions();
-  },
   components: {
     datepicker,
   },
@@ -156,6 +160,13 @@ export default {
       startDate: ref(),
       endDate: ref(),
     };
+  },
+  props: {
+    id: {
+      type: Number,
+      required: false,
+      default: -1,
+    },
   },
   methods: {
     getRoomOptions() {
@@ -172,7 +183,8 @@ export default {
           let roomInfo = response.data.message;
           for (var i in roomInfo) {
             let newOption = document.createElement("option");
-            newOption.value = roomInfo[i].roomDTO.id;
+            newOption.value =
+              roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
             newOption.innerHTML =
               roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
             tablaRoom.append(newOption);
@@ -241,7 +253,7 @@ export default {
           .catch((err) => {
             if (err.response.status == 403) {
               if (App.methods.requestRefreshToken()) {
-                this.getStudentAppointmentById();
+                this.crearCita();
               } else {
                 this.$router.push("/login");
               }
@@ -250,6 +262,40 @@ export default {
       } else {
         this.errorFunction("Faltan datos por llenar");
       }
+    },
+    getStudentAppointmentById() {
+      axios
+        .get("http://localhost:8081/appointment/" + this.id, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.AccessToken,
+          },
+        })
+        .then((response) => {
+          let fullAppointment = response.data.message;
+
+          console.log(fullAppointment.building + " " + fullAppointment.room);
+          document.getElementById("roomSelect").value =
+            fullAppointment.building + " " + fullAppointment.room;
+          document.getElementById("description").value =
+            fullAppointment.appointmentDTO.procedure_type;
+
+          for (var schedule of fullAppointment.tentativeSchedules) {
+            this.startDate = schedule.start_time;
+            this.endDate = schedule.end_time;
+            this.addDate();
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 403) {
+            if (App.methods.requestRefreshToken()) {
+              this.getStudentAppointmentById();
+            } else {
+              this.$router.push("/login");
+            }
+          }
+        });
     },
     deleteDate() {
       let table = document.getElementById("fechas-tentativas");
@@ -271,6 +317,15 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {}, 1000);
     },
+  },
+  mounted() {
+    this.getRoomOptions();
+    if (this.id != -1) {
+      this.getStudentAppointmentById(this.id);
+      document.getElementById("createAppointment").innerHTML = "Guardar";
+    } else {
+      document.getElementById("createAppointment").innerHTML = "Crear cita";
+    }
   },
 };
 </script>
