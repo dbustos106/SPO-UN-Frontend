@@ -70,8 +70,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 export default {
-  name: "CalendarioEstudiante",
+  name: "patientProcedureCalendar",
   components: { FullCalendar },
+  emits: {
+    confirm: null,
+  },
   data() {
     return {
       eventSelected: null,
@@ -141,6 +144,7 @@ export default {
           this.$data.showModal = false;
           this.$data.showConfirmMessage = true;
           this.$data.eventSelected.remove();
+          this.$emit("confirm");
         })
         .catch((err) => {
           if (err.response.status == 403) {

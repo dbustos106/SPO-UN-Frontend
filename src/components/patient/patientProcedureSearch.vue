@@ -25,6 +25,7 @@
         <!-- ======= PatientProcedureCalendar ======= -->
         <div class="row mx-auto mb-5">
           <patientProcedureCalendar
+            @confirm="getAllAvailableAppointments"
             ref="patientProcedureCalendar"
           ></patientProcedureCalendar>
         </div>
@@ -92,6 +93,7 @@ export default {
       }
     },
     getAllAvailableAppointments() {
+      this.$data.schedules = [];
       axios
         .get("http://localhost:8081/appointment/allAvailable", {
           headers: {
