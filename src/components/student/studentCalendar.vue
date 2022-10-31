@@ -1,5 +1,5 @@
 <template>
-  <!-- ======= TableContainer ======= -->
+  <!-- ======= AppointmentsContainer ======= -->
   <div id="AppointmentsContainer" class="container">
     <div class="card login-card">
       <div class="row no-gutters">
@@ -25,10 +25,7 @@
             <appointmentWindow ref="appointmentWindow" :id="idAppointment">
             </appointmentWindow>
             <div class="row">
-              <button
-                class="btnGris mx-auto"
-                @click="appointmentWindowShow = false"
-              >
+              <button class="btnGris mx-auto" @click="updateData">
                 Cerrar
               </button>
             </div>
@@ -109,6 +106,7 @@
       </div>
     </div>
   </div>
+  <!-- End AppointmentsContainer -->
 </template>
 
 <script>
@@ -165,6 +163,12 @@ export default {
     },
     putStudentAppointmentInTable(appointments) {
       let table = document.getElementById("tableOfAppointments");
+
+      while (table.children[1].firstChild != table.children[1].lastChild) {
+        var child = table.children[1].lastChild;
+        child.remove();
+      }
+
       for (var k in appointments) {
         let id = appointments[k].id;
         let row = table.insertRow();
@@ -336,6 +340,7 @@ export default {
               });
             }
             this.$data.lastPage += 1;
+            console.log("llega aqui?");
             this.putStudentAppointmentInTable(appointments);
           } else {
             this.$data.idPage = this.$data.lastPage;
@@ -354,6 +359,12 @@ export default {
     createAppointment() {
       this.$data.idAppointment = -1;
       this.$data.appointmentWindowShow = true;
+    },
+    updateData() {
+      this.$data.appointmentWindowShow = false;
+      this.getStudentAppointments(0);
+      this.getStudentSchedule();
+      this.getStudentUnconfirmedSchedule();
     },
     backPage() {
       let table = document.getElementById("tableOfAppointments");
@@ -379,7 +390,6 @@ export default {
       this.getStudentAppointments(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("tableOfAppointments");
       var filterKey = document.getElementById("query").value;
       var filterAppointments = this.$data.appointments;
 
@@ -388,11 +398,6 @@ export default {
           return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
         });
       });
-
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.putStudentAppointmentInTable(filterAppointments);
     },
   },
