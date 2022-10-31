@@ -11,7 +11,7 @@
         <!-- End Busqueda -->
 
         <!-- ======= NoAppointmensMessage ======= -->
-        <div class="row mx-auto" v-if="noAppointmentsShow">
+        <div class="row mx-auto mt-3" v-if="noAppointmentsShow">
           <span title="error" class="noAppointmensMessage">
             <i class="fa fa-exclamation-circle"></i>
             <span id="noAppointmentsMessageSpan"

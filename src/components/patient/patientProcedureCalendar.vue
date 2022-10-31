@@ -74,6 +74,7 @@ export default {
   components: { FullCalendar },
   data() {
     return {
+      eventSelected: null,
       showModal: false,
       showConfirmMessage: false,
       selectedInitialDate: "",
@@ -92,18 +93,17 @@ export default {
         eventTextColor: "black",
         events: [],
         eventClick: function (info) {
+          this.$data.eventSelected = info.event;
+          this.$data.showModal = true;
           this.$data.selectedInitialDate = info.event.start;
           this.$data.selectedEndDate = info.event.end;
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
-          this.$data.showModal = true;
           document.getElementById("modalAppointmentTitle").innerHTML =
             "Cita para el día " +
             this.formatDate(this.$data.selectedInitialDate) +
             " para " +
             this.$data.selectedAppointmentType.toLowerCase();
-
-          //this.$refs.modalAppontmentReserveWindow.$refs.modalAppointmentStartTime.innerHTML=info.event.start;
         }.bind(this),
       },
     };
@@ -111,16 +111,17 @@ export default {
   methods: {
     reserveAppointment() {
       let reserveData = {
-        start_time: this.$data.selectedInitialDate
-          .toISOString()
-          .slice(0, 19)
-          .replace("T", " "),
-        end_time: this.$data.selectedEndDate
-          .toISOString()
-          .slice(0, 19)
-          .replace("T", " "),
+        start_time: this.formatDate(this.$data.selectedInitialDate)
+          .replace(" a las ", " ")
+          .replaceAll("/", "-")
+          .replace("AM", ":00"),
+        end_time: this.formatDate(this.$data.selectedEndDate)
+          .replace(" a las ", " ")
+          .replaceAll("/", "-")
+          .replace("AM", ":00"),
       };
       let reserveDataBody = JSON.stringify(reserveData);
+
       axios
         .put(
           "http://localhost:8081/appointment/" +
@@ -139,6 +140,7 @@ export default {
         .then(() => {
           this.$data.showModal = false;
           this.$data.showConfirmMessage = true;
+          this.$data.eventSelected.remove();
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -178,7 +180,7 @@ export default {
           "AM";
       }
 
-      return `${date}/${month}/${year} a las ${hour}`;
+      return `${year}/${month}/${date} a las ${hour}`;
     },
   },
 };
