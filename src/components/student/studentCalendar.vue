@@ -166,6 +166,7 @@ export default {
     putStudentAppointmentInTable(appointments) {
       let table = document.getElementById("tableOfAppointments");
       for (var k in appointments) {
+        console.log(appointments[k]);
         let id = appointments[k].id;
         let row = table.insertRow();
         let idCell = row.insertCell();
@@ -175,12 +176,22 @@ export default {
         let btnDetailCell = row.insertCell();
         let btnDeleteCell = row.insertCell();
         idCell.appendChild(document.createTextNode(appointments[k].id));
-        start_timeCell.appendChild(
-          document.createTextNode(appointments[k].start_time)
-        );
-        end_timeCell.appendChild(
-          document.createTextNode(appointments[k].end_time)
-        );
+        if(appointments[k].start_time !== null && appointments[k].end_time !== null){
+          start_timeCell.appendChild(
+            document.createTextNode(appointments[k].start_time)
+          );
+          end_timeCell.appendChild(
+            document.createTextNode(appointments[k].end_time)
+          );
+        }else{
+          start_timeCell.appendChild(
+            document.createTextNode("Sin Confirmar")
+          );
+          end_timeCell.appendChild(
+            document.createTextNode("Sin Confirmar")
+          );
+        }
+       
         procedure_typeCell.appendChild(
           document.createTextNode(appointments[k].procedure_type)
         );

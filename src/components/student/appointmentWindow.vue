@@ -206,13 +206,15 @@ export default {
         });
     },
     addDate() {
-      if (this.startDate != undefined && this.endDate != undefined) {
+      if (this.startDate != undefined && this.endDate != undefined && new Date(this.startDate).getTime() < new Date(this.endDate).getTime()) {
         var table = document.getElementById("fechas-tentativas");
         var row = table.insertRow(-1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         cell1.innerHTML = this.startDate;
         cell2.innerHTML = this.endDate;
+      }else if(new Date(this.startDate).getTime() > new Date(this.endDate).getTime()){
+        this.errorFunction("Fecha inicial seleccionada es mayor a la fecha final seleccionada");
       }
     },
     sendAppointment() {
@@ -228,45 +230,50 @@ export default {
       if (selectedRoom != "Lugar de atención" && procedureType != "") {
         let tentativeSchedules = [];
         let schedulesTable =
-          document.getElementById("fechas-tentativas").children;
-        for (var i = 2; i < schedulesTable.length; i++) {
-          let startTime = schedulesTable[i].children[0].innerHTML;
-          let endTime = schedulesTable[i].children[1].innerHTML;
-          tentativeSchedules.push({
-            start_time: startTime.replace("T", " "),
-            end_time: endTime.replace("T", " "),
-          });
-        }
-        let newAppointment = {
-          appointmentDTO: {
-            procedure_type: procedureType,
-            room_id: parseInt(this.$data.rooms[selectedRoom]),
-          },
-          tentativeSchedules: tentativeSchedules,
-          students: [sessionStorage.Username],
-        };
-        let formAppointmentBody = JSON.stringify(newAppointment);
-
-        axios
-          .post("http://localhost:8081/appointment/save", formAppointmentBody, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.AccessToken,
+          document.getElementById("fechas-tentativas").children[1].children;
+        if(schedulesTable.length>1){
+          for (var i = 1; i < schedulesTable.length; i++) {
+            let startTime = schedulesTable[i].children[0].innerHTML;
+            let endTime = schedulesTable[i].children[1].innerHTML;
+            tentativeSchedules.push({
+              start_time: startTime.replace("T", " "),
+              end_time: endTime.replace("T", " "),
+            });
+          }
+          let newAppointment = {
+            appointmentDTO: {
+              procedure_type: procedureType,
+              room_id: parseInt(this.$data.rooms[selectedRoom]),
             },
-          })
-          .then(() => {
-            this.successFunction("Cita creada con éxito");
-          })
-          .catch((err) => {
-            if (err.response.status == 403) {
-              if (App.methods.requestRefreshToken()) {
-                this.createAppointment();
-              } else {
-                this.$router.push("/login");
+            tentativeSchedules: tentativeSchedules,
+            students: [sessionStorage.Username],
+          };
+          let formAppointmentBody = JSON.stringify(newAppointment);
+
+          axios
+            .post("http://localhost:8081/appointment/save", formAppointmentBody, {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            })
+            .then(() => {
+              this.successFunction("Cita creada con éxito");
+            })
+            .catch((err) => {
+              if (err.response.status == 403) {
+                if (App.methods.requestRefreshToken()) {
+                  this.createAppointment();
+                } else {
+                  this.$router.push("/login");
+                }
               }
-            }
-          });
+            });
+        }else{
+          this.errorFunction("No hay fechas tentativas seleccionadas");
+        }
+        
       } else {
         this.errorFunction("Faltan datos por llenar");
       }
@@ -333,7 +340,6 @@ export default {
         })
         .then((response) => {
           let fullAppointment = response.data.message;
-
           console.log(fullAppointment.building + " " + fullAppointment.room);
           document.getElementById("roomSelect").value =
             fullAppointment.building + " " + fullAppointment.room;
