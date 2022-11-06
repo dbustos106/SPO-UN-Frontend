@@ -81,7 +81,9 @@ export default {
       showModal: false,
       showConfirmMessage: false,
       selectedInitialDate: "",
+      selectedInitialDate2: "",
       selectedEndDate: "",
+      selectedEndDate2: "",
       selectedAppointmentId: "",
       selectedAppointmentType: "",
       calendarOptions: {
@@ -102,9 +104,13 @@ export default {
           this.$data.selectedEndDate = info.event.end;
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
+
           document.getElementById("modalAppointmentTitle").innerHTML =
             "Cita para el día " +
-            this.formatDate(this.$data.selectedInitialDate) +
+            this.formatDate(
+              this.$data.selectedInitialDate,
+              this.$data.selectedEndDate
+            ) +
             " para " +
             this.$data.selectedAppointmentType.toLowerCase();
         }.bind(this),
@@ -114,14 +120,16 @@ export default {
   methods: {
     reserveAppointment() {
       let reserveData = {
-        start_time: this.formatDate(this.$data.selectedInitialDate)
+        start_time: this.formatDate(this.$data.selectedInitialDate2)
           .replace(" a las ", " ")
           .replaceAll("/", "-")
-          .replace("AM", ":00"),
-        end_time: this.formatDate(this.$data.selectedEndDate)
+          .replace("AM", ":00")
+          .replace("PM", ":00"),
+        end_time: this.formatDate(this.$data.selectedEndDate2)
           .replace(" a las ", " ")
           .replaceAll("/", "-")
-          .replace("AM", ":00"),
+          .replace("AM", ":00")
+          .replace("PM", ":00"),
       };
       let reserveDataBody = JSON.stringify(reserveData);
 
@@ -157,6 +165,8 @@ export default {
         });
     },
     formatDate(inputDate) {
+      this.$data.selectedInitialDate2 = inputDate;
+      this.$data.selectedEndDate2 = inputDate;
       let date, month, year, hour, minutes;
 
       date = inputDate.getDate();

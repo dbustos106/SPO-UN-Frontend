@@ -75,8 +75,6 @@ export default {
             title: schedules[i].procedure_type,
             start: schedules[i].start_time.replace(" ", "T"),
             end: schedules[i].end_time.replace(" ", "T"),
-            start_time: schedules[i].start_time.replace(" ", "T"),
-            end_time: schedules[i].end_time.replace(" ", "T"),
             color: "#73e600",
           },
         ];

@@ -196,10 +196,9 @@ export default {
   },
   methods: {
     putPatientScheduleInCalendar(schedules) {
-      //Add events to calendar
       for (var i in schedules) {
         this.calendarOptions.events = [
-          ...this.calendarOptions.events, //Adds all the previous events
+          ...this.calendarOptions.events,
           {
             id: schedules[i].appointment_id,
             title: "Cita " + schedules[i].appointment_id,
