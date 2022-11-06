@@ -208,11 +208,11 @@ export default {
     addDate() {
       if (this.startDate != undefined && this.endDate != undefined && new Date(this.startDate).getTime() < new Date(this.endDate).getTime()) {
         var table = document.getElementById("fechas-tentativas");
-        var row = table.insertRow(-1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.innerHTML = this.startDate;
-        cell2.innerHTML = this.endDate;
+        var row = table.insertRow();
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        cell1.appendChild(document.createTextNode(this.startDate));
+        cell2.appendChild(document.createTextNode(this.endDate));
       }
     },
     sendAppointment() {
@@ -237,37 +237,38 @@ export default {
               start_time: startTime.replace("T", " "),
               end_time: endTime.replace("T", " "),
             });
-          }
-          let newAppointment = {
-            appointmentDTO: {
-              procedure_type: procedureType,
-              room_id: parseInt(this.$data.rooms[selectedRoom]),
-            },
-            tentativeSchedules: tentativeSchedules,
-            students: [sessionStorage.Username],
-          };
-          let formAppointmentBody = JSON.stringify(newAppointment);
 
-            axios
-              .post("http://localhost:8081/appointment/save", formAppointmentBody, {
-                headers: {
-                  "Access-Control-Allow-Origin": "*",
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer " + sessionStorage.AccessToken,
-                },
-              })
-              .then(() => {
-                this.successFunction("Cita creada con éxito");
-              })
-              .catch((err) => {
-                if (err.response.status == 403) {
-                  if (App.methods.requestRefreshToken()) {
-                    this.createAppointment();
-                  } else {
-                    this.$router.push("/login");
+            let newAppointment = {
+              appointmentDTO: {
+                procedure_type: procedureType,
+                room_id: parseInt(this.$data.rooms[selectedRoom]),
+              },
+              tentativeSchedules: tentativeSchedules,
+              students: [sessionStorage.Username],
+            };
+            let formAppointmentBody = JSON.stringify(newAppointment);
+
+              axios
+                .post("http://localhost:8081/appointment/save", formAppointmentBody, {
+                  headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + sessionStorage.AccessToken,
+                  },
+                })
+                .then(() => {
+                  this.successFunction("Cita creada con éxito");
+                })
+                .catch((err) => {
+                  if (err.response.status == 403) {
+                    if (App.methods.requestRefreshToken()) {
+                      this.createAppointment();
+                    } else {
+                      this.$router.push("/login");
+                    }
                   }
-                }
-              });
+                });
+          }
         }else{
         this.errorFunction("No hay fechas tentativas seleccionadas");
       }
@@ -343,7 +344,6 @@ export default {
         .then((response) => {
           let fullAppointment = response.data.message;
 
-          console.log(fullAppointment.building + " " + fullAppointment.room);
           document.getElementById("roomSelect").value =
             fullAppointment.building + " " + fullAppointment.room;
           document.getElementById("description").value =
