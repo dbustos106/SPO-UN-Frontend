@@ -163,14 +163,14 @@
 </template>
 
 <script>
+import axios from "axios";
+import App from "../../App.vue";
+
 import "@fullcalendar/core/vdom";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
-import axios from "axios";
-import App from "../../App.vue";
 
 export default {
   name: "patientCalendar",
@@ -259,13 +259,16 @@ export default {
     },
     getPatientAppointmentById() {
       axios
-        .get("http://localhost:8081/appointment/" + this.$data.idAppointment, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
+        .get(
+          App.methods.getBackUrl() + "/appointment/" + this.$data.idAppointment,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          }
+        )
         .then((response) => {
           let fullAppointment = response.data.message;
           document.getElementById("idAppointment").textContent =
@@ -312,7 +315,8 @@ export default {
       // send request
       axios
         .put(
-          "http://localhost:8081/patient/cancelAppointment/" +
+          App.methods.getBackUrl() +
+            "/patient/cancelAppointment/" +
             this.$data.idAppointment,
           null,
           {
@@ -339,7 +343,10 @@ export default {
     getPatientSchedule() {
       axios
         .get(
-          "http://localhost:8081/patient/" + sessionStorage.Id + "/schedule/",
+          App.methods.getBackUrl() +
+            "/patient/" +
+            sessionStorage.Id +
+            "/schedule/",
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -367,7 +374,8 @@ export default {
     getPatientAppointments(page) {
       axios
         .get(
-          "http://localhost:8081/patient/" +
+          App.methods.getBackUrl() +
+            "/patient/" +
             sessionStorage.Id +
             "/appointments/",
           {

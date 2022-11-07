@@ -143,14 +143,14 @@
 </template>
 
 <script>
+import axios from "axios";
+import App from "../../App.vue";
+
 import "@fullcalendar/core/vdom";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
-import axios from "axios";
-import App from "../../App.vue";
 
 export default {
   name: "professorCalendar",
@@ -226,13 +226,16 @@ export default {
     },
     getProfessorAppointmentById() {
       axios
-        .get("http://localhost:8081/appointment/" + this.$data.idAppointment, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
+        .get(
+          App.methods.getBackUrl() + "/appointment/" + this.$data.idAppointment,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          }
+        )
         .then((response) => {
           let fullAppointment = response.data.message;
           document.getElementById("idAppointment").textContent =
@@ -268,7 +271,10 @@ export default {
     getProfessorSchedule() {
       axios
         .get(
-          "http://localhost:8081/professor/" + sessionStorage.Id + "/schedule/",
+          App.methods.getBackUrl() +
+            "/professor/" +
+            sessionStorage.Id +
+            "/schedule/",
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -296,7 +302,8 @@ export default {
     getProfessorAppointments(page) {
       axios
         .get(
-          "http://localhost:8081/professor/" +
+          App.methods.getBackUrl() +
+            "/professor/" +
             sessionStorage.Id +
             "/appointments/",
           {

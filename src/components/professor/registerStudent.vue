@@ -212,7 +212,7 @@ export default {
       let formBody = JSON.stringify(datos);
 
       axios
-        .post("http://localhost:8081/register/student", formBody, {
+        .post(App.methods.getBackUrl() + "/register/student", formBody, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",

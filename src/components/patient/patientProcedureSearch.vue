@@ -93,7 +93,7 @@ export default {
     getAllAvailableAppointments() {
       this.$data.schedules = [];
       axios
-        .get("http://localhost:8081/appointment/allAvailable", {
+        .get(App.methods.getBackUrl() + "/appointment/allAvailable", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",

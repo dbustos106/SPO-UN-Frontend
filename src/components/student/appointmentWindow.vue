@@ -141,8 +141,8 @@
 </template>
 
 <script>
-import App from "../../App.vue";
 import axios from "axios";
+import App from "../../App.vue";
 
 import { ref } from "vue";
 import datepicker from "@vuepic/vue-datepicker";
@@ -173,7 +173,7 @@ export default {
     getRoomOptions() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
-        .get("http://localhost:8081/room/all", {
+        .get(App.methods.getBackUrl() + "/room/all", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -252,13 +252,17 @@ export default {
         let formAppointmentBody = JSON.stringify(newAppointment);
 
         axios
-          .post("http://localhost:8081/appointment/save", formAppointmentBody, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.AccessToken,
-            },
-          })
+          .post(
+            App.methods.getBackUrl() + "/appointment/save",
+            formAppointmentBody,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            }
+          )
           .then(() => {
             this.successFunction("Cita creada con éxito");
           })
@@ -306,13 +310,17 @@ export default {
         let formAppointmentBody = JSON.stringify(newAppointment);
 
         axios
-          .put("http://localhost:8081/appointment/edit", formAppointmentBody, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.AccessToken,
-            },
-          })
+          .put(
+            App.methods.getBackUrl() + "/appointment/edit",
+            formAppointmentBody,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            }
+          )
           .then(() => {
             this.successFunction("Cita creada con éxito");
           })
@@ -331,7 +339,7 @@ export default {
     },
     getStudentAppointmentById() {
       axios
-        .get("http://localhost:8081/appointment/" + this.id, {
+        .get(App.methods.getBackUrl() + "/appointment/" + this.id, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",

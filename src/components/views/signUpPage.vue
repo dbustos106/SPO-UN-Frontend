@@ -238,6 +238,7 @@
 
 <script>
 import axios from "axios";
+import App from "../../App.vue";
 
 export default {
   name: "signUpPage",
@@ -319,7 +320,7 @@ export default {
       let formBody = JSON.stringify(datos);
 
       axios
-        .post("http://localhost:8081/register/patient", formBody, {
+        .post(App.methods.getBackUrl() + "/register/patient", formBody, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",

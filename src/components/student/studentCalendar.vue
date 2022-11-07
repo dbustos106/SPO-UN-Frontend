@@ -229,7 +229,8 @@ export default {
       // send request
       axios
         .put(
-          "http://localhost:8081/student/cancelAppointment/" +
+          App.methods.getBackUrl() +
+            "/student/cancelAppointment/" +
             this.$data.idAppointment,
           null,
           {
@@ -256,7 +257,10 @@ export default {
     getStudentSchedule() {
       axios
         .get(
-          "http://localhost:8081/student/" + sessionStorage.Id + "/schedule",
+          App.methods.getBackUrl() +
+            "/student/" +
+            sessionStorage.Id +
+            "/schedule",
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -284,7 +288,8 @@ export default {
     getStudentUnconfirmedSchedule() {
       axios
         .get(
-          "http://localhost:8081/student/" +
+          App.methods.getBackUrl() +
+            "/student/" +
             sessionStorage.Id +
             "/unconfirmedSchedule",
           {
@@ -314,7 +319,8 @@ export default {
     getStudentAppointments(page) {
       axios
         .get(
-          "http://localhost:8081/student/" +
+          App.methods.getBackUrl() +
+            "/student/" +
             sessionStorage.Id +
             "/appointments/",
           {

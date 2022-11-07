@@ -14,6 +14,7 @@
 
 <script>
 import axios from "axios";
+import App from "../../App.vue";
 
 export default {
   name: "verifyAccountPage",
@@ -28,7 +29,8 @@ export default {
     let code = this.$route.params.code;
     axios
       .put(
-        "http://localhost:8081/register/verifyAccount/" +
+        App.methods.getBackUrl() +
+          "/register/verifyAccount/" +
           typeUser +
           "?code=" +
           code,

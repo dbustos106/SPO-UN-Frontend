@@ -63,6 +63,7 @@
 <script>
 import axios from "axios";
 import App from "../../App.vue";
+
 import "@fullcalendar/core/vdom";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -135,7 +136,8 @@ export default {
 
       axios
         .put(
-          "http://localhost:8081/appointment/" +
+          App.methods.getBackUrl() +
+            "/appointment/" +
             this.$data.selectedAppointmentId +
             "/confirmPatient/" +
             sessionStorage.Id,

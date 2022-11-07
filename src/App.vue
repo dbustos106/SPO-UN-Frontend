@@ -23,6 +23,8 @@
 
 <script>
 import axios from "axios";
+//import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+//App.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
 
 export default {
   name: "initPage",
@@ -31,7 +33,9 @@ export default {
       showModal: false,
     };
   },
-  components: {},
+  components: {
+    //VueSidebarMenuAkahon,
+  },
   methods: {
     toUrlEncoded(datos) {
       var formBody = [];
@@ -52,7 +56,7 @@ export default {
     },
     requestRefreshToken() {
       axios
-        .get("http://localhost:8081/auth/refreshToken", {
+        .get(this.getBackUrl() + "/auth/refreshToken", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -81,6 +85,9 @@ export default {
       str = str.replaceAll("ó", "o");
       str = str.replaceAll("ú", "u");
       return str;
+    },
+    getBackUrl() {
+      return "http://Spoun-env.eba-iykbrjzb.us-east-1.elasticbeanstalk.com";
     },
   },
 };
