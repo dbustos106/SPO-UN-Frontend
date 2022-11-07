@@ -206,7 +206,11 @@ export default {
         });
     },
     addDate() {
-      if (this.startDate != undefined && this.endDate != undefined) {
+      if (
+        this.startDate != undefined &&
+        this.endDate != undefined &&
+        new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
+      ) {
         var table = document.getElementById("fechas-tentativas");
         var row = table.insertRow();
         var cell1 = row.insertCell();
