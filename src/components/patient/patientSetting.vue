@@ -246,7 +246,7 @@ export default {
   methods: {
     async loadData() {
       axios
-        .get("http://localhost:8081/patient/" + sessionStorage.Id, {
+        .get(App.methods.getBackUrl() + "/patient/" + sessionStorage.Id, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -337,7 +337,7 @@ export default {
       let formBody = JSON.stringify(datos);
 
       axios
-        .put("http://localhost:8081/patient/edit", formBody, {
+        .put(App.methods.getBackUrl() + "/patient/edit", formBody, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -365,7 +365,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
-      }, 1000);
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
@@ -374,7 +374,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
-      }, 1000);
+      }, 5000);
     },
   },
   mounted() {

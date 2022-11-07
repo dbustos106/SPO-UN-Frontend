@@ -79,7 +79,10 @@ export default {
     getStudents(page) {
       axios
         .get(
-          "http://localhost:8081/professor/" + sessionStorage.Id + "/students/",
+          App.methods.getBackUrl() +
+            "/professor/" +
+            sessionStorage.Id +
+            "/students/",
           {
             headers: {
               "Access-Control-Allow-Origin": "*",

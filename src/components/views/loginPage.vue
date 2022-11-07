@@ -126,7 +126,7 @@ export default {
       let formBody = App.methods.toUrlEncoded(datos);
       console.log(formBody);
       axios
-        .post("http://localhost:8081/auth/login", formBody, {
+        .post(App.methods.getBackUrl() + "/auth/login", formBody, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
           },
@@ -162,7 +162,9 @@ export default {
       let errorDiv = document.getElementById("errorNotification");
       errorDiv.innerHTML = messageText;
       this.$data.errorShow = true;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.errorShow = false;
+      }, 5000);
     },
   },
 };

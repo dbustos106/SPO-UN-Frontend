@@ -170,7 +170,6 @@ export default {
       }
 
       for (var k in appointments) {
-        console.log(appointments[k]);
         let id = appointments[k].id;
         let row = table.insertRow();
         let idCell = row.insertCell();
@@ -180,22 +179,12 @@ export default {
         let btnDetailCell = row.insertCell();
         let btnDeleteCell = row.insertCell();
         idCell.appendChild(document.createTextNode(appointments[k].id));
-        if(appointments[k].start_time !== null && appointments[k].end_time !== null){
-          start_timeCell.appendChild(
-            document.createTextNode(appointments[k].start_time)
-          );
-          end_timeCell.appendChild(
-            document.createTextNode(appointments[k].end_time)
-          );
-        }else{
-          start_timeCell.appendChild(
-            document.createTextNode("Sin Confirmar")
-          );
-          end_timeCell.appendChild(
-            document.createTextNode("Sin Confirmar")
-          );
-        }
-       
+        start_timeCell.appendChild(
+          document.createTextNode(appointments[k].start_time)
+        );
+        end_timeCell.appendChild(
+          document.createTextNode(appointments[k].end_time)
+        );
         procedure_typeCell.appendChild(
           document.createTextNode(appointments[k].procedure_type)
         );
@@ -240,7 +229,8 @@ export default {
       // send request
       axios
         .put(
-          "http://localhost:8081/student/cancelAppointment/" +
+          App.methods.getBackUrl() +
+            "/student/cancelAppointment/" +
             this.$data.idAppointment,
           null,
           {
@@ -267,7 +257,10 @@ export default {
     getStudentSchedule() {
       axios
         .get(
-          "http://localhost:8081/student/" + sessionStorage.Id + "/schedule",
+          App.methods.getBackUrl() +
+            "/student/" +
+            sessionStorage.Id +
+            "/schedule",
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -295,7 +288,8 @@ export default {
     getStudentUnconfirmedSchedule() {
       axios
         .get(
-          "http://localhost:8081/student/" +
+          App.methods.getBackUrl() +
+            "/student/" +
             sessionStorage.Id +
             "/unconfirmedSchedule",
           {
@@ -325,7 +319,8 @@ export default {
     getStudentAppointments(page) {
       axios
         .get(
-          "http://localhost:8081/student/" +
+          App.methods.getBackUrl() +
+            "/student/" +
             sessionStorage.Id +
             "/appointments/",
           {

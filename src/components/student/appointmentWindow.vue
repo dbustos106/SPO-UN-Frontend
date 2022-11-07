@@ -141,8 +141,8 @@
 </template>
 
 <script>
-import App from "../../App.vue";
 import axios from "axios";
+import App from "../../App.vue";
 
 import { ref } from "vue";
 import datepicker from "@vuepic/vue-datepicker";
@@ -173,7 +173,7 @@ export default {
     getRoomOptions() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
-        .get("http://localhost:8081/room/all", {
+        .get(App.methods.getBackUrl() + "/room/all", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -206,7 +206,11 @@ export default {
         });
     },
     addDate() {
-      if (this.startDate != undefined && this.endDate != undefined && new Date(this.startDate).getTime() < new Date(this.endDate).getTime()) {
+      if (
+        this.startDate != undefined &&
+        this.endDate != undefined &&
+        new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
+      ) {
         var table = document.getElementById("fechas-tentativas");
         var row = table.insertRow();
         var cell1 = row.insertCell();
@@ -226,57 +230,58 @@ export default {
       let selectedRoom = document.getElementById("roomSelect").value;
       let procedureType = document.getElementById("description").value;
       if (selectedRoom != "Lugar de atención" && procedureType != "") {
-        
-        let schedulesTable = document.getElementById("fechas-tentativas").children[1].children;
+        let schedulesTable =
+          document.getElementById("fechas-tentativas").children[1];
+
         let tentativeSchedules = [];
-        if(schedulesTable.length>1){
-          for (var i = 1; i < schedulesTable.length; i++) {
-            let startTime = schedulesTable[i].children[0].innerHTML;
-            let endTime = schedulesTable[i].children[1].innerHTML;
+        for (var element of schedulesTable.childNodes) {
+          if (schedulesTable.firstChild != element) {
+            let startTime = element.firstChild.innerHTML;
+            let endTime = element.lastChild.innerHTML;
             tentativeSchedules.push({
               start_time: startTime.replace("T", " "),
               end_time: endTime.replace("T", " "),
             });
-
-            let newAppointment = {
-              appointmentDTO: {
-                procedure_type: procedureType,
-                room_id: parseInt(this.$data.rooms[selectedRoom]),
-              },
-              tentativeSchedules: tentativeSchedules,
-              students: [sessionStorage.Username],
-            };
-            let formAppointmentBody = JSON.stringify(newAppointment);
-
-              axios
-                .post("http://localhost:8081/appointment/save", formAppointmentBody, {
-                  headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + sessionStorage.AccessToken,
-                  },
-                })
-                .then(() => {
-                  this.successFunction("Cita creada con éxito");
-                })
-                .catch((err) => {
-                  if (err.response.status == 403) {
-                    if (App.methods.requestRefreshToken()) {
-                      this.createAppointment();
-                    } else {
-                      this.$router.push("/login");
-                    }
-                  }
-                });
           }
-        }else{
-        this.errorFunction("No hay fechas tentativas seleccionadas");
-      }
-        
+        }
+
+        let newAppointment = {
+          appointmentDTO: {
+            procedure_type: procedureType,
+            room_id: parseInt(this.$data.rooms[selectedRoom]),
+          },
+          tentativeSchedules: tentativeSchedules,
+          students: [sessionStorage.Username],
+        };
+        let formAppointmentBody = JSON.stringify(newAppointment);
+
+        axios
+          .post(
+            App.methods.getBackUrl() + "/appointment/save",
+            formAppointmentBody,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            }
+          )
+          .then(() => {
+            this.successFunction("Cita creada con éxito");
+          })
+          .catch((err) => {
+            if (err.response.status == 403) {
+              if (App.methods.requestRefreshToken()) {
+                this.createAppointment();
+              } else {
+                this.$router.push("/login");
+              }
+            }
+          });
       } else {
         this.errorFunction("Faltan datos por llenar");
       }
-    
     },
     updateAppointment() {
       let selectedRoom = document.getElementById("roomSelect").value;
@@ -309,13 +314,17 @@ export default {
         let formAppointmentBody = JSON.stringify(newAppointment);
 
         axios
-          .put("http://localhost:8081/appointment/edit", formAppointmentBody, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.AccessToken,
-            },
-          })
+          .put(
+            App.methods.getBackUrl() + "/appointment/edit",
+            formAppointmentBody,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            }
+          )
           .then(() => {
             this.successFunction("Cita creada con éxito");
           })
@@ -334,7 +343,7 @@ export default {
     },
     getStudentAppointmentById() {
       axios
-        .get("http://localhost:8081/appointment/" + this.id, {
+        .get(App.methods.getBackUrl() + "/appointment/" + this.id, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -376,14 +385,18 @@ export default {
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
       errorDiv.innerHTML = messageText;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.successShow = false;
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
       errorDiv.innerHTML = messageText;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.errorShow = false;
+      }, 5000);
     },
   },
   mounted() {

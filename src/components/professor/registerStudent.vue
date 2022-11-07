@@ -212,7 +212,7 @@ export default {
       let formBody = JSON.stringify(datos);
 
       axios
-        .post("http://localhost:8081/register/student", formBody, {
+        .post(App.methods.getBackUrl() + "/register/student", formBody, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -240,7 +240,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
-      }, 3000);
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
@@ -249,7 +249,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
-      }, 3000);
+      }, 5000);
     },
   },
 };
