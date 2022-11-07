@@ -2,7 +2,7 @@
   <section id="signUp">
     <!-- ======= MarcoReg section ======= -->
     <div id="marcoReg" class="container">
-      <div class="card login-card">
+      <div id="formSignUp" class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
             <img
@@ -13,7 +13,7 @@
           </div>
           <div class="col">
             <p class="login-card-description mt-5">Registra tus datos</p>
-            <div class="form-group needs-validation" id="form">
+            <div class="form-group needs-validation" id="formSignUp">
               <div class="row mx-auto">
                 <div class="col-sm-10 mx-auto">
                   <input
@@ -63,7 +63,7 @@
               </div>
 
               <div class="row mx-auto">
-                <div class="col-md-5 ml-auto">
+                <div class="col-sm-5 ml-auto">
                   <select class="form-select mx-auto" required id="browsers">
                     <option selected disabled value="">
                       Tipo de documento
@@ -76,7 +76,7 @@
                   <div class="valid-feedback">Válido</div>
                   <div class="invalid-feedback">Elije una opción</div>
                 </div>
-                <div class="col-md-5 mr-auto">
+                <div class="col-sm-5 mr-auto">
                   <input
                     class="form-control"
                     type="number"
@@ -165,7 +165,7 @@
               </div>
 
               <div class="row mx-auto mb-3">
-                <div class="col-md-5 ml-auto">
+                <div class="col-sm-5 ml-auto">
                   <select class="form-select mx-auto" required id="genderR">
                     <option selected disabled value="">Género</option>
                     <option value="hombre">Hombre</option>
@@ -175,7 +175,7 @@
                   <div class="valid-feedback">Válido</div>
                   <div class="invalid-feedback">Elije una opción</div>
                 </div>
-                <div class="col-md-5 mr-auto">
+                <div class="col-sm-5 mr-auto">
                   <select class="form-select mx-auto" required id="RHR">
                     <option selected disabled value="">Tipo de sangre</option>
                     <option value="A+">A positivo</option>
@@ -328,7 +328,7 @@ export default {
           },
         })
         .then(() => {
-          this.successFunction("Registro Exitoso");
+          this.successFunction("Registro Exitoso, revise su correo");
         })
         .catch(() => {
           this.errorFunction("Error, correo o documento ya registrado");
@@ -341,7 +341,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
-      }, 3000);
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
@@ -350,7 +350,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
-      }, 3000);
+      }, 5000);
     },
   },
 };
@@ -384,20 +384,24 @@ export default {
 --------------------------------------------------------------*/
 
 #marcoReg {
-  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  margin-top: 80px;
+}
+
+#formSignUp {
+  word-wrap: initial;
+  max-height: 80%;
 }
 
 .login-card {
   position: relative;
   margin-top: 40px;
   width: 100%;
+  height: 80%;
   border: 0;
   border-radius: 27.5px;
   box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
-  overflow: hidden;
 }
 
 .login-card-img {
@@ -434,36 +438,13 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.login-card .form-control {
-  border: 1px solid #d5dae2;
-  min-height: 45px;
-  font-size: 13px;
-  line-height: 15;
-  font-weight: normal;
-}
-
-.login-card .form-control::-webkit-input-placeholder {
-  color: #919aa3;
-}
-
-.login-card .form-control::-moz-placeholder {
-  color: #919aa3;
-}
-
-.login-card .form-control:-ms-input-placeholder {
-  color: #919aa3;
-}
-
-.login-card .form-control::-ms-input-placeholder {
-  color: #919aa3;
-}
-
-.login-card .form-control::placeholder {
-  color: #919aa3;
+.form-select {
+  height: 45px;
+  margin-bottom: 20px;
 }
 
 #registerButton {
-  margin-top: 20px;
+  margin-top: 10px;
   position: center;
   max-width: 100px;
 }

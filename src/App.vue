@@ -23,8 +23,6 @@
 
 <script>
 import axios from "axios";
-//import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
-//App.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
 
 export default {
   name: "initPage",
@@ -88,6 +86,7 @@ export default {
     },
     getBackUrl() {
       return "http://Spoun-env.eba-iykbrjzb.us-east-1.elasticbeanstalk.com";
+      //return "http://localhost:5000";
     },
   },
 };

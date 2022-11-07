@@ -240,7 +240,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
-      }, 3000);
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
@@ -249,7 +249,7 @@ export default {
       errorDiv.innerHTML = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
-      }, 3000);
+      }, 5000);
     },
   },
 };

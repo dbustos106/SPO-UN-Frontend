@@ -161,7 +161,9 @@ export default {
       let errorDiv = document.getElementById("errorNotification");
       errorDiv.innerHTML = messageText;
       this.$data.errorShow = true;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.$data.errorShow = false;
+      }, 5000);
     },
   },
 };
