@@ -124,10 +124,10 @@ export default {
         password: password,
       };
       let formBody = App.methods.toUrlEncoded(datos);
+      console.log(formBody);
       axios
         .post("http://localhost:8081/auth/login", formBody, {
           headers: {
-            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
           },
         })
@@ -142,7 +142,8 @@ export default {
           sessionStorage.setItem("Username", userInfo[0]);
           this.openUserPage(sessionStorage.Role);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           this.errorFunction(" Usuario o contraseña incorrectos");
         });
     },
