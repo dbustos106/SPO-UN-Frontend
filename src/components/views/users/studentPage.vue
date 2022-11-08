@@ -1,6 +1,6 @@
 <template>
   <section class="sectionMarco userInit" :class="{ ing2: sideBarIsOpen == 1 }">
-    <StudentBar ref="StudentBar"></StudentBar>
+    <StudentBar :usernameContainer="username"></StudentBar>
     <!-- ======= Router view ======= -->
     <router-view></router-view>
     <!-- End Router view -->
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       sideBarIsOpen: 1,
+      username: sessionStorage.Username,
     };
   },
   methods: {
@@ -28,8 +29,6 @@ export default {
   mounted() {
     var btnMenu = document.getElementById("btn");
     btnMenu.addEventListener("click", this.moveContainer);
-    this.$refs.StudentBar.$refs.studentUsername.innerHTML =
-      sessionStorage.Username;
   },
 };
 </script>

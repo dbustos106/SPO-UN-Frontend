@@ -24,7 +24,6 @@
               </div>
 
               <div class="col-sm-8 mx-auto mb-3">
-                <label for="user" class="sr-only">Usuario</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputUser">
@@ -36,14 +35,12 @@
                     id="user"
                     class="form-control"
                     placeholder="Usuario"
-                    v-model="Usuario"
                     required
                   />
                 </div>
               </div>
 
               <div class="col-sm-8 mx-auto mb-3">
-                <label for="password" class="sr-only">Password</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputPassword">
@@ -55,7 +52,6 @@
                     id="password"
                     class="form-control"
                     placeholder="Contraseña"
-                    v-model="Contraseña"
                     required
                   />
                 </div>
@@ -66,6 +62,7 @@
                   Aceptar
                 </button>
               </div>
+
               <div class="col-sm-8 mx-auto mt-5">
                 <a class="forgot-password-link">¿Olvidaste la contraseña?</a>
                 <p>

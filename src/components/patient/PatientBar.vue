@@ -89,6 +89,11 @@
 export default {
   name: "PatientBar",
   props: {
+    usernameContainer: {
+      type: String,
+      required: true,
+      default: "",
+    },
     isMenuOpen: {
       type: Boolean,
       default: true,
@@ -181,9 +186,6 @@ export default {
       isOpened: false,
     };
   },
-  mounted() {
-    this.isOpened = this.isMenuOpen;
-  },
   methods: {
     openSearchAppointment() {
       this.$router.push("/patient/searchAppointment");
@@ -215,6 +217,10 @@ export default {
         "--menu-footer-text-color": this.menuFooterTextColor,
       };
     },
+  },
+  mounted() {
+    this.isOpened = this.isMenuOpen;
+    this.$refs.patientUsername.innerHTML = this.usernameContainer;
   },
 };
 </script>

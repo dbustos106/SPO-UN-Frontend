@@ -98,6 +98,11 @@
 export default {
   name: "ProfessorBar",
   props: {
+    usernameContainer: {
+      type: String,
+      required: true,
+      default: "",
+    },
     isMenuOpen: {
       type: Boolean,
       default: true,
@@ -153,7 +158,6 @@ export default {
         },
       ],
     },
-
     //! Profile detailes
     profileImg: {
       type: String,
@@ -218,9 +222,6 @@ export default {
       isOpened: false,
     };
   },
-  mounted() {
-    this.isOpened = this.isMenuOpen;
-  },
   methods: {
     openRegisterStudent() {
       this.$router.push("/professor/registerStudent");
@@ -255,6 +256,10 @@ export default {
         "--menu-footer-text-color": this.menuFooterTextColor,
       };
     },
+  },
+  mounted() {
+    this.isOpened = this.isMenuOpen;
+    this.$refs.professorUsername.innerHTML = this.usernameContainer;
   },
 };
 </script>

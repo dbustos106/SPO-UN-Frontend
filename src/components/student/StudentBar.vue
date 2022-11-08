@@ -71,11 +71,20 @@
 </template>
 
 <script>
-//import AppVue from '@/App.vue';
-
 export default {
   name: "SidebarMenuAkahonStudent",
+
+  data() {
+    return {
+      isOpened: false,
+    };
+  },
   props: {
+    usernameContainer: {
+      type: String,
+      required: true,
+      default: "",
+    },
     //! Menu settings
     isMenuOpen: {
       type: Boolean,
@@ -132,7 +141,6 @@ export default {
         },
       ],
     },
-
     //! Profile detailes
     profileImg: {
       type: String,
@@ -192,14 +200,6 @@ export default {
       default: "#fff",
     },
   },
-  data() {
-    return {
-      isOpened: false,
-    };
-  },
-  mounted() {
-    this.isOpened = this.isMenuOpen;
-  },
   methods: {
     openStudentCalendar() {
       this.$router.push("/student/studentCalendar");
@@ -228,6 +228,10 @@ export default {
         "--menu-footer-text-color": this.menuFooterTextColor,
       };
     },
+  },
+  mounted() {
+    this.isOpened = this.isMenuOpen;
+    this.$refs.studentUsername.innerHTML = this.usernameContainer;
   },
 };
 </script>
