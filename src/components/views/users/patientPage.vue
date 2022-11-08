@@ -1,17 +1,10 @@
 <template>
-  <div>
+  <section class="sectionMarco userInit" :class="{ ing2: sideBarIsOpen == 1 }">
     <PatientBar ref="PatientBar"></PatientBar>
-
-    <section
-      id="patientSection"
-      class="container"
-      :class="{ ing2: sideBarIsOpen == 1 }"
-    >
-      <!-- ======= Router view ======= -->
-      <router-view></router-view>
-      <!-- End Router view -->
-    </section>
-  </div>
+    <!-- ======= Router view ======= -->
+    <router-view></router-view>
+    <!-- End Router view -->
+  </section>
 </template>
 
 <script>
@@ -40,36 +33,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#patientSection {
-  max-width: 100vw;
-  height: 180vh;
-  background: url("../../../assets/img/panoramicaUnal.jpg") top center;
-  background-size: cover;
-  position: absolute;
-}
-
-#patientSection:before {
-  content: "";
-  background: rgba(45, 53, 69, 0.7);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.ing2 {
-  animation: aumWidth 0.7s forwards;
-}
-
-@keyframes aumWidth {
-  0% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 100px;
-  }
-}
-</style>

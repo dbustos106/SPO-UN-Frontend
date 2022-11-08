@@ -2,74 +2,73 @@
   <div>
     <!-- ======= Header ======= -->
     <header
-    id="header"
-    class="fixed-top header-transparent"
-    :class="{ ing: scrollPosition > 10 }"
-  >
-    <div
-      id="contHeader"
-      class="container d-flex align-items-center justify-content-between"
+      id="header"
+      class="fixed-top header-transparent"
+      :class="{ ing: scrollPosition > 10 }"
     >
-      <h1 id="logo" class="logo">Spo-Un</h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <router-link class="btn-sign-up scrollto" to="/home"
-            >Inicio</router-link
-          >
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-    </div>
-  </header>
-  <!-- End Header -->
+      <div
+        id="contHeader"
+        class="container d-flex align-items-center justify-content-between"
+      >
+        <h1 id="logo" class="logo">Spo-Un</h1>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <router-link class="btn-sign-up scrollto" to="/home"
+              >Inicio</router-link
+            >
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
 
-  <!-- ======= Router view ======= -->
-  <router-view></router-view>
-  <!-- End router view -->
+    <!-- ======= Router view ======= -->
+    <router-view></router-view>
+    <!-- End router view -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-2 footer-dir">
-            <h3>Ubicación</h3>
-            <p>
-              Carrera 45 # 26-85 <br />
-              Edif. Uriel Gutiérrez<br />
-              Bogotá D.C., Colombia <br /><br />
-            </p>
-          </div>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-2 footer-dir">
+              <h3>Ubicación</h3>
+              <p>
+                Carrera 45 # 26-85 <br />
+                Edif. Uriel Gutiérrez<br />
+                Bogotá D.C., Colombia <br /><br />
+              </p>
+            </div>
 
-          <div class="col-lg-5 col-md-2 footer-contact">
-            <h3>Contacto</h3>
-            <strong>Teléfono:</strong> +57 3195540137<br />
-            <strong>Teléfono:</strong> (+57 1) 316 5000<br />
-            <strong>Email:</strong> spoun.app@gmail.com<br />
+            <div class="col-lg-5 col-md-2 footer-contact">
+              <h3>Contacto</h3>
+              <strong>Teléfono:</strong> +57 3195540137<br />
+              <strong>Teléfono:</strong> (+57 1) 316 5000<br />
+              <strong>Email:</strong> spoun.app@gmail.com<br />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container d-md-flex py-4">
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Spo-UN</span></strong
-          >. All Rights Reserved. Designed by
-          <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      <div class="container d-md-flex py-4">
+        <div class="me-md-auto text-center text-md-start">
+          <div class="copyright">
+            &copy; Copyright <strong><span>Spo-UN</span></strong
+            >. All Rights Reserved. Designed by
+            <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-  <!-- End Footer -->
+    </footer>
+    <!-- End Footer -->
   </div>
-  
-  
 </template>
 
 <script>
 export default {
   name: "initPage",
+
   data() {
     return {
       scrollPosition: null,
@@ -194,16 +193,6 @@ export default {
   display: none;
   line-height: 0;
   transition: 0.5s;
-}
-
-@media (max-width: 991px) {
-  .mobile-nav-toggle {
-    display: block;
-  }
-
-  .navbar ul {
-    display: none;
-  }
 }
 
 .navbar-mobile {

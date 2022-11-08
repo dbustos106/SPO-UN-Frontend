@@ -1,19 +1,14 @@
 <template>
-  <section id="signUp">
-    <!-- ======= MarcoReg section ======= -->
-    <div id="marcoReg" class="container">
-      <div id="formSignUp" class="card login-card">
+  <section class="sectionMarco">
+    <div class="container marco">
+      <div class="card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <img
-              src="../../assets/img/login.jpg"
-              alt="login"
-              class="login-card-img"
-            />
+            <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
           <div class="col">
-            <p class="login-card-description mt-5">Registra tus datos</p>
-            <div class="form-group needs-validation" id="formSignUp">
+            <p class="card-description mt-5">Registra tus datos</p>
+            <div class="form-group needs-validation">
               <div class="row mx-auto">
                 <div class="col-sm-10 mx-auto">
                   <input
@@ -24,10 +19,6 @@
                     id="fusernameR"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
               </div>
 
@@ -41,10 +32,6 @@
                     id="fnameR"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
                 <div class="col-sm-5 mr-auto">
                   <input
@@ -55,10 +42,6 @@
                     id="lnameR"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
               </div>
 
@@ -73,8 +56,6 @@
                     <option value="CE">Cédula Extranjera</option>
                     <option value="TE">Tarjeta Extranjera</option>
                   </select>
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">Elije una opción</div>
                 </div>
                 <div class="col-sm-5 mr-auto">
                   <input
@@ -90,10 +71,6 @@
                     placeholder="Número de documento"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
               </div>
 
@@ -107,10 +84,6 @@
                     placeholder="Correo electrónico"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
                 <div class="col-sm-5 mr-auto">
                   <input
@@ -126,10 +99,6 @@
                     placeholder="Edad"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
               </div>
 
@@ -143,10 +112,6 @@
                     placeholder="Contraseña"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
                 <div class="col-sm-5 mr-auto">
                   <input
@@ -157,10 +122,6 @@
                     placeholder="Confirmar Contraseña"
                     required
                   />
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">
-                    No puede estar vacía la casilla
-                  </div>
                 </div>
               </div>
 
@@ -172,8 +133,6 @@
                     <option value="mujer">Mujer</option>
                     <option value="noEspecifica">Sin especificar</option>
                   </select>
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">Elije una opción</div>
                 </div>
                 <div class="col-sm-5 mr-auto">
                   <select class="form-select mx-auto" required id="RHR">
@@ -187,12 +146,10 @@
                     <option value="O+">O positivo</option>
                     <option value="O-">O negativo</option>
                   </select>
-                  <div class="valid-feedback">Válido</div>
-                  <div class="invalid-feedback">Elije una opción</div>
                 </div>
               </div>
 
-              <div class="col-sm-8 mx-auto">
+              <div class="col-sm-10 mx-auto">
                 <section v-show="errorShow">
                   <div class="alertBar error">
                     <span title="error" class="alertBar-message">
@@ -217,13 +174,8 @@
                 </section>
               </div>
 
-              <div class="row mx-auto">
-                <button
-                  id="registerButton"
-                  type="submit"
-                  class="btn btn-primary mx-auto mb-3"
-                  v-on:click="register"
-                >
+              <div class="col-sm-5 mx-auto">
+                <button class="btn btn-block btn" v-on:click="register">
                   Registrar
                 </button>
               </div>
@@ -232,7 +184,6 @@
         </div>
       </div>
     </div>
-    <!-- End MarcoReg -->
   </section>
 </template>
 
@@ -278,61 +229,35 @@ export default {
         if (password !== confirmPassword) {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
-          this.sendData(
-            username,
-            name,
-            lastName,
-            email,
-            password,
-            cedula,
-            tipoCedula,
-            genero,
-            edad,
-            RH
-          );
+          let datos = {
+            username: username,
+            password: password,
+            name: name + "-" + lastName,
+            email: email,
+            document_type: tipoCedula,
+            document_number: cedula,
+            age: parseInt(edad),
+            gender: genero,
+            blood_type: RH,
+          };
+          let formBody = JSON.stringify(datos);
+
+          axios
+            .post(App.methods.getBackUrl() + "/register/patient", formBody, {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer e",
+              },
+            })
+            .then(() => {
+              this.successFunction("Registro Exitoso, revise su correo");
+            })
+            .catch(() => {
+              this.errorFunction("Error, correo o documento ya registrado");
+            });
         }
       }
-    },
-    async sendData(
-      username,
-      name,
-      lastName,
-      email,
-      password,
-      cedula,
-      tipoCedula,
-      genero,
-      edad,
-      RH
-    ) {
-      let datos = {
-        username: username,
-        password: password,
-        name: name + "-" + lastName,
-        email: email,
-        document_type: tipoCedula,
-        document_number: cedula,
-        age: parseInt(edad),
-        gender: genero,
-        blood_type: RH,
-      };
-
-      let formBody = JSON.stringify(datos);
-
-      axios
-        .post(App.methods.getBackUrl() + "/register/patient", formBody, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer e",
-          },
-        })
-        .then(() => {
-          this.successFunction("Registro Exitoso, revise su correo");
-        })
-        .catch(() => {
-          this.errorFunction("Error, correo o documento ya registrado");
-        });
     },
     successFunction(messageText) {
       this.$data.errorShow = false;
@@ -355,234 +280,3 @@ export default {
   },
 };
 </script>
-
-<style>
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-#signUp {
-  width: 100%;
-  height: 100vh;
-  background: url("../../assets/img/panoramicaUnal.jpg") top center;
-  background-size: cover;
-  position: relative;
-  border-top: 100px;
-}
-
-#signUp:before {
-  content: "";
-  background: rgba(45, 53, 69, 0.7);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-/*--------------------------------------------------------------
-# MarcoReg
---------------------------------------------------------------*/
-
-#marcoReg {
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
-}
-
-#formSignUp {
-  word-wrap: initial;
-  max-height: 80%;
-}
-
-.login-card {
-  position: relative;
-  margin-top: 40px;
-  width: 100%;
-  height: 80%;
-  border: 0;
-  border-radius: 27.5px;
-  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
-}
-
-.login-card-img {
-  border-radius: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-
-img .login-card-img {
-  transition: 0.5s all ease-in-out;
-}
-
-img .login-card-img:hover {
-  transform: scale(1.5);
-}
-
-.login-card-description {
-  font-size: 25px;
-  color: #000;
-  font-weight: normal;
-  text-align: center;
-  margin-bottom: 23px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.form-select {
-  height: 45px;
-  margin-bottom: 20px;
-}
-
-#registerButton {
-  margin-top: 10px;
-  position: center;
-  max-width: 100px;
-}
-
-/*--------------------------------------------------------------
-# Error
---------------------------------------------------------------*/
-
-.large {
-  font-size: 18px !important;
-}
-.alertBar {
-  color: rgb(245, 140, 140);
-  margin-bottom: 5px;
-  line-height: 30px;
-  animation: reveal 1 1s;
-  border: 1px solid rgba(32, 32, 32, 0.15);
-}
-
-.alert-info {
-  display: inline-block;
-  padding: 5px 2.5em 5px 10px;
-  color: red;
-  vertical-align: middle;
-}
-.alert-details {
-  display: none;
-}
-.more,
-.cta {
-  color: #007acc !important;
-}
-.alert-message {
-  padding-right: 1em;
-  text-overflow: ellipsis;
-  color: inherit;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 900px;
-}
-a {
-  color: #007acc;
-}
-
-:hover {
-  color: #007acc;
-}
-strong {
-  font-weight: 400;
-  color: inherit;
-}
-
-.alert-dismiss {
-  float: right;
-  line-height: 15px;
-}
-.a {
-  color: #000000;
-  display: inline-block;
-  padding: 14px;
-}
-.hover {
-  color: inherit;
-  text-decoration: none;
-}
-
-@keyframes reveal {
-  0% {
-    transform: translate(0px, -50px);
-  }
-  50% {
-    transform: translate(0px, -50px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
-}
-@keyframes collapse {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  50% {
-    transform: translate(0px, -50px);
-  }
-  100% {
-    transform: translate(0px, -50px);
-  }
-}
-pre {
-  margin: 0px 10px 10px;
-  line-height: 18px;
-  font-family: monospace;
-}
-i {
-  display: inline-block;
-  min-width: 20px;
-  text-align: center;
-  font-size: 14px;
-  -webkit-font-smoothing: none;
-}
-.largeBut {
-  font-size: 20px;
-}
-.success_blue {
-  color: #1ba1e2;
-}
-.success_green {
-  color: #339933;
-}
-.warning_col {
-  color: #f8a800;
-}
-.error_col {
-  color: #ba141a;
-}
-.success {
-  background: #f5f5f5;
-  color: #222;
-  border: 1px solid #e6e6e6;
-}
-.success_confirm {
-  background: #eff8fd;
-  color: #222;
-  border: 1px solid #d8effa;
-}
-.warning {
-  background: #fff9ee;
-  color: #222;
-  border: 1px solid #fef0d4;
-}
-.error {
-  background: #fc9494;
-  color: #222;
-  border: 1px solid #f9d5d3;
-}
-.form-section > p:first-child {
-  padding: 0 0 8px 0;
-}
-</style>
