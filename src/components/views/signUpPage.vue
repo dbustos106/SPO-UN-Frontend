@@ -193,6 +193,7 @@ import App from "../../App.vue";
 
 export default {
   name: "signUpPage",
+
   data() {
     return {
       errorShow: false,

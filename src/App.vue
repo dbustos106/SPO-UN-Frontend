@@ -106,122 +106,6 @@ export default {
 }
 
 /*--------------------------------------------------------------
-# login-card
---------------------------------------------------------------*/
-.card {
-  position: relative;
-  margin-top: 40px;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 27.5px;
-  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
-  overflow: hidden;
-}
-
-.card-description {
-  font-size: 25px;
-  color: #000;
-  font-weight: normal;
-  text-align: center;
-  margin-bottom: 23px;
-}
-
-.card-img {
-  border-radius: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-img .card-img {
-  transition: 0.5s all ease-in-out;
-}
-img .card-img:hover {
-  transform: scale(1.5);
-}
-
-.card form {
-  max-width: 326px;
-}
-.card .form-control {
-  border: 1px solid #d5dae2;
-  margin-bottom: 20px;
-  min-height: 45px;
-  font-size: 13px;
-  line-height: 15;
-  font-weight: normal;
-}
-.card .form-control::-webkit-input-placeholder {
-  color: #919aa3;
-}
-.card .form-control::-moz-placeholder {
-  color: #919aa3;
-}
-.card .form-control:-ms-input-placeholder {
-  color: #919aa3;
-}
-.card .form-control::-ms-input-placeholder {
-  color: #919aa3;
-}
-.card .form-control::placeholder {
-  color: #919aa3;
-}
-.card .btn {
-  background-color: #1a1d53;
-  border-radius: 4px;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 20px;
-  color: #fff;
-  margin-bottom: 24px;
-  padding: 5px;
-}
-
-.card .btn:hover {
-  border-color: #1a1d53;
-  color: #1a1d53;
-}
-
-.forgot-password-link {
-  font-size: 14px;
-  color: #47637e;
-  text-align: center;
-}
-
-.card-footer-text {
-  font-size: 14px;
-  color: #0d2366;
-}
-.card-footer-text:hover {
-  font-size: 14px;
-  color: #060912;
-}
-@media (max-width: 767px) {
-  .card-footer-text {
-    margin-bottom: 24px;
-  }
-}
-.card-footer-nav a {
-  font-size: 14px;
-  color: #919aa3;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.form-select {
-  height: 45px;
-  margin-bottom: 20px;
-}
-
-/*--------------------------------------------------------------
 # SectionMarco
 --------------------------------------------------------------*/
 
@@ -275,6 +159,15 @@ input[type="number"] {
   font-size: 22px;
 }
 
+.marco a {
+  font-size: 14px;
+}
+
+.marco span {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
+
 .marco .btn-sign-up {
   font-family: "Raleway", sans-serif;
   font-weight: 500;
@@ -324,6 +217,125 @@ input[type="number"] {
   100% {
     margin-left: 100px;
   }
+}
+
+/*--------------------------------------------------------------
+# login-card
+--------------------------------------------------------------*/
+.card {
+  position: relative;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 27.5px;
+  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+  overflow: hidden;
+}
+
+.card-description {
+  font-size: 25px;
+  color: #000;
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 23px;
+}
+
+.card-img {
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+img .card-img {
+  transition: 0.5s all ease-in-out;
+}
+img .card-img:hover {
+  transform: scale(1.5);
+}
+
+.card form {
+  max-width: 326px;
+}
+.card a {
+  color: #000000;
+}
+.card .form-control {
+  border: 1px solid #d5dae2;
+  margin-bottom: 20px;
+  min-height: 45px;
+  font-size: 13px;
+  line-height: 15;
+  font-weight: normal;
+}
+.card .form-control::-webkit-input-placeholder {
+  color: #919aa3;
+}
+.card .form-control::-moz-placeholder {
+  color: #919aa3;
+}
+.card .form-control:-ms-input-placeholder {
+  color: #919aa3;
+}
+.card .form-control::-ms-input-placeholder {
+  color: #919aa3;
+}
+.card .form-control::placeholder {
+  color: #919aa3;
+}
+.card .btn {
+  background-color: #1a1d53;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  margin-bottom: 24px;
+  padding: 5px;
+}
+
+.card .btn:hover {
+  border-color: #1a1d53;
+  color: #1a1d53;
+}
+
+.sign-up-link {
+  font-size: 14px;
+  color: #003c74;
+}
+
+.card-footer-text {
+  font-size: 14px;
+  color: #0d2366;
+}
+.card-footer-text:hover {
+  font-size: 14px;
+  color: #060912;
+}
+@media (max-width: 767px) {
+  .card-footer-text {
+    margin-bottom: 24px;
+  }
+}
+.card-footer-nav a {
+  font-size: 14px;
+  color: #919aa3;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form-select {
+  height: 45px;
+  margin-bottom: 20px;
 }
 
 /*.

@@ -31,8 +31,8 @@
     <footer id="footer">
       <div class="footer-top">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-6 col-md-2 footer-dir">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 footer-dir">
               <h3>Ubicación</h3>
               <p>
                 Carrera 45 # 26-85 <br />
@@ -41,7 +41,7 @@
               </p>
             </div>
 
-            <div class="col-lg-5 col-md-2 footer-contact">
+            <div class="col-lg-6 footer-contact">
               <h3>Contacto</h3>
               <strong>Teléfono:</strong> +57 3195540137<br />
               <strong>Teléfono:</strong> (+57 1) 316 5000<br />
@@ -55,8 +55,7 @@
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
             &copy; Copyright <strong><span>Spo-UN</span></strong
-            >. All Rights Reserved. Designed by
-            <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            >. All Rights Reserved. Designed by SPO-UN
           </div>
         </div>
       </div>

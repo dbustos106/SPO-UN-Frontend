@@ -63,15 +63,13 @@
                 </button>
               </div>
 
-              <div class="col-sm-8 mx-auto mt-5">
-                <a class="forgot-password-link">¿Olvidaste la contraseña?</a>
-                <p>
-                  <a>¿No tienes una cuenta?</a>
-                  <a v-on:click="openSignUpPage" class="card-footer-text">
-                    Regístrate
-                  </a>
-                </p>
-                <nav class="card-footer-nav">
+              <div class="col-sm-8 mx-auto mb-4">
+                <a href="#!">¿Olvidaste la contraseña?</a>
+                <br />
+                <span>¿No tienes una cuenta? </span>
+                <a href="#!" v-on:click="openSignUpPage">Regístrate</a>
+
+                <nav class="card-footer-nav mt-3">
                   <a href="#!">Terms of use. </a>
                   <a href="#!">Privacy policy</a>
                 </nav>
