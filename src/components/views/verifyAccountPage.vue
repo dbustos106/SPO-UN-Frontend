@@ -3,7 +3,7 @@
     <div class="container marco">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
-        <h2>Su cuenta ha sido verificada con exito!</h2>
+        <h3>Su cuenta ha sido verificada con exito!</h3>
         <router-link class="btn-login scrollto" to="/login">Login</router-link>
       </div>
     </div>

@@ -175,7 +175,7 @@
               </div>
 
               <div class="col-sm-5 mx-auto">
-                <button class="btn btn-block btn" v-on:click="register">
+                <button class="btn btn-block" v-on:click="register">
                   Registrar
                 </button>
               </div>

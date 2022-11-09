@@ -1,9 +1,8 @@
 <template>
-  <!-- ======= AppointmentsContainer ======= -->
-  <div id="AppointmentsContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card">
       <div class="row no-gutters">
-        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
+        <h2 class="card-description mx-auto mt-5 mb-4">Citas</h2>
 
         <!-- ======= Overlay ======= -->
         <transition name="fade">
@@ -21,8 +20,11 @@
             class="modal-mask"
             v-if="appointmentWindowShow"
           >
-            <h1>Cita</h1>
-            <appointmentWindow ref="appointmentWindow" :id="idAppointment">
+            <appointmentWindow
+              ref="appointmentWindow"
+              :id="idAppointment"
+              :title="titleAppointmentWindow"
+            >
             </appointmentWindow>
             <div class="row">
               <button class="btnGris mx-auto" @click="updateData">
@@ -36,7 +38,7 @@
         <!-- ======= deleteWindow ======= -->
         <transition name="fade">
           <div id="deleteWindow" class="modal-mask" v-if="deleteWindowShow">
-            <h1>Confirmación</h1>
+            <h2>Confirmación</h2>
             <p>¿Desea cancelar la cita?</p>
             <button class="btnGris mr-4" @click="deleteWindowShow = false">
               Cerrar
@@ -48,13 +50,6 @@
           </div>
         </transition>
         <!-- End deleteWindow -->
-
-        <!-- ======= Busqueda ======= -->
-        <div class="row-sm-6 ml-5 mb-3">
-          Búsqueda:
-          <input id="query" v-on:keyup="filteredData" />
-        </div>
-        <!-- End Busqueda -->
 
         <!-- ======= TableOfAppointments ======= -->
         <div class="row mx-auto">
@@ -106,7 +101,6 @@
       </div>
     </div>
   </div>
-  <!-- End AppointmentsContainer -->
 </template>
 
 <script>
@@ -132,9 +126,10 @@ export default {
       idPage: 0,
       lastPage: 0,
       idAppointment: -1,
-      btnSelected: null,
-      deleteWindowShow: false,
+      titleAppointmentWindow: "",
       appointmentWindowShow: false,
+      deleteWindowShow: false,
+      btnSelected: null,
       appointments: [],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
@@ -161,7 +156,7 @@ export default {
         ];
       }
     },
-    putStudentAppointmentInTable(appointments) {
+    putStudentAppointmentsInTable(appointments) {
       let table = document.getElementById("tableOfAppointments");
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
@@ -196,6 +191,7 @@ export default {
           "click",
           function () {
             this.$data.idAppointment = id;
+            this.$data.titleAppointmentWindow = "Cita seleccionada";
             this.$data.appointmentWindowShow = true;
           }.bind(this)
         );
@@ -316,7 +312,7 @@ export default {
           }
         });
     },
-    getStudentAppointments(page) {
+    getStudentAppointments(idPage) {
       axios
         .get(
           App.methods.getBackUrl() +
@@ -329,7 +325,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 6 },
+            params: { page: idPage, size: 6 },
           }
         )
         .then((response) => {
@@ -346,7 +342,7 @@ export default {
               });
             }
             this.$data.lastPage += 1;
-            this.putStudentAppointmentInTable(appointments);
+            this.putStudentAppointmentsInTable(appointments);
           } else {
             this.$data.idPage = this.$data.lastPage;
           }
@@ -354,7 +350,7 @@ export default {
         .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
-              this.getStudentAppointments(page);
+              this.getStudentAppointments(idPage);
             } else {
               this.$router.push("/login");
             }
@@ -364,6 +360,7 @@ export default {
     createAppointment() {
       this.$data.idAppointment = -1;
       this.$data.appointmentWindowShow = true;
+      this.$data.titleAppointmentWindow = "Crear cita";
     },
     updateData() {
       this.$data.appointmentWindowShow = false;
@@ -394,17 +391,6 @@ export default {
       }
       this.getStudentAppointments(this.$data.idPage);
     },
-    filteredData() {
-      var filterKey = document.getElementById("query").value;
-      var filterAppointments = this.$data.appointments;
-
-      filterAppointments = filterAppointments.filter(function (row) {
-        return Object.keys(row).some(function (key) {
-          return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
-        });
-      });
-      this.putStudentAppointmentInTable(filterAppointments);
-    },
   },
   mounted() {
     this.getStudentAppointments(0);
@@ -415,14 +401,15 @@ export default {
 </script>
 
 <style>
-#AppointmentsContainer {
-  width: 70%;
-}
-
 #appointmentWindow {
   top: 2%;
   left: 24%;
   width: 65%;
   height: 95%;
+}
+@media (max-width: 767px) {
+  #appointmentWindow {
+    left: 10%;
+  }
 }
 </style>

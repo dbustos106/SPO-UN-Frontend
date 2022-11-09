@@ -58,7 +58,7 @@
               </div>
 
               <div class="col-sm-8 mx-auto mb-5">
-                <button class="btn btn-block btn" v-on:click="sendLogin">
+                <button class="btn btn-block" v-on:click="sendLogin">
                   Aceptar
                 </button>
               </div>

@@ -1,51 +1,59 @@
 <template>
-  <div class="row">
-    <!-- ====== DataAppointment ====== -->
-    <div id="dataAppointment" class="col-5 mx-auto" style="text-align: center">
-      <h4 ref="id" class="text mb-3">Información de la cita</h4>
-      <div class="form-horizontal">
-        <div class="form-group">
-          <div class="col-12">
-            <label>Tipo de procedimiento:</label>
+  <div class="container marco-modal">
+    <h2 id="titleAppointmentWindow" class="card-description mx-auto mb-3"></h2>
+    <!-- ====== Appointment ====== -->
+    <div class="row mx-auto">
+      <div
+        id="dataAppointment"
+        class="col mx-auto mr-1"
+        style="text-align: center"
+      >
+        <h3 ref="id" class="text mb-3">Información de la cita</h3>
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-12">
+              <label>Tipo de procedimiento:</label>
+            </div>
+            <div class="col-12">
+              <textarea
+                class="textarea"
+                ref="procedure_type"
+                rows="5"
+                cols="40"
+                id="description"
+              ></textarea>
+            </div>
           </div>
-          <div class="col-12">
-            <textarea
-              class="textarea"
-              ref="procedure_type"
-              rows="5"
-              cols="40"
-              id="description"
-            ></textarea>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-12">
-            <label>Consultorio</label>
-          </div>
-          <div class="col-12">
-            <select
-              ref="place"
-              class="form-select mx-auto"
-              required
-              id="roomSelect"
-            >
-              <option selected disabled value="Lugar de atención">
-                Lugar de atención
-              </option>
-            </select>
+          <div class="form-group">
+            <div class="col-12">
+              <label>Consultorio</label>
+            </div>
+            <div class="col-12">
+              <select
+                ref="place"
+                class="form-select mx-auto"
+                required
+                id="roomSelect"
+              >
+                <option selected disabled value="Lugar de atención">
+                  Lugar de atención
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End DataAppointment -->
 
-    <!-- ====== dataTentative ====== -->
-    <div id="dataTentative" class="col-6 mx-auto" style="text-align: center">
-      <h4 class="text mb-3">Fechas tentativas</h4>
+      <div
+        id="dataTentative"
+        class="col mx-auto ml-1"
+        style="text-align: center"
+      >
+        <h3 class="text mb-3">Fechas tentativas</h3>
 
-      <!-- ======= tentativeTable ======= -->
-      <div class="row mb-2">
-        <div id="tentativeDates">
+        <!-- ======= tentativeTable ======= -->
+        <!--<div class="row mb-2">-->
+        <div id="tentativeDates" class="mx-auto">
           <table id="fechas-tentativas">
             <thead>
               <tr>
@@ -58,45 +66,46 @@
             </tbody>
           </table>
         </div>
-      </div>
-      <!-- End tentativeTable -->
+        <!--</div>-->
+        <!-- End tentativeTable -->
 
-      <!-- ======= DatePicker ======= -->
-      <div class="row mb-2">
-        <div class="col-5">
-          <datepicker
-            ref="datepicker1"
-            v-model="startDate"
-            name="startTime"
-            showNowButton
-            :minDate="new Date()"
-            modelType="yyyy-MM-dd HH:mm:ss"
-            placeholder="Fecha de inicio"
-          >
-          </datepicker>
+        <!-- ======= DatePicker ======= -->
+        <div class="row mb-2">
+          <div class="col-5">
+            <datepicker
+              ref="datepicker1"
+              v-model="startDate"
+              name="startTime"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de inicio"
+            >
+            </datepicker>
+          </div>
+          <div class="col-5">
+            <datepicker
+              v-model="endDate"
+              name="endTime"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de fin"
+            >
+            </datepicker>
+          </div>
+          <div class="col-1">
+            <button class="btnGrisTq" @click="addDate">^</button>
+          </div>
         </div>
-        <div class="col-5">
-          <datepicker
-            v-model="endDate"
-            name="endTime"
-            showNowButton
-            :minDate="new Date()"
-            modelType="yyyy-MM-dd HH:mm:ss"
-            placeholder="Fecha de fin"
-          >
-          </datepicker>
-        </div>
-        <div class="col-1">
-          <button class="btnGrisTq" @click="addDate">^</button>
-        </div>
-      </div>
-      <!-- End DatePicker -->
+        <!-- End DatePicker -->
 
-      <button class="btnBlue mx-auto mt-3" v-on:click="deleteDate">
-        Eliminar
-      </button>
+        <button class="btnBlue mx-auto mt-3 mb-3" v-on:click="deleteDate">
+          Eliminar
+        </button>
+      </div>
     </div>
-    <!-- End DataTentative -->
+    <!-- End Appointment -->
 
     <!-- ====== MessageShow ====== -->
     <div class="row mx-auto">
@@ -126,7 +135,7 @@
     <!-- End MessageShow -->
 
     <!-- ====== btnCrear ====== -->
-    <div class="row mx-auto">
+    <div class="row mx-auto mt-2">
       <button
         id="createAppointment"
         ref="createAppointment"
@@ -167,6 +176,11 @@ export default {
       type: Number,
       required: false,
       default: -1,
+    },
+    title: {
+      type: String,
+      required: true,
+      default: "Cita",
     },
   },
   methods: {
@@ -407,35 +421,34 @@ export default {
     } else {
       document.getElementById("createAppointment").innerHTML = "Crear cita";
     }
+    document.getElementById("titleAppointmentWindow").innerHTML = this.title;
   },
 };
 </script>
+
 <style>
 #dataAppointment {
   background-color: #fff;
-  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  margin: 0 0 25px;
-  width: 500px;
   align-items: center;
+  min-width: 250px;
+  margin-right: 10px;
 }
 #dataTentative {
   background-color: #fff;
-  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  margin: 0 0 25px;
-  width: 500px;
-  height: 50%;
   align-items: center;
   text-align: center;
+  min-width: 250px;
+  margin-left: 10px;
 }
 
 #btnAddDate {
@@ -445,17 +458,10 @@ export default {
   margin-top: 0px;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-}
-
 #tentativeDates {
   overflow: auto;
   height: 250px;
-  width: 470px;
+  width: 95%;
 }
 
 tr:nth-child(even) {

@@ -130,7 +130,7 @@ export default {
 .sectionMarco.userInit {
   min-height: 100vh;
   position: absolute;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 .marco {
@@ -142,7 +142,6 @@ export default {
 
 .marco .container {
   text-align: center;
-  padding-top: 50px;
 }
 
 .marco h1 {
@@ -154,7 +153,15 @@ export default {
 }
 
 .marco h2 {
-  color: #eee;
+  margin: 15px 0 0 0;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 56px;
+  color: rgb(0, 0, 19);
+}
+
+.marco h3 {
+  color: rgb(255, 255, 255);
   margin: 15px 0 0 0;
   font-size: 22px;
 }
@@ -217,6 +224,32 @@ export default {
   100% {
     margin-left: 100px;
   }
+}
+
+/*--------------------------------------------------------------
+# Marco-Modal
+--------------------------------------------------------------*/
+
+.marco-modal {
+  width: 90%;
+  height: 90%;
+  overflow-y: auto;
+}
+
+.marco-modal h2 {
+  margin: 15px 0 0 0;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 56px;
+  color: rgb(0, 0, 19);
+}
+
+.marco-modal h3 {
+  margin: 15px 0 0 0;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 56px;
+  color: rgb(0, 0, 19);
 }
 
 /*--------------------------------------------------------------
@@ -408,6 +441,7 @@ input[type="number"] {
 
 .modal-mask {
   width: 50%;
+  min-width: 400px;
   position: fixed;
   top: 30%;
   left: 33%;
@@ -418,9 +452,16 @@ input[type="number"] {
   z-index: 101;
 }
 
+@media (max-width: 767px) {
+  .modal-mask {
+    left: 10%;
+  }
+}
 table {
   border-collapse: collapse;
-  font-family: Tahoma, Geneva, sans-serif;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
 }
 
 table td {
@@ -454,6 +495,7 @@ table tbody tr:nth-child(odd) {
 
 .btnBlue {
   width: 20%;
+  min-width: 100px;
   background: rgba(0, 3, 37, 0.8);
   border-radius: 4px;
   border: none;
@@ -468,6 +510,7 @@ table tbody tr:nth-child(odd) {
 
 .btnRed {
   width: 20%;
+  min-width: 100px;
   background: rgba(125, 0, 0, 0.8);
   border-radius: 4px;
   border: none;
@@ -482,6 +525,7 @@ table tbody tr:nth-child(odd) {
 
 .btnGreen {
   width: 20%;
+  min-width: 100px;
   background: rgba(44, 125, 0, 0.8);
   border-radius: 4px;
   border: none;
@@ -496,6 +540,7 @@ table tbody tr:nth-child(odd) {
 
 .btnGris {
   width: 20%;
+  min-width: 100px;
   background: rgba(87, 89, 94, 0.7);
   border-radius: 4px;
   border: none;
@@ -510,6 +555,7 @@ table tbody tr:nth-child(odd) {
 
 .btnGrisLq {
   width: 5%;
+  min-width: 30px;
   background: rgba(87, 89, 94, 0.7);
   border-radius: 4px;
   border: none;
@@ -524,6 +570,7 @@ table tbody tr:nth-child(odd) {
 
 .btnGrisTq {
   height: 35px;
+  min-width: 30px;
   background: rgba(133, 133, 135, 0.8);
   border-radius: 4px;
   padding: 10px 10px;

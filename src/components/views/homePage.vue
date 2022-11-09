@@ -3,10 +3,10 @@
     <div class="container marco">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
-        <h2>
+        <h3>
           Sistema de prácticas odontológicas de la Universidad Nacional de
           Colombia
-        </h2>
+        </h3>
         <router-link class="btn-sign-up scrollto" to="/signUp"
           >Sign up</router-link
         >
