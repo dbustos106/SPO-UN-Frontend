@@ -569,11 +569,11 @@ table tbody tr:nth-child(odd) {
 }
 
 .btnGrisTq {
-  height: 35px;
+  height: 38px;
   min-width: 30px;
   background: rgba(133, 133, 135, 0.8);
   border-radius: 4px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   border: none;
   color: #fff;
 }

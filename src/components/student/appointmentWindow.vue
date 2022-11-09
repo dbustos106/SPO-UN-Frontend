@@ -2,12 +2,8 @@
   <div class="container marco-modal">
     <h2 id="titleAppointmentWindow" class="card-description mx-auto mb-3"></h2>
     <!-- ====== Appointment ====== -->
-    <div class="row mx-auto">
-      <div
-        id="dataAppointment"
-        class="col mx-auto mr-1"
-        style="text-align: center"
-      >
+    <div class="row mx-auto mb-3">
+      <div id="dataAppointment" class="col mr-1" style="text-align: center">
         <h3 ref="id" class="text mb-3">Información de la cita</h3>
         <div class="form-horizontal">
           <div class="form-group">
@@ -35,26 +31,20 @@
                 required
                 id="roomSelect"
               >
-                <option selected disabled value="Lugar de atención">
-                  Lugar de atención
-                </option>
+                <option selected disabled value="">Lugar de atención</option>
               </select>
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        id="dataTentative"
-        class="col mx-auto ml-1"
-        style="text-align: center"
-      >
+      <div id="dataTentative" class="col ml-1" style="text-align: center">
         <h3 class="text mb-3">Fechas tentativas</h3>
 
         <!-- ======= tentativeTable ======= -->
         <!--<div class="row mb-2">-->
-        <div id="tentativeDates" class="mx-auto">
-          <table id="fechas-tentativas">
+        <div id="tentativeDates" class="container mx-auto mb-1">
+          <table id="tentativeDatesTable">
             <thead>
               <tr>
                 <td>Fecha inicio</td>
@@ -69,40 +59,41 @@
         <!--</div>-->
         <!-- End tentativeTable -->
 
-        <!-- ======= DatePicker ======= -->
-        <div class="row mb-2">
-          <div class="col-5">
-            <datepicker
-              ref="datepicker1"
-              v-model="startDate"
-              name="startTime"
-              showNowButton
-              :minDate="new Date()"
-              modelType="yyyy-MM-dd HH:mm:ss"
-              placeholder="Fecha de inicio"
-            >
-            </datepicker>
+        <div class="container mx-auto mt-1">
+          <!-- ======= DatePicker ======= -->
+          <div class="row mb-2">
+            <div class="col-5">
+              <datepicker
+                v-model="startDate"
+                name="startTime"
+                showNowButton
+                :minDate="new Date()"
+                modelType="yyyy-MM-dd HH:mm:ss"
+                placeholder="Fecha de inicio"
+              >
+              </datepicker>
+            </div>
+            <div class="col-5">
+              <datepicker
+                v-model="endDate"
+                name="endTime"
+                showNowButton
+                :minDate="new Date()"
+                modelType="yyyy-MM-dd HH:mm:ss"
+                placeholder="Fecha de fin"
+              >
+              </datepicker>
+            </div>
+            <div class="col-1">
+              <button class="btnGrisTq" @click="addDate">^</button>
+            </div>
           </div>
-          <div class="col-5">
-            <datepicker
-              v-model="endDate"
-              name="endTime"
-              showNowButton
-              :minDate="new Date()"
-              modelType="yyyy-MM-dd HH:mm:ss"
-              placeholder="Fecha de fin"
-            >
-            </datepicker>
-          </div>
-          <div class="col-1">
-            <button class="btnGrisTq" @click="addDate">^</button>
-          </div>
-        </div>
-        <!-- End DatePicker -->
+          <!-- End DatePicker -->
 
-        <button class="btnBlue mx-auto mt-3 mb-3" v-on:click="deleteDate">
-          Eliminar
-        </button>
+          <button class="btnBlue mx-auto mt-3 mb-3" v-on:click="deleteDate">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
     <!-- End Appointment -->
@@ -135,7 +126,7 @@
     <!-- End MessageShow -->
 
     <!-- ====== btnCrear ====== -->
-    <div class="row mx-auto mt-2">
+    <div class="row mx-auto">
       <button
         id="createAppointment"
         ref="createAppointment"
@@ -158,7 +149,8 @@ import datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
 export default {
-  name: "createAppointment",
+  name: "AppointmentWindow",
+
   components: {
     datepicker,
   },
@@ -225,12 +217,18 @@ export default {
         this.endDate != undefined &&
         new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
       ) {
-        var table = document.getElementById("fechas-tentativas");
-        var row = table.insertRow();
+        var schedulesTable = document.getElementById("tentativeDatesTable");
+        var row = schedulesTable.insertRow();
         var cell1 = row.insertCell();
         var cell2 = row.insertCell();
         cell1.appendChild(document.createTextNode(this.startDate));
         cell2.appendChild(document.createTextNode(this.endDate));
+      } else if (
+        new Date(this.startDate).getTime() > new Date(this.endDate).getTime()
+      ) {
+        this.errorFunction(
+          "Fecha inicial seleccionada es mayor a la fecha final seleccionada"
+        );
       }
     },
     sendAppointment() {
@@ -243,10 +241,14 @@ export default {
     createAppointment() {
       let selectedRoom = document.getElementById("roomSelect").value;
       let procedureType = document.getElementById("description").value;
-      if (selectedRoom != "Lugar de atención" && procedureType != "") {
-        let schedulesTable =
-          document.getElementById("fechas-tentativas").children[1];
+      let schedulesTable = document.getElementById("tentativeDatesTable")
+        .children[1];
 
+      if (
+        selectedRoom != "" &&
+        procedureType != "" &&
+        schedulesTable.firstChild != schedulesTable.lastChild
+      ) {
         let tentativeSchedules = [];
         for (var element of schedulesTable.childNodes) {
           if (schedulesTable.firstChild != element) {
@@ -301,8 +303,8 @@ export default {
       let selectedRoom = document.getElementById("roomSelect").value;
       let procedureType = document.getElementById("description").value;
       if (selectedRoom != "Lugar de atención" && procedureType != "") {
-        let schedulesTable =
-          document.getElementById("fechas-tentativas").children[1];
+        let schedulesTable = document.getElementById("tentativeDatesTable")
+          .children[1];
 
         let tentativeSchedules = [];
         for (var element of schedulesTable.childNodes) {
@@ -389,9 +391,12 @@ export default {
         });
     },
     deleteDate() {
-      let table = document.getElementById("fechas-tentativas");
-      if (table.children[1].firstChild != table.children[1].lastChild) {
-        table.children[1].lastChild.remove();
+      let schedulesTable = document.getElementById("tentativeDatesTable");
+      if (
+        schedulesTable.children[1].firstChild !=
+        schedulesTable.children[1].lastChild
+      ) {
+        schedulesTable.children[1].lastChild.remove();
       }
     },
     successFunction(messageText) {
@@ -460,8 +465,8 @@ export default {
 
 #tentativeDates {
   overflow: auto;
-  height: 250px;
-  width: 95%;
+  height: 210px;
+  width: 98%;
 }
 
 tr:nth-child(even) {

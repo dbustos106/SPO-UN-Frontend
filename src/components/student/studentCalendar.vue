@@ -51,9 +51,9 @@
         </transition>
         <!-- End deleteWindow -->
 
-        <!-- ======= TableOfAppointments ======= -->
-        <div class="row mx-auto">
-          <table id="tableOfAppointments" ref="tableOfAppointmentsRef">
+        <!-- ======= AppointmentsTable ======= -->
+        <div id="AppointmentContainer" class="row mx-auto">
+          <table id="AppointmentsTable">
             <thead>
               <tr>
                 <td>Id</td>
@@ -68,20 +68,19 @@
               <tr></tr>
             </tbody>
           </table>
-        </div>
-        <!-- End TableOfAppointments -->
-
-        <!-- ======= Buttons ======= -->
-        <div class="row ml-5 mb-3">
-          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-          <div class="col-lg">
-            <button class="btnBlue" @click="createAppointment">
-              Crear cita
-            </button>
+          <!-- ======= Buttons ======= -->
+          <div class="row">
+            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
+            <div class="col-5">
+              <button class="btnBlue" @click="createAppointment">
+                Crear cita
+              </button>
+            </div>
           </div>
+          <!-- End Buttons -->
         </div>
-        <!-- End Buttons -->
+        <!-- End AppointmentsTable -->
 
         <hr width="100%" />
         <hr width="100%" />
@@ -157,7 +156,7 @@ export default {
       }
     },
     putStudentAppointmentsInTable(appointments) {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
         var child = table.children[1].lastChild;
@@ -174,12 +173,24 @@ export default {
         let btnDetailCell = row.insertCell();
         let btnDeleteCell = row.insertCell();
         idCell.appendChild(document.createTextNode(appointments[k].id));
-        start_timeCell.appendChild(
-          document.createTextNode(appointments[k].start_time)
-        );
-        end_timeCell.appendChild(
-          document.createTextNode(appointments[k].end_time)
-        );
+
+        // start time and end time
+        if (
+          appointments[k].start_time !== null &&
+          appointments[k].end_time !== null
+        ) {
+          start_timeCell.appendChild(
+            document.createTextNode(appointments[k].start_time)
+          );
+          end_timeCell.appendChild(
+            document.createTextNode(appointments[k].end_time)
+          );
+        } else {
+          start_timeCell.appendChild(document.createTextNode("Sin Confirmar"));
+          end_timeCell.appendChild(document.createTextNode("Sin Confirmar"));
+        }
+
+        // procedure type
         procedure_typeCell.appendChild(
           document.createTextNode(appointments[k].procedure_type)
         );
@@ -369,7 +380,7 @@ export default {
       this.getStudentUnconfirmedSchedule();
     },
     backPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -382,7 +393,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       this.$data.idPage += 1;
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
@@ -411,5 +422,9 @@ export default {
   #appointmentWindow {
     left: 10%;
   }
+}
+#AppointmentContainer {
+  width: 90%;
+  overflow-x: auto;
 }
 </style>

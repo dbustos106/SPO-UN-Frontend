@@ -470,11 +470,10 @@ export default {
 }
 
 #tableOfAppointments {
-  width: 90%;
+  width: 100%;
   height: fit-content;
   position: center;
   margin-left: 50px;
-  padding: 20px 20px;
 }
 
 #deleteWindow {
