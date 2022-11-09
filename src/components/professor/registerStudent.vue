@@ -1,10 +1,9 @@
 <template>
-  <!-- ======= StudentsContainer ======= -->
-  <div id="studentsContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card">
       <div class="row no-gutters">
         <div class="col">
-          <p class="login-card-description mt-5 mb-5">Registra los datos</p>
+          <h2 class="card-description mx-auto mt-5 mb-5">Registra los datos</h2>
           <div class="form-group needs-validation" id="form">
             <div class="row mx-auto">
               <div class="col-sm-5 ml-auto">
@@ -16,10 +15,6 @@
                   id="fnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
               <div class="col-sm-5 mr-auto">
                 <input
@@ -30,10 +25,6 @@
                   id="lnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -46,8 +37,6 @@
                   <option value="CE">Cédula Extranjera</option>
                   <option value="TE">Tarjeta Extranjera</option>
                 </select>
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">Elije una opción</div>
               </div>
               <div class="col-md-5 mr-auto">
                 <input
@@ -63,10 +52,6 @@
                   placeholder="Número de documento"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -80,10 +65,6 @@
                   placeholder="Correo electrónico"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -97,10 +78,6 @@
                   placeholder="Contraseña"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
               <div class="col-sm-5 mr-auto">
                 <input
@@ -111,10 +88,6 @@
                   placeholder="Confirmar Contraseña"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -143,13 +116,8 @@
               </section>
             </div>
 
-            <div class="row mx-auto">
-              <button
-                id="registerButton"
-                type="submit"
-                class="btn btn-primary mx-auto mb-5"
-                v-on:click="register"
-              >
+            <div class="col-sm-5 mx-auto">
+              <button class="btn btn-block mx-auto mb-5" v-on:click="register">
                 Registrar
               </button>
             </div>
@@ -158,7 +126,6 @@
       </div>
     </div>
   </div>
-  <!-- End StudentsContainer -->
 </template>
 
 <script>

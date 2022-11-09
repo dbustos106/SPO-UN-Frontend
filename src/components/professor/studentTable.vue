@@ -1,13 +1,12 @@
 <template>
-  <!-- ======= studentsContainer ======= -->
-  <div id="studentsContainer" class="container">
+  <div class="container marco">
     <div class="card login-card">
       <div class="row no-gutters">
-        <p class="login-card-description mt-5 mb-5">Estudiantes a cargo</p>
+        <h2 class="card-description mx-auto mt-5 mb-5">Estudiantes a cargo</h2>
         <div class="col-12 mx-auto">
           <!-- ======= Busqueda ======= -->
           <div class="row-sm-6 ml-5 mb-3">
-            Búsqueda:
+            <span>Búsqueda: </span>
             <input id="query" v-on:keyup="filteredData" />
           </div>
           <!-- End Busqueda -->
@@ -40,7 +39,6 @@
       </div>
     </div>
   </div>
-  <!-- End studentsContainer -->
 </template>
 
 <script>
@@ -169,10 +167,6 @@ export default {
 </script>
 
 <style>
-#studentsContainer {
-  width: 70%;
-}
-
 #tableOfStudents {
   width: 90%;
   margin-left: 50px;
