@@ -1,20 +1,28 @@
 <template>
-  <!-- ======= ProcedureSearchContainer ======= -->
-  <div id="ProcedureSearchContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card">
       <div class="row no-gutters">
+        <h2 class="card-description mx-auto mt-5 mb-4">Citas disponibles</h2>
+        <span class="login-card-description ml-2"
+          >Citas disponibles en Verde</span
+        >
+
+        <span class="login-card-description ml-2"
+          >Haga click sobre el horario deseado para reservar la cita</span
+        >
+
         <!-- ======= Busqueda ======= -->
-        <div class="row-sm-6 ml-5 mt-4">
-          Búsqueda:
+        <div class="row-sm-6 mt-4 ml-2 mb-2">
+          <span>Búsqueda: </span>
           <input id="query" v-on:keyup="filteredData" />
         </div>
         <!-- End Busqueda -->
 
         <!-- ======= NoAppointmensMessage ======= -->
-        <div class="row mx-auto mt-3" v-if="noAppointmentsShow">
+        <div class="row mx-auto" v-if="noAppointmentsShow">
           <span title="error" class="noAppointmensMessage">
             <i class="fa fa-exclamation-circle"></i>
-            <span id="noAppointmentsMessageSpan"
+            <span
               >No hay citas disponibles para lo especificado. Intente buscar más
               tarde</span
             >
@@ -33,8 +41,6 @@
       </div>
     </div>
   </div>
-
-  <!-- End ProcedureSearchContainer -->
 </template>
 
 <script>
@@ -148,13 +154,8 @@ export default {
 </script>
 
 <style>
-#ProcedureSearchContainer {
-  width: 70%;
-  height: 90%;
-}
-
 .noAppointmensMessage {
-  background-color: rgb(248, 61, 61);
+  background-color: rgba(242, 0, 0, 0.7);
   z-index: 1000;
 }
 </style>

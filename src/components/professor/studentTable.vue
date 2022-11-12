@@ -1,19 +1,20 @@
 <template>
   <div class="container marco">
-    <div class="card login-card">
+    <div class="card">
       <div class="row no-gutters">
         <h2 class="card-description mx-auto mt-5 mb-5">Estudiantes a cargo</h2>
-        <div class="col-12 mx-auto">
+
+        <div id="studentContainer" class="mx-auto">
           <!-- ======= Busqueda ======= -->
-          <div class="row-sm-6 ml-5 mb-3">
+          <div class="row-sm-6 mb-3">
             <span>Búsqueda: </span>
             <input id="query" v-on:keyup="filteredData" />
           </div>
           <!-- End Busqueda -->
 
-          <!-- ======= TableOfStudents ======= -->
-          <div class="row mx-auto">
-            <table id="tableOfStudents" ref="tableOfStudentsRef">
+          <!-- ======= Studentstable ======= -->
+          <div class="TableContainer">
+            <table id="StudentsTable">
               <thead>
                 <tr>
                   <td>Nombre</td>
@@ -27,10 +28,10 @@
               </tbody>
             </table>
           </div>
-          <!-- End TableOfStudents -->
+          <!-- End StudentsTable -->
 
           <!-- ======= Buttons ======= -->
-          <div class="row ml-5 mb-3">
+          <div class="row ml-1 mb-4">
             <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
             <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
           </div>
@@ -46,7 +47,8 @@ import axios from "axios";
 import App from "../../App.vue";
 
 export default {
-  name: "studentTable",
+  name: "studentsProfessorPage",
+
   components: {},
   data() {
     return {
@@ -57,7 +59,7 @@ export default {
   },
   methods: {
     putStudentsInTable(students) {
-      let table = document.getElementById("tableOfStudents");
+      let table = document.getElementById("StudentsTable");
       for (var j in students) {
         let row = table.insertRow();
         let nameCell = row.insertCell();
@@ -121,7 +123,7 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("tableOfStudents");
+      let table = document.getElementById("StudentsTable");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -134,7 +136,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("tableOfStudents");
+      let table = document.getElementById("StudentsTable");
       this.$data.idPage += 1;
       while (table.children[1].firstChild != table.children[1].lastChild) {
         var child = table.children[1].lastChild;
@@ -143,7 +145,7 @@ export default {
       this.getStudents(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("tableOfStudents");
+      let table = document.getElementById("StudentsTable");
       var filterKey = document.getElementById("query").value;
       var filterStudents = this.$data.students;
 
@@ -167,11 +169,7 @@ export default {
 </script>
 
 <style>
-#tableOfStudents {
+#StudentContainer {
   width: 90%;
-  margin-left: 50px;
-  height: fit-content;
-  position: center;
-  padding: 20px 20px;
 }
 </style>

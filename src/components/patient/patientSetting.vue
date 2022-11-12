@@ -1,18 +1,13 @@
 <template>
-  <!-- ======= FormContainer ======= -->
-  <div id="formContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card">
       <div class="row no-gutters">
         <div class="col">
-          <p class="login-card-description mt-3">Datos</p>
+          <h2 class="card-description mt-3">Datos</h2>
           <div class="form-group needs-validation" id="form">
             <div class="row mx-auto">
               <div class="col-sm-10 mx-auto">
-                <a>Username</a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-sm-10 mx-auto">
+                <span>Nombre de usuario</span>
                 <input
                   class="form-control"
                   type="text"
@@ -21,23 +16,12 @@
                   id="fusernameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
             <div class="row mx-auto">
               <div class="col-sm-5 ml-auto">
-                <a>Nombre</a>
-              </div>
-              <div class="col-sm-5 mr-auto">
-                <a>Apellido</a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-sm-5 ml-auto">
+                <span>Nombre</span>
                 <input
                   class="form-control"
                   type="text"
@@ -46,12 +30,9 @@
                   id="fnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
               <div class="col-sm-5 mr-auto">
+                <span>Apellido</span>
                 <input
                   class="form-control"
                   type="text"
@@ -60,23 +41,12 @@
                   id="lnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
-                <a>Tipo de documento</a>
-              </div>
-              <div class="col-md-5 mr-auto">
-                <a>Número de documento</a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-md-5 ml-auto">
+                <span>Tipo de documento</span>
                 <select class="form-select mx-auto" required id="browsers">
                   <option selected disabled value="">Tipo de documento</option>
                   <option value="CC">Cédula de Ciudadanía</option>
@@ -84,10 +54,9 @@
                   <option value="CE">Cédula Extranjera</option>
                   <option value="TE">Tarjeta Extranjera</option>
                 </select>
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">Elije una opción</div>
               </div>
               <div class="col-md-5 mr-auto">
+                <span>Número de documento</span>
                 <input
                   class="form-control"
                   type="number"
@@ -101,23 +70,12 @@
                   placeholder="Número de documento"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
             <div class="row mx-auto">
               <div class="col-sm-5 ml-auto">
-                <a>Correo</a>
-              </div>
-              <div class="col-sm-5 mr-auto">
-                <a>Edad</a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-sm-5 ml-auto">
+                <span>Correo</span>
                 <input
                   class="form-control"
                   type="email"
@@ -126,12 +84,9 @@
                   placeholder="Correo electrónico"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
               <div class="col-sm-5 mr-auto">
+                <span>Edad</span>
                 <input
                   class="form-control"
                   type="number"
@@ -145,33 +100,21 @@
                   placeholder="Edad"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
-                <a>Género</a>
-              </div>
-              <div class="col-md-5 mr-auto">
-                <a>Tipo de sangre</a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-md-5 ml-auto">
+                <span>Género</span>
                 <select class="form-select mx-auto" required id="genderR">
                   <option selected disabled value="">Género</option>
                   <option value="hombre">Hombre</option>
                   <option value="mujer">Mujer</option>
                   <option value="noEspecifica">Sin especificar</option>
                 </select>
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">Elije una opción</div>
               </div>
               <div class="col-md-5 mr-auto">
+                <span>Tipo de sangre</span>
                 <select class="form-select mx-auto" required id="RHR">
                   <option selected disabled value="">Tipo de sangre</option>
                   <option value="A+">A positivo</option>
@@ -183,8 +126,6 @@
                   <option value="O+">O positivo</option>
                   <option value="O-">O negativo</option>
                 </select>
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">Elije una opción</div>
               </div>
             </div>
 
@@ -213,13 +154,8 @@
               </section>
             </div>
 
-            <div class="row mx-auto">
-              <button
-                id="registerButton"
-                type="submit"
-                class="btn btn-primary mx-auto mb-2"
-                v-on:click="update"
-              >
+            <div class="col-4 mx-auto">
+              <button class="btn btn-block mx-auto mb-2" v-on:click="update">
                 Guardar
               </button>
             </div>
@@ -228,7 +164,6 @@
       </div>
     </div>
   </div>
-  <!-- End FormContainer -->
 </template>
 
 <script>

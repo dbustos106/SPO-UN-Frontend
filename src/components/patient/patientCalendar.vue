@@ -1,9 +1,8 @@
 <template>
-  <!-- ======= AppointmentsContainer ======= -->
-  <div id="AppointmentsContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card card">
       <div class="row no-gutters">
-        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
+        <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
 
         <!-- ======= Overlay ======= -->
         <transition name="fade">
@@ -17,68 +16,90 @@
         <!-- ======= detailWindow ======= -->
         <transition name="fade">
           <div id="detailWindow" class="modal-mask" v-if="detailWindowShow">
-            <h1 class="ml-1">Cita</h1>
+            <h2 class="ml-1">Cita</h2>
 
             <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Tipo de procedimiento:</a>
-              </div>
-              <div class="col-sm-7">
-                <a id="procedure_type">Tipo de procedimiento:</a>
-              </div>
-            </div>
+              <div class="col-8">
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Tipo de procedimiento:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="procedure_type">Tipo de procedimiento:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Cita número:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idAppointment">Cita número:</a>
-              </div>
-            </div>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Cita número:</span>
+                  </div>
+                  <div class="col-sm-5">
+                    <span id="idAppointment">Cita número:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora inicio:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="start_time">Hora inicio:</a>
-              </div>
-            </div>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Hora inicio:</span>
+                  </div>
+                  <div class="col-sm-5">
+                    <span id="start_time">Hora inicio:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora fin:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="end_time">Hora fin:</a>
-              </div>
-            </div>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Hora fin:</span>
+                  </div>
+                  <div class="col-sm-5">
+                    <span id="end_time">Hora fin:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Lugar:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idPlace">Lugar:</a>
-              </div>
-            </div>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Lugar:</span>
+                  </div>
+                  <div class="col-sm-5">
+                    <span id="idPlace">Lugar:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Estudiantes:</a>
-              </div>
-              <div class="col-sm-7">
-                <a id="students">Estudiantes:</a>
-              </div>
-            </div>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Estudiantes:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="students">Estudiantes:</span>
+                  </div>
+                </div>
 
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Professor:</a>
+                <div class="row mx-auto">
+                  <div class="col-sm-4">
+                    <span>Professor:</span>
+                  </div>
+                  <div class="col-sm-5 mb-3">
+                    <span id="professor">Professor</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-5 mb-3">
-                <a id="professor">Professor</a>
+
+              <div class="col-4">
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
               </div>
             </div>
 
@@ -93,73 +114,62 @@
 
         <!-- ======= deleteWindow ======= -->
         <transition name="fade">
-          <div id="deleteWindow" class="modal-mask" v-if="deleteWindowShow">
-            <h1>Confirmación</h1>
+          <div class="modal-mask deleteWindow" v-if="deleteWindowShow">
+            <h2>Confirmación</h2>
 
-            <p>¿Desea cancelar la cita?</p>
-            <button class="btnGris mr-4" @click="deleteWindowShow = false">
-              Cerrar
-            </button>
-            <button class="btnRed" @click="deletePatientAppointment">
-              Cancelar
-            </button>
+            <span>¿Desea cancelar la cita?</span>
+            <div class="row justify-content-center">
+              <button class="btnGris mr-1" @click="deleteWindowShow = false">
+                Cerrar
+              </button>
+              <button class="btnRed ml-1" @click="deletePatientAppointment">
+                Cancelar
+              </button>
+            </div>
           </div>
         </transition>
         <!-- End deleteWindow -->
 
-        <!-- ======= Busqueda ======= -->
-        <div class="row-sm-6 ml-5 mb-3">
-          Búsqueda:
-          <input id="query" v-on:keyup="filteredData" />
-        </div>
-        <!-- End Busqueda -->
-
-        <!-- ======= TableOfAppointments ======= -->
-        <div class="row mx-auto">
-          <table id="tableOfAppointments" ref="tableOfAppointmentsRef">
-            <thead>
-              <tr>
-                <td>Id</td>
-                <td>Fecha de inicio</td>
-                <td>Fecha de fin</td>
-                <td>Tipo de procedimiento</td>
-                <td>Detalles</td>
-                <td>Cancelar</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr></tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- End TableOfAppointments -->
-
-        <!-- ======= Buttons ======= -->
-        <div class="row ml-5 mb-3">
-          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-        </div>
-        <!-- End Buttons -->
-
-        <hr width="100%" />
-        <hr width="100%" />
-
-        <!-- ======= PatientCalendarContainer section ======= -->
-        <div class="row mx-auto">
-          <div id="calendarContainer" class="container">
-            <FullCalendar
-              id="calendar"
-              class="mx-auto"
-              ref="fullCalendar"
-              :options="calendarOptions"
-            />
+        <div id="AppointmentContainer" class="mx-auto">
+          <!-- ======= AppointmentsTable ======= -->
+          <div class="TableContainer">
+            <table id="AppointmentsTable">
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Fecha de inicio</td>
+                  <td>Fecha de fin</td>
+                  <td>Tipo de procedimiento</td>
+                  <td>Detalles</td>
+                  <td>Cancelar</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+              </tbody>
+            </table>
           </div>
+          <!-- End AppointmentsTable -->
+
+          <!-- ======= Buttons ======= -->
+          <div class="row ml-1">
+            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
+          </div>
+          <!-- End Buttons -->
+
+          <hr width="100%" />
+          <hr width="100%" />
+
+          <!-- ======= PatientCalendarContainer ======= -->
+          <div class="row mb-5">
+            <FullCalendar ref="fullCalendar" :options="calendarOptions" />
+          </div>
+          <!-- End PatientCalendarContainer -->
         </div>
-        <!-- End PatientCalendarContainer -->
       </div>
     </div>
   </div>
-  <!-- End AppointmentsContainer -->
 </template>
 
 <script>
@@ -209,7 +219,7 @@ export default {
       }
     },
     putPatientAppointmentInTable(appointments) {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       for (var k in appointments) {
         let id = appointments[k].id;
         let row = table.insertRow();
@@ -331,6 +341,7 @@ export default {
           console.log("eliminada con exito");
         })
         .catch((err) => {
+          console.log(err);
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
               this.deletePatientAppointment();
@@ -417,7 +428,7 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -430,7 +441,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       this.$data.idPage += 1;
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
@@ -440,7 +451,7 @@ export default {
       this.getPatientAppointments(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       var filterKey = document.getElementById("query").value;
       var filterAppointments = this.$data.appointments;
 
@@ -463,20 +474,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#AppointmentsContainer {
-  width: 70%;
-}
-
-#tableOfAppointments {
-  width: 100%;
-  height: fit-content;
-  position: center;
-  margin-left: 50px;
-}
-
-#deleteWindow {
-  text-align: center;
-}
-</style>

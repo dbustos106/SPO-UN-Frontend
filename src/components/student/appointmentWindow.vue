@@ -1,14 +1,14 @@
 <template>
   <div class="container marco-modal">
-    <h2 id="titleAppointmentWindow" class="card-description mx-auto mb-3"></h2>
+    <h2 id="titleAppointmentWindow"></h2>
     <!-- ====== Appointment ====== -->
-    <div class="row mx-auto mb-3">
+    <div class="row mx-auto mb-1 mt-2">
       <div id="dataAppointment" class="col mr-1" style="text-align: center">
         <h3 ref="id" class="text mb-3">Información de la cita</h3>
         <div class="form-horizontal">
           <div class="form-group">
             <div class="col-12">
-              <label>Tipo de procedimiento:</label>
+              <span>Tipo de procedimiento:</span>
             </div>
             <div class="col-12">
               <textarea
@@ -22,7 +22,7 @@
           </div>
           <div class="form-group">
             <div class="col-12">
-              <label>Consultorio</label>
+              <span>Consultorio</span>
             </div>
             <div class="col-12">
               <select
@@ -42,7 +42,6 @@
         <h3 class="text mb-3">Fechas tentativas</h3>
 
         <!-- ======= tentativeTable ======= -->
-        <!--<div class="row mb-2">-->
         <div id="tentativeDates" class="container mx-auto mb-1">
           <table id="tentativeDatesTable">
             <thead>
@@ -56,44 +55,38 @@
             </tbody>
           </table>
         </div>
-        <!--</div>-->
         <!-- End tentativeTable -->
 
+        <!-- ======= DatePicker ======= -->
         <div class="container mx-auto mt-1">
-          <!-- ======= DatePicker ======= -->
           <div class="row mb-2">
-            <div class="col-5">
-              <datepicker
-                v-model="startDate"
-                name="startTime"
-                showNowButton
-                :minDate="new Date()"
-                modelType="yyyy-MM-dd HH:mm:ss"
-                placeholder="Fecha de inicio"
-              >
-              </datepicker>
-            </div>
-            <div class="col-5">
-              <datepicker
-                v-model="endDate"
-                name="endTime"
-                showNowButton
-                :minDate="new Date()"
-                modelType="yyyy-MM-dd HH:mm:ss"
-                placeholder="Fecha de fin"
-              >
-              </datepicker>
-            </div>
-            <div class="col-1">
-              <button class="btnGrisTq" @click="addDate">^</button>
-            </div>
+            <datepicker
+              v-model="startDate"
+              name="startTime"
+              class="datePicker"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de inicio"
+            >
+            </datepicker>
+            <datepicker
+              v-model="endDate"
+              name="endTime"
+              class="datePicker"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de fin"
+            >
+            </datepicker>
+            <button class="btnGrisTq" @click="addDate">^</button>
           </div>
-          <!-- End DatePicker -->
-
           <button class="btnBlue mx-auto mt-3 mb-3" v-on:click="deleteDate">
             Eliminar
           </button>
         </div>
+        <!-- End DatePicker -->
       </div>
     </div>
     <!-- End Appointment -->
@@ -128,13 +121,15 @@
     <!-- ====== btnCrear ====== -->
     <div class="row mx-auto">
       <button
-        id="createAppointment"
-        ref="createAppointment"
+        id="btnCreateAppointment"
         class="btnBlue mx-auto"
         v-on:click="sendAppointment"
       >
         Crear cita
       </button>
+    </div>
+    <div class="row mx-auto">
+      <button class="btnGris mx-auto" @click="closeWindow">Cerrar</button>
     </div>
     <!-- End btnCrear -->
   </div>
@@ -153,6 +148,9 @@ export default {
 
   components: {
     datepicker,
+  },
+  emits: {
+    close: null,
   },
   data() {
     return {
@@ -176,6 +174,35 @@ export default {
     },
   },
   methods: {
+    addDate() {
+      if (
+        this.startDate != undefined &&
+        this.endDate != undefined &&
+        new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
+      ) {
+        var schedulesTable = document.getElementById("tentativeDatesTable");
+        var row = schedulesTable.insertRow();
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        cell1.appendChild(document.createTextNode(this.startDate));
+        cell2.appendChild(document.createTextNode(this.endDate));
+      } else if (
+        new Date(this.startDate).getTime() > new Date(this.endDate).getTime()
+      ) {
+        this.errorFunction(
+          "Fecha inicial seleccionada es mayor a la fecha final seleccionada"
+        );
+      }
+    },
+    deleteDate() {
+      let schedulesTable = document.getElementById("tentativeDatesTable");
+      if (
+        schedulesTable.children[1].firstChild !=
+        schedulesTable.children[1].lastChild
+      ) {
+        schedulesTable.children[1].lastChild.remove();
+      }
+    },
     getRoomOptions() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
@@ -210,26 +237,6 @@ export default {
             }
           }
         });
-    },
-    addDate() {
-      if (
-        this.startDate != undefined &&
-        this.endDate != undefined &&
-        new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
-      ) {
-        var schedulesTable = document.getElementById("tentativeDatesTable");
-        var row = schedulesTable.insertRow();
-        var cell1 = row.insertCell();
-        var cell2 = row.insertCell();
-        cell1.appendChild(document.createTextNode(this.startDate));
-        cell2.appendChild(document.createTextNode(this.endDate));
-      } else if (
-        new Date(this.startDate).getTime() > new Date(this.endDate).getTime()
-      ) {
-        this.errorFunction(
-          "Fecha inicial seleccionada es mayor a la fecha final seleccionada"
-        );
-      }
     },
     sendAppointment() {
       if (this.id != -1) {
@@ -342,7 +349,7 @@ export default {
             }
           )
           .then(() => {
-            this.successFunction("Cita creada con éxito");
+            this.successFunction("Cita guardada con éxito");
           })
           .catch((err) => {
             if (err.response.status == 403) {
@@ -390,15 +397,6 @@ export default {
           }
         });
     },
-    deleteDate() {
-      let schedulesTable = document.getElementById("tentativeDatesTable");
-      if (
-        schedulesTable.children[1].firstChild !=
-        schedulesTable.children[1].lastChild
-      ) {
-        schedulesTable.children[1].lastChild.remove();
-      }
-    },
     successFunction(messageText) {
       this.$data.errorShow = false;
       this.$data.successShow = true;
@@ -417,14 +415,17 @@ export default {
         this.$data.errorShow = false;
       }, 5000);
     },
+    closeWindow() {
+      this.$emit("close");
+    },
   },
   mounted() {
     this.getRoomOptions();
     if (this.id != -1) {
       this.getStudentAppointmentById(this.id);
-      document.getElementById("createAppointment").innerHTML = "Guardar";
+      document.getElementById("btnCreateAppointment").innerHTML = "Guardar";
     } else {
-      document.getElementById("createAppointment").innerHTML = "Crear cita";
+      document.getElementById("btnCreateAppointment").innerHTML = "Crear cita";
     }
     document.getElementById("titleAppointmentWindow").innerHTML = this.title;
   },
@@ -467,10 +468,6 @@ export default {
   overflow: auto;
   height: 210px;
   width: 98%;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
 }
 
 .textarea {

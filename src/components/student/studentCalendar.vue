@@ -24,52 +24,54 @@
               ref="appointmentWindow"
               :id="idAppointment"
               :title="titleAppointmentWindow"
+              @close="updateData"
             >
             </appointmentWindow>
-            <div class="row">
-              <button class="btnGris mx-auto" @click="updateData">
-                Cerrar
-              </button>
-            </div>
           </div>
         </transition>
         <!-- End appointmentWindow -->
 
         <!-- ======= deleteWindow ======= -->
         <transition name="fade">
-          <div id="deleteWindow" class="modal-mask" v-if="deleteWindowShow">
+          <div class="modal-mask deleteWindow" v-if="deleteWindowShow">
             <h2>Confirmación</h2>
-            <p>¿Desea cancelar la cita?</p>
-            <button class="btnGris mr-4" @click="deleteWindowShow = false">
-              Cerrar
-            </button>
+            <span>¿Desea cancelar la cita?</span>
+            <div class="row justify-content-center">
+              <button class="btnGris mr-1" @click="deleteWindowShow = false">
+                Cerrar
+              </button>
 
-            <button class="btnRed" @click="deleteStudentAppointment">
-              Cancelar
-            </button>
+              <button class="btnRed ml-1" @click="cancelStudentAppointment">
+                Cancelar
+              </button>
+            </div>
           </div>
         </transition>
         <!-- End deleteWindow -->
 
-        <!-- ======= AppointmentsTable ======= -->
-        <div id="AppointmentContainer" class="row mx-auto">
-          <table id="AppointmentsTable">
-            <thead>
-              <tr>
-                <td>Id</td>
-                <td>Fecha de inicio</td>
-                <td>Fecha de fin</td>
-                <td>Tipo de procedimiento</td>
-                <td>Detalles</td>
-                <td>Cancelar</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr></tr>
-            </tbody>
-          </table>
+        <div id="AppointmentContainer" class="mx-auto">
+          <!-- ======= AppointmentsTable ======= -->
+          <div class="TableContainer">
+            <table id="AppointmentsTable">
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Fecha de inicio</td>
+                  <td>Fecha de fin</td>
+                  <td>Tipo de procedimiento</td>
+                  <td>Detalles</td>
+                  <td>Cancelar</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End AppointmentsTable -->
+
           <!-- ======= Buttons ======= -->
-          <div class="row">
+          <div class="row ml-1">
             <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
             <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
             <div class="col-5">
@@ -79,24 +81,16 @@
             </div>
           </div>
           <!-- End Buttons -->
-        </div>
-        <!-- End AppointmentsTable -->
 
-        <hr width="100%" />
-        <hr width="100%" />
+          <hr width="100%" />
+          <hr width="100%" />
 
-        <!-- ======= StudentCalendarContainer section ======= -->
-        <div class="row mx-auto">
-          <div id="calendarContainer" class="container">
-            <FullCalendar
-              id="calendar"
-              class="mx-auto"
-              ref="fullCalendar"
-              :options="calendarOptions"
-            />
+          <!-- ======= StudentCalendarContainer ======= -->
+          <div class="row mb-5">
+            <FullCalendar ref="fullCalendar" :options="calendarOptions" />
           </div>
+          <!-- End StudentCalendarContainer -->
         </div>
-        <!-- End StudentCalendarContainer -->
       </div>
     </div>
   </div>
@@ -142,7 +136,6 @@ export default {
   },
   methods: {
     putStudentScheduleInCalendar(schedules, color) {
-      this.calendarOptions.events = [];
       for (var i in schedules) {
         this.calendarOptions.events = [
           ...this.calendarOptions.events,
@@ -222,7 +215,7 @@ export default {
         btnDeleteCell.appendChild(newButtonDelete);
       }
     },
-    deleteStudentAppointment() {
+    cancelStudentAppointment() {
       // close modal window
       this.$data.deleteWindowShow = false;
       // delete row from table
@@ -230,8 +223,12 @@ export default {
 
       // delete event from calendar
       let calendarApi = this.$refs.fullCalendar.getApi();
-      let event = calendarApi.getEventById(this.$data.idAppointment);
-      event.remove();
+
+      var event = calendarApi.getEventById(this.$data.idAppointment);
+      while (event != null) {
+        event.remove();
+        event = calendarApi.getEventById(this.$data.idAppointment);
+      }
 
       // send request
       axios
@@ -254,7 +251,7 @@ export default {
         .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
-              this.deleteStudentAppointment();
+              this.cancelStudentAppointment();
             } else {
               this.$router.push("/login");
             }
@@ -374,6 +371,7 @@ export default {
       this.$data.titleAppointmentWindow = "Crear cita";
     },
     updateData() {
+      this.calendarOptions.events = [];
       this.$data.appointmentWindowShow = false;
       this.getStudentAppointments(0);
       this.getStudentSchedule();
@@ -404,6 +402,7 @@ export default {
     },
   },
   mounted() {
+    this.calendarOptions.events = [];
     this.getStudentAppointments(0);
     this.getStudentSchedule();
     this.getStudentUnconfirmedSchedule();
@@ -412,19 +411,17 @@ export default {
 </script>
 
 <style>
+#AppointmentContainer {
+  width: 90%;
+}
 #appointmentWindow {
-  top: 2%;
-  left: 24%;
+  top: 5%;
+  left: 27%;
   width: 65%;
-  height: 95%;
 }
 @media (max-width: 767px) {
   #appointmentWindow {
     left: 10%;
   }
-}
-#AppointmentContainer {
-  width: 90%;
-  overflow-x: auto;
 }
 </style>

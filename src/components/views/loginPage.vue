@@ -1,7 +1,7 @@
 <template>
-  <section class="sectionMarco">
-    <div class="container marco">
-      <div class="card">
+  <section id="loginSection" class="sectionMarco">
+    <div class="container marco align-items-center">
+      <div class="card mt-5">
         <div class="row no-gutters">
           <div class="col-md-5">
             <img src="../../assets/img/login.jpg" class="card-img" />
@@ -154,3 +154,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#loginSection {
+  padding-left: 0px;
+}
+</style>

@@ -1,61 +1,38 @@
 <template>
-  <div>
-    <!-- ======= Overlay ======= -->
-    <transition name="fade">
-      <div class="modal-overlay" v-show="showModal"></div>
-    </transition>
-    <!-- End Overlay -->
+  <!-- ======= Overlay ======= -->
+  <transition name="fade">
+    <div class="modal-overlay" v-show="showModal"></div>
+  </transition>
+  <!-- End Overlay -->
 
-    <!-- ======= confirmWindow ======= -->
-    <transition name="fade">
-      <div id="confirmWindow" class="modal-mask" v-show="showModal">
-        <div class="row">
-          <label id="modalAppointmentTitle">Hola</label>
-          <label> ¿Desea reservar esta cita? </label>
-        </div>
-        <div class="row-10 mx-auto">
-          <button class="btnGreen mr-3" v-on:click="reserveAppointment()">
-            Si
-          </button>
-          <button class="btnRed" v-on:click="showModal = false">No</button>
-        </div>
+  <!-- ======= confirmWindow ======= -->
+  <transition name="fade">
+    <div class="modal-mask confirmWindow" v-show="showModal">
+      <div class="row">
+        <label id="modalAppointmentTitle">Hola</label>
+        <label> ¿Desea reservar esta cita? </label>
       </div>
-    </transition>
-    <!-- End confirmWindow -->
-  </div>
-
-  <!-- ======= ProcedureSearchCalendarContainer ======= -->
-  <div id="ProcedureSearchCalendarContainer" class="container">
-    <div class="card login-card">
-      <div class="row no-gutters">
-        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
-        <span
-          class="col-12"
-          id="AppointmetReserveSuccessMessage"
-          v-if="showConfirmMessage"
-        >
-          <label>Cita reservada con éxito. Revise su cronograma</label>
-        </span>
-
-        <label class="login-card-description mx-auto" id="labelUp1"
-          >Citas disponibles en
-        </label>
-        <label class="login-card-description mx-auto" id="labelUp3"
-          >verde</label
-        >
-
-        <label class="login-card-description" id="labelUp2"
-          >Haga click sobre el horario deseado para reservar la cita</label
-        >
-        <div class="col-11 mx-auto">
-          <FullCalendar
-            ref="procedureCalendar"
-            id="patientProcedureCalendar"
-            :options="calendarOptions"
-          />
-        </div>
+      <div class="row-10 mx-auto">
+        <button class="btnGreen mr-3" v-on:click="reserveAppointment()">
+          Si
+        </button>
+        <button class="btnRed" v-on:click="showModal = false">No</button>
       </div>
     </div>
+  </transition>
+  <!-- End confirmWindow -->
+
+  <!-- ======= ProcedureSearchCalendarContainer ======= -->
+  <span
+    class="col-12"
+    id="AppointmetReserveSuccessMessage"
+    v-if="showConfirmMessage"
+  >
+    Cita reservada con éxito. Revise su cronograma
+  </span>
+
+  <div class="row mb-5">
+    <FullCalendar ref="procedureCalendar" :options="calendarOptions" />
   </div>
   <!-- End ProcedureSearchCalendarContainer -->
 </template>
@@ -72,6 +49,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 export default {
   name: "patientProcedureCalendar",
+
   components: { FullCalendar },
   emits: {
     confirm: null,
@@ -203,30 +181,7 @@ export default {
 </script>
 
 <style>
-#ProcedureSearchCalendarContainer {
-  width: 100%;
-  height: 100%;
-  z-index: 50;
-}
-
 #AppointmetReserveSuccessMessage {
   background-color: #73e600;
-}
-
-#labelUp1 {
-  font-size: 1.3em;
-}
-
-#labelUp2 {
-  font-size: 1.3em;
-}
-
-#labelUp3 {
-  font-size: 1.3em;
-  color: rgb(98, 228, 65);
-}
-
-#confirmWindow {
-  text-align: center;
 }
 </style>

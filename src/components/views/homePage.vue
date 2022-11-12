@@ -1,6 +1,6 @@
 <template>
-  <section class="sectionMarco">
-    <div class="container marco">
+  <section id="homeSection" class="sectionMarco">
+    <div id="welcomeContainer" class="container marco align-items-center">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
         <h3>
@@ -15,3 +15,9 @@
     </div>
   </section>
 </template>
+
+<style>
+#homeSection {
+  padding-left: 0px;
+}
+</style>

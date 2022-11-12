@@ -1,5 +1,5 @@
 <template>
-  <section class="sectionMarco">
+  <section id="signUpSection" class="sectionMarco">
     <div class="container marco">
       <div class="card">
         <div class="row no-gutters">
@@ -281,3 +281,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#signUpSection {
+  padding-left: 0px;
+}
+</style>

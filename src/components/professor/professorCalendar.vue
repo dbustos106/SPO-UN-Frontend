@@ -1,9 +1,9 @@
 <template>
   <!-- ======= TableContainer ======= -->
-  <div id="AppointmentsContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card card">
       <div class="row no-gutters">
-        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
+        <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
 
         <!-- ======= Overlay ======= -->
         <transition name="fade">
@@ -14,71 +14,92 @@
         <!-- ======= detailWindow ======= -->
         <transition name="fade">
           <div id="detailWindow" class="modal-mask" v-if="detailWindow">
-            <h1 class="ml-1">Cita</h1>
+            <h2 class="ml-1">Cita</h2>
 
             <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Tipo de procedimiento:</a>
+              <div class="col-8">
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Tipo de procedimiento:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="procedure_type">Tipo de procedimiento:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Cita número:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="idAppointment">Cita número:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Hora inicio:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="start_time">Hora inicio:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Hora fin:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="end_time">Hora fin:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Lugar:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="idPlace">Lugar:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Estudiantes:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="students">Estudiantes:</span>
+                  </div>
+                </div>
+
+                <div class="row mx-auto">
+                  <div class="col-sm-5">
+                    <span>Professor:</span>
+                  </div>
+                  <div class="col-sm-7 mb-3">
+                    <span id="professor">Professor</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-7">
-                <a id="procedure_type">Tipo de procedimiento:</a>
+
+              <div class="col-4">
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
+                <span> holi </span>
               </div>
             </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Cita número:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idAppointment">Cita número:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora inicio:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="start_time">Hora inicio:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Hora fin:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="end_time">Hora fin:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Lugar:</a>
-              </div>
-              <div class="col-sm-5">
-                <a id="idPlace">Lugar:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Estudiantes:</a>
-              </div>
-              <div class="col-sm-7">
-                <a id="students">Estudiantes:</a>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-sm-4">
-                <a>Professor:</a>
-              </div>
-              <div class="col-sm-5 mb-3">
-                <a id="professor">Professor</a>
-              </div>
-            </div>
-
             <div class="row mx-auto">
               <button class="btnGris mx-auto" @click="detailWindow = false">
                 Cerrar
@@ -88,55 +109,42 @@
         </transition>
         <!-- End detailWindow -->
 
-        <!-- ======= Busqueda ======= -->
-        <div class="row-sm-6 ml-5 mb-3">
-          Búsqueda:
-          <input id="query" v-on:keyup="filteredData" />
-        </div>
-        <!-- End Busqueda -->
+        <div id="AppointmentContainer" class="mx-auto">
+          <!-- ======= AppointmentsTable ======= -->
+          <div class="TableContainer">
+            <table id="AppointmentsTable">
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Fecha de inicio</td>
+                  <td>Fecha de fin</td>
+                  <td>Tipo de procedimiento</td>
+                  <td>Detalles</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End AppointmentsTable -->
 
-        <!-- ======= TableOfAppointments ======= -->
-        <div class="row mx-auto">
-          <table id="tableOfAppointments" ref="tableOfAppointmentsRef">
-            <thead>
-              <tr>
-                <td>Id</td>
-                <td>Fecha de inicio</td>
-                <td>Fecha de fin</td>
-                <td>Tipo de procedimiento</td>
-                <td>Detalles</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr></tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- End TableOfAppointments -->
+          <!-- ======= Buttons ======= -->
+          <div class="row ml-1">
+            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
+          </div>
+          <!-- End Buttons -->
 
-        <!-- ======= Buttons ======= -->
-        <div class="row ml-5 mb-3">
-          <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-          <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-        </div>
-        <!-- End Buttons -->
+          <hr width="100%" />
+          <hr width="100%" />
 
-        <hr width="100%" />
-        <hr width="100%" />
-
-        <!-- ======= ProfessorCalendarContainer section ======= -->
-        <div class="row mx-auto">
-          <!-- ======= ProfessorCalendarContainer section ======= -->
-          <div id="calendarContainer" class="container">
-            <FullCalendar
-              id="calendar"
-              class="mx-auto my-auto"
-              :options="calendarOptions"
-            />
+          <!-- ======= ProfessorCalendarContainer ======= -->
+          <div class="row mb-5">
+            <FullCalendar class="mx-auto my-auto" :options="calendarOptions" />
           </div>
           <!-- End ProfessorCalendarContainer -->
         </div>
-        <!-- End ProfessorCalendarContainer -->
       </div>
     </div>
   </div>
@@ -190,7 +198,7 @@ export default {
       }
     },
     putProfessorAppointmentInTable(appointments) {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       for (var k in appointments) {
         let id = appointments[k].id;
         let row = table.insertRow();
@@ -345,7 +353,7 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -358,7 +366,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       this.$data.idPage += 1;
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
@@ -368,7 +376,7 @@ export default {
       this.getProfessorAppointments(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("tableOfAppointments");
+      let table = document.getElementById("AppointmentsTable");
       var filterKey = document.getElementById("query").value;
       var filterAppointments = this.$data.appointments;
 
@@ -393,7 +401,7 @@ export default {
 </script>
 
 <style>
-#AppointmentsContainer {
-  width: 70%;
+#AppointmentContainer {
+  width: 90%;
 }
 </style>

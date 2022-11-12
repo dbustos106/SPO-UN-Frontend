@@ -1,6 +1,6 @@
 <template>
-  <section class="sectionMarco">
-    <div class="container marco">
+  <section id="verifySection" class="sectionMarco">
+    <div class="container marco align-items-center">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
         <h3>Su cuenta ha sido verificada con exito!</h3>
@@ -55,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#verifySection {
+  padding-left: 0px;
+}
+</style>

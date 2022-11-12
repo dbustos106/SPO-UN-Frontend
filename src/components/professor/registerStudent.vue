@@ -162,43 +162,41 @@ export default {
         if (password !== confirmPassword) {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
-          this.sendData(name, lastName, email, password, cedula, tipoCedula);
+          let datos = {
+            username: email.substring(0, email.indexOf("@")),
+            password: password,
+            name: name + "-" + lastName,
+            email: email,
+            document_type: tipoCedula,
+            document_number: cedula,
+            professor_id: parseInt(sessionStorage.Id),
+          };
+          let formBody = JSON.stringify(datos);
+
+          axios
+            .post(App.methods.getBackUrl() + "/register/student", formBody, {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.AccessToken,
+              },
+            })
+            .then(() => {
+              this.successFunction("Registro Exitoso");
+            })
+            .catch((err) => {
+              console.log(err);
+              this.errorFunction("Error, correo o documento ya registrado");
+              if (err.response.status == 403) {
+                if (App.methods.requestRefreshToken()) {
+                  this.register();
+                } else {
+                  this.$router.push("/login");
+                }
+              }
+            });
         }
       }
-    },
-    async sendData(name, lastName, email, password, cedula, tipoCedula) {
-      let datos = {
-        username: email.substring(0, email.indexOf("@")),
-        password: password,
-        name: name + "-" + lastName,
-        email: email,
-        document_type: tipoCedula,
-        document_number: cedula,
-        professor_id: parseInt(sessionStorage.Id),
-      };
-      let formBody = JSON.stringify(datos);
-
-      axios
-        .post(App.methods.getBackUrl() + "/register/student", formBody, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
-        .then(() => {
-          this.successFunction("Registro Exitoso");
-        })
-        .catch((err) => {
-          this.errorFunction("Error, correo o documento ya registrado");
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.register();
-            } else {
-              this.$router.push("/login");
-            }
-          }
-        });
     },
     successFunction(messageText) {
       this.$data.errorShow = false;
@@ -221,11 +219,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#studentsContainer {
-  width: 80%;
-  margin-top: 40px;
-  height: fit-content;
-}
-</style>

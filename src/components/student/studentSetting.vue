@@ -16,10 +16,6 @@
                   id="fnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
               <div class="col-sm-5 mr-auto">
                 <span>Apellido</span>
@@ -31,12 +27,9 @@
                   id="lnameR"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
+
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
                 <span>Tipo de documento</span>
@@ -47,8 +40,6 @@
                   <option value="CE">Cédula Extranjera</option>
                   <option value="TE">Tarjeta Extranjera</option>
                 </select>
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">Elije una opción</div>
               </div>
               <div class="col-md-5 mr-auto">
                 <span>Número de documento</span>
@@ -65,10 +56,6 @@
                   placeholder="Número de documento"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -83,10 +70,6 @@
                   placeholder="Correo electrónico"
                   required
                 />
-                <div class="valid-feedback">Válido</div>
-                <div class="invalid-feedback">
-                  No puede estar vacía la casilla
-                </div>
               </div>
             </div>
 
@@ -132,7 +115,8 @@ import axios from "axios";
 import App from "../../App.vue";
 
 export default {
-  name: "registro-estudiante",
+  name: "studentSettingPage",
+
   data() {
     return {
       errorShow: false,
