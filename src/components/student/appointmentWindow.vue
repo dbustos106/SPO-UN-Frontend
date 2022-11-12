@@ -35,6 +35,14 @@
               </select>
             </div>
           </div>
+          <div class="form-group" v-if="patientShow">
+            <div class="col-12">
+              <span>Paciente</span>
+            </div>
+            <div class="col-12">
+              <span id="patientName">{{ patientName }}</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -157,6 +165,8 @@ export default {
       rooms: {},
       errorShow: false,
       successShow: false,
+      patientShow: false,
+      patientName: "",
       startDate: ref(),
       endDate: ref(),
     };
@@ -273,7 +283,7 @@ export default {
             procedure_type: procedureType,
             room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
-          tentativeSchedules: tentativeSchedules,
+          tentativeScheduleDTOS: tentativeSchedules,
           students: [sessionStorage.Username],
         };
         let formAppointmentBody = JSON.stringify(newAppointment);
@@ -331,7 +341,7 @@ export default {
             procedure_type: procedureType,
             room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
-          tentativeSchedules: tentativeSchedules,
+          tentativeScheduleDTOS: tentativeSchedules,
           students: [sessionStorage.Username],
         };
         let formAppointmentBody = JSON.stringify(newAppointment);
@@ -381,7 +391,12 @@ export default {
           document.getElementById("description").value =
             fullAppointment.appointmentDTO.procedure_type;
 
-          for (var schedule of fullAppointment.tentativeSchedules) {
+          if (fullAppointment.appointmentDTO.patient_id != null) {
+            this.$data.patientShow = true;
+            this.$data.patientName = fullAppointment.patient;
+          }
+
+          for (var schedule of fullAppointment.tentativeScheduleDTOS) {
             this.startDate = schedule.start_time;
             this.endDate = schedule.end_time;
             this.addDate();
@@ -468,11 +483,5 @@ export default {
   overflow: auto;
   height: 210px;
   width: 98%;
-}
-
-.textarea {
-  width: 100%;
-  background-color: #f8f8f8;
-  font-size: 15px;
 }
 </style>

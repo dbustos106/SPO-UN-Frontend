@@ -24,7 +24,7 @@
                   <div class="col-sm-5">
                     <span>Tipo de procedimiento:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="procedure_type">Tipo de procedimiento:</span>
                   </div>
                 </div>
@@ -33,7 +33,7 @@
                   <div class="col-sm-5">
                     <span>Cita número:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="idAppointment">Cita número:</span>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="col-sm-5">
                     <span>Hora inicio:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="start_time">Hora inicio:</span>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                   <div class="col-sm-5">
                     <span>Hora fin:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="end_time">Hora fin:</span>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                   <div class="col-sm-5">
                     <span>Lugar:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="idPlace">Lugar:</span>
                   </div>
                 </div>
@@ -69,17 +69,26 @@
                   <div class="col-sm-5">
                     <span>Estudiantes:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="students">Estudiantes:</span>
                   </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row">
                   <div class="col-sm-5">
                     <span>Professor:</span>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-7">
                     <span id="professor">Professor</span>
+                  </div>
+                </div>
+
+                <div class="row mb-4">
+                  <div class="col-sm-5">
+                    <span>Paciente:</span>
+                  </div>
+                  <div class="col-sm-7">
+                    <span id="patient">Paciente</span>
                   </div>
                 </div>
               </div>
@@ -88,16 +97,16 @@
                 <div class="row mt-3">
                   <span class="mx-auto">Calificación:</span>
                 </div>
-                <div class="col mt-3">
+                <div class="mx-auto mt-3">
                   <textarea
                     class="textarea"
                     ref="feedback"
-                    rows="5"
-                    cols="45"
+                    rows="4"
+                    cols="25"
                     id="feedback"
                   ></textarea>
                 </div>
-                <div class="col">
+                <div class="mx-auto">
                   <p class="clasificacion">
                     <input
                       id="radio1"
@@ -105,36 +114,44 @@
                       name="estrellas"
                       value="5"
                     />
-                    <label id="star" for="radio1">★</label>
+                    <label class="star" for="radio1">★</label>
                     <input
                       id="radio2"
                       type="radio"
                       name="estrellas"
                       value="4"
                     />
-                    <label id="star" for="radio2">★</label>
+                    <label class="star" for="radio2">★</label>
                     <input
                       id="radio3"
                       type="radio"
                       name="estrellas"
                       value="3"
                     />
-                    <label id="star" for="radio3">★</label>
+                    <label class="star" for="radio3">★</label>
                     <input
                       id="radio4"
                       type="radio"
                       name="estrellas"
                       value="2"
                     />
-                    <label id="star" for="radio4">★</label>
+                    <label class="star" for="radio4">★</label>
                     <input
                       id="radio5"
                       type="radio"
                       name="estrellas"
                       value="1"
                     />
-                    <label id="star" for="radio5">★</label>
+                    <label class="star" for="radio5">★</label>
                   </p>
+                </div>
+                <div class="row mx-auto mb-2">
+                  <button
+                    class="btnBlue mx-auto"
+                    v-on:click="qualifyAppointment"
+                  >
+                    Enviar
+                  </button>
                 </div>
               </div>
             </div>
@@ -158,7 +175,7 @@
               <button class="btnGris mr-1" @click="deleteWindowShow = false">
                 Cerrar
               </button>
-              <button class="btnRed ml-1" @click="deletePatientAppointment">
+              <button class="btnRed ml-1" @click="cancelPatientAppointment">
                 Cancelar
               </button>
             </div>
@@ -329,8 +346,19 @@ export default {
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
             fullAppointment.professor;
+          document.getElementById("patient").textContent =
+            fullAppointment.patient;
           document.getElementById("feedback").textContent =
             fullAppointment.appointmentDTO.patient_feedback;
+          document
+            .querySelectorAll(`input[name="estrellas"]`)
+            .forEach((element) => {
+              if (
+                element.value == fullAppointment.appointmentDTO.patient_rating
+              ) {
+                element.checked = true;
+              }
+            });
 
           let students = "";
           for (var student of fullAppointment.students) {
@@ -349,7 +377,7 @@ export default {
           }
         });
     },
-    deletePatientAppointment() {
+    cancelPatientAppointment() {
       // close modal window
       this.$data.deleteWindowShow = false;
       // delete row from table
@@ -379,10 +407,53 @@ export default {
           console.log("eliminada con exito");
         })
         .catch((err) => {
-          console.log(err);
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
-              this.deletePatientAppointment();
+              this.cancelPatientAppointment();
+            } else {
+              this.$router.push("/login");
+            }
+          }
+        });
+    },
+    qualifyAppointment() {
+      var patient_feedback = document.getElementById("feedback").value;
+      var patient_rating = 0;
+      document
+        .querySelectorAll(`input[name="estrellas"]`)
+        .forEach((element) => {
+          if (element.checked) {
+            patient_rating = element.value;
+          }
+        });
+      let datos = {
+        patient_feedback: patient_feedback,
+        patient_rating: patient_rating,
+      };
+      let formBody = JSON.stringify(datos);
+
+      axios
+        .put(
+          App.methods.getBackUrl() +
+            "/appointment/" +
+            this.$data.idAppointment +
+            "/qualify/",
+          formBody,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          }
+        )
+        .then(() => {
+          console.log("envio exitoso");
+        })
+        .catch((err) => {
+          if (err.response.status == 403) {
+            if (App.methods.requestRefreshToken()) {
+              this.cancelStudentAppointment();
             } else {
               this.$router.push("/login");
             }
@@ -512,27 +583,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.clasificacion {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-}
-
-.clasificacion input[type="radio"]:checked ~ label {
-  color: orange;
-}
-.clasificacion input[type="radio"] {
-  /*visibility: hidden;*/
-  display: none;
-}
-
-label {
-  color: grey;
-}
-
-label:hover,
-label:hover ~ label {
-  color: orange;
-}
-</style>

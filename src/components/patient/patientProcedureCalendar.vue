@@ -9,8 +9,8 @@
   <transition name="fade">
     <div class="modal-mask confirmWindow" v-show="showModal">
       <div class="row">
-        <label id="modalAppointmentTitle">Hola</label>
-        <label> ¿Desea reservar esta cita? </label>
+        <span id="modalAppointmentTitle">Hola</span>
+        <span> ¿Desea reservar esta cita? </span>
       </div>
       <div class="row-10 mx-auto">
         <button class="btnGreen mr-3" v-on:click="reserveAppointment()">

@@ -422,7 +422,7 @@ export default {
 }
 @media (max-width: 767px) {
   #appointmentWindow {
-    left: 10%;
+    left: 25%;
   }
 }
 </style>

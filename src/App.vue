@@ -495,6 +495,37 @@ table tbody tr:nth-child(odd) {
   color: #000000 !important;
 }
 
+.textarea {
+  width: 100%;
+  background-color: #f8f8f8;
+  font-size: 15px;
+}
+
+/*--------------------------------------------------------------
+# Calsificacion
+--------------------------------------------------------------*/
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: orange;
+}
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+.star:hover,
+.star:hover ~ label {
+  color: orange;
+}
+
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
