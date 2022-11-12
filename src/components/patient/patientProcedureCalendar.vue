@@ -23,13 +23,11 @@
   <!-- End confirmWindow -->
 
   <!-- ======= ProcedureSearchCalendarContainer ======= -->
-  <span
-    class="col-12"
-    id="AppointmetReserveSuccessMessage"
-    v-if="showConfirmMessage"
-  >
-    Cita reservada con éxito. Revise su cronograma
-  </span>
+  <div class="row-sm-12 mb-5">
+    <span id="AppointmetReserveSuccessMessage" v-if="showConfirmMessage">
+      Cita reservada con éxito. Revise su cronograma
+    </span>
+  </div>
 
   <div class="row mb-5">
     <FullCalendar ref="procedureCalendar" :options="calendarOptions" />
@@ -182,6 +180,6 @@ export default {
 
 <style>
 #AppointmetReserveSuccessMessage {
-  background-color: #73e600;
+  background-color: #a1e45e;
 }
 </style>

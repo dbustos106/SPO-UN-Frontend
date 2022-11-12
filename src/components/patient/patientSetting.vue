@@ -129,7 +129,7 @@
               </div>
             </div>
 
-            <div class="col-sm-8 mx-auto mt-4">
+            <div class="col-4 mx-auto mb-1">
               <section v-show="errorShow">
                 <div class="alertBar error">
                   <span title="error" class="alertBar-message">
@@ -154,8 +154,8 @@
               </section>
             </div>
 
-            <div class="col-4 mx-auto">
-              <button class="btn btn-block mx-auto mb-2" v-on:click="update">
+            <div class="col-4 mx-auto mt-3 mb-4">
+              <button class="btn btn-block mx-auto" v-on:click="update">
                 Guardar
               </button>
             </div>

@@ -73,7 +73,7 @@
               </div>
             </div>
 
-            <div class="col-sm-8 mx-auto mt-4">
+            <div class="col-4 mx-auto mb-1">
               <section v-show="errorShow">
                 <div class="alertBar error">
                   <span title="error" class="alertBar-message">
@@ -98,7 +98,7 @@
               </section>
             </div>
 
-            <div class="col-4 mx-auto">
+            <div class="col-4 mx-auto mt-3">
               <button class="btn btn-block mx-auto mb-5" v-on:click="update">
                 Registrar
               </button>

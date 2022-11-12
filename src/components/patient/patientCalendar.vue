@@ -85,21 +85,9 @@
               </div>
 
               <div class="col-4">
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
+                <div class="row mx-auto">
+                  <span id="feedback"> feedback </span>
+                </div>
               </div>
             </div>
 
@@ -293,6 +281,8 @@ export default {
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
             fullAppointment.professor;
+          document.getElementById("feedback").textContent =
+            fullAppointment.appointmentDTO.patient_feedback;
 
           let students = "";
           for (var student of fullAppointment.students) {

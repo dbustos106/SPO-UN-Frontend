@@ -19,8 +19,8 @@
         <!-- End Busqueda -->
 
         <!-- ======= NoAppointmensMessage ======= -->
-        <div class="row mx-auto" v-if="noAppointmentsShow">
-          <span title="error" class="noAppointmensMessage">
+        <div class="row-sm-12 ml-2" v-if="noAppointmentsShow">
+          <span title="error" id="noAppointmensMessage">
             <i class="fa fa-exclamation-circle"></i>
             <span
               >No hay citas disponibles para lo especificado. Intente buscar más
@@ -154,8 +154,8 @@ export default {
 </script>
 
 <style>
-.noAppointmensMessage {
-  background-color: rgba(242, 0, 0, 0.7);
+#noAppointmensMessage {
+  background-color: rgba(245, 82, 82, 0.7);
   z-index: 1000;
 }
 </style>
