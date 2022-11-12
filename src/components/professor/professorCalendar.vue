@@ -247,12 +247,24 @@ export default {
         let procedure_typeCell = row.insertCell();
         let btnDetailCell = row.insertCell();
         idCell.appendChild(document.createTextNode(appointments[k].id));
-        start_timeCell.appendChild(
-          document.createTextNode(appointments[k].start_time)
-        );
-        end_timeCell.appendChild(
-          document.createTextNode(appointments[k].end_time)
-        );
+
+        // start time and end time
+        if (
+          appointments[k].start_time !== null &&
+          appointments[k].end_time !== null
+        ) {
+          start_timeCell.appendChild(
+            document.createTextNode(appointments[k].start_time)
+          );
+          end_timeCell.appendChild(
+            document.createTextNode(appointments[k].end_time)
+          );
+        } else {
+          start_timeCell.appendChild(document.createTextNode("Sin Confirmar"));
+          end_timeCell.appendChild(document.createTextNode("Sin Confirmar"));
+        }
+
+        // procedure type
         procedure_typeCell.appendChild(
           document.createTextNode(appointments[k].procedure_type)
         );

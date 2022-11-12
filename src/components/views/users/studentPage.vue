@@ -12,14 +12,15 @@ import StudentBar from "../../student/StudentBar.vue";
 
 export default {
   name: "studentPage",
-  components: {
-    StudentBar,
-  },
+
   data() {
     return {
       sideBarIsOpen: 1,
       username: sessionStorage.Username,
     };
+  },
+  components: {
+    StudentBar,
   },
   methods: {
     moveContainer() {

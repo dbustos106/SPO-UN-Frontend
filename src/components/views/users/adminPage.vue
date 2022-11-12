@@ -12,13 +12,14 @@ import AdminBar from "../../admin/AdminBar.vue";
 
 export default {
   name: "AdminPage",
-  components: {
-    AdminBar,
-  },
+
   data() {
     return {
       sideBarIsOpen: 1,
     };
+  },
+  components: {
+    AdminBar,
   },
   methods: {
     moveContainer() {

@@ -8,13 +8,13 @@
           <!-- ======= Busqueda ======= -->
           <div class="row-sm-6 mb-3">
             <span>Búsqueda: </span>
-            <input id="query" v-on:keyup="filteredData" />
+            <input id="nptQuery" v-on:keyup="filteredData" />
           </div>
           <!-- End Busqueda -->
 
           <!-- ======= Studentstable ======= -->
           <div class="TableContainer">
-            <table id="StudentsTable">
+            <table id="tblStudents">
               <thead>
                 <tr>
                   <td>Nombre</td>
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     putStudentsInTable(students) {
-      let table = document.getElementById("StudentsTable");
+      let table = document.getElementById("tblStudents");
       for (var j in students) {
         let row = table.insertRow();
         let nameCell = row.insertCell();
@@ -123,7 +123,7 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("StudentsTable");
+      let table = document.getElementById("tblStudents");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -136,7 +136,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("StudentsTable");
+      let table = document.getElementById("tblStudents");
       this.$data.idPage += 1;
       while (table.children[1].firstChild != table.children[1].lastChild) {
         var child = table.children[1].lastChild;
@@ -145,8 +145,8 @@ export default {
       this.getStudents(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("StudentsTable");
-      var filterKey = document.getElementById("query").value;
+      let table = document.getElementById("tblStudents");
+      var filterKey = document.getElementById("nptQuery").value;
       var filterStudents = this.$data.students;
 
       filterStudents = filterStudents.filter(function (row) {

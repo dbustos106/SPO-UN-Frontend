@@ -71,6 +71,12 @@
 <script>
 export default {
   name: "AdminBar",
+
+  data() {
+    return {
+      isOpened: false,
+    };
+  },
   props: {
     isMenuOpen: {
       type: Boolean,
@@ -187,14 +193,6 @@ export default {
       default: "#fff",
     },
   },
-  data() {
-    return {
-      isOpened: false,
-    };
-  },
-  mounted() {
-    this.isOpened = this.isMenuOpen;
-  },
   methods: {
     openRegisterProfessor() {
       this.$router.push("/admin/registerProfessor");
@@ -220,6 +218,9 @@ export default {
         "--menu-footer-text-color": this.menuFooterTextColor,
       };
     },
+  },
+  mounted() {
+    this.isOpened = this.isMenuOpen;
   },
 };
 </script>

@@ -14,13 +14,13 @@
         <!-- ======= Busqueda ======= -->
         <div class="row-sm-6 mt-4 ml-2 mb-2">
           <span>Búsqueda: </span>
-          <input id="query" v-on:keyup="filteredData" />
+          <input id="spnQuery" v-on:keyup="filteredData" />
         </div>
         <!-- End Busqueda -->
 
         <!-- ======= NoAppointmensMessage ======= -->
         <div class="row-sm-12 ml-2" v-if="noAppointmentsShow">
-          <span title="error" id="noAppointmensMessage">
+          <span title="error" id="spnNoAppointmensMessage">
             <i class="fa fa-exclamation-circle"></i>
             <span
               >No hay citas disponibles para lo especificado. Intente buscar más
@@ -49,15 +49,17 @@ import App from "../../App.vue";
 import patientProcedureCalendar from "./patientProcedureCalendar";
 
 export default {
-  components: {
-    patientProcedureCalendar,
-  },
+  name: "patientProcedureSearch",
+
   data() {
     return {
       schedules: [],
       earliestDate: null,
       noAppointmentsShow: false,
     };
+  },
+  components: {
+    patientProcedureCalendar,
   },
   methods: {
     putAppointmentInCalendar(schedules) {
@@ -109,13 +111,14 @@ export default {
         .then((response) => {
           let appointmentsSearch = response.data.message;
           for (var i in appointmentsSearch) {
-            for (var j in appointmentsSearch[i].tentativeSchedules) {
+            for (var j in appointmentsSearch[i].tentativeScheduleDTOS) {
               this.$data.schedules.push({
                 appointment_id:
-                  appointmentsSearch[i].tentativeSchedules[j].appointment_id,
+                  appointmentsSearch[i].tentativeScheduleDTOS[j].appointment_id,
                 start_time:
-                  appointmentsSearch[i].tentativeSchedules[j].start_time,
-                end_time: appointmentsSearch[i].tentativeSchedules[j].end_time,
+                  appointmentsSearch[i].tentativeScheduleDTOS[j].start_time,
+                end_time:
+                  appointmentsSearch[i].tentativeScheduleDTOS[j].end_time,
                 procedure_type:
                   appointmentsSearch[i].appointmentDTO.procedure_type,
               });
@@ -135,7 +138,7 @@ export default {
         });
     },
     filteredData() {
-      var filterKey = document.getElementById("query").value;
+      var filterKey = document.getElementById("spnQuery").value;
       var filterSchedules = this.$data.schedules;
 
       filterSchedules = filterSchedules.filter(function (row) {
@@ -154,7 +157,7 @@ export default {
 </script>
 
 <style>
-#noAppointmensMessage {
+#spnNoAppointmensMessage {
   background-color: rgba(245, 82, 82, 0.7);
   z-index: 1000;
 }

@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: "SidebarMenuAkahonStudent",
+  name: "studentBar",
 
   data() {
     return {

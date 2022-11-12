@@ -6,6 +6,7 @@
           <div class="col-md-5">
             <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
+
           <div class="col">
             <p class="card-description mt-5 mb-5">Iniciar sesión</p>
             <div class="form-group needs-validation">
@@ -14,7 +15,7 @@
                   <div class="alertBar error">
                     <span title="error" class="alertBar-message">
                       <i class="fa fa-exclamation-circle"></i>
-                      <span id="errorNotification"></span>
+                      <span id="spnErrorNotification"></span>
                     </span>
                     <span class="alertBar-dismiss">
                       <a class="cta"></a>
@@ -26,13 +27,13 @@
               <div class="col-sm-8 mx-auto mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputUser">
+                    <span class="input-group-text">
                       <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </span>
                   </div>
                   <input
                     type="text"
-                    id="user"
+                    id="nptUsername"
                     class="form-control"
                     placeholder="Usuario"
                     required
@@ -43,13 +44,13 @@
               <div class="col-sm-8 mx-auto mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputPassword">
+                    <span class="input-group-text">
                       <i class="fa fa-key" aria-hidden="true"></i>
                     </span>
                   </div>
                   <input
                     type="password"
-                    id="password"
+                    id="nptPassword"
                     class="form-control"
                     placeholder="Contraseña"
                     required
@@ -96,13 +97,13 @@ export default {
   },
   methods: {
     sendLogin() {
-      var user = document.getElementById("user").value;
-      var password = document.getElementById("password").value;
-      if (user == "" || password == "") {
+      var username = document.getElementById("nptUsername").value;
+      var password = document.getElementById("nptPassword").value;
+      if (username == "" || password == "") {
         this.errorFunction(" No ha ingresado los datos");
       } else {
         let datos = {
-          username: user,
+          username: username,
           password: password,
         };
         let formBody = App.methods.toUrlEncoded(datos);
@@ -144,8 +145,8 @@ export default {
       }
     },
     errorFunction(messageText) {
-      let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      let errorNotification = document.getElementById("spnErrorNotification");
+      errorNotification.innerHTML = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

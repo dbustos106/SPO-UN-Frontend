@@ -13,7 +13,7 @@
                   type="text"
                   name="username"
                   placeholder="Username"
-                  id="fusernameR"
+                  id="nptUsername"
                   required
                 />
               </div>
@@ -27,7 +27,7 @@
                   type="text"
                   name="name"
                   placeholder="Nombre"
-                  id="fnameR"
+                  id="nptName"
                   required
                 />
               </div>
@@ -38,7 +38,7 @@
                   type="text"
                   name="lastName"
                   placeholder="Apellido"
-                  id="lnameR"
+                  id="nptLastName"
                   required
                 />
               </div>
@@ -47,7 +47,11 @@
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
                 <span>Tipo de documento</span>
-                <select class="form-select mx-auto" required id="browsers">
+                <select
+                  class="form-select mx-auto"
+                  required
+                  id="slcDocumentType"
+                >
                   <option selected disabled value="">Tipo de documento</option>
                   <option value="CC">Cédula de Ciudadanía</option>
                   <option value="TI">Tarjeta de Identidad</option>
@@ -60,7 +64,7 @@
                 <input
                   class="form-control"
                   type="number"
-                  id="cedulaR"
+                  id="nptDocumentNumber"
                   min="1"
                   pattern="^[0-9]+"
                   onpaste="return false;"
@@ -79,7 +83,7 @@
                 <input
                   class="form-control"
                   type="email"
-                  id="emailR"
+                  id="nptEmail"
                   name="email"
                   placeholder="Correo electrónico"
                   required
@@ -90,7 +94,7 @@
                 <input
                   class="form-control"
                   type="number"
-                  id="ageR"
+                  id="nptAge"
                   min="1"
                   max="200"
                   onpaste="return false;"
@@ -106,7 +110,7 @@
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
                 <span>Género</span>
-                <select class="form-select mx-auto" required id="genderR">
+                <select class="form-select mx-auto" required id="slcGender">
                   <option selected disabled value="">Género</option>
                   <option value="hombre">Hombre</option>
                   <option value="mujer">Mujer</option>
@@ -115,7 +119,7 @@
               </div>
               <div class="col-md-5 mr-auto">
                 <span>Tipo de sangre</span>
-                <select class="form-select mx-auto" required id="RHR">
+                <select class="form-select mx-auto" required id="slcBloodType">
                   <option selected disabled value="">Tipo de sangre</option>
                   <option value="A+">A positivo</option>
                   <option value="A-">A negativo</option>
@@ -190,16 +194,17 @@ export default {
         })
         .then((response) => {
           let patient = response.data.message;
-          let name = patient.name.split("-");
-          document.getElementById("fusernameR").value = patient.username;
-          document.getElementById("fnameR").value = name[0];
-          document.getElementById("lnameR").value = name[1];
-          document.getElementById("emailR").value = patient.email;
-          document.getElementById("browsers").value = patient.document_type;
-          document.getElementById("cedulaR").value = patient.document_number;
-          document.getElementById("genderR").value = patient.gender;
-          document.getElementById("ageR").value = patient.age;
-          document.getElementById("RHR").value = patient.blood_type;
+          document.getElementById("nptUsername").value = patient.username;
+          document.getElementById("nptName").value = patient.name;
+          document.getElementById("nptLastName").value = patient.last_name;
+          document.getElementById("nptEmail").value = patient.email;
+          document.getElementById("slcDocumentType").value =
+            patient.document_type;
+          document.getElementById("nptDocumentNumber").value =
+            patient.document_number;
+          document.getElementById("slcGender").value = patient.gender;
+          document.getElementById("nptAge").value = patient.age;
+          document.getElementById("slcBloodType").value = patient.blood_type;
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -212,86 +217,63 @@ export default {
         });
     },
     update() {
-      var username = document.getElementById("fusernameR").value;
-      var name = document.getElementById("fnameR").value;
-      var lastName = document.getElementById("lnameR").value;
-      var email = document.getElementById("emailR").value;
-      var tipoCedula = document.getElementById("browsers").value;
-      var cedula = document.getElementById("cedulaR").value;
-      var genero = document.getElementById("genderR").value;
-      var edad = document.getElementById("ageR").value;
-      var RH = document.getElementById("RHR").value;
+      var username = document.getElementById("nptUsername").value;
+      var name = document.getElementById("nptName").value;
+      var lastName = document.getElementById("nptLastName").value;
+      var email = document.getElementById("nptEmail").value;
+      var documentType = document.getElementById("slcDocumentType").value;
+      var documentNumber = document.getElementById("nptDocumentNumber").value;
+      var gender = document.getElementById("slcGender").value;
+      var age = document.getElementById("nptAge").value;
+      var bloodType = document.getElementById("slcBloodType").value;
       if (
         username == "" ||
         name == "" ||
         lastName == "" ||
         email == "" ||
-        cedula == "" ||
-        genero == "" ||
-        edad == "" ||
-        RH == ""
+        documentNumber == "" ||
+        gender == "" ||
+        age == "" ||
+        bloodType == ""
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-        this.sendData(
-          username,
-          name,
-          lastName,
-          email,
-          cedula,
-          tipoCedula,
-          genero,
-          edad,
-          RH
-        );
-      }
-    },
-    async sendData(
-      username,
-      name,
-      lastName,
-      email,
-      cedula,
-      tipoCedula,
-      genero,
-      edad,
-      RH
-    ) {
-      let datos = {
-        id: sessionStorage.Id,
-        username: username,
-        name: name + "-" + lastName,
-        email: email,
-        document_type: tipoCedula,
-        document_number: cedula,
-        age: parseInt(edad),
-        gender: genero,
-        blood_type: RH,
-      };
+        let datos = {
+          id: sessionStorage.Id,
+          username: username,
+          name: name,
+          last_name: lastName,
+          email: email,
+          document_type: documentType,
+          document_number: documentNumber,
+          age: parseInt(age),
+          gender: gender,
+          blood_type: bloodType,
+        };
+        let formBody = JSON.stringify(datos);
 
-      let formBody = JSON.stringify(datos);
-
-      axios
-        .put(App.methods.getBackUrl() + "/patient/edit", formBody, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
-        .then(() => {
-          this.successFunction("Registro Exitoso");
-        })
-        .catch((err) => {
-          this.errorFunction("Error, correo o documento ya registrado");
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.update();
-            } else {
-              this.$router.push("/login");
+        axios
+          .put(App.methods.getBackUrl() + "/patient/edit", formBody, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          })
+          .then(() => {
+            this.successFunction("Registro Exitoso");
+          })
+          .catch((err) => {
+            this.errorFunction("Error, correo o documento ya registrado");
+            if (err.response.status == 403) {
+              if (App.methods.requestRefreshToken()) {
+                this.update();
+              } else {
+                this.$router.push("/login");
+              }
             }
-          }
-        });
+          });
+      }
     },
     successFunction(messageText) {
       this.$data.errorShow = false;

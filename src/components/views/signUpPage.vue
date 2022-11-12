@@ -6,6 +6,7 @@
           <div class="col-md-5">
             <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
+
           <div class="col">
             <p class="card-description mt-5">Registra tus datos</p>
             <div class="form-group needs-validation">
@@ -16,7 +17,7 @@
                     type="text"
                     name="username"
                     placeholder="Username"
-                    id="fusernameR"
+                    id="nptUsername"
                     required
                   />
                 </div>
@@ -29,7 +30,7 @@
                     type="text"
                     name="name"
                     placeholder="Nombre"
-                    id="fnameR"
+                    id="nptName"
                     required
                   />
                 </div>
@@ -39,7 +40,7 @@
                     type="text"
                     name="lastName"
                     placeholder="Apellido"
-                    id="lnameR"
+                    id="nptLastName"
                     required
                   />
                 </div>
@@ -47,7 +48,11 @@
 
               <div class="row mx-auto">
                 <div class="col-sm-5 ml-auto">
-                  <select class="form-select mx-auto" required id="browsers">
+                  <select
+                    class="form-select mx-auto"
+                    required
+                    id="slcDocumentType"
+                  >
                     <option selected disabled value="">
                       Tipo de documento
                     </option>
@@ -61,7 +66,7 @@
                   <input
                     class="form-control"
                     type="number"
-                    id="cedulaR"
+                    id="nptDocumentNumber"
                     min="1"
                     pattern="^[0-9]+"
                     onpaste="return false;"
@@ -79,7 +84,7 @@
                   <input
                     class="form-control"
                     type="email"
-                    id="emailR"
+                    id="nptEmail"
                     name="email"
                     placeholder="Correo electrónico"
                     required
@@ -89,7 +94,7 @@
                   <input
                     class="form-control"
                     type="number"
-                    id="ageR"
+                    id="nptAge"
                     min="1"
                     max="200"
                     onpaste="return false;"
@@ -106,9 +111,9 @@
                 <div class="col-sm-5 ml-auto">
                   <input
                     class="form-control"
-                    id="passwordR"
+                    id="nptPassword"
                     type="password"
-                    name="password"
+                    name="nptPassword"
                     placeholder="Contraseña"
                     required
                   />
@@ -116,9 +121,9 @@
                 <div class="col-sm-5 mr-auto">
                   <input
                     class="form-control"
-                    id="confirmPasswordR"
+                    id="nptConfirmPassword"
                     type="password"
-                    name="confirmPasswordR"
+                    name="nptConfirmPassword"
                     placeholder="Confirmar Contraseña"
                     required
                   />
@@ -127,7 +132,7 @@
 
               <div class="row mx-auto mb-3">
                 <div class="col-sm-5 ml-auto">
-                  <select class="form-select mx-auto" required id="genderR">
+                  <select class="form-select mx-auto" required id="slcGender">
                     <option selected disabled value="">Género</option>
                     <option value="hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
@@ -135,7 +140,11 @@
                   </select>
                 </div>
                 <div class="col-sm-5 mr-auto">
-                  <select class="form-select mx-auto" required id="RHR">
+                  <select
+                    class="form-select mx-auto"
+                    required
+                    id="slcBloodType"
+                  >
                     <option selected disabled value="">Tipo de sangre</option>
                     <option value="A+">A positivo</option>
                     <option value="A-">A negativo</option>
@@ -202,17 +211,17 @@ export default {
   },
   methods: {
     register() {
-      var username = document.getElementById("fusernameR").value;
-      var name = document.getElementById("fnameR").value;
-      var lastName = document.getElementById("lnameR").value;
-      var email = document.getElementById("emailR").value;
-      var password = document.getElementById("passwordR").value;
-      var confirmPassword = document.getElementById("confirmPasswordR").value;
-      var tipoCedula = document.getElementById("browsers").value;
-      var cedula = document.getElementById("cedulaR").value;
-      var genero = document.getElementById("genderR").value;
-      var edad = document.getElementById("ageR").value;
-      var RH = document.getElementById("RHR").value;
+      var username = document.getElementById("nptUsername").value;
+      var name = document.getElementById("nptName").value;
+      var lastName = document.getElementById("nptLastName").value;
+      var email = document.getElementById("nptEmail").value;
+      var password = document.getElementById("nptPassword").value;
+      var confirmPassword = document.getElementById("nptConfirmPassword").value;
+      var documentType = document.getElementById("slcDocumentType").value;
+      var documentNumber = document.getElementById("nptDocumentNumber").value;
+      var gender = document.getElementById("slcGender").value;
+      var age = document.getElementById("nptAge").value;
+      var bloodType = document.getElementById("slcBloodType").value;
       if (
         username == "" ||
         name == "" ||
@@ -220,10 +229,10 @@ export default {
         email == "" ||
         password == "" ||
         confirmPassword == "" ||
-        cedula == "" ||
-        genero == "" ||
-        edad == "" ||
-        RH == ""
+        documentNumber == "" ||
+        gender == "" ||
+        age == "" ||
+        bloodType == ""
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
@@ -233,13 +242,14 @@ export default {
           let datos = {
             username: username,
             password: password,
-            name: name + "-" + lastName,
+            name: name,
+            last_name: lastName,
             email: email,
-            document_type: tipoCedula,
-            document_number: cedula,
-            age: parseInt(edad),
-            gender: genero,
-            blood_type: RH,
+            document_type: documentType,
+            document_number: documentNumber,
+            age: parseInt(age),
+            gender: gender,
+            blood_type: bloodType,
           };
           let formBody = JSON.stringify(datos);
 

@@ -12,14 +12,15 @@ import ProfessorBar from "../../professor/ProfessorBar.vue";
 
 export default {
   name: "ProfessorPage",
-  components: {
-    ProfessorBar,
-  },
+
   data() {
     return {
       sideBarIsOpen: 1,
       username: sessionStorage.Username,
     };
+  },
+  components: {
+    ProfessorBar,
   },
   methods: {
     moveContainer() {

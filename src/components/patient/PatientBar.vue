@@ -88,6 +88,12 @@
 <script>
 export default {
   name: "PatientBar",
+
+  data() {
+    return {
+      isOpened: false,
+    };
+  },
   props: {
     usernameContainer: {
       type: String,
@@ -180,11 +186,6 @@ export default {
       type: String,
       default: "#fff",
     },
-  },
-  data() {
-    return {
-      isOpened: false,
-    };
   },
   methods: {
     openSearchAppointment() {

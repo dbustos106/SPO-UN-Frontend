@@ -12,6 +12,7 @@ import PatientBar from "../../patient/PatientBar.vue";
 
 export default {
   name: "PatientPage",
+
   components: {
     PatientBar,
   },

@@ -13,7 +13,7 @@
                   type="text"
                   name="name"
                   placeholder="Nombre"
-                  id="fnameR"
+                  id="nptName"
                   required
                 />
               </div>
@@ -24,7 +24,7 @@
                   type="text"
                   name="lastName"
                   placeholder="Apellido"
-                  id="lnameR"
+                  id="nptLastName"
                   required
                 />
               </div>
@@ -33,7 +33,11 @@
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
                 <span>Tipo de documento</span>
-                <select class="form-select mx-auto" required id="browsers">
+                <select
+                  class="form-select mx-auto"
+                  required
+                  id="sclDocumentType"
+                >
                   <option selected disabled value="">Tipo de documento</option>
                   <option value="CC">Cédula de Ciudadanía</option>
                   <option value="TI">Tarjeta de Identidad</option>
@@ -46,7 +50,7 @@
                 <input
                   class="form-control"
                   type="number"
-                  id="cedulaR"
+                  id="nptDocumentNumber"
                   min="1"
                   pattern="^[0-9]+"
                   onpaste="return false;"
@@ -65,7 +69,7 @@
                 <input
                   class="form-control"
                   type="email"
-                  id="emailR"
+                  id="nptEmail"
                   name="email"
                   placeholder="Correo electrónico"
                   required
@@ -115,7 +119,8 @@ import axios from "axios";
 import App from "../../App.vue";
 
 export default {
-  name: "registerProfessor",
+  name: "professorSetting",
+
   data() {
     return {
       errorShow: false,
@@ -134,12 +139,13 @@ export default {
         })
         .then((response) => {
           let professor = response.data.message;
-          let name = professor.name.split("-");
-          document.getElementById("fnameR").value = name[0];
-          document.getElementById("lnameR").value = name[1];
-          document.getElementById("emailR").value = professor.email;
-          document.getElementById("browsers").value = professor.document_type;
-          document.getElementById("cedulaR").value = professor.document_number;
+          document.getElementById("nptName").value = professor.name;
+          document.getElementById("nptLastName").value = professor.last_name;
+          document.getElementById("nptEmail").value = professor.email;
+          document.getElementById("sclDocumentType").value =
+            professor.document_type;
+          document.getElementById("nptDocumentNumber").value =
+            professor.document_number;
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -152,49 +158,47 @@ export default {
         });
     },
     update() {
-      var name = document.getElementById("fnameR").value;
-      var lastName = document.getElementById("lnameR").value;
-      var email = document.getElementById("emailR").value;
-      var tipoCedula = document.getElementById("browsers").value;
-      var cedula = document.getElementById("cedulaR").value;
-      if (name == "" || lastName == "" || email == "" || cedula == "") {
+      var name = document.getElementById("nptName").value;
+      var lastName = document.getElementById("nptLastName").value;
+      var email = document.getElementById("nptEmail").value;
+      var documentType = document.getElementById("sclDocumentType").value;
+      var documentNumber = document.getElementById("nptDocumentNumber").value;
+      if (name == "" || lastName == "" || email == "" || documentNumber == "") {
         this.errorFunction("Faltan datos por llenar");
       } else {
-        this.sendData(name, lastName, email, cedula, tipoCedula);
-      }
-    },
-    async sendData(name, lastName, email, cedula, tipoCedula) {
-      let datos = {
-        id: sessionStorage.Id,
-        username: email.substring(0, email.indexOf("@")),
-        name: name + "-" + lastName,
-        email: email,
-        document_type: tipoCedula,
-        document_number: cedula,
-      };
-      let formBody = JSON.stringify(datos);
+        let datos = {
+          id: sessionStorage.Id,
+          username: email.substring(0, email.indexOf("@")),
+          name: name,
+          last_name: lastName,
+          email: email,
+          document_type: documentType,
+          document_number: documentNumber,
+        };
+        let formBody = JSON.stringify(datos);
 
-      axios
-        .put(App.methods.getBackUrl() + "/professor/edit", formBody, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.AccessToken,
-          },
-        })
-        .then(() => {
-          this.successFunction("Registro Exitoso");
-        })
-        .catch((err) => {
-          this.errorFunction("Error, correo o documento ya registrado");
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.update();
-            } else {
-              this.$router.push("/login");
+        axios
+          .put(App.methods.getBackUrl() + "/professor/edit", formBody, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.AccessToken,
+            },
+          })
+          .then(() => {
+            this.successFunction("Registro Exitoso");
+          })
+          .catch((err) => {
+            this.errorFunction("Error, correo o documento ya registrado");
+            if (err.response.status == 403) {
+              if (App.methods.requestRefreshToken()) {
+                this.update();
+              } else {
+                this.$router.push("/login");
+              }
             }
-          }
-        });
+          });
+      }
     },
     successFunction(messageText) {
       this.$data.errorShow = false;

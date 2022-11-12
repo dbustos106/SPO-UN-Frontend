@@ -12,7 +12,7 @@
                   type="text"
                   name="name"
                   placeholder="Nombre"
-                  id="fnameR"
+                  id="nptName"
                   required
                 />
               </div>
@@ -22,7 +22,7 @@
                   type="text"
                   name="lastName"
                   placeholder="Apellido"
-                  id="lnameR"
+                  id="nptLastName"
                   required
                 />
               </div>
@@ -30,7 +30,11 @@
 
             <div class="row mx-auto">
               <div class="col-md-5 ml-auto">
-                <select class="form-select mx-auto" required id="browsers">
+                <select
+                  class="form-select mx-auto"
+                  required
+                  id="slcDocumentType"
+                >
                   <option selected disabled value="">Tipo de documento</option>
                   <option value="CC">Cédula de Ciudadanía</option>
                   <option value="TI">Tarjeta de Identidad</option>
@@ -42,7 +46,7 @@
                 <input
                   class="form-control"
                   type="number"
-                  id="cedulaR"
+                  id="nptDocumentNumber"
                   min="1"
                   pattern="^[0-9]+"
                   onpaste="return false;"
@@ -60,7 +64,7 @@
                 <input
                   class="form-control"
                   type="email"
-                  id="emailR"
+                  id="nptEmail"
                   name="email"
                   placeholder="Correo electrónico"
                   required
@@ -72,9 +76,9 @@
               <div class="col-sm-5 ml-auto">
                 <input
                   class="form-control"
-                  id="passwordR"
+                  id="nptPassword"
                   type="password"
-                  name="password"
+                  name="nptPassword"
                   placeholder="Contraseña"
                   required
                 />
@@ -82,16 +86,16 @@
               <div class="col-sm-5 mr-auto">
                 <input
                   class="form-control"
-                  id="confirmPasswordR"
+                  id="nptConfirmPassword"
                   type="password"
-                  name="confirmPasswordR"
+                  name="nptConfirmPassword"
                   placeholder="Confirmar Contraseña"
                   required
                 />
               </div>
             </div>
 
-            <div class="col-sm-8 mx-auto mt-4">
+            <div class="col-4 mx-auto mt-4 mb-1">
               <section v-show="errorShow">
                 <div class="alertBar error">
                   <span title="error" class="alertBar-message">
@@ -116,7 +120,7 @@
               </section>
             </div>
 
-            <div class="col-sm-5 mx-auto">
+            <div class="col-4 mx-auto">
               <button class="btn btn-block mx-auto mb-5" v-on:click="register">
                 Registrar
               </button>
@@ -134,6 +138,7 @@ import App from "../../App.vue";
 
 export default {
   name: "registerStudent",
+
   data() {
     return {
       errorShow: false,
@@ -142,20 +147,20 @@ export default {
   },
   methods: {
     register() {
-      var name = document.getElementById("fnameR").value;
-      var lastName = document.getElementById("lnameR").value;
-      var email = document.getElementById("emailR").value;
-      var password = document.getElementById("passwordR").value;
-      var confirmPassword = document.getElementById("confirmPasswordR").value;
-      var tipoCedula = document.getElementById("browsers").value;
-      var cedula = document.getElementById("cedulaR").value;
+      var name = document.getElementById("nptName").value;
+      var lastName = document.getElementById("nptLastName").value;
+      var email = document.getElementById("nptEmail").value;
+      var password = document.getElementById("nptPassword").value;
+      var confirmPassword = document.getElementById("nptConfirmPassword").value;
+      var documentType = document.getElementById("slcDocumentType").value;
+      var documentNumber = document.getElementById("nptDocumentNumber").value;
       if (
         name == "" ||
         lastName == "" ||
         email == "" ||
         password == "" ||
         confirmPassword == "" ||
-        cedula == ""
+        documentNumber == ""
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
@@ -165,10 +170,11 @@ export default {
           let datos = {
             username: email.substring(0, email.indexOf("@")),
             password: password,
-            name: name + "-" + lastName,
+            name: name,
+            last_name: lastName,
             email: email,
-            document_type: tipoCedula,
-            document_number: cedula,
+            document_type: documentType,
+            document_number: documentNumber,
             professor_id: parseInt(sessionStorage.Id),
           };
           let formBody = JSON.stringify(datos);

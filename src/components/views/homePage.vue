@@ -1,6 +1,6 @@
 <template>
   <section id="homeSection" class="sectionMarco">
-    <div id="welcomeContainer" class="container marco align-items-center">
+    <div class="container marco align-items-center">
       <div class="container position-relative">
         <h1>Bienvenido a Spo-UN</h1>
         <h3>

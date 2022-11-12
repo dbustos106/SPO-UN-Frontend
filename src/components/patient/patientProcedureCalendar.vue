@@ -9,7 +9,7 @@
   <transition name="fade">
     <div class="modal-mask confirmWindow" v-show="showModal">
       <div class="row">
-        <span id="modalAppointmentTitle">Hola</span>
+        <span id="spnModalAppointmentTitle">Hola</span>
         <span> ¿Desea reservar esta cita? </span>
       </div>
       <div class="row-10 mx-auto">
@@ -24,7 +24,7 @@
 
   <!-- ======= ProcedureSearchCalendarContainer ======= -->
   <div class="row-sm-12 mb-5">
-    <span id="AppointmetReserveSuccessMessage" v-if="showConfirmMessage">
+    <span id="spnAppointmetReserveSuccessMessage" v-if="showConfirmMessage">
       Cita reservada con éxito. Revise su cronograma
     </span>
   </div>
@@ -48,10 +48,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 export default {
   name: "patientProcedureCalendar",
 
-  components: { FullCalendar },
-  emits: {
-    confirm: null,
-  },
   data() {
     return {
       eventSelected: null,
@@ -82,7 +78,7 @@ export default {
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
 
-          document.getElementById("modalAppointmentTitle").innerHTML =
+          document.getElementById("spnModalAppointmentTitle").innerHTML =
             "Cita para el día " +
             this.formatDate(
               this.$data.selectedInitialDate,
@@ -93,6 +89,12 @@ export default {
         }.bind(this),
       },
     };
+  },
+  components: {
+    FullCalendar,
+  },
+  emits: {
+    confirm: null,
   },
   methods: {
     reserveAppointment() {
@@ -179,7 +181,7 @@ export default {
 </script>
 
 <style>
-#AppointmetReserveSuccessMessage {
+#spnAppointmetReserveSuccessMessage {
   background-color: #a1e45e;
 }
 </style>

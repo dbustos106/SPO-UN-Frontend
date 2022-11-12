@@ -7,11 +7,11 @@
       :class="{ ing: scrollPosition > 10 }"
     >
       <div
-        id="contHeader"
+        id="infoHeaderContainer"
         class="container d-flex align-items-center justify-content-between"
       >
-        <h1 id="logo" class="logo">Spo-Un</h1>
-        <nav id="navbar" class="navbar">
+        <h1 class="logo">Spo-Un</h1>
+        <nav class="navbar">
           <ul>
             <router-link class="btn-sign-up scrollto" to="/home"
               >Inicio</router-link
@@ -128,7 +128,7 @@ export default {
   max-height: 40px;
 }
 
-#contHeader {
+#infoHeaderContainer {
   max-width: 2000px;
   width: 90%;
   padding: 0;

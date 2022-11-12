@@ -16,7 +16,7 @@
                 ref="procedure_type"
                 rows="5"
                 cols="40"
-                id="description"
+                id="procedure_type"
               ></textarea>
             </div>
           </div>
@@ -29,7 +29,7 @@
                 ref="place"
                 class="form-select mx-auto"
                 required
-                id="roomSelect"
+                id="slcRoom"
               >
                 <option selected disabled value="">Lugar de atención</option>
               </select>
@@ -40,7 +40,7 @@
               <span>Paciente</span>
             </div>
             <div class="col-12">
-              <span id="patientName">{{ patientName }}</span>
+              <span>{{ patientName }}</span>
             </div>
           </div>
         </div>
@@ -50,8 +50,8 @@
         <h3 class="text mb-3">Fechas tentativas</h3>
 
         <!-- ======= tentativeTable ======= -->
-        <div id="tentativeDates" class="container mx-auto mb-1">
-          <table id="tentativeDatesTable">
+        <div id="tentativeDatesContainer" class="container mx-auto mb-1">
+          <table id="tblTentativeDates">
             <thead>
               <tr>
                 <td>Fecha inicio</td>
@@ -190,7 +190,7 @@ export default {
         this.endDate != undefined &&
         new Date(this.startDate).getTime() < new Date(this.endDate).getTime()
       ) {
-        var schedulesTable = document.getElementById("tentativeDatesTable");
+        var schedulesTable = document.getElementById("tblTentativeDates");
         var row = schedulesTable.insertRow();
         var cell1 = row.insertCell();
         var cell2 = row.insertCell();
@@ -205,7 +205,7 @@ export default {
       }
     },
     deleteDate() {
-      let schedulesTable = document.getElementById("tentativeDatesTable");
+      let schedulesTable = document.getElementById("tblTentativeDates");
       if (
         schedulesTable.children[1].firstChild !=
         schedulesTable.children[1].lastChild
@@ -214,7 +214,7 @@ export default {
       }
     },
     getRoomOptions() {
-      let tablaRoom = document.getElementById("roomSelect");
+      let tablaRoom = document.getElementById("slcRoom");
       axios
         .get(App.methods.getBackUrl() + "/room/all", {
           headers: {
@@ -256,10 +256,10 @@ export default {
       }
     },
     createAppointment() {
-      let selectedRoom = document.getElementById("roomSelect").value;
-      let procedureType = document.getElementById("description").value;
-      let schedulesTable = document.getElementById("tentativeDatesTable")
-        .children[1];
+      let selectedRoom = document.getElementById("slcRoom").value;
+      let procedureType = document.getElementById("procedure_type").value;
+      let schedulesTable =
+        document.getElementById("tblTentativeDates").children[1];
 
       if (
         selectedRoom != "" &&
@@ -317,11 +317,11 @@ export default {
       }
     },
     updateAppointment() {
-      let selectedRoom = document.getElementById("roomSelect").value;
-      let procedureType = document.getElementById("description").value;
+      let selectedRoom = document.getElementById("slcRoom").value;
+      let procedureType = document.getElementById("procedure_type").value;
       if (selectedRoom != "Lugar de atención" && procedureType != "") {
-        let schedulesTable = document.getElementById("tentativeDatesTable")
-          .children[1];
+        let schedulesTable =
+          document.getElementById("tblTentativeDates").children[1];
 
         let tentativeSchedules = [];
         for (var element of schedulesTable.childNodes) {
@@ -386,9 +386,9 @@ export default {
         .then((response) => {
           let fullAppointment = response.data.message;
 
-          document.getElementById("roomSelect").value =
+          document.getElementById("slcRoom").value =
             fullAppointment.building + " " + fullAppointment.room;
-          document.getElementById("description").value =
+          document.getElementById("procedure_type").value =
             fullAppointment.appointmentDTO.procedure_type;
 
           if (fullAppointment.appointmentDTO.patient_id != null) {
@@ -472,16 +472,16 @@ export default {
   margin-left: 10px;
 }
 
+#tentativeDatesContainer {
+  overflow: auto;
+  height: 210px;
+  width: 98%;
+}
+
 #btnAddDate {
   width: 70px;
   height: 34px;
   margin-right: 50px;
   margin-top: 0px;
-}
-
-#tentativeDates {
-  overflow: auto;
-  height: 210px;
-  width: 98%;
 }
 </style>

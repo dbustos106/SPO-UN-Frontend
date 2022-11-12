@@ -97,6 +97,12 @@
 <script>
 export default {
   name: "ProfessorBar",
+
+  data() {
+    return {
+      isOpened: false,
+    };
+  },
   props: {
     usernameContainer: {
       type: String,
@@ -216,11 +222,6 @@ export default {
       type: String,
       default: "#fff",
     },
-  },
-  data() {
-    return {
-      isOpened: false,
-    };
   },
   methods: {
     openRegisterStudent() {
