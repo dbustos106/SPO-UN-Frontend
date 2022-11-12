@@ -1,6 +1,6 @@
 <template>
   <div class="container marco">
-    <div class="card card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
 
@@ -16,82 +16,130 @@
         <!-- ======= detailWindow ======= -->
         <transition name="fade">
           <div id="detailWindow" class="modal-mask" v-if="detailWindowShow">
-            <h2 class="ml-1">Cita</h2>
+            <h2 class="ml-1 mb-3">Cita</h2>
 
             <div class="row mx-auto">
-              <div class="col-8">
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+              <div class="col-sm-7 mr-2">
+                <div class="row mt-2">
+                  <div class="col-sm-5">
                     <span>Tipo de procedimiento:</span>
                   </div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-6">
                     <span id="procedure_type">Tipo de procedimiento:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
                     <span>Cita número:</span>
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <span id="idAppointment">Cita número:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
                     <span>Hora inicio:</span>
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <span id="start_time">Hora inicio:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
                     <span>Hora fin:</span>
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <span id="end_time">Hora fin:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
                     <span>Lugar:</span>
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <span id="idPlace">Lugar:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
                     <span>Estudiantes:</span>
                   </div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-6">
                     <span id="students">Estudiantes:</span>
                   </div>
                 </div>
 
-                <div class="row mx-auto">
-                  <div class="col-sm-4">
+                <div class="row mb-3">
+                  <div class="col-sm-5">
                     <span>Professor:</span>
                   </div>
-                  <div class="col-sm-5 mb-3">
+                  <div class="col-sm-6">
                     <span id="professor">Professor</span>
                   </div>
                 </div>
               </div>
 
-              <div class="col-4">
-                <div class="row mx-auto">
-                  <span id="feedback"> feedback </span>
+              <div class="col-sm-4 card ml-2">
+                <div class="row mt-3">
+                  <span class="mx-auto">Calificación:</span>
+                </div>
+                <div class="col mt-3">
+                  <textarea
+                    class="textarea"
+                    ref="feedback"
+                    rows="5"
+                    cols="45"
+                    id="feedback"
+                  ></textarea>
+                </div>
+                <div class="col">
+                  <p class="clasificacion">
+                    <input
+                      id="radio1"
+                      type="radio"
+                      name="estrellas"
+                      value="5"
+                    />
+                    <label id="star" for="radio1">★</label>
+                    <input
+                      id="radio2"
+                      type="radio"
+                      name="estrellas"
+                      value="4"
+                    />
+                    <label id="star" for="radio2">★</label>
+                    <input
+                      id="radio3"
+                      type="radio"
+                      name="estrellas"
+                      value="3"
+                    />
+                    <label id="star" for="radio3">★</label>
+                    <input
+                      id="radio4"
+                      type="radio"
+                      name="estrellas"
+                      value="2"
+                    />
+                    <label id="star" for="radio4">★</label>
+                    <input
+                      id="radio5"
+                      type="radio"
+                      name="estrellas"
+                      value="1"
+                    />
+                    <label id="star" for="radio5">★</label>
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div class="row mx-auto">
+            <div class="row mx-auto mt-3">
               <button class="btnGris mx-auto" @click="detailWindowShow = false">
                 Cerrar
               </button>
@@ -464,3 +512,27 @@ export default {
   },
 };
 </script>
+
+<style>
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: orange;
+}
+.clasificacion input[type="radio"] {
+  /*visibility: hidden;*/
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+</style>

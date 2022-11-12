@@ -1,9 +1,9 @@
 <template>
   <div class="container marco">
-    <div class="card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <div class="col">
-          <h2 class="card-description mt-5 mb-5">Registro profesores</h2>
+          <h2 class="card-description mt-5 mb-5">Datos</h2>
           <div class="form-group needs-validation" id="form">
             <div class="row mx-auto">
               <div class="col-sm-5 ml-auto">

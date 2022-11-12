@@ -1,6 +1,6 @@
 <template>
   <div class="container marco">
-    <div class="card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <div class="col">
           <h2 class="card-description mt-5 mb-5">Datos</h2>

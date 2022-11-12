@@ -1,6 +1,6 @@
 <template>
   <div class="container marco">
-    <div class="card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <h2 class="card-description mx-auto mt-5 mb-5">Estudiantes a cargo</h2>
 

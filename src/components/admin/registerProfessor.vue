@@ -1,10 +1,10 @@
 <template>
   <!-- ======= FormContainer ======= -->
-  <div id="formContainer" class="container">
-    <div class="card login-card">
+  <div class="container marco">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <div class="col">
-          <p class="login-card-description mt-5 mb-5">Registro profesores</p>
+          <h2 class="card-description mt-5 mb-5">Registro profesores</h2>
           <div class="form-group needs-validation" id="form">
             <div class="row mx-auto">
               <div class="col-sm-5 ml-auto">
@@ -144,13 +144,8 @@
               </section>
             </div>
 
-            <div class="row mx-auto">
-              <button
-                id="registerButton"
-                type="submit"
-                class="btn btn-primary mx-auto mb-5"
-                v-on:click="register"
-              >
+            <div class="col-sm-5 mx-auto">
+              <button class="btn btn-block mx-auto mb-5" v-on:click="register">
                 Registrar
               </button>
             </div>
@@ -252,62 +247,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.container3 {
-  background-color: #e0e5eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-.center {
-  margin: auto;
-  width: 60%;
-  border: 3px solid #315203;
-  padding: 10px;
-}
-.input_label {
-  margin-left: 50px;
-}
-.namef {
-  margin-left: 50px;
-}
-.label1 {
-  margin-left: 10px;
-}
-.label2 {
-  margin-left: 150px;
-}
-.fname {
-  margin-left: 8px;
-  border: 1px solid #070707;
-  padding: 10px 25px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  font-weight: normal;
-}
-.lname {
-  margin-left: 10px;
-  border: 1px solid #070707;
-  padding: 10px 25px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  font-weight: normal;
-}
-#confirPassLabelP {
-  margin-left: 135px;
-}
-.margin-down {
-  margin-top: 0px;
-}
-.form-control {
-  border: 1px solid #d5dae2;
-  padding: 15px 25px;
-  margin-bottom: 20px;
-  min-height: 45px;
-  font-size: 13px;
-  line-height: 15;
-  font-weight: normal;
-}
-</style>

@@ -1,7 +1,7 @@
 <template>
   <section id="signUpSection" class="sectionMarco">
-    <div class="container marco">
-      <div class="card">
+    <div class="container marco align-items-center">
+      <div class="card mt-5 mb-5">
         <div class="row no-gutters">
           <div class="col-md-5">
             <img src="../../assets/img/login.jpg" class="card-img" />

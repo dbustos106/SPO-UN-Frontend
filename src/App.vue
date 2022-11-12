@@ -1,7 +1,6 @@
 <template>
   <!-- ======= Meta datos ======= -->
   <div>
-    <!-- <meta charset="UTF-8" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>SPO UN - Inicia sesión</title>
@@ -238,7 +237,7 @@ export default {
 
 .marco-modal {
   width: 90%;
-  height: 87%;
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -262,14 +261,17 @@ export default {
   width: 43%;
 }
 
+.feedbackContainer {
+  border-width: 1px;
+  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+}
+
 /*--------------------------------------------------------------
 # Card
 --------------------------------------------------------------*/
 
 .card {
   position: relative;
-  margin-top: 90px;
-  margin-bottom: 40px;
   width: 100%;
   height: 100%;
   border: 0;
@@ -426,10 +428,9 @@ input[type="number"] {
 
 .modal-mask {
   width: 50%;
-  max-height: 90%;
-  min-width: 400px;
+  max-height: 75%;
   position: fixed;
-  top: 20%;
+  top: 15%;
   left: 33%;
   background: #fff;
   padding: 20px;
@@ -447,9 +448,10 @@ input[type="number"] {
   text-align: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   .modal-mask {
-    left: 10%;
+    width: 70%;
+    left: 20%;
   }
 }
 

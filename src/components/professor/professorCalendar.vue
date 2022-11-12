@@ -1,7 +1,7 @@
 <template>
   <!-- ======= TableContainer ======= -->
   <div class="container marco">
-    <div class="card card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
 
@@ -82,22 +82,10 @@
                 </div>
               </div>
 
-              <div class="col-4">
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
-                <span> holi </span>
+              <div class="col-4 feedbackContainer">
+                <div class="row mx-auto">
+                  <span id="feedback"> feedback </span>
+                </div>
               </div>
             </div>
             <div class="row mx-auto">
@@ -258,6 +246,8 @@ export default {
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
             fullAppointment.professor;
+          document.getElementById("feedback").textContent =
+            fullAppointment.appointmentDTO.patient_feedback;
 
           let students = "";
           for (var student of fullAppointment.students) {

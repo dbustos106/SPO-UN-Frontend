@@ -1,7 +1,7 @@
 <template>
   <div class="container marco-modal">
     <h2 id="titleAppointmentWindow"></h2>
-    <!-- ====== Appointment ====== -->
+    <!-- ====== AppointmentData ====== -->
     <div class="row mx-auto mb-1 mt-2">
       <div id="dataAppointment" class="col mr-1" style="text-align: center">
         <h3 ref="id" class="text mb-3">Información de la cita</h3>
@@ -89,7 +89,7 @@
         <!-- End DatePicker -->
       </div>
     </div>
-    <!-- End Appointment -->
+    <!-- End AppointmentData -->
 
     <!-- ====== MessageShow ====== -->
     <div class="row mx-auto">

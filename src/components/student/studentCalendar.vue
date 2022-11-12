@@ -1,6 +1,6 @@
 <template>
   <div class="container marco">
-    <div class="card">
+    <div class="card mt-5 mb-3">
       <div class="row no-gutters">
         <h2 class="card-description mx-auto mt-5 mb-4">Citas</h2>
 
@@ -418,6 +418,7 @@ export default {
   top: 5%;
   left: 27%;
   width: 65%;
+  max-height: 88%;
 }
 @media (max-width: 767px) {
   #appointmentWindow {
