@@ -39,8 +39,22 @@
             <div class="col-12">
               <span>Paciente</span>
             </div>
-            <div class="col-12">
-              <span>{{ patientName }}</span>
+            <div class="col">
+              <span>Nombre: </span>
+              <span class="mr-1">{{ patientName }}</span>
+              <span>{{ patientLasName }}</span>
+            </div>
+            <div class="col">
+              <span class=""> Correo: </span>
+              <span>{{ patientEmail }}</span>
+            </div>
+            <div class="col">
+              <span class="mr-1">{{ patientDocumentType }}</span>
+              <span>{{ patientDocumentNumber }}</span>
+              <span> Edad: </span>
+              <span>{{ patientDocumentAge }}</span>
+              <span> Tipo de sangre: </span>
+              <span>{{ patientBloodType }}</span>
             </div>
           </div>
         </div>
@@ -166,9 +180,15 @@ export default {
       errorShow: false,
       successShow: false,
       patientShow: false,
-      patientName: "",
       startDate: ref(),
       endDate: ref(),
+      patientName: "",
+      patientLasName: "",
+      patientEmail: "",
+      patientDocumentType: "",
+      patientDocumentNumber: "",
+      patientDocumentAge: "",
+      patientBloodType: "",
     };
   },
   props: {
@@ -393,7 +413,15 @@ export default {
 
           if (fullAppointment.appointmentDTO.patient_id != null) {
             this.$data.patientShow = true;
-            this.$data.patientName = fullAppointment.patient;
+            this.$data.patientName = fullAppointment.patientDTO.name;
+            this.$data.patientLasName = fullAppointment.patientDTO.last_name;
+            this.$data.patientEmail = fullAppointment.patientDTO.email;
+            this.$data.patientDocumentType =
+              fullAppointment.patientDTO.document_type;
+            this.$data.patientDocumentNumber =
+              fullAppointment.patientDTO.document_number;
+            this.$data.patientDocumentAge = fullAppointment.patientDTO.age;
+            this.$data.patientBloodType = fullAppointment.patientDTO.blood_type;
           }
 
           for (var schedule of fullAppointment.tentativeScheduleDTOS) {
