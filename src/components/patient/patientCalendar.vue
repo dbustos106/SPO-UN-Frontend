@@ -314,7 +314,7 @@ export default {
           document.getElementById("idPlace").textContent =
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
-            fullAppointment.professor;
+            "(" + fullAppointment.professor + ")";
           document.getElementById("patient").textContent =
             fullAppointment.patient;
           document.getElementById("feedback").textContent =
@@ -331,10 +331,12 @@ export default {
 
           let students = "";
           for (var student of fullAppointment.students) {
-            students += "(" + student + "@unal.edu.co) ";
+            students += "(" + student + ") ";
           }
 
           document.getElementById("students").textContent = students;
+          document.getElementById("patient").textContent =
+            "(" + fullAppointment.patientDTO.email + ")";
         })
         .catch((err) => {
           if (err.response.status == 403) {
