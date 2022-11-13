@@ -92,9 +92,9 @@
               </div>
             </div>
 
-            <div class="col-sm-4 card ml-2">
-              <div class="row mt-3">
-                <span class="mx-auto">Calificación:</span>
+            <div class="col-sm-4 card">
+              <div class="row mx-auto mt-3">
+                <span>Calificación:</span>
               </div>
               <div class="mx-auto mt-3">
                 <textarea
@@ -105,8 +105,8 @@
                   id="feedback"
                 ></textarea>
               </div>
-              <div class="mx-auto">
-                <p class="clasificacion">
+              <div class="row mx-auto">
+                <span class="clasificacion">
                   <input id="radio1" type="radio" name="estrellas" value="5" />
                   <label class="star" for="radio1">★</label>
                   <input id="radio2" type="radio" name="estrellas" value="4" />
@@ -117,10 +117,10 @@
                   <label class="star" for="radio4">★</label>
                   <input id="radio5" type="radio" name="estrellas" value="1" />
                   <label class="star" for="radio5">★</label>
-                </p>
+                </span>
               </div>
               <div class="row mx-auto mb-2">
-                <button class="btnBlue mx-auto" v-on:click="qualifyAppointment">
+                <button class="btnBlue" v-on:click="qualifyAppointment">
                   Enviar
                 </button>
               </div>

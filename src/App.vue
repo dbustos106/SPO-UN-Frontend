@@ -826,7 +826,7 @@ label {
 }
 
 .btnBlue:hover {
-  background: rgba(0, 5, 65, 0.8);
+  background: rgba(21, 27, 93, 0.8);
   color: #fff;
 }
 

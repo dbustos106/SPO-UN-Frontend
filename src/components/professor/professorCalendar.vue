@@ -89,7 +89,7 @@
               </div>
             </div>
 
-            <div class="col-sm-4 card ml-2">
+            <div class="col-sm-4 card">
               <div class="row mt-3">
                 <span class="mx-auto">Calificación:</span>
               </div>
