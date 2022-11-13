@@ -1,7 +1,7 @@
 <template>
   <section id="signUpSection" class="sectionMarco">
     <div class="container marco align-items-center">
-      <div class="card mt-5 mb-5">
+      <div id="signUpCard" class="card mt-5 mb-5">
         <div class="row no-gutters">
           <div class="col-md-5">
             <img src="../../assets/img/login.jpg" class="card-img" />
@@ -295,5 +295,8 @@ export default {
 <style>
 #signUpSection {
   padding-left: 0px;
+}
+#signUpCard {
+  margin-top: 80px !important;
 }
 </style>

@@ -124,7 +124,7 @@ export default {
     };
   },
   methods: {
-    async loadData() {
+    loadData() {
       axios
         .get(App.methods.getBackUrl() + "/student/" + sessionStorage.Id, {
           headers: {
