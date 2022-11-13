@@ -16,7 +16,10 @@ export default {
   data() {
     return {
       sideBarIsOpen: 1,
-      username: sessionStorage.Username,
+      username: sessionStorage.Username.substring(
+        0,
+        sessionStorage.Username.indexOf("@")
+      ),
     };
   },
   components: {

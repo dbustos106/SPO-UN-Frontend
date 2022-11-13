@@ -11,19 +11,6 @@
             <p class="card-description mt-5">Registra tus datos</p>
             <div class="form-group needs-validation">
               <div class="row mx-auto">
-                <div class="col-sm-10 mx-auto">
-                  <input
-                    class="form-control"
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    id="nptUsername"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="row mx-auto">
                 <div class="col-sm-5 ml-auto">
                   <input
                     class="form-control"
@@ -211,7 +198,6 @@ export default {
   },
   methods: {
     register() {
-      var username = document.getElementById("nptUsername").value;
       var name = document.getElementById("nptName").value;
       var lastName = document.getElementById("nptLastName").value;
       var email = document.getElementById("nptEmail").value;
@@ -223,7 +209,6 @@ export default {
       var age = document.getElementById("nptAge").value;
       var bloodType = document.getElementById("slcBloodType").value;
       if (
-        username == "" ||
         name == "" ||
         lastName == "" ||
         email == "" ||
@@ -240,7 +225,6 @@ export default {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
           let datos = {
-            username: username,
             password: password,
             name: name,
             last_name: lastName,

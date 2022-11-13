@@ -274,7 +274,7 @@ export default {
           document.getElementById("idPlace").textContent =
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
-            "(" + fullAppointment.professor + "@unal.edu.co)";
+            "(" + fullAppointment.professor + ")";
           document.getElementById("feedback").textContent =
             fullAppointment.appointmentDTO.patient_feedback;
           document
@@ -290,7 +290,7 @@ export default {
 
           let students = "";
           for (var student of fullAppointment.students) {
-            students += "(" + student + "@unal.edu.co)";
+            students += "(" + student + ")";
           }
           document.getElementById("students").textContent = students;
 

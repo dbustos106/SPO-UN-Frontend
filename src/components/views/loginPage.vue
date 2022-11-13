@@ -33,9 +33,9 @@
                   </div>
                   <input
                     type="text"
-                    id="nptUsername"
+                    id="nptEmail"
                     class="form-control"
-                    placeholder="Usuario"
+                    placeholder="correo"
                     required
                   />
                 </div>
@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     sendLogin() {
-      var username = document.getElementById("nptUsername").value;
+      var username = document.getElementById("nptEmail").value;
       var password = document.getElementById("nptPassword").value;
       if (username == "" || password == "") {
         this.errorFunction(" No ha ingresado los datos");

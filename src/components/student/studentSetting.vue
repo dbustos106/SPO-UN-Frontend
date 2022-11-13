@@ -72,7 +72,7 @@
         </div>
 
         <div class="row mx-auto">
-          <div class="col-4 mx-auto mb-1 mt-2">
+          <div class="col-4 mx-auto mb-2 mt-2">
             <section v-show="errorShow">
               <div class="alertBar error">
                 <span title="error" class="alertBar-message">
@@ -100,7 +100,7 @@
 
         <div class="row mx-auto">
           <div class="col-4 mx-auto mb-4">
-            <button class="btn btn-block mx-auto mb-4" v-on:click="update">
+            <button class="btn btn-block mx-auto mb-3" v-on:click="update">
               Guardar
             </button>
           </div>

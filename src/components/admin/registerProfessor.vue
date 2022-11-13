@@ -91,7 +91,7 @@
         </div>
 
         <div class="row mx-auto">
-          <div class="col-4 mx-auto mt-4">
+          <div class="col-4 mx-auto mt-3 mb-1">
             <section v-show="errorShow">
               <div class="alertBar error">
                 <span title="error" class="alertBar-message">
@@ -165,7 +165,6 @@ export default {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
           let datos = {
-            username: email.substring(0, email.indexOf("@")),
             password: password,
             name: name,
             last_name: lastName,

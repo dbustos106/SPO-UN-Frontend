@@ -1,22 +1,8 @@
 <template>
   <div class="container marco">
     <div class="card mt-5 mb-3">
-      <h2 class="card-description mt-3 mb-1">Datos</h2>
+      <h2 class="card-description mt-3 mb-3">Datos</h2>
       <div class="form-group needs-validation" id="form">
-        <div class="row mx-auto">
-          <div class="col-sm-10 mx-auto">
-            <span>Nombre de usuario</span>
-            <input
-              class="form-control"
-              type="text"
-              name="username"
-              placeholder="Username"
-              id="nptUsername"
-              required
-            />
-          </div>
-        </div>
-
         <div class="row mx-auto">
           <div class="col-sm-5 ml-auto">
             <span>Nombre</span>
@@ -128,7 +114,7 @@
         </div>
 
         <div class="row mx-auto">
-          <div class="col-4 mx-auto mb-1">
+          <div class="col-4 mx-auto mt-3 mb-1">
             <section v-show="errorShow">
               <div class="alertBar error">
                 <span title="error" class="alertBar-message">
@@ -155,7 +141,7 @@
         </div>
 
         <div class="row mx-auto">
-          <div class="col-4 mx-auto mt-3 mb-2">
+          <div class="col-4 mx-auto mb-2">
             <button class="btn btn-block mx-auto" v-on:click="update">
               Guardar
             </button>
@@ -190,7 +176,6 @@ export default {
         })
         .then((response) => {
           let patient = response.data.message;
-          document.getElementById("nptUsername").value = patient.username;
           document.getElementById("nptName").value = patient.name;
           document.getElementById("nptLastName").value = patient.last_name;
           document.getElementById("nptEmail").value = patient.email;
@@ -213,7 +198,6 @@ export default {
         });
     },
     update() {
-      var username = document.getElementById("nptUsername").value;
       var name = document.getElementById("nptName").value;
       var lastName = document.getElementById("nptLastName").value;
       var email = document.getElementById("nptEmail").value;
@@ -223,7 +207,6 @@ export default {
       var age = document.getElementById("nptAge").value;
       var bloodType = document.getElementById("slcBloodType").value;
       if (
-        username == "" ||
         name == "" ||
         lastName == "" ||
         email == "" ||
@@ -236,7 +219,6 @@ export default {
       } else {
         let datos = {
           id: sessionStorage.Id,
-          username: username,
           name: name,
           last_name: lastName,
           email: email,

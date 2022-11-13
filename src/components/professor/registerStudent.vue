@@ -164,7 +164,6 @@ export default {
           this.errorFunction("Las contraseñas no coinciden");
         } else {
           let datos = {
-            username: email.substring(0, email.indexOf("@")),
             password: password,
             name: name,
             last_name: lastName,
