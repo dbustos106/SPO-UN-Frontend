@@ -1,9 +1,9 @@
 <template>
   <div class="container marco-modal">
     <h2 id="titleAppointmentWindow"></h2>
-    <!-- ====== AppointmentData ====== -->
-    <div class="row mx-auto mb-1 mt-2">
-      <div id="dataAppointment" class="col mr-1" style="text-align: center">
+    <div class="row mx-auto mb-1 mt-2" style="text-align: center">
+      <!-- ====== DataAppointment ====== -->
+      <div id="dataAppointment" class="col mr-1">
         <h3 ref="id" class="text mb-3">Información de la cita</h3>
         <div class="form-horizontal">
           <div class="form-group">
@@ -37,33 +37,21 @@
           </div>
           <div class="form-group" v-if="patientShow">
             <div class="col-12">
-              <span>Paciente</span>
+              <span>Hora inicio: </span>
+              <span>{{ appointmentStartTime }}</span>
             </div>
-            <div class="col">
-              <span>Nombre: </span>
-              <span class="mr-1">{{ patientName }}</span>
-              <span>{{ patientLasName }}</span>
-            </div>
-            <div class="col">
-              <span class=""> Correo: </span>
-              <span>{{ patientEmail }}</span>
-            </div>
-            <div class="col">
-              <span class="mr-1">{{ patientDocumentType }}</span>
-              <span>{{ patientDocumentNumber }}</span>
-              <span> Edad: </span>
-              <span>{{ patientDocumentAge }}</span>
-              <span> Tipo de sangre: </span>
-              <span>{{ patientBloodType }}</span>
+            <div class="col-12">
+              <span>Hora fin: </span>
+              <span>{{ appointmentEndTime }}</span>
             </div>
           </div>
         </div>
       </div>
+      <!-- End DataAppointment -->
 
-      <div id="dataTentative" class="col ml-1" style="text-align: center">
+      <!-- ====== TentativeDates ====== -->
+      <div id="dataTentative" class="col ml-1" v-if="tentativeShow">
         <h3 class="text mb-3">Fechas tentativas</h3>
-
-        <!-- ======= tentativeTable ======= -->
         <div id="tentativeDatesContainer" class="container mx-auto mb-1">
           <table id="tblTentativeDates">
             <thead>
@@ -77,9 +65,7 @@
             </tbody>
           </table>
         </div>
-        <!-- End tentativeTable -->
 
-        <!-- ======= DatePicker ======= -->
         <div class="container mx-auto mt-1">
           <div class="row mb-2">
             <datepicker
@@ -108,10 +94,53 @@
             Eliminar
           </button>
         </div>
-        <!-- End DatePicker -->
+      </div>
+      <!-- End TentativeDates -->
+
+      <!-- ====== Patient ====== -->
+      <div id="dataPatient" class="col ml-1" v-if="patientShow">
+        <h3 class="text mb-3">Paciente</h3>
+        <div class="form-horizontal">
+          <div class="col">
+            <span> Nombre: </span>
+            <span>{{ patientName }}</span>
+            <span> Apellido: </span>
+            <span>{{ patientLasName }}</span>
+          </div>
+          <div class="col">
+            <span class=""> Correo: </span>
+            <span>{{ patientEmail }}</span>
+          </div>
+          <div class="col">
+            <span class="mr-1">{{ patientDocumentType }}</span>
+            <span>{{ patientDocumentNumber }}</span>
+            <span> Edad: </span>
+            <span>{{ patientDocumentAge }}</span>
+            <span> Tipo de sangre: </span>
+            <span>{{ patientBloodType }}</span>
+          </div>
+        </div>
+        <div class="form-horizontal">
+          <h3 class="text mb-3">Calificación</h3>
+          <span id="feedback"> feedback </span>
+          <div class="form-group">
+            <p class="clasificacion">
+              <input id="radio1" type="radio" name="estrellas" value="5" />
+              <label for="radio1">★</label>
+              <input id="radio2" type="radio" name="estrellas" value="4" />
+              <label for="radio2">★</label>
+              <input id="radio3" type="radio" name="estrellas" value="3" />
+              <label for="radio3">★</label>
+              <input id="radio4" type="radio" name="estrellas" value="2" />
+              <label for="radio4">★</label>
+              <input id="radio5" type="radio" name="estrellas" value="1" />
+              <label for="radio5">★</label>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- End AppointmentData -->
+    <!-- End Patient -->
 
     <!-- ====== MessageShow ====== -->
     <div class="row mx-auto">
@@ -140,7 +169,7 @@
     </div>
     <!-- End MessageShow -->
 
-    <!-- ====== btnCrear ====== -->
+    <!-- ====== buttons ====== -->
     <div class="row mx-auto">
       <button
         id="btnCreateAppointment"
@@ -153,7 +182,7 @@
     <div class="row mx-auto">
       <button class="btnGris mx-auto" @click="closeWindow">Cerrar</button>
     </div>
-    <!-- End btnCrear -->
+    <!-- End buttons -->
   </div>
 </template>
 
@@ -168,18 +197,13 @@ import "@vuepic/vue-datepicker/dist/main.css";
 export default {
   name: "AppointmentWindow",
 
-  components: {
-    datepicker,
-  },
-  emits: {
-    close: null,
-  },
   data() {
     return {
       rooms: {},
       errorShow: false,
       successShow: false,
-      patientShow: false,
+      tentativeShow: true,
+      patientShow: true,
       startDate: ref(),
       endDate: ref(),
       patientName: "",
@@ -189,7 +213,15 @@ export default {
       patientDocumentNumber: "",
       patientDocumentAge: "",
       patientBloodType: "",
+      appointmentStartTime: "",
+      appointmentEndTime: "",
     };
+  },
+  components: {
+    datepicker,
+  },
+  emits: {
+    close: null,
   },
   props: {
     id: {
@@ -412,7 +444,7 @@ export default {
             fullAppointment.appointmentDTO.procedure_type;
 
           if (fullAppointment.appointmentDTO.patient_id != null) {
-            this.$data.patientShow = true;
+            this.$data.tentativeShow = false;
             this.$data.patientName = fullAppointment.patientDTO.name;
             this.$data.patientLasName = fullAppointment.patientDTO.last_name;
             this.$data.patientEmail = fullAppointment.patientDTO.email;
@@ -422,6 +454,25 @@ export default {
               fullAppointment.patientDTO.document_number;
             this.$data.patientDocumentAge = fullAppointment.patientDTO.age;
             this.$data.patientBloodType = fullAppointment.patientDTO.blood_type;
+            this.$data.appointmentStartTime =
+              fullAppointment.appointmentDTO.start_time;
+            this.$data.appointmentEndTime =
+              fullAppointment.appointmentDTO.end_time;
+
+            document.getElementById("feedback").textContent =
+              fullAppointment.appointmentDTO.patient_feedback;
+            document
+              .querySelectorAll(`input[name="estrellas"]`)
+              .forEach((element) => {
+                if (
+                  element.value == fullAppointment.appointmentDTO.patient_rating
+                ) {
+                  element.checked = true;
+                }
+                element.disabled = true;
+              });
+          } else {
+            this.$data.patientShow = false;
           }
 
           for (var schedule of fullAppointment.tentativeScheduleDTOS) {
@@ -468,6 +519,7 @@ export default {
       this.getStudentAppointmentById(this.id);
       document.getElementById("btnCreateAppointment").innerHTML = "Guardar";
     } else {
+      this.$data.patientShow = false;
       document.getElementById("btnCreateAppointment").innerHTML = "Crear cita";
     }
     document.getElementById("titleAppointmentWindow").innerHTML = this.title;
@@ -488,6 +540,18 @@ export default {
   margin-right: 10px;
 }
 #dataTentative {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);
+  color: #000;
+  font-size: 15px;
+  font-weight: 400;
+  align-items: center;
+  text-align: center;
+  min-width: 250px;
+  margin-left: 10px;
+}
+#dataPatient {
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);

@@ -261,7 +261,7 @@ export default {
             },
           })
           .then(() => {
-            this.successFunction("Registro Exitoso");
+            this.successFunction("Guardado Exitoso");
           })
           .catch((err) => {
             this.errorFunction("Error, correo o documento ya registrado");

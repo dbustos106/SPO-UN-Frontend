@@ -1,189 +1,155 @@
 <template>
-  <!-- ======= TableContainer ======= -->
   <div class="container marco">
     <div class="card mt-5 mb-3">
-      <div class="row no-gutters">
-        <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
+      <h2 class="card-description mt-5 mx-auto mb-4">Citas</h2>
 
-        <!-- ======= Overlay ======= -->
-        <transition name="fade">
-          <div class="modal-overlay" v-if="detailWindow || deleteWindow"></div>
-        </transition>
-        <!-- End Overlay -->
+      <!-- ======= Overlay ======= -->
+      <transition name="fade">
+        <div class="modal-overlay" v-if="detailWindow || deleteWindow"></div>
+      </transition>
+      <!-- End Overlay -->
 
-        <!-- ======= detailWindow ======= -->
-        <transition name="fade">
-          <div id="detailWindow" class="modal-mask" v-if="detailWindow">
-            <h2 class="ml-1 mb-3">Cita</h2>
+      <!-- ======= detailWindow ======= -->
+      <transition name="fade">
+        <div id="detailWindow" class="modal-mask" v-if="detailWindow">
+          <h2 class="ml-1 mb-3">Cita</h2>
 
-            <div class="row mx-auto">
-              <div class="col-sm-7 mr-2">
-                <div class="row mt-2">
-                  <div class="col-sm-5">
-                    <span>Tipo de procedimiento:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="procedure_type">Tipo de procedimiento:</span>
-                  </div>
+          <div class="row mx-auto">
+            <div class="col-sm-7 mr-2">
+              <div class="row mt-2">
+                <div class="col-sm-5">
+                  <span>Tipo de procedimiento:</span>
                 </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Cita número:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="idAppointment">Cita número:</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Hora inicio:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="start_time">Hora inicio:</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Hora fin:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="end_time">Hora fin:</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Lugar:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="idPlace">Lugar:</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Estudiantes:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="students">Estudiantes:</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-5">
-                    <span>Professor:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="professor">Professor</span>
-                  </div>
-                </div>
-
-                <div class="row mb-4">
-                  <div class="col-sm-5">
-                    <span>Paciente:</span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span id="patient">Paciente</span>
-                  </div>
+                <div class="col-sm-7">
+                  <span id="procedure_type">Tipo de procedimiento:</span>
                 </div>
               </div>
 
-              <div class="col-sm-4 card ml-2">
-                <div class="row mt-3">
-                  <span class="mx-auto">Calificación:</span>
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Cita número:</span>
                 </div>
-                <div class="col mt-3">
-                  <span id="feedback"> feedback </span>
+                <div class="col-sm-7">
+                  <span id="idAppointment">Cita número:</span>
                 </div>
-                <div class="col">
-                  <p class="clasificacion">
-                    <input
-                      id="radio1"
-                      type="radio"
-                      name="estrellas"
-                      value="5"
-                    />
-                    <label for="radio1">★</label>
-                    <input
-                      id="radio2"
-                      type="radio"
-                      name="estrellas"
-                      value="4"
-                    />
-                    <label for="radio2">★</label>
-                    <input
-                      id="radio3"
-                      type="radio"
-                      name="estrellas"
-                      value="3"
-                    />
-                    <label for="radio3">★</label>
-                    <input
-                      id="radio4"
-                      type="radio"
-                      name="estrellas"
-                      value="2"
-                    />
-                    <label for="radio4">★</label>
-                    <input
-                      id="radio5"
-                      type="radio"
-                      name="estrellas"
-                      value="1"
-                    />
-                    <label for="radio5">★</label>
-                  </p>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Hora inicio:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="start_time">Hora inicio:</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Hora fin:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="end_time">Hora fin:</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Lugar:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="idPlace">Lugar:</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Estudiantes:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="students">Estudiantes:</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <span>Professor:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="professor">Professor</span>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-sm-5">
+                  <span>Paciente:</span>
+                </div>
+                <div class="col-sm-7">
+                  <span id="patient">Paciente</span>
                 </div>
               </div>
             </div>
-            <div class="row mx-auto">
-              <button class="btnGris mx-auto" @click="detailWindow = false">
-                Cerrar
-              </button>
+
+            <div class="col-sm-4 card ml-2">
+              <div class="row mt-3">
+                <span class="mx-auto">Calificación:</span>
+              </div>
+              <div class="col mt-3">
+                <span id="feedback"> feedback </span>
+              </div>
+              <div class="col">
+                <p class="clasificacion">
+                  <input id="radio1" type="radio" name="estrellas" value="5" />
+                  <label for="radio1">★</label>
+                  <input id="radio2" type="radio" name="estrellas" value="4" />
+                  <label for="radio2">★</label>
+                  <input id="radio3" type="radio" name="estrellas" value="3" />
+                  <label for="radio3">★</label>
+                  <input id="radio4" type="radio" name="estrellas" value="2" />
+                  <label for="radio4">★</label>
+                  <input id="radio5" type="radio" name="estrellas" value="1" />
+                  <label for="radio5">★</label>
+                </p>
+              </div>
             </div>
           </div>
-        </transition>
-        <!-- End detailWindow -->
-
-        <div id="AppointmentContainer" class="mx-auto">
-          <!-- ======= AppointmentsTable ======= -->
-          <div class="TableContainer">
-            <table id="AppointmentsTable">
-              <thead>
-                <tr>
-                  <td>Id</td>
-                  <td>Fecha de inicio</td>
-                  <td>Fecha de fin</td>
-                  <td>Tipo de procedimiento</td>
-                  <td>Detalles</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr></tr>
-              </tbody>
-            </table>
+          <div class="row mx-auto">
+            <button class="btnGris mx-auto" @click="detailWindow = false">
+              Cerrar
+            </button>
           </div>
-          <!-- End AppointmentsTable -->
-
-          <!-- ======= Buttons ======= -->
-          <div class="row ml-1">
-            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-          </div>
-          <!-- End Buttons -->
-
-          <hr width="100%" />
-          <hr width="100%" />
-
-          <!-- ======= ProfessorCalendarContainer ======= -->
-          <div class="row mb-5">
-            <FullCalendar class="mx-auto my-auto" :options="calendarOptions" />
-          </div>
-          <!-- End ProfessorCalendarContainer -->
         </div>
+      </transition>
+      <!-- End detailWindow -->
+
+      <div id="AppointmentContainer" class="mx-auto">
+        <div class="TableContainer">
+          <table id="AppointmentsTable">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Fecha de inicio</td>
+                <td>Fecha de fin</td>
+                <td>Tipo de procedimiento</td>
+                <td>Detalles</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ======= Buttons ======= -->
+        <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+        <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
+        <!-- End Buttons -->
+
+        <hr width="100%" />
+        <hr width="100%" />
+
+        <!-- ======= ProfessorCalendarContainer ======= -->
+        <FullCalendar class="mb-4" :options="calendarOptions" />
+        <!-- End ProfessorCalendarContainer -->
       </div>
     </div>
   </div>
@@ -308,9 +274,7 @@ export default {
           document.getElementById("idPlace").textContent =
             fullAppointment.building + " - " + fullAppointment.room;
           document.getElementById("professor").textContent =
-            fullAppointment.professor;
-          document.getElementById("patient").textContent =
-            fullAppointment.patient;
+            "(" + fullAppointment.professor + "@unal.edu.co)";
           document.getElementById("feedback").textContent =
             fullAppointment.appointmentDTO.patient_feedback;
           document
@@ -328,8 +292,14 @@ export default {
           for (var student of fullAppointment.students) {
             students += "(" + student + "@unal.edu.co)";
           }
-
           document.getElementById("students").textContent = students;
+
+          if (fullAppointment.patientDTO != null) {
+            document.getElementById("patient").textContent =
+              "(" + fullAppointment.patientDTO.email + ")";
+          } else {
+            document.getElementById("patient").textContent = "No asignada";
+          }
         })
         .catch((err) => {
           if (err.response.status == 403) {

@@ -816,7 +816,7 @@ label {
 --------------------------------------------------------------*/
 
 .btnBlue {
-  width: 20%;
+  width: 15%;
   min-width: 100px;
   background: rgba(0, 3, 37, 0.8);
   border-radius: 4px;
@@ -831,7 +831,7 @@ label {
 }
 
 .btnRed {
-  width: 20%;
+  width: 15%;
   min-width: 100px;
   background: rgba(125, 0, 0, 0.8);
   border-radius: 4px;
@@ -861,7 +861,7 @@ label {
 }
 
 .btnGris {
-  width: 20%;
+  width: 15%;
   min-width: 100px;
   background: rgba(87, 89, 94, 0.7);
   border-radius: 4px;

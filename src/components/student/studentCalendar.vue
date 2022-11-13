@@ -1,96 +1,90 @@
 <template>
   <div class="container marco">
     <div class="card mt-5 mb-3">
-      <div class="row no-gutters">
-        <h2 class="card-description mx-auto mt-5 mb-4">Citas</h2>
+      <h2 class="card-description mx-auto mt-5 mb-4">Citas</h2>
 
-        <!-- ======= Overlay ======= -->
-        <transition name="fade">
-          <div
-            class="modal-overlay"
-            v-if="deleteWindowShow || appointmentWindowShow"
-          ></div>
-        </transition>
-        <!-- End Overlay -->
+      <!-- ======= Overlay ======= -->
+      <transition name="fade">
+        <div
+          class="modal-overlay"
+          v-if="deleteWindowShow || appointmentWindowShow"
+        ></div>
+      </transition>
+      <!-- End Overlay -->
 
-        <!-- ======= appointmentWindow ======= -->
-        <transition name="fade">
-          <div
-            id="appointmentWindow"
-            class="modal-mask"
-            v-if="appointmentWindowShow"
+      <!-- ======= appointmentWindow ======= -->
+      <transition name="fade">
+        <div
+          id="appointmentWindow"
+          class="modal-mask"
+          v-if="appointmentWindowShow"
+        >
+          <appointmentWindow
+            ref="appointmentWindow"
+            :id="idAppointment"
+            :title="titleAppointmentWindow"
+            @close="updateData"
           >
-            <appointmentWindow
-              ref="appointmentWindow"
-              :id="idAppointment"
-              :title="titleAppointmentWindow"
-              @close="updateData"
-            >
-            </appointmentWindow>
-          </div>
-        </transition>
-        <!-- End appointmentWindow -->
-
-        <!-- ======= deleteWindow ======= -->
-        <transition name="fade">
-          <div class="modal-mask deleteWindow" v-if="deleteWindowShow">
-            <h2>Confirmación</h2>
-            <span>¿Desea cancelar la cita?</span>
-            <div class="row justify-content-center">
-              <button class="btnGris mr-1" @click="deleteWindowShow = false">
-                Cerrar
-              </button>
-
-              <button class="btnRed ml-1" @click="cancelStudentAppointment">
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </transition>
-        <!-- End deleteWindow -->
-
-        <div id="AppointmentContainer" class="mx-auto">
-          <!-- ======= AppointmentsTable ======= -->
-          <div class="TableContainer">
-            <table id="AppointmentsTable">
-              <thead>
-                <tr>
-                  <td>Id</td>
-                  <td>Fecha de inicio</td>
-                  <td>Fecha de fin</td>
-                  <td>Tipo de procedimiento</td>
-                  <td>Detalles</td>
-                  <td>Cancelar</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr></tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- End AppointmentsTable -->
-
-          <!-- ======= Buttons ======= -->
-          <div class="row ml-1">
-            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-            <div class="col-5">
-              <button class="btnBlue" @click="createAppointment">
-                Crear cita
-              </button>
-            </div>
-          </div>
-          <!-- End Buttons -->
-
-          <hr width="100%" />
-          <hr width="100%" />
-
-          <!-- ======= StudentCalendarContainer ======= -->
-          <div class="row mb-5">
-            <FullCalendar ref="fullCalendar" :options="calendarOptions" />
-          </div>
-          <!-- End StudentCalendarContainer -->
+          </appointmentWindow>
         </div>
+      </transition>
+      <!-- End appointmentWindow -->
+
+      <!-- ======= deleteWindow ======= -->
+      <transition name="fade">
+        <div class="modal-mask deleteWindow" v-if="deleteWindowShow">
+          <h2>Confirmación</h2>
+          <span>¿Desea cancelar la cita?</span>
+          <div class="row justify-content-center">
+            <button class="btnGris mr-1" @click="deleteWindowShow = false">
+              Cerrar
+            </button>
+
+            <button class="btnRed ml-1" @click="cancelStudentAppointment">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </transition>
+      <!-- End deleteWindow -->
+
+      <div id="AppointmentContainer" class="mx-auto">
+        <!-- ======= AppointmentsTable ======= -->
+        <div class="TableContainer">
+          <table id="tblAppointments">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Fecha de inicio</td>
+                <td>Fecha de fin</td>
+                <td>Tipo de procedimiento</td>
+                <td>Detalles</td>
+                <td>Cancelar</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- End AppointmentsTable -->
+
+        <!-- ======= Buttons ======= -->
+        <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
+        <button class="btnGrisLq mr-1" v-on:click="nextPage">&gt;</button>
+        <button class="btnBlue" @click="createAppointment">Crear cita</button>
+        <!-- End Buttons -->
+
+        <hr width="100%" />
+        <hr width="100%" />
+
+        <!-- ======= StudentCalendarContainer ======= -->
+        <FullCalendar
+          class="mb-4"
+          ref="fullCalendar"
+          :options="calendarOptions"
+        />
+        <!-- End StudentCalendarContainer -->
       </div>
     </div>
   </div>
@@ -110,10 +104,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 export default {
   name: "studentCalendar",
 
-  components: {
-    FullCalendar,
-    appointmentWindow,
-  },
   data() {
     return {
       idPage: 0,
@@ -134,6 +124,10 @@ export default {
       },
     };
   },
+  components: {
+    FullCalendar,
+    appointmentWindow,
+  },
   methods: {
     putStudentScheduleInCalendar(schedules, color) {
       for (var i in schedules) {
@@ -149,7 +143,7 @@ export default {
       }
     },
     putStudentAppointmentsInTable(appointments) {
-      let table = document.getElementById("AppointmentsTable");
+      let table = document.getElementById("tblAppointments");
 
       while (table.children[1].firstChild != table.children[1].lastChild) {
         var child = table.children[1].lastChild;
@@ -378,7 +372,7 @@ export default {
       this.getStudentUnconfirmedSchedule();
     },
     backPage() {
-      let table = document.getElementById("AppointmentsTable");
+      let table = document.getElementById("tblAppointments");
 
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
@@ -391,7 +385,7 @@ export default {
       }
     },
     nextPage() {
-      let table = document.getElementById("AppointmentsTable");
+      let table = document.getElementById("tblAppointments");
       this.$data.idPage += 1;
 
       while (table.children[1].firstChild != table.children[1].lastChild) {

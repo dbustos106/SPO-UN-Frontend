@@ -1,42 +1,37 @@
 <template>
   <div class="container marco">
     <div class="card mt-5 mb-3">
-      <div class="row no-gutters">
-        <h2 class="card-description mx-auto mt-5 mb-5">Estudiantes a cargo</h2>
-
-        <div id="studentContainer" class="mx-auto">
-          <!-- ======= Busqueda ======= -->
-          <div class="row-sm-6 mb-3">
-            <span>Búsqueda: </span>
-            <input id="nptQuery" v-on:keyup="filteredData" />
-          </div>
-          <!-- End Busqueda -->
-
-          <!-- ======= Studentstable ======= -->
-          <div class="TableContainer">
-            <table id="tblStudents">
-              <thead>
-                <tr>
-                  <td>Nombre</td>
-                  <td>Correo</td>
-                  <td>Tipo de documento</td>
-                  <td>Número de documento</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr></tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- End StudentsTable -->
-
-          <!-- ======= Buttons ======= -->
-          <div class="row ml-1 mb-4">
-            <button class="btnGrisLq mr-1" v-on:click="backPage">&lt;</button>
-            <button class="btnGrisLq" v-on:click="nextPage">&gt;</button>
-          </div>
-          <!-- End Buttons -->
+      <h2 class="card-description mx-auto mt-5 mb-3">Estudiantes a cargo</h2>
+      <div id="studentContainer" class="mx-auto">
+        <!-- ======= Busqueda ======= -->
+        <div class="row-sm-6 mb-3">
+          <span>Búsqueda: </span>
+          <input id="nptQuery" v-on:keyup="filteredData" />
         </div>
+        <!-- End Busqueda -->
+
+        <!-- ======= Studentstable ======= -->
+        <div class="TableContainer">
+          <table id="tblStudents">
+            <thead>
+              <tr>
+                <td>Nombre</td>
+                <td>Correo</td>
+                <td>Tipo de documento</td>
+                <td>Número de documento</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- End StudentsTable -->
+
+        <!-- ======= Buttons ======= -->
+        <button class="btnGrisLq mr-1 mb-3" v-on:click="backPage">&lt;</button>
+        <button class="btnGrisLq mb-3" v-on:click="nextPage">&gt;</button>
+        <!-- End Buttons -->
       </div>
     </div>
   </div>
@@ -169,7 +164,7 @@ export default {
 </script>
 
 <style>
-#StudentContainer {
+#studentContainer {
   width: 90%;
 }
 </style>
