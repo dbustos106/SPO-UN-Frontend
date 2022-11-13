@@ -93,9 +93,8 @@
             </div>
 
             <div class="col-sm-4 card">
-              <div class="row mx-auto mt-3">
-                <span>Calificación:</span>
-              </div>
+              <span>Calificación: </span>
+              <label id="spnClasificacion" v-if="checkClasifiacion">✔</label>
               <div class="mx-auto mt-3">
                 <textarea
                   class="textarea"
@@ -215,6 +214,7 @@ export default {
       btnSelected: null,
       detailWindowShow: false,
       deleteWindowShow: false,
+      checkClasifiacion: false,
       appointments: [],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
@@ -290,6 +290,8 @@ export default {
       }
     },
     getPatientAppointmentById() {
+      this.$data.checkClasifiacion = false;
+
       axios
         .get(
           App.methods.getBackUrl() + "/appointment/" + this.$data.idAppointment,
@@ -419,7 +421,7 @@ export default {
           }
         )
         .then(() => {
-          console.log("envio exitoso");
+          this.$data.checkClasifiacion = true;
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -554,3 +556,10 @@ export default {
   },
 };
 </script>
+
+<style>
+#spnClasificacion {
+  width: 5%;
+  color: rgb(0, 80, 21);
+}
+</style>
