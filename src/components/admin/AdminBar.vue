@@ -54,7 +54,7 @@
           <div class="profile-details">
             <i class="bx bx-user-circle"></i>
             <div class="name">
-              <div class="name" id="adminUsername"></div>
+              <div class="name" ref="userEmail"></div>
             </div>
           </div>
           <i
@@ -78,6 +78,11 @@ export default {
     };
   },
   props: {
+    userEmail: {
+      type: String,
+      required: true,
+      default: "",
+    },
     isMenuOpen: {
       type: Boolean,
       default: true,
@@ -221,6 +226,7 @@ export default {
   },
   mounted() {
     this.isOpened = this.isMenuOpen;
+    this.$refs.userEmail.innerHTML = this.userEmail;
   },
 };
 </script>

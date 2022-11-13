@@ -336,7 +336,7 @@ export default {
             room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
           tentativeScheduleDTOS: tentativeSchedules,
-          students: [sessionStorage.Username],
+          students: [sessionStorage.Email],
         };
         let formAppointmentBody = JSON.stringify(newAppointment);
 
@@ -394,7 +394,7 @@ export default {
             room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
           tentativeScheduleDTOS: tentativeSchedules,
-          students: [sessionStorage.Username],
+          students: [sessionStorage.Email],
         };
         let formAppointmentBody = JSON.stringify(newAppointment);
 

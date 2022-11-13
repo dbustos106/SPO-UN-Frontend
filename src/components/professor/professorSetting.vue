@@ -164,10 +164,9 @@ export default {
       } else {
         let datos = {
           id: sessionStorage.Id,
-          username: email.substring(0, email.indexOf("@")),
+          email: email,
           name: name,
           last_name: lastName,
-          email: email,
           document_type: documentType,
           document_number: documentNumber,
         };

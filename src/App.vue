@@ -67,7 +67,7 @@ export default {
           sessionStorage.setItem("RefreshToken", response.data.refresh_token);
           sessionStorage.setItem("Id", userInfo[1]);
           sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
-          sessionStorage.setItem("Username", userInfo[0]);
+          sessionStorage.setItem("Email", userInfo[0]);
           return true;
         })
         .catch(() => {

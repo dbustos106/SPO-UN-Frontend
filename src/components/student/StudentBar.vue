@@ -56,11 +56,7 @@
           <div class="profile-details">
             <i class="bx bx-user-circle"></i>
             <div class="name">
-              <div
-                class="name"
-                id="studentUsername"
-                ref="studentUsername"
-              ></div>
+              <div class="email" ref="userEmail"></div>
             </div>
           </div>
           <i id="log_out" class="bx bx-log-out" v-on:click="closeSession()"></i>
@@ -80,7 +76,7 @@ export default {
     };
   },
   props: {
-    usernameContainer: {
+    userEmail: {
       type: String,
       required: true,
       default: "",
@@ -231,7 +227,7 @@ export default {
   },
   mounted() {
     this.isOpened = this.isMenuOpen;
-    this.$refs.studentUsername.innerHTML = this.usernameContainer;
+    this.$refs.userEmail.innerHTML = this.userEmail;
   },
 };
 </script>

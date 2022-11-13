@@ -96,7 +96,7 @@ export default {
               this.$data.students.push({
                 id: students[i].id,
                 name: students[i].name,
-                email: students[i].username + "@unal.edu.co",
+                email: students[i].email,
                 document_type: students[i].document_type,
                 document_number: students[i].document_number,
               });

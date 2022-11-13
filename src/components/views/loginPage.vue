@@ -97,13 +97,13 @@ export default {
   },
   methods: {
     sendLogin() {
-      var username = document.getElementById("nptEmail").value;
+      var email = document.getElementById("nptEmail").value;
       var password = document.getElementById("nptPassword").value;
-      if (username == "" || password == "") {
+      if (email == "" || password == "") {
         this.errorFunction(" No ha ingresado los datos");
       } else {
         let datos = {
-          username: username,
+          email: email,
           password: password,
         };
         let formBody = App.methods.toUrlEncoded(datos);
@@ -122,7 +122,7 @@ export default {
             sessionStorage.setItem("RefreshToken", response.data.refresh_token);
             sessionStorage.setItem("Id", userInfo[1]);
             sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
-            sessionStorage.setItem("Username", userInfo[0]);
+            sessionStorage.setItem("Email", userInfo[0]);
             this.openUserPage(sessionStorage.Role);
           })
           .catch(() => {

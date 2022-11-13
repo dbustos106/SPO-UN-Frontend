@@ -1,6 +1,6 @@
 <template>
   <section class="sectionMarco userInit" :class="{ ing2: sideBarIsOpen == 1 }">
-    <PatientBar :usernameContainer="username"></PatientBar>
+    <PatientBar :userEmail="email"></PatientBar>
     <!-- ======= Router view ======= -->
     <router-view></router-view>
     <!-- End Router view -->
@@ -13,17 +13,17 @@ import PatientBar from "../../patient/PatientBar.vue";
 export default {
   name: "PatientPage",
 
-  components: {
-    PatientBar,
-  },
   data() {
     return {
       sideBarIsOpen: 1,
-      username: sessionStorage.Username.substring(
+      email: sessionStorage.Email.substring(
         0,
-        sessionStorage.Username.indexOf("@")
+        sessionStorage.Email.indexOf("@")
       ),
     };
+  },
+  components: {
+    PatientBar,
   },
   methods: {
     moveContainer() {

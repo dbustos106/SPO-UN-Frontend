@@ -1,6 +1,6 @@
 <template>
   <section class="sectionMarco userInit" :class="{ ing2: sideBarIsOpen == 1 }">
-    <StudentBar :usernameContainer="username"></StudentBar>
+    <StudentBar :userEmail="email"></StudentBar>
     <!-- ======= Router view ======= -->
     <router-view></router-view>
     <!-- End Router view -->
@@ -16,9 +16,9 @@ export default {
   data() {
     return {
       sideBarIsOpen: 1,
-      username: sessionStorage.Username.substring(
+      email: sessionStorage.Email.substring(
         0,
-        sessionStorage.Username.indexOf("@")
+        sessionStorage.Email.indexOf("@")
       ),
     };
   },

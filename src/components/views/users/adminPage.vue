@@ -1,6 +1,6 @@
 <template>
   <section class="sectionMarco userInit" :class="{ ing2: sideBarIsOpen == 1 }">
-    <AdminBar ref="AdminBar"></AdminBar>
+    <AdminBar :userEmail="email"></AdminBar>
     <!-- ======= Router view ======= -->
     <router-view></router-view>
     <!-- End Router view -->
@@ -16,6 +16,10 @@ export default {
   data() {
     return {
       sideBarIsOpen: 1,
+      email: sessionStorage.Email.substring(
+        0,
+        sessionStorage.Email.indexOf("@")
+      ),
     };
   },
   components: {
