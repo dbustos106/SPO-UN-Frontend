@@ -42,6 +42,19 @@
               <span class="tooltip">
                 menuItem.tooltip || Registrar Profesores
               </span>
+
+              <a
+                class="box-hover"
+                id="listItem1"
+                v-on:click="openRoomSchedule()"
+              >
+                <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
+                <span class="links_name">Ver y editar horarios de salas</span>
+              </a>
+              <span class="tooltip">
+                menuItem.tooltip || Ver y editar horarios de salas.
+              </span>
+
               <a class="box-hover" id="listItem3">
                 <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                 <span class="links_name">Ajustes</span>
@@ -69,6 +82,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: "AdminBar",
   props: {
@@ -198,6 +213,10 @@ export default {
   methods: {
     openRegisterProfessor() {
       this.$router.push("/admin/registerProfessor");
+    },
+    openRoomSchedule(){
+      this.$router.push("/admin/roomManagement");
+      
     },
     closeSessionAdmin() {
       sessionStorage.removeItem("AccessToken");

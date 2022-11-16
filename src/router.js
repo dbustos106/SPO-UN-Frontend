@@ -23,6 +23,7 @@ import PatientSearch from './components/patient/patientProcedureSearch.vue'
 
 import AdminPage from './components/views/users/adminPage.vue'
 import RegisterProfessor from './components/admin/registerProfessor.vue'
+import roomManagement from './components/admin/roomManagement.vue'
 
 // definir rutas
 const routes = [
@@ -129,6 +130,11 @@ const routes = [
         path: 'registerProfessor',
         name: 'RegisterProfessor',
         component: RegisterProfessor
+      },
+      {
+        path: 'roomManagement',
+        name: 'RoomManagement',
+        component: roomManagement
       },
     ]
   }

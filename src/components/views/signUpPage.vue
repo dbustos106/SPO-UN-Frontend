@@ -308,7 +308,8 @@ export default {
       let datos = {
         username: username,
         password: password,
-        name: name + "-" + lastName,
+        name: name ,
+        last_name:lastName,
         email: email,
         document_type: tipoCedula,
         document_number: cedula,

@@ -203,7 +203,8 @@ export default {
       let datos = {
         username: email.substring(0, email.indexOf("@")),
         password: password,
-        name: name + "-" + lastName,
+        name: name,
+        last_name: lastName,
         email: email,
         document_type: tipoCedula,
         document_number: cedula,

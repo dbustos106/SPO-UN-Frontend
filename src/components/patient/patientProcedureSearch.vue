@@ -61,10 +61,7 @@ export default {
       this.$data.earliestDate = "3000-12-31T11:59:59";
 
       for (var i in schedules) {
-        if (
-          new Date(schedules[i].start_time).getTime() <
-          new Date(this.$data.earliestDate).getTime()
-        ) {
+        if (new Date(schedules[i].start_time).getTime() < new Date(this.$data.earliestDate).getTime()) {
           this.$data.earliestDate = schedules[i].start_time;
         }
 

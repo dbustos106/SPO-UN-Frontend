@@ -271,6 +271,7 @@ export default {
             this.successFunction("Cita creada con éxito");
           })
           .catch((err) => {
+            console.log(err);
             if (err.response.status == 403) {
               if (App.methods.requestRefreshToken()) {
                 this.createAppointment();
