@@ -42,10 +42,34 @@
               <span class="tooltip">
                 menuItem.tooltip || Registrar Profesores
               </span>
-
+              <a class="box-hover" id="listItem2" v-on:click="createBuilding()">
+                <i
+                  class="bx"
+                  :class="'bxs-buildings' || 'bx-square-rounded'"
+                />
+                <span class="links_name">Crear edificio</span>
+              </a>
+              <span class="tooltip"> menuItem.tooltip || Crear Edificio </span>
+              <a class="box-hover" id="listItem3" v-on:click="createRoom()">
+                <i
+                  class="bx"
+                  :class="'bx-add-to-queue' || 'bx-square-rounded'"
+                />
+                <span class="links_name">Crear consultorio</span>
+              </a>
+              <span class="tooltip">
+                menuItem.tooltip || Crear consultorio
+              </span>
+              <a class="box-hover" id="listItem4" v-on:click="editRoom()">
+                <i class="bx" :class="'bx-edit-alt' || 'bx-square-rounded'" />
+                <span class="links_name">Editar consultorio</span>
+              </a>
+              <span class="tooltip">
+                menuItem.tooltip || Editar consultorio
+              </span>
               <a
                 class="box-hover"
-                id="listItem1"
+                id="listItem5"
                 v-on:click="openRoomSchedule()"
               >
                 <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
@@ -55,7 +79,7 @@
                 menuItem.tooltip || Ver y editar horarios de salas.
               </span>
 
-              <a class="box-hover" id="listItem3">
+              <a class="box-hover" id="listItem6">
                 <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                 <span class="links_name">Ajustes</span>
               </a>
@@ -82,8 +106,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: "AdminBar",
 
@@ -217,9 +239,17 @@ export default {
     openRegisterProfessor() {
       this.$router.push("/admin/registerProfessor");
     },
-    openRoomSchedule(){
+    createBuilding() {
+      this.$router.push("/admin/createBuilding");
+    },
+    createRoom() {
+      this.$router.push("/admin/createRoom");
+    },
+    editRoom() {
+      this.$router.push("/admin/editRoom");
+    },
+    openRoomSchedule() {
       this.$router.push("/admin/roomManagement");
-      
     },
     closeSessionAdmin() {
       sessionStorage.removeItem("AccessToken");

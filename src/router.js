@@ -24,7 +24,9 @@ import PatientSearch from './components/patient/patientProcedureSearch.vue'
 import AdminPage from './components/views/users/adminPage.vue'
 import RegisterProfessor from './components/admin/registerProfessor.vue'
 import roomManagement from './components/admin/roomManagement.vue'
-
+import createBuilding from './components/admin/createBuilding.vue'
+import createRoom from './components/admin/createRoom.vue'
+import editRoom from './components/admin/editRoom.vue'
 // definir rutas
 const routes = [
 
@@ -135,6 +137,21 @@ const routes = [
         path: 'roomManagement',
         name: 'RoomManagement',
         component: roomManagement
+      },
+      {
+        path: 'createBuilding',
+        name: 'createBuilding',
+        component: createBuilding
+      },
+      {
+        path: 'createRoom',
+        name: 'createRoom',
+        component: createRoom
+      },
+      {
+        path: 'editRoom',
+        name: 'editRoom',
+        component: editRoom
       },
     ]
   }
