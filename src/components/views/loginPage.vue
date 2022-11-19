@@ -117,7 +117,6 @@ export default {
           .then((response) => {
             this.$data.errorShow = false;
             let loginInfo = App.methods.jwtDecode(response.data.access_token);
-            console.log(response.data.access_token);
             let userInfo = loginInfo.payload.sub.split(",");
             sessionStorage.setItem("AccessToken", response.data.access_token);
             sessionStorage.setItem("RefreshToken", response.data.refresh_token);

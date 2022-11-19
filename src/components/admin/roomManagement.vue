@@ -172,7 +172,6 @@ export default{
             this.$data.rooms[
               rooms[i].buildingDTO.name + " " + rooms[i].roomDTO.name
             ] = rooms[i].roomDTO.id;
-            console.log(this.$data.rooms);
           }
         })
         .catch((err) => {

@@ -5,7 +5,7 @@
       <div class="form-group needs-validation" id="form">
         <div class="row mx-auto">
           <div class="ml-auto">
-            <select class="form-select mx-auto" required id="slcBuilding">
+            <select ref="place" class="form-select mx-auto" required id="slcBuilding">
               <option selected disabled value="">Edificio</option>
             </select>
             <input
@@ -70,6 +70,7 @@ export default {
       buildings: {},
       errorShow: false,
       successShow: false,
+      buildingsMounted: false,
     };
   },
   methods: {
@@ -84,24 +85,24 @@ export default {
           },
         })
         .then((response) => {
-          let buildingInfo = response.data.message;
+          let buildingInfo = response.data.message.content;
           this.$data.buildings = {};
           for (var i in buildingInfo) {
             let newOption = document.createElement("option");
             newOption.value =
-              buildingInfo[i].buildingDTO.id + " " + buildingInfo[i].buildingDTO.name;
+              buildingInfo[i].id;
             newOption.innerHTML =
-              buildingInfo[i].buildingDTO.id + " " + buildingInfo[i].buildingDTO.name;
-              tablaBuilding.append(newOption);
+              buildingInfo[i].id + " " + buildingInfo[i].name;
+            tablaBuilding.append(newOption);
             this.$data.buildings[
-              buildingInfo[i].buildingDTO.id + " " + buildingInfo[i].buildingDTO.name
-            ] = buildingInfo[i].buildingDTO.id;
+              buildingInfo[i].id + " " + buildingInfo[i].name
+            ] = buildingInfo[i].id;
           }
         })
         .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
-              this.getBuildingOptions();
+              //this.getBuildingOptions();
             } else {
               this.$router.push("/admin");
             }
@@ -116,7 +117,7 @@ export default {
       } else {
         let datos = {
           name: name,
-          building: building,
+          building_id: building,
         };
         let formBody = JSON.stringify(datos);
         axios
@@ -160,9 +161,11 @@ export default {
         this.$data.errorShow = false;
       }, 5000);
     },
-    mounted() {
-      this.getBuildingOptions();
-    },
+    
   },
+  mounted() {
+    this.isOpened = this.isMenuOpen;
+      this.getBuildingOptions();
+  }
 };
 </script>

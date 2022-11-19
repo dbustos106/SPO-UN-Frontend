@@ -1,103 +1,103 @@
 <template>
     <div class="row">
-            <!-- ====== dataTentative ====== -->
-        <div id="tentativeRoom" class="col-12 mx-auto" style="text-align: center">
-            <p id="appointmentId">ID Cita: {{idAppointment}}</p>
-            <p id="selectedStartTime">Hora inicial: {{selectedStartTime}}</p>
-            <p id="selectedEndTime">Hora Final: {{selectedEndTime}}</p>
+    <!-- ====== dataTentative ====== -->
+    <div id="tentativeRoom" class="col-12 mx-auto" style="text-align: center">
+      <p id="appointmentId">ID Cita: {{idAppointment}}</p>
+      <p id="selectedStartTime">Hora inicial: {{selectedStartTime}}</p>
+      <p id="selectedEndTime">Hora Final: {{selectedEndTime}}</p>
 
-            <div class="container mx-auto mt-1">
-             <!-- ======= DatePicker ======= -->
-             <div class="row mb-2">
-                <div class="col-5">
-                <datepicker
-                    ref="datepicker1"
-                    v-model="startDate"
-                    name="startTime"
-                    showNowButton
-                    :minDate="new Date()"
-                    modelType="yyyy-MM-dd HH:mm:ss"
-                    placeholder="Fecha de inicio"
-                >
-                </datepicker>
-                </div>
-                <div class="col-5">
-                <datepicker
-                    v-model="endDate"
-                    name="endTime"
-                    showNowButton
-                    :minDate="new Date()"
-                    modelType="yyyy-MM-dd HH:mm:ss"
-                    placeholder="Fecha de fin"
-                >
-                </datepicker>
-                </div>
-                <div class="col-1">
-                    <button class="btnGrisTq" v-on:click="addRoomHours()">v</button>
-                </div>
-              </div>
-            </div>
-            <!-- End DatePicker -->
+      <div class="container mx-auto mt-1">
+        <!-- ======= DatePicker ======= -->
+        <div class="row mb-2">
+          <div class="col-5">
+          <datepicker
+              ref="datepicker1"
+              v-model="startDate"
+              name="startTime"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de inicio"
+          >
+          </datepicker>
+          </div>
+          <div class="col-5">
+          <datepicker
+              v-model="endDate"
+              name="endTime"
+              showNowButton
+              :minDate="new Date()"
+              modelType="yyyy-MM-dd HH:mm:ss"
+              placeholder="Fecha de fin"
+          >
+          </datepicker>
+          </div>
+          <div class="col-1">
+              <button class="btnGrisTq" v-on:click="addRoomHours()">v</button>
+          </div>
+        </div>
+      </div>
+      <!-- End DatePicker -->
 
-            <!-- ======= tentativeTable ======= -->
-            <div class="row mb-2">
-                <div id="tentativeRoomDates">
-                <table id="roomNewHours">
-                    <thead>
-                    <tr>
-                        <td>Fecha inicio</td>
-                        <td>Fecha final</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr></tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-            <!-- End tentativeTable -->
-            
-            <!-- ====== MessageShow ====== -->
-            <div class="row mx-auto">
-              <section v-show="errorShow">
-                <div class="alertBar error">
-                  <span title="error" class="alertBar-message">
-                    <i class="fa fa-exclamation-circle"></i>
-                    <span id="errorNotification"></span>
-                  </span>
-                  <span class="alertBar-dismiss">
-                    <a class="cta"></a>
-                  </span>
-                </div>
-              </section>
-              <section v-show="successShow">
-                <div class="success_green">
-                  <span title="success" class="alertBar-message">
-                    <i class="fa fa-exclamation-circle"></i>
-                    <span id="successNotification"></span>
-                  </span>
-                  <span class="alertBar-dismiss">
-                    <a class="cta"></a>
-                  </span>
-                </div>
-              </section>
-            </div>
-            <!-- End MessageShow -->
-           
-        </div>
+      <!-- ======= tentativeTable ======= -->
+      <div class="row mb-2">
+          <div id="tentativeRoomDates">
+          <table id="roomNewHours">
+              <thead>
+              <tr>
+                  <td>Fecha inicio</td>
+                  <td>Fecha final</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr></tr>
+              </tbody>
+          </table>
+          </div>
+      </div>
+      <!-- End tentativeTable -->
+      
+      <!-- ====== MessageShow ====== -->
+      <div class="row mx-auto">
+        <section v-show="errorShow">
+          <div class="alertBar error">
+            <span title="error" class="alertBar-message">
+              <i class="fa fa-exclamation-circle"></i>
+              <span id="errorNotification"></span>
+            </span>
+            <span class="alertBar-dismiss">
+              <a class="cta"></a>
+            </span>
+          </div>
+        </section>
+        <section v-show="successShow">
+          <div class="success_green">
+            <span title="success" class="alertBar-message">
+              <i class="fa fa-exclamation-circle"></i>
+              <span id="successNotification"></span>
+            </span>
+            <span class="alertBar-dismiss">
+              <a class="cta"></a>
+            </span>
+          </div>
+        </section>
+      </div>
+      <!-- End MessageShow -->
+        
+    </div>
 
-        <!-- ====== btnCrear ====== -->
-        <div class="row mx-auto">
-        <button
-            id="createAppointment"
-            ref="createAppointment"
-            class="btnBlue mx-auto"
-            v-on:click="sendNewHours()"
-        >
-            Cambiar Horario
-        </button>
-        </div>
-        </div>
+    <!-- ====== btnCrear ====== -->
+    <div class="row mx-auto">
+    <button
+        id="createAppointment"
+        ref="createAppointment"
+        class="btnBlue mx-auto"
+        v-on:click="sendNewHours()"
+    >
+        Cambiar Horario
+    </button>
+    </div>
+    </div>
         
     
 </template>
@@ -142,28 +142,24 @@ export default {
   },
   methods:{
     addRoomHours(){
-        if (
-            this.$data.startDate != undefined &&
-            this.$data.endDate != undefined &&
-            new Date(this.$data.startDate).getTime() < new Date(this.$data.endDate).getTime()
-        ) {
-            var table = document.getElementById("roomNewHours");
-            if(table.children[1].children.length==2){
-              table.children[1].lastChild.remove();
-            }
-            var row = table.insertRow();
-            var cell1 = row.insertCell();
-            var cell2 = row.insertCell();
-            cell1.appendChild(document.createTextNode(this.$data.startDate));
-            cell2.appendChild(document.createTextNode(this.$data.endDate));
-            
-
-            
-        }
+      if (
+          this.$data.startDate != undefined &&
+          this.$data.endDate != undefined &&
+          new Date(this.$data.startDate).getTime() < new Date(this.$data.endDate).getTime()
+      ) {
+          var table = document.getElementById("roomNewHours");
+          if(table.children[1].children.length==2){
+            table.children[1].lastChild.remove();
+          }
+          var row = table.insertRow();
+          var cell1 = row.insertCell();
+          var cell2 = row.insertCell();
+          cell1.appendChild(document.createTextNode(this.$data.startDate));
+          cell2.appendChild(document.createTextNode(this.$data.endDate));            
+      }
     },
     sendNewHours(){
       let schedulesTable = document.getElementById("roomNewHours").children[1];
-      console.log()
       if(schedulesTable.children.length>=2){
         this.newStartTime=schedulesTable.children[1].children[0].innerHTML;
         this.newEndTime=schedulesTable.children[1].children[1].innerHTML;

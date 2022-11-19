@@ -60,23 +60,16 @@
               <span class="tooltip">
                 menuItem.tooltip || Crear consultorio
               </span>
-              <a class="box-hover" id="listItem4" v-on:click="editRoom()">
-                <i class="bx" :class="'bx-edit-alt' || 'bx-square-rounded'" />
-                <span class="links_name">Editar consultorio</span>
-              </a>
-              <span class="tooltip">
-                menuItem.tooltip || Editar consultorio
-              </span>
               <a
                 class="box-hover"
                 id="listItem5"
                 v-on:click="openRoomSchedule()"
               >
                 <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                <span class="links_name">Ver y editar horarios de salas</span>
+                <span class="links_name">Editar horarios de salas</span>
               </a>
               <span class="tooltip">
-                menuItem.tooltip || Ver y editar horarios de salas.
+                menuItem.tooltip || Editar horarios de salas.
               </span>
 
               <a class="box-hover" id="listItem6">
@@ -244,9 +237,6 @@ export default {
     },
     createRoom() {
       this.$router.push("/admin/createRoom");
-    },
-    editRoom() {
-      this.$router.push("/admin/editRoom");
     },
     openRoomSchedule() {
       this.$router.push("/admin/roomManagement");
