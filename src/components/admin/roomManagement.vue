@@ -30,8 +30,12 @@
               class="modal-mask"
               v-if="addRoomHoursShow"
             >
-              <h1>Editar Horarios</h1>
-              <roomHourEditor>
+              <h4>Editar Horarios</h4>
+              <roomHourEditor
+                v-bind:idAppointment="idAppointment"
+                v-bind:selectedStartTime="selectedStartTime"
+                v-bind:selectedEndTime="selectedEndTime"
+              >
 
               </roomHourEditor>
               <div class="row">
@@ -69,16 +73,17 @@
               <table id="tableOfRoomHours" ref="tableOfRoomHours">
                 <thead>
                   <tr>
+                    <td>ID Cita</td>
                     <td>Fecha de inicio</td>
                     <td>Fecha de fin</td>
-                    <td>Eliminar</td>
+                    <td>Editar</td>
                   </tr>
                 </thead>
                 <tbody>
                   <tr></tr>
                 </tbody>
               </table>
-              <button v-on:click="openRoomModal()">Agregar Horarios</button>
+              <!--<button v-on:click="openRoomModal()">Agregar Horarios</button>-->
             </div>
             <!-- End TableOfRoomHours -->
 
@@ -121,7 +126,11 @@ export default{
       rooms: {},
       errorShow: false,
       successShow: false,
+      selectedRoom: "707",
       earliestDate: null,
+      idAppointment: "1000",
+      selectedStartTime:"" ,
+      selectedEndTime:"",
       deleteWindowShow: false,
       addRoomHoursShow: false,
       calendarOptions: {
@@ -178,10 +187,10 @@ export default{
     },
     getRoomById(){
       let calendarApi = this.$refs.fullCalendar.getApi();
-      let selectedRoom=document.getElementById("roomSelect").value;
+      this.selectedRoom=String(document.getElementById("roomSelect").value);
       this.$data.earliestDate = "3000-12-31T11:59:59";
       axios
-        .get(App.methods.getBackUrl() + "/room/"+selectedRoom + "/schedules", {
+        .get(App.methods.getBackUrl() + "/room/"+this.selectedRoom + "/schedules", {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -201,9 +210,14 @@ export default{
           for(var i in roomHours){
 
             let row = tableOfRoomHours.insertRow();
+            let id_cell = row.insertCell();
             let start_timeCell = row.insertCell();
             let end_timeCell = row.insertCell();
             let btnDeleteCell = row.insertCell();
+
+            id_cell.appendChild(
+              document.createTextNode(roomHours[i].id)
+            )
 
             start_timeCell.appendChild(
               document.createTextNode(roomHours[i].start_time)
@@ -214,13 +228,15 @@ export default{
 
             // button delete
             let newButtonDelete = document.createElement("button");
-            newButtonDelete.innerHTML = "Eliminar Horario";
+            newButtonDelete.innerHTML = "Editar Horario";
             newButtonDelete.addEventListener(
               "click",
               function () {
-                this.$data.idAppointment = roomHours[i].id;
+                this.idAppointment = newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+                this.selectedStartTime = newButtonDelete.parentElement.parentElement.children[1].innerHTML;
+                this.selectedEndTime = newButtonDelete.parentElement.parentElement.children[2].innerHTML;
                 console.log(this.$data.idAppointment);
-                //this.$data.deleteWindowShow = true;
+                this.$data.addRoomHoursShow=true;
               }.bind(this)
             );
             btnDeleteCell.appendChild(newButtonDelete);
@@ -240,8 +256,10 @@ export default{
               },
             ];
           }
-
-          calendarApi.gotoDate(this.$data.earliestDate); //Go to min date
+          if(this.$data.earliestDate !== "3000-12-31T11:59:59"){
+            calendarApi.gotoDate(this.$data.earliestDate); //Go to min date
+          }
+          
           
         })
         .catch((err)=>{
