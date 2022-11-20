@@ -13,7 +13,7 @@
             </span>
           </div>
         </section>
-        <p class="login-card-description mt-5 mx-auto mb-4">Citas</p>
+        <h1 class="card-description mt-5 mb-5">Citas</h1>
 
           <!-- ======= Overlay ======= -->
           <transition name="fade">
@@ -138,7 +138,10 @@ export default{
         initialView: "timeGridWeek",
         locale: "es",
         selectable: true,
-        allDaySlot:false,
+        allDaySlot: false,
+        slotMinTime: "06:00:00",
+        slotMaxTime: "19:00:00",
+        eventTextColor: "black",
         height: 650,
         events: [],
       },
@@ -188,6 +191,7 @@ export default{
       let calendarApi = this.$refs.fullCalendar.getApi();
       this.selectedRoom=String(document.getElementById("roomSelect").value);
       this.$data.earliestDate = "3000-12-31T11:59:59";
+      this.calendarOptions.events = [];
       axios
         .get(App.methods.getBackUrl() + "/room/"+this.selectedRoom + "/schedules", {
           headers: {
@@ -257,6 +261,10 @@ export default{
           }
           if(this.$data.earliestDate !== "3000-12-31T11:59:59"){
             calendarApi.gotoDate(this.$data.earliestDate); //Go to min date
+          }
+
+          if(document.getElementById("tableOfRoomHours").children[1].children.length<2){
+            this.errorFunction("No hay horarios asignados a esta sala");
           }
           
           

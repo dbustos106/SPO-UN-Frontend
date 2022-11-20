@@ -47,18 +47,18 @@
                   class="bx"
                   :class="'bxs-buildings' || 'bx-square-rounded'"
                 />
-                <span class="links_name">Crear edificio</span>
+                <span class="links_name">Administrar edificios</span>
               </a>
-              <span class="tooltip"> menuItem.tooltip || Crear Edificio </span>
+              <span class="tooltip"> menuItem.tooltip || Administrar Edificios </span>
               <a class="box-hover" id="listItem3" v-on:click="createRoom()">
                 <i
                   class="bx"
                   :class="'bx-add-to-queue' || 'bx-square-rounded'"
                 />
-                <span class="links_name">Crear consultorio</span>
+                <span class="links_name">Administrar salas</span>
               </a>
               <span class="tooltip">
-                menuItem.tooltip || Crear consultorio
+                menuItem.tooltip || Administrar salas
               </span>
               <a
                 class="box-hover"
@@ -66,17 +66,12 @@
                 v-on:click="openRoomSchedule()"
               >
                 <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
-                <span class="links_name">Editar horarios de salas</span>
+                <span class="links_name">Horarios de salas</span>
               </a>
               <span class="tooltip">
-                menuItem.tooltip || Editar horarios de salas.
+                menuItem.tooltip || Horarios de salas.
               </span>
 
-              <a class="box-hover" id="listItem6">
-                <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
-                <span class="links_name">Ajustes</span>
-              </a>
-              <span class="tooltip"> menuItem.tooltip || Ajustes </span>
             </li>
           </span>
         </ul>

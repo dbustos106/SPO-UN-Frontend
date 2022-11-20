@@ -353,6 +353,7 @@ export default {
     cancelPatientAppointment() {
       // close modal window
       this.$data.deleteWindowShow = false;
+      //ToDo: Borrar SSI la respuesta del back fue positiva. 
       // delete row from table
       this.$data.btnSelected.parentElement.parentElement.remove();
 

@@ -28,7 +28,7 @@
           </div>
         </transition>
         <!-- End deleteWindow -->
-        <h2 class="card-description mt-5 mb-5">Registro edificio</h2>
+        <h2 class="card-description mt-5 mb-5">Administrar edificios</h2>
          <!-- ======= buildingsTable ======= -->
          <div class="row mb-2">
               <div id="buildings">
@@ -166,14 +166,13 @@
                   if (App.methods.requestRefreshToken()) {
                     this.register();
                   } else {
-                    this.$router.push("/admin");
+                    this.$router.push("/login");
                   }
                 }
               });
           }
       },
       putBuildings(){
-      //let tablaRoom = document.getElementById("roomSelect");
       axios
         .get(App.methods.getBackUrl() + "/building/all", {
           headers: {
@@ -218,7 +217,6 @@
         });
       },
       deleteBuilding(){
-        console.log(this.$data.IDtoDelete);
         axios
           .delete(App.methods.getBackUrl() + "/building/" +this.$data.IDtoDelete +"/delete" ,{
             headers: {
@@ -232,11 +230,11 @@
               for(var i=1; i< buildingsTableChildren.length;i++){
                 if(buildingsTableChildren[i].children[0].innerHTML==this.$data.IDtoDelete){
                   buildingsTableChildren[i].remove();
+                  this.$data.deleteWindowShow=false;
                   break;
                 }
               }
-            //this.putBuildings();
-            this.successFunction("El edificio ha eliminado");
+            this.successFunction("El edificio ha sido eliminado");
           })
           .catch((err) => {
             console.log(err);
@@ -245,10 +243,10 @@
               if (App.methods.requestRefreshToken()) {
                 this.register();
               } else {
-                this.$router.push("/admin");
+                this.$router.push("/login");
               }
             }else if(err.response.status == 400){
-              this.errorFunction("No se pudo eliminar este edificio. Revise si este tiene cuartos asociados");
+              this.errorFunction("No se pudo eliminar este edificio. Revise si este tiene cuartos asociados.");
               this.$data.deleteWindowShow = false;
             }
           });
