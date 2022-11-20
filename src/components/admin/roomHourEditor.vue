@@ -156,6 +156,8 @@ export default {
           var cell2 = row.insertCell();
           cell1.appendChild(document.createTextNode(this.$data.startDate));
           cell2.appendChild(document.createTextNode(this.$data.endDate));            
+      }else if(new Date(this.$data.startDate).getTime() > new Date(this.$data.endDate).getTime()){
+        this.errorFunction("La hora de inicio es mayor a la hora de finalización");
       }
     },
     sendNewHours(){
