@@ -185,7 +185,6 @@
         .then((response) => {
           let buildingsTable=document.getElementById("allBuildings");
           let allBuildings=response.data.message.content;
-          console.log(allBuildings);
           for(var i in allBuildings){
             var row = buildingsTable.insertRow();
             var cell1 = row.insertCell();
@@ -210,6 +209,7 @@
         .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
+              
               this.getRoomOptions();
             } else {
               this.$router.push("/login");
@@ -228,6 +228,14 @@
             },
           })
           .then(() => {
+            let buildingsTableChildren=document.getElementById("allBuildings").children[1].children;
+              for(var i=1; i< buildingsTableChildren.length;i++){
+                if(buildingsTableChildren[i].children[0].innerHTML==this.$data.IDtoDelete){
+                  buildingsTableChildren[i].remove();
+                  break;
+                }
+              }
+            //this.putBuildings();
             this.successFunction("El edificio ha eliminado");
           })
           .catch((err) => {
