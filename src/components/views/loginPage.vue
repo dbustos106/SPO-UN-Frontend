@@ -107,7 +107,6 @@ export default {
           password: password,
         };
         let formBody = App.methods.toUrlEncoded(datos);
-
         axios
           .post(App.methods.getBackUrl() + "/auth/login", formBody, {
             headers: {

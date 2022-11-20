@@ -6,6 +6,7 @@ import Login from './components/views/loginPage.vue'
 import RegisterPatient from './components/views/signUpPage.vue'
 import VerifyAccount from './components/views/verifyAccountPage.vue'
 import askPasswordRecover from './components/views/askPasswordRecover.vue'
+import changePassword from './components/views/newPassword.vue'
 
 import ProfessorPage from './components/views/users/professorPage.vue'
 import RegisterStudent from "./components/professor/registerStudent.vue";
@@ -59,6 +60,11 @@ const routes = [
         path: 'askRecover',
         name: 'ask recover Password',
         component: askPasswordRecover
+      },
+      {
+        path: ':role/ChangePassword/:code', 
+        name: 'changePassword',
+        component: changePassword
       }
     ]
   },
