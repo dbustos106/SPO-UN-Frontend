@@ -65,10 +65,10 @@
               </div>
 
               <div class="col-sm-8 mx-auto mb-4">
-                <a href="#!">¿Olvidaste la contraseña?</a>
+                <a v-on:click="openRecoverPage">¿Olvidaste la contraseña?</a>
                 <br />
                 <span>¿No tienes una cuenta? </span>
-                <a href="#!" v-on:click="openSignUpPage">Regístrate</a>
+                <a v-on:click="openSignUpPage">Regístrate</a>
 
                 <nav class="card-footer-nav mt-3">
                   <a href="#!">Terms of use. </a>
@@ -132,6 +132,9 @@ export default {
     },
     openSignUpPage() {
       this.$router.push("/signUp");
+    },
+    openRecoverPage(){
+      this.$router.push("/askRecover")
     },
     openUserPage(role) {
       if (role == "Professor") {
