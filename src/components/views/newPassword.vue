@@ -121,14 +121,14 @@
                     .then((response)=>{
                         console.log(response);
                         this.$data.successShow=true;
-                        this.successFunction("Constraseña cambiada");
+                        this.successFunction("Constraseña cambiada");            
                     })
                     .catch((err)=>{
                         console.log(err);
                     })
                     
                 }else{
-                    this.errorFunction("Las contraseñas son distintos");
+                    this.errorFunction("Las contraseñas son distintas");
                 }
             },
             errorFunction(messageText) {
@@ -137,6 +137,7 @@
                 this.$data.errorShow = true;
                 setTimeout(() => {
                     this.$data.errorShow = false;
+                    this.$router.push("/login")
                 }, 5000);
             },
             successFunction(messageText) {
