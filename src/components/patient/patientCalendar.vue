@@ -93,9 +93,13 @@
             </div>
 
             <div class="col-sm-4 card">
-              <span>Calificación: </span>
-              <label id="spnClasificacion" v-if="checkClasifiacion">✔</label>
-              <div class="mx-auto mt-3">
+              <span class="mb-2">Calificación: </span>
+              <div class="row">
+                <label id="spnClasificacion" v-if="checkClasifiacion"
+                  >✔ calificación exitosa</label
+                >
+              </div>
+              <div class="mx-auto mt-1">
                 <textarea
                   class="textarea"
                   ref="feedback"
@@ -548,7 +552,7 @@ export default {
 
 <style>
 #spnClasificacion {
-  width: 5%;
+  width: 90%;
   color: rgb(0, 80, 21);
 }
 </style>

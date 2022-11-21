@@ -59,6 +59,7 @@
         <!-- End Error -->
 
         <div id="ScheduleContainer" class="mx-auto">
+          <span>Seleccione un consultorio</span>
           <!-- ======= RoomSelect ======= -->
           <div class="form-group">
             <div class="row">
@@ -66,16 +67,12 @@
                 <select
                   ref="place"
                   class="form-select mx-auto"
+                  @change="getSchedulesRoomById"
                   required
                   id="roomSelect"
                 >
                   <option selected disabled value="">Consultorio</option>
                 </select>
-              </div>
-              <div class="col-6">
-                <button v-on:click="getSchedulesRoomById()">
-                  Ver horarios
-                </button>
               </div>
             </div>
           </div>
@@ -334,7 +331,10 @@ export default {
             }
           }
           if (err.response.status == 400) {
-            //console.log("Error al eliminar");
+            this.$data.deleteWindowShow = false;
+            this.errorFunction(
+              "Este horario corresponde a una cita asignada, no puede eliminarse"
+            );
           }
         });
     },
