@@ -21,7 +21,7 @@
         >
           <appointmentWindow
             ref="appointmentWindow"
-            :id="idAppointment"
+            :idAppointment="idAppointment"
             :title="titleAppointmentWindow"
             @close="updateData"
           >
@@ -395,10 +395,10 @@ export default {
   width: 90%;
 }
 #appointmentWindow {
-  top: 5%;
+  top: 10%;
   left: 27%;
   width: 65%;
-  max-height: 88%;
+  max-height: 83%;
 }
 @media (max-width: 767px) {
   #appointmentWindow {

@@ -173,6 +173,7 @@
     <div class="row mx-auto">
       <button
         id="btnCreateAppointment"
+        v-if="btnCreateShow"
         class="btnBlue mx-auto"
         v-on:click="sendAppointment"
       >
@@ -204,6 +205,7 @@ export default {
       successShow: false,
       tentativeShow: true,
       patientShow: true,
+      btnCreateShow: true,
       startDate: ref(),
       endDate: ref(),
       patientName: "",
@@ -224,7 +226,7 @@ export default {
     close: null,
   },
   props: {
-    id: {
+    idAppointment: {
       type: Number,
       required: false,
       default: -1,
@@ -301,7 +303,7 @@ export default {
         });
     },
     sendAppointment() {
-      if (this.id != -1) {
+      if (this.idAppointment != -1) {
         this.updateAppointment();
       } else {
         this.createAppointment();
@@ -389,7 +391,7 @@ export default {
 
         let newAppointment = {
           appointmentDTO: {
-            id: this.id,
+            id: this.idAppointment,
             procedure_type: procedureType,
             room_id: parseInt(this.$data.rooms[selectedRoom]),
           },
@@ -428,7 +430,7 @@ export default {
     },
     getStudentAppointmentById() {
       axios
-        .get(App.methods.getBackUrl() + "/appointment/" + this.id, {
+        .get(App.methods.getBackUrl() + "/appointment/" + this.idAppointment, {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
@@ -445,6 +447,7 @@ export default {
 
           if (fullAppointment.appointmentDTO.patient_id != null) {
             this.$data.tentativeShow = false;
+            this.$data.btnCreateShow = false;
             this.$data.patientName = fullAppointment.patientDTO.name;
             this.$data.patientLasName = fullAppointment.patientDTO.last_name;
             this.$data.patientEmail = fullAppointment.patientDTO.email;
@@ -515,8 +518,8 @@ export default {
   },
   mounted() {
     this.getRoomOptions();
-    if (this.id != -1) {
-      this.getStudentAppointmentById(this.id);
+    if (this.idAppointment != -1) {
+      this.getStudentAppointmentById(this.idAppointment);
       document.getElementById("btnCreateAppointment").innerHTML = "Guardar";
     } else {
       this.$data.patientShow = false;
