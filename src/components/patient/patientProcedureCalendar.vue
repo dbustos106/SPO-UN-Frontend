@@ -54,9 +54,7 @@ export default {
       showModal: false,
       showConfirmMessage: false,
       selectedInitialDate: "",
-      selectedInitialDate2: "",
       selectedEndDate: "",
-      selectedEndDate2: "",
       selectedAppointmentId: "",
       selectedAppointmentType: "",
       calendarOptions: {
@@ -75,6 +73,8 @@ export default {
           this.$data.showModal = true;
           this.$data.selectedInitialDate = info.event.start;
           this.$data.selectedEndDate = info.event.end;
+          console.log("11:", this.$data.selectedInitialDate);
+          console.log("22:", this.$data.selectedEndDate);
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
 
@@ -99,12 +99,12 @@ export default {
   methods: {
     reserveAppointment() {
       let reserveData = {
-        start_time: this.formatDate(this.$data.selectedInitialDate2)
+        start_time: this.formatDate(this.$data.selectedInitialDate)
           .replace(" a las ", " ")
           .replaceAll("/", "-")
           .replace("AM", ":00")
           .replace("PM", ":00"),
-        end_time: this.formatDate(this.$data.selectedEndDate2)
+        end_time: this.formatDate(this.$data.selectedEndDate)
           .replace(" a las ", " ")
           .replaceAll("/", "-")
           .replace("AM", ":00")
@@ -145,8 +145,6 @@ export default {
         });
     },
     formatDate(inputDate) {
-      this.$data.selectedInitialDate2 = inputDate;
-      this.$data.selectedEndDate2 = inputDate;
       let date, month, year, hour, minutes;
 
       date = inputDate.getDate();

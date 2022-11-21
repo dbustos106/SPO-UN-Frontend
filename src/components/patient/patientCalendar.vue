@@ -242,6 +242,11 @@ export default {
     },
     putPatientAppointmentInTable(appointments) {
       let table = document.getElementById("AppointmentsTable");
+      while (table.children[1].firstChild != table.children[1].lastChild) {
+        var child = table.children[1].lastChild;
+        child.remove();
+      }
+
       for (var k in appointments) {
         let id = appointments[k].id;
         let row = table.insertRow();
@@ -353,7 +358,7 @@ export default {
     cancelPatientAppointment() {
       // close modal window
       this.$data.deleteWindowShow = false;
-      //ToDo: Borrar SSI la respuesta del back fue positiva. 
+      //ToDo: Borrar SSI la respuesta del back fue positiva.
       // delete row from table
       this.$data.btnSelected.parentElement.parentElement.remove();
 
@@ -450,10 +455,8 @@ export default {
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let schedules = response.data.message;
-            this.putPatientScheduleInCalendar(schedules);
-          }
+          let schedules = response.data.message;
+          this.putPatientScheduleInCalendar(schedules);
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -482,23 +485,25 @@ export default {
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let appointments = response.data.message.content;
+          let appointments = response.data.message.content;
 
-            this.$data.appointments = [];
-            for (var j in appointments) {
-              this.$data.appointments.push({
-                id: appointments[j].id,
-                start_time: appointments[j].start_time,
-                end_time: appointments[j].end_time,
-                procedure_type: appointments[j].procedure_type,
-              });
-            }
-            this.$data.lastPage += 1;
-            this.putPatientAppointmentInTable(appointments);
-          } else {
-            this.$data.idPage = this.$data.lastPage;
+          this.$data.appointments = [];
+          for (var j in appointments) {
+            this.$data.appointments.push({
+              id: appointments[j].id,
+              start_time: appointments[j].start_time,
+              end_time: appointments[j].end_time,
+              procedure_type: appointments[j].procedure_type,
+            });
           }
+
+          if (appointments.length == 0) {
+            this.$data.idPage = this.$data.lastPage;
+          } else {
+            this.$data.lastPage += 1;
+          }
+
+          this.putPatientAppointmentInTable(appointments);
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -511,30 +516,17 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("AppointmentsTable");
-
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
         this.$data.lastPage -= 1;
-        while (table.children[1].firstChild != table.children[1].lastChild) {
-          var child = table.children[1].lastChild;
-          child.remove();
-        }
         this.getPatientAppointments(this.$data.idPage);
       }
     },
     nextPage() {
-      let table = document.getElementById("AppointmentsTable");
       this.$data.idPage += 1;
-
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.getPatientAppointments(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("AppointmentsTable");
       var filterKey = document.getElementById("query").value;
       var filterAppointments = this.$data.appointments;
 
@@ -544,10 +536,6 @@ export default {
         });
       });
 
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.putPatientAppointmentInTable(filterAppointments);
     },
   },

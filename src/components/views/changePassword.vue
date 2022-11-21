@@ -8,7 +8,7 @@
           </div>
 
           <div class="col">
-            <p class="card-description mt-5 mb-3">Recuperar Contraseña</p>
+            <p class="card-description mt-5 mb-3">Cambiar Contraseña</p>
             <div class="form-group needs-validation">
               <div class="col-sm-8 mx-auto">
                 <section v-show="errorShow">
@@ -42,10 +42,10 @@
                     </span>
                   </div>
                   <input
-                    type="text"
-                    id="nptEmail"
+                    type="password"
+                    id="nptPassword"
                     class="form-control"
-                    placeholder="Correo"
+                    placeholder="Contraseña"
                     required
                   />
                 </div>
@@ -59,18 +59,18 @@
                     </span>
                   </div>
                   <input
-                    type="text"
-                    id="nptEmailConfirm"
+                    type="password"
+                    id="nptPasswordConfirm"
                     class="form-control"
-                    placeholder="Confirmar Correo"
+                    placeholder="Confirmar Contraseña"
                     required
                   />
                 </div>
               </div>
 
               <div class="col-sm-8 mx-auto mb-5">
-                <button class="btn btn-block mb-5" v-on:click="sendEmail">
-                  Enviar Correo
+                <button class="btn btn-block" v-on:click="changePassword">
+                  Cambiar Contraseña
                 </button>
               </div>
             </div>
@@ -85,25 +85,47 @@
 import axios from "axios";
 import App from "../../App.vue";
 export default {
-  name: "askPasswordRecover",
+  name: "ChangePassword",
 
   data() {
     return {
       errorShow: false,
       successShow: false,
+      role: "",
+      code: "",
     };
   },
   methods: {
-    sendEmail() {
-      var email = document.getElementById("nptEmail").value;
-      var emailConfirmation = document.getElementById("nptEmailConfirm").value;
-      if (email == emailConfirmation) {
+    changePassword() {
+      var password = document.getElementById("nptPassword").value;
+      var passwordConfirmation =
+        document.getElementById("nptPasswordConfirm").value;
+      console.log(password);
+      if (password == passwordConfirmation) {
+        let datos = {
+          password: password,
+        };
+        let formBody = App.methods.toUrlEncoded(datos);
+        console.log(formBody);
         axios
-          .get(
-            App.methods.getBackUrl() + "/changePassword/email?email=" + email
+          .put(
+            App.methods.getBackUrl() +
+              "/changePassword/" +
+              this.$data.role +
+              "?code=" +
+              this.$data.code,
+            formBody,
+            {
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded;charset=UTF-8",
+              },
+            }
           )
           .then(() => {
-            this.successFunction("Revise su correo");
+            document.getElementById("nptPassword").value = "";
+            document.getElementById("nptPasswordConfirm").value = "";
+            this.successFunction("Constraseña cambiada");
           })
           .catch((err) => {
             if (err.response.status == 400) {
@@ -111,7 +133,7 @@ export default {
             }
           });
       } else {
-        this.errorFunction("Los correos son distintos");
+        this.errorFunction("Las contraseñas son distintas");
       }
     },
     successFunction(messageText) {
@@ -134,11 +156,9 @@ export default {
       }, 5000);
     },
   },
+  mounted() {
+    this.$data.role = this.$route.params.role;
+    this.$data.code = this.$route.params.code;
+  },
 };
 </script>
-
-<style>
-.success_green {
-  color: #339933;
-}
-</style>

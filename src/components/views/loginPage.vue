@@ -65,10 +65,12 @@
               </div>
 
               <div class="col-sm-8 mx-auto mb-4">
-                <a v-on:click="openRecoverPage">¿Olvidaste la contraseña?</a>
+                <a href="#!" v-on:click="openRecoverPage"
+                  >¿Olvidaste la contraseña?</a
+                >
                 <br />
                 <span>¿No tienes una cuenta? </span>
-                <a v-on:click="openSignUpPage">Regístrate</a>
+                <a href="#!" v-on:click="openSignUpPage">Regístrate</a>
 
                 <nav class="card-footer-nav mt-3">
                   <a href="#!">Terms of use. </a>
@@ -124,7 +126,8 @@ export default {
             sessionStorage.setItem("Email", userInfo[0]);
             this.openUserPage(sessionStorage.Role);
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log(err);
             this.errorFunction(" Usuario o contraseña incorrectos");
           });
       }
@@ -132,8 +135,8 @@ export default {
     openSignUpPage() {
       this.$router.push("/signUp");
     },
-    openRecoverPage(){
-      this.$router.push("/askRecover")
+    openRecoverPage() {
+      this.$router.push("/askRecover");
     },
     openUserPage(role) {
       if (role == "Professor") {

@@ -21,7 +21,7 @@
         >
           <appointmentWindow
             ref="appointmentWindow"
-            :id="idAppointment"
+            :idAppointment="idAppointment"
             :title="titleAppointmentWindow"
             @close="updateData"
           >
@@ -268,10 +268,8 @@ export default {
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let schedules = response.data.message;
-            this.putStudentScheduleInCalendar(schedules, "green");
-          }
+          let schedules = response.data.message;
+          this.putStudentScheduleInCalendar(schedules, "green");
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -299,10 +297,8 @@ export default {
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let unconfirmedSchedules = response.data.message;
-            this.putStudentScheduleInCalendar(unconfirmedSchedules, "yellow");
-          }
+          let unconfirmedSchedules = response.data.message;
+          this.putStudentScheduleInCalendar(unconfirmedSchedules, "yellow");
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -331,23 +327,25 @@ export default {
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let appointments = response.data.message.content;
+          let appointments = response.data.message.content;
 
-            this.$data.appointments = [];
-            for (var j in appointments) {
-              this.$data.appointments.push({
-                id: appointments[j].id,
-                start_time: appointments[j].start_time,
-                end_time: appointments[j].end_time,
-                procedure_type: appointments[j].procedure_type,
-              });
-            }
-            this.$data.lastPage += 1;
-            this.putStudentAppointmentsInTable(appointments);
-          } else {
-            this.$data.idPage = this.$data.lastPage;
+          this.$data.appointments = [];
+          for (var j in appointments) {
+            this.$data.appointments.push({
+              id: appointments[j].id,
+              start_time: appointments[j].start_time,
+              end_time: appointments[j].end_time,
+              procedure_type: appointments[j].procedure_type,
+            });
           }
+
+          if (appointments.length == 0) {
+            this.$data.idPage = this.$data.lastPage;
+          } else {
+            this.$data.lastPage += 1;
+          }
+
+          this.putStudentAppointmentsInTable(appointments);
         })
         .catch((err) => {
           if (err.response.status == 403) {
@@ -372,26 +370,14 @@ export default {
       this.getStudentUnconfirmedSchedule();
     },
     backPage() {
-      let table = document.getElementById("tblAppointments");
-
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
         this.$data.lastPage -= 1;
-        while (table.children[1].firstChild != table.children[1].lastChild) {
-          var child = table.children[1].lastChild;
-          child.remove();
-        }
         this.getStudentAppointments(this.$data.idPage);
       }
     },
     nextPage() {
-      let table = document.getElementById("tblAppointments");
       this.$data.idPage += 1;
-
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.getStudentAppointments(this.$data.idPage);
     },
   },
@@ -409,10 +395,10 @@ export default {
   width: 90%;
 }
 #appointmentWindow {
-  top: 5%;
+  top: 10%;
   left: 27%;
   width: 65%;
-  max-height: 88%;
+  max-height: 83%;
 }
 @media (max-width: 767px) {
   #appointmentWindow {

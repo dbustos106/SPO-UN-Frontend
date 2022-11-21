@@ -43,13 +43,12 @@
                 menuItem.tooltip || Registrar Profesores
               </span>
               <a class="box-hover" id="listItem2" v-on:click="createBuilding()">
-                <i
-                  class="bx"
-                  :class="'bxs-buildings' || 'bx-square-rounded'"
-                />
+                <i class="bx" :class="'bxs-buildings' || 'bx-square-rounded'" />
                 <span class="links_name">Administrar edificios</span>
               </a>
-              <span class="tooltip"> menuItem.tooltip || Administrar Edificios </span>
+              <span class="tooltip">
+                menuItem.tooltip || Administrar Edificios
+              </span>
               <a class="box-hover" id="listItem3" v-on:click="createRoom()">
                 <i
                   class="bx"
@@ -71,7 +70,6 @@
               <span class="tooltip">
                 menuItem.tooltip || Horarios de salas.
               </span>
-
             </li>
           </span>
         </ul>
