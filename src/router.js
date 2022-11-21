@@ -6,7 +6,7 @@ import Login from './components/views/loginPage.vue'
 import RegisterPatient from './components/views/signUpPage.vue'
 import VerifyAccount from './components/views/verifyAccountPage.vue'
 import askPasswordRecover from './components/views/askPasswordRecover.vue'
-import changePassword from './components/views/newPassword.vue'
+import changePassword from './components/views/changePassword.vue'
 
 import ProfessorPage from './components/views/users/professorPage.vue'
 import RegisterStudent from "./components/professor/registerStudent.vue";
@@ -28,6 +28,7 @@ import RegisterProfessor from './components/admin/registerProfessor.vue'
 import roomManagement from './components/admin/roomManagement.vue'
 import createBuilding from './components/admin/createBuilding.vue'
 import createRoom from './components/admin/createRoom.vue'
+
 // definir rutas
 const routes = [
 
@@ -62,7 +63,7 @@ const routes = [
         component: askPasswordRecover
       },
       {
-        path: ':role/ChangePassword/:code', 
+        path: '/ChangePassword/:role/:code', 
         name: 'changePassword',
         component: changePassword
       }

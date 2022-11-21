@@ -1,16 +1,16 @@
 <template>
-    <div class="row">
+  <div class="row">
     <!-- ====== dataTentative ====== -->
     <div id="tentativeRoom" class="col-12 mx-auto" style="text-align: center">
-      <p id="appointmentId">ID Cita: {{idAppointment}}</p>
-      <p id="selectedStartTime">Hora inicial: {{selectedStartTime}}</p>
-      <p id="selectedEndTime">Hora Final: {{selectedEndTime}}</p>
+      <p id="appointmentId">ID Cita: {{ idAppointment }}</p>
+      <p id="selectedStartTime">Hora inicial: {{ selectedStartTime }}</p>
+      <p id="selectedEndTime">Hora Final: {{ selectedEndTime }}</p>
 
       <div class="container mx-auto mt-1">
         <!-- ======= DatePicker ======= -->
         <div class="row mb-2">
           <div class="col-5">
-          <datepicker
+            <datepicker
               ref="datepicker1"
               v-model="startDate"
               name="startTime"
@@ -18,22 +18,22 @@
               :minDate="new Date()"
               modelType="yyyy-MM-dd HH:mm:ss"
               placeholder="Fecha de inicio"
-          >
-          </datepicker>
+            >
+            </datepicker>
           </div>
           <div class="col-5">
-          <datepicker
+            <datepicker
               v-model="endDate"
               name="endTime"
               showNowButton
               :minDate="new Date()"
               modelType="yyyy-MM-dd HH:mm:ss"
               placeholder="Fecha de fin"
-          >
-          </datepicker>
+            >
+            </datepicker>
           </div>
           <div class="col-1">
-              <button class="btnGrisTq" v-on:click="addRoomHours()">v</button>
+            <button class="btnGrisTq" v-on:click="addRoomHours()">v</button>
           </div>
         </div>
       </div>
@@ -41,22 +41,22 @@
 
       <!-- ======= tentativeTable ======= -->
       <div class="row mb-2">
-          <div id="tentativeRoomDates">
+        <div id="tentativeRoomDates">
           <table id="roomNewHours">
-              <thead>
+            <thead>
               <tr>
-                  <td>Fecha inicio</td>
-                  <td>Fecha final</td>
+                <td>Fecha inicio</td>
+                <td>Fecha final</td>
               </tr>
-              </thead>
-              <tbody>
+            </thead>
+            <tbody>
               <tr></tr>
-              </tbody>
+            </tbody>
           </table>
-          </div>
+        </div>
       </div>
       <!-- End tentativeTable -->
-      
+
       <!-- ====== MessageShow ====== -->
       <div class="row mx-auto">
         <section v-show="errorShow">
@@ -83,27 +83,24 @@
         </section>
       </div>
       <!-- End MessageShow -->
-        
     </div>
 
     <!-- ====== btnCrear ====== -->
     <div class="row mx-auto">
-    <button
+      <button
         id="createAppointment"
         ref="createAppointment"
         class="btnBlue mx-auto"
         v-on:click="sendNewHours()"
-    >
+      >
         Cambiar Horario
-    </button>
+      </button>
     </div>
-    </div>
-        
-    
+  </div>
 </template>
 
 <script>
-import { ref } from "vue"
+import { ref } from "vue";
 import datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 //import { response } from "express";
@@ -116,91 +113,97 @@ export default {
     datepicker,
   },
   props: {
-    idAppointment:{
-      type: String, 
+    idAppointment: {
+      type: String,
       required: true,
-      default: "101"
+      default: "101",
     },
-    selectedStartTime:{
-      type: String, 
+    selectedStartTime: {
+      type: String,
       required: true,
     },
-    selectedEndTime:{
-      type: String, 
+    selectedEndTime: {
+      type: String,
       required: true,
-    }
+    },
   },
-  data(){
-    return{
-        startDate: ref(),
-        endDate: ref(),
-        newStartTime: "",
-        newEndTime: "",
-        errorShow: false,
-        successShow: false,
-    }
+  data() {
+    return {
+      startDate: ref(),
+      endDate: ref(),
+      newStartTime: "",
+      newEndTime: "",
+      errorShow: false,
+      successShow: false,
+    };
   },
-  methods:{
-    addRoomHours(){
+  methods: {
+    addRoomHours() {
       if (
-          this.$data.startDate != undefined &&
-          this.$data.endDate != undefined &&
-          new Date(this.$data.startDate).getTime() < new Date(this.$data.endDate).getTime()
+        this.$data.startDate != undefined &&
+        this.$data.endDate != undefined &&
+        new Date(this.$data.startDate).getTime() <
+          new Date(this.$data.endDate).getTime()
       ) {
-          var table = document.getElementById("roomNewHours");
-          if(table.children[1].children.length==2){
-            table.children[1].lastChild.remove();
-          }
-          var row = table.insertRow();
-          var cell1 = row.insertCell();
-          var cell2 = row.insertCell();
-          cell1.appendChild(document.createTextNode(this.$data.startDate));
-          cell2.appendChild(document.createTextNode(this.$data.endDate));            
-      }else if(new Date(this.$data.startDate).getTime() > new Date(this.$data.endDate).getTime()){
-        this.errorFunction("La hora de inicio es mayor a la hora de finalización");
+        var table = document.getElementById("roomNewHours");
+        if (table.children[1].children.length == 2) {
+          table.children[1].lastChild.remove();
+        }
+        var row = table.insertRow();
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        cell1.appendChild(document.createTextNode(this.$data.startDate));
+        cell2.appendChild(document.createTextNode(this.$data.endDate));
+      } else if (
+        new Date(this.$data.startDate).getTime() >
+        new Date(this.$data.endDate).getTime()
+      ) {
+        this.errorFunction(
+          "La hora de inicio es mayor a la hora de finalización"
+        );
       }
     },
-    sendNewHours(){
+    sendNewHours() {
       let schedulesTable = document.getElementById("roomNewHours").children[1];
-      if(schedulesTable.children.length>=2){
-        this.newStartTime=schedulesTable.children[1].children[0].innerHTML;
-        this.newEndTime=schedulesTable.children[1].children[1].innerHTML;
-        let hoursBack={
+      if (schedulesTable.children.length >= 2) {
+        this.newStartTime = schedulesTable.children[1].children[0].innerHTML;
+        this.newEndTime = schedulesTable.children[1].children[1].innerHTML;
+        let hoursBack = {
           id: this.idAppointment,
           start_time: this.newStartTime,
-          end_time: this.newEndTime
+          end_time: this.newEndTime,
+        };
+        console.log(hoursBack);
 
-        }
-        console.log(hoursBack);   
-        
-        axios.put(App.methods.getBackUrl() + "/schedule/edit",hoursBack,{
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.RefreshToken,
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          document.getElementById("selectedStartTime").innerHTML=this.newStartTime;
-          document.getElementById("selectedEndTime").innerHTML=this.newEndTime;
-          this.successFunction("El horario se ha actualizado con éxito");
-        })
-        .catch((err)=>{
-          console.log(err);
-          if (err.response.status == 403) {
-            if (App.methods.requestRefreshToken()) {
-              this.getRoomOptions();
-            } else {
-              this.$router.push("/login");
+        axios
+          .put(App.methods.getBackUrl() + "/schedule/edit", hoursBack, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.RefreshToken,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            document.getElementById("selectedStartTime").innerHTML =
+              this.newStartTime;
+            document.getElementById("selectedEndTime").innerHTML =
+              this.newEndTime;
+            this.successFunction("El horario se ha actualizado con éxito");
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status == 403) {
+              if (App.methods.requestRefreshToken()) {
+                this.getRoomOptions();
+              } else {
+                this.$router.push("/login");
+              }
             }
-          }
-        })
-      }else{
-        this.errorFunction("No tiene ningún horario seleccionado")
+          });
+      } else {
+        this.errorFunction("No tiene ningún horario seleccionado");
       }
-        
-        
     },
     successFunction(messageText) {
       this.$data.errorShow = false;
@@ -221,10 +224,8 @@ export default {
       }, 5000);
     },
   },
-  mounted(){
-  }
-}
-
+  mounted() {},
+};
 </script>
 
 <style>
@@ -245,8 +246,6 @@ export default {
   margin-left: 10px;
 }
 
-
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -259,5 +258,4 @@ table {
   height: 250px;
   width: 470px;
 }
-
 </style>

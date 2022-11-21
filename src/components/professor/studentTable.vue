@@ -55,6 +55,11 @@ export default {
   methods: {
     putStudentsInTable(students) {
       let table = document.getElementById("tblStudents");
+      while (table.children[1].firstChild != table.children[1].lastChild) {
+        var child = table.children[1].lastChild;
+        child.remove();
+      }
+
       for (var j in students) {
         let row = table.insertRow();
         let nameCell = row.insertCell();
@@ -71,7 +76,7 @@ export default {
         );
       }
     },
-    getStudents(page) {
+    getStudents(idPage) {
       axios
         .get(
           App.methods.getBackUrl() +
@@ -84,33 +89,35 @@ export default {
               "Content-Type": "application/json",
               Authorization: "Bearer " + sessionStorage.AccessToken,
             },
-            params: { page: page, size: 10 },
+            params: { page: idPage, size: 10 },
           }
         )
         .then((response) => {
-          if (!("error" in response.data)) {
-            let students = response.data.message.content;
+          let students = response.data.message.content;
 
-            this.$data.students = [];
-            for (var i in students) {
-              this.$data.students.push({
-                id: students[i].id,
-                name: students[i].name,
-                email: students[i].email,
-                document_type: students[i].document_type,
-                document_number: students[i].document_number,
-              });
-            }
-            this.$data.lastPage += 1;
-            this.putStudentsInTable(students);
-          } else {
-            this.$data.idPage = this.$data.lastPage;
+          this.$data.students = [];
+          for (var i in students) {
+            this.$data.students.push({
+              id: students[i].id,
+              name: students[i].name,
+              email: students[i].email,
+              document_type: students[i].document_type,
+              document_number: students[i].document_number,
+            });
           }
+
+          if (students.length == 0) {
+            this.$data.idPage = this.$data.lastPage;
+          } else {
+            this.$data.lastPage += 1;
+          }
+
+          this.putStudentsInTable(students);
         })
         .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
-              this.getStudents(page);
+              this.getStudents(idPage);
             } else {
               this.$router.push("/login");
             }
@@ -118,29 +125,17 @@ export default {
         });
     },
     backPage() {
-      let table = document.getElementById("tblStudents");
-
       if (this.$data.idPage > 0) {
         this.$data.idPage -= 1;
         this.$data.lastPage -= 1;
-        while (table.children[1].firstChild != table.children[1].lastChild) {
-          var child = table.children[1].lastChild;
-          child.remove();
-        }
         this.getStudents(this.$data.idPage);
       }
     },
     nextPage() {
-      let table = document.getElementById("tblStudents");
       this.$data.idPage += 1;
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.getStudents(this.$data.idPage);
     },
     filteredData() {
-      let table = document.getElementById("tblStudents");
       var filterKey = document.getElementById("nptQuery").value;
       var filterStudents = this.$data.students;
 
@@ -150,10 +145,6 @@ export default {
         });
       });
 
-      while (table.children[1].firstChild != table.children[1].lastChild) {
-        var child = table.children[1].lastChild;
-        child.remove();
-      }
       this.putStudentsInTable(filterStudents);
     },
   },

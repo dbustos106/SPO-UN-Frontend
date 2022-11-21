@@ -1,5 +1,5 @@
 <template>
-<div id="roomManagContainer" class="container">
+  <div id="roomManagContainer" class="container">
     <div class="card login-card">
       <div class="row no-gutters">
         <section v-show="errorShow">
@@ -15,43 +15,39 @@
         </section>
         <h1 class="card-description mt-5 mb-5">Citas</h1>
 
-          <!-- ======= Overlay ======= -->
-          <transition name="fade">
-            <div
-              class="modal-overlay"
-              v-if="addRoomHoursShow"
-            ></div>
-          </transition>
-          <!-- End Overlay -->
+        <!-- ======= Overlay ======= -->
+        <transition name="fade">
+          <div class="modal-overlay" v-if="addRoomHoursShow"></div>
+        </transition>
+        <!-- End Overlay -->
 
-          <transition name="fade">
-            <div
-              id="appointmentWindow"
-              class="modal-mask"
-              v-if="addRoomHoursShow"
+        <transition name="fade">
+          <div
+            id="appointmentWindow"
+            class="modal-mask"
+            v-if="addRoomHoursShow"
+          >
+            <h4>Editar Horarios</h4>
+            <roomHourEditor
+              v-bind:idAppointment="idAppointment"
+              v-bind:selectedStartTime="selectedStartTime"
+              v-bind:selectedEndTime="selectedEndTime"
             >
-              <h4>Editar Horarios</h4>
-              <roomHourEditor
-                v-bind:idAppointment="idAppointment"
-                v-bind:selectedStartTime="selectedStartTime"
-                v-bind:selectedEndTime="selectedEndTime"
-              >
-
-              </roomHourEditor>
-              <div class="row">
+            </roomHourEditor>
+            <div class="row">
               <button class="btnGris mx-auto" v-on:click="closeRoomModal()">
                 Cerrar
               </button>
             </div>
-            </div>
-          </transition>
+          </div>
+        </transition>
 
-          <div class="form-group">
-            <div class="col-12">
-              <label>Consultorio</label>
-            </div>
-            <div class="row">
-              <div class="col-6">
+        <div class="form-group">
+          <div class="col-12">
+            <label>Consultorio</label>
+          </div>
+          <div class="row">
+            <div class="col-6">
               <select
                 ref="place"
                 class="form-select mx-auto"
@@ -62,10 +58,9 @@
                   Consultorio
                 </option>
               </select>
-              
             </div>
             <div class="col-6">
-              <button v-on:click="getRoomById()" >Ver horarios</button>
+              <button v-on:click="getRoomById()">Ver horarios</button>
             </div>
 
             <!-- ======= TableOfRoomHours ======= -->
@@ -98,28 +93,27 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import App from "../../App.vue";
-import roomHourEditor from "./roomHourEditor.vue"
+import roomHourEditor from "./roomHourEditor.vue";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-
-export default{
+export default {
   name: "roomManagement",
 
   components: {
-    FullCalendar,roomHourEditor
+    FullCalendar,
+    roomHourEditor,
   },
   data() {
     return {
@@ -129,8 +123,8 @@ export default{
       selectedRoom: "707",
       earliestDate: null,
       idAppointment: "1000",
-      selectedStartTime:"" ,
-      selectedEndTime:"",
+      selectedStartTime: "",
+      selectedEndTime: "",
       deleteWindowShow: false,
       addRoomHoursShow: false,
       calendarOptions: {
@@ -152,8 +146,7 @@ export default{
     this.putRooms();
   },
   methods: {
-    
-    putRooms(){
+    putRooms() {
       let tablaRoom = document.getElementById("roomSelect");
       axios
         .get(App.methods.getBackUrl() + "/room/all", {
@@ -164,13 +157,13 @@ export default{
           },
         })
         .then((response) => {
-          let rooms=response.data.message;
-          console.log(rooms);
-          this.$data.rooms = {}
-          for(var i in rooms){
+          let rooms = response.data.message;
+          this.$data.rooms = {};
+          for (var i in rooms) {
             let newOption = document.createElement("option");
             newOption.value = rooms[i].roomDTO.id;
-            newOption.innerHTML = rooms[i].buildingDTO.name + " " + rooms[i].roomDTO.name;
+            newOption.innerHTML =
+              rooms[i].buildingDTO.name + " " + rooms[i].roomDTO.name;
             tablaRoom.append(newOption);
             this.$data.rooms[
               rooms[i].buildingDTO.name + " " + rooms[i].roomDTO.name
@@ -187,40 +180,46 @@ export default{
           }
         });
     },
-    getRoomById(){
+    getRoomById() {
       let calendarApi = this.$refs.fullCalendar.getApi();
-      this.selectedRoom=String(document.getElementById("roomSelect").value);
+      this.selectedRoom = String(document.getElementById("roomSelect").value);
       this.$data.earliestDate = "3000-12-31T11:59:59";
       this.calendarOptions.events = [];
       axios
-        .get(App.methods.getBackUrl() + "/room/"+this.selectedRoom + "/schedules", {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.RefreshToken,
-          },
-        })
+        .get(
+          App.methods.getBackUrl() +
+            "/room/" +
+            this.selectedRoom +
+            "/schedules",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.RefreshToken,
+            },
+          }
+        )
         .then((response) => {
-          let tableOfRoomHours=document.getElementById("tableOfRoomHours");
+          let tableOfRoomHours = document.getElementById("tableOfRoomHours");
 
-          while (tableOfRoomHours.children[1].firstChild != tableOfRoomHours.children[1].lastChild) {
+          while (
+            tableOfRoomHours.children[1].firstChild !=
+            tableOfRoomHours.children[1].lastChild
+          ) {
             var child = tableOfRoomHours.children[1].lastChild;
             child.remove();
           }
 
-          let roomHours=response.data.message;
-          console.log(response)
-          for(var i in roomHours){
-
+          let roomHours = response.data.message;
+          console.log(response);
+          for (var i in roomHours) {
             let row = tableOfRoomHours.insertRow();
             let id_cell = row.insertCell();
             let start_timeCell = row.insertCell();
             let end_timeCell = row.insertCell();
             let btnDeleteCell = row.insertCell();
 
-            id_cell.appendChild(
-              document.createTextNode(roomHours[i].id)
-            )
+            id_cell.appendChild(document.createTextNode(roomHours[i].id));
 
             start_timeCell.appendChild(
               document.createTextNode(roomHours[i].start_time)
@@ -235,16 +234,22 @@ export default{
             newButtonDelete.addEventListener(
               "click",
               function () {
-                this.idAppointment = newButtonDelete.parentElement.parentElement.children[0].innerHTML;
-                this.selectedStartTime = newButtonDelete.parentElement.parentElement.children[1].innerHTML;
-                this.selectedEndTime = newButtonDelete.parentElement.parentElement.children[2].innerHTML;
+                this.idAppointment =
+                  newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+                this.selectedStartTime =
+                  newButtonDelete.parentElement.parentElement.children[1].innerHTML;
+                this.selectedEndTime =
+                  newButtonDelete.parentElement.parentElement.children[2].innerHTML;
                 console.log(this.$data.idAppointment);
-                this.$data.addRoomHoursShow=true;
+                this.$data.addRoomHoursShow = true;
               }.bind(this)
             );
             btnDeleteCell.appendChild(newButtonDelete);
 
-            if (new Date(roomHours[i].start_time).getTime() < new Date(this.$data.earliestDate).getTime()) {
+            if (
+              new Date(roomHours[i].start_time).getTime() <
+              new Date(this.$data.earliestDate).getTime()
+            ) {
               this.$data.earliestDate = roomHours[i].start_time;
             }
 
@@ -259,17 +264,18 @@ export default{
               },
             ];
           }
-          if(this.$data.earliestDate !== "3000-12-31T11:59:59"){
+          if (this.$data.earliestDate !== "3000-12-31T11:59:59") {
             calendarApi.gotoDate(this.$data.earliestDate); //Go to min date
           }
 
-          if(document.getElementById("tableOfRoomHours").children[1].children.length<2){
+          if (
+            document.getElementById("tableOfRoomHours").children[1].children
+              .length < 2
+          ) {
             this.errorFunction("No hay horarios asignados a esta sala");
           }
-          
-          
         })
-        .catch((err)=>{
+        .catch((err) => {
           if (err.response.status == 403) {
             if (App.methods.requestRefreshToken()) {
               this.getRoomOptions();
@@ -277,18 +283,18 @@ export default{
               this.$router.push("/login");
             }
           }
-        })
+        });
     },
-    openRoomModal(){
-      let selectedRoomVer=document.getElementById("roomSelect").value;
-      if(selectedRoomVer != "Consultorio"){
-        this.$data.addRoomHoursShow=true;
-      }else{
+    openRoomModal() {
+      let selectedRoomVer = document.getElementById("roomSelect").value;
+      if (selectedRoomVer != "Consultorio") {
+        this.$data.addRoomHoursShow = true;
+      } else {
         this.errorFunction("Por favor seleccione un cuarto");
       }
     },
-    closeRoomModal(){
-      this.$data.addRoomHoursShow=false;
+    closeRoomModal() {
+      this.$data.addRoomHoursShow = false;
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
@@ -299,15 +305,14 @@ export default{
         this.$data.errorShow = false;
       }, 5000);
     },
-  }
-}
+  },
+};
 </script>
 
 <style>
 #RoomManagContainer {
   width: 70%;
 }
-
 
 #appointmentWindow {
   top: 2%;
