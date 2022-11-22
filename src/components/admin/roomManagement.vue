@@ -331,6 +331,7 @@ export default {
             }
           }
           if (err.response.status == 400) {
+            this.$data.deleteWindowShow = false;
             this.errorFunction(
               "Este horario corresponde a una cita asignada, no puede eliminarse"
             );
