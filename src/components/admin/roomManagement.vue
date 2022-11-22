@@ -334,7 +334,9 @@ export default {
             }
           }
           if (err.response.status == 400) {
-            //console.log("Error al eliminar");
+            this.errorFunction(
+              "Este horario corresponde a una cita asignada, no puede eliminarse"
+            );
           }
         });
     },

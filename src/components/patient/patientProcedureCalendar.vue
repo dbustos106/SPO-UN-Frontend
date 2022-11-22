@@ -110,6 +110,8 @@ export default {
           .replace("AM", ":00")
           .replace("PM", ":00"),
       };
+      console.log("inicial", this.$data.selectedInitialDate);
+      console.log("final", this.$data.selectedEndDate);
       let reserveDataBody = JSON.stringify(reserveData);
 
       axios
@@ -158,7 +160,6 @@ export default {
       month = month.toString().padStart(2, "0");
 
       if (hour >= 13) {
-        hour = hour - 12;
         hour =
           hour.toString().padStart(2, "0") +
           ":" +
