@@ -7,7 +7,7 @@
             <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
 
-          <div class="col">
+          <div class="col" v-show="passShow">
             <p class="card-description mt-5 mb-3">Cambiar Contraseña</p>
             <div class="form-group needs-validation">
               <div class="col-sm-8 mx-auto">
@@ -16,17 +16,6 @@
                     <span title="error" class="alertBar-message">
                       <i class="fa fa-exclamation-circle"></i>
                       <span id="errorNotification"></span>
-                    </span>
-                    <span class="alertBar-dismiss">
-                      <a class="cta"></a>
-                    </span>
-                  </div>
-                </section>
-                <section v-show="successShow">
-                  <div class="success_green">
-                    <span title="success" class="alertBar-message">
-                      <i class="fa fa-exclamation-circle"></i>
-                      <span id="successNotification"></span>
                     </span>
                     <span class="alertBar-dismiss">
                       <a class="cta"></a>
@@ -75,6 +64,10 @@
               </div>
             </div>
           </div>
+          <div class="col" v-show="messageShow">
+            <p class="card-description mt-5 mb-3" >Contraseña cambiada </p>
+            <button class="btn btn-block" v-on:click="goToLogin()">Ir a login</button>
+          </div>
         </div>
       </div>
     </div>
@@ -90,7 +83,8 @@ export default {
   data() {
     return {
       errorShow: false,
-      successShow: false,
+      passShow: true,
+      messageShow: false,
       role: "",
       code: "",
     };
@@ -125,7 +119,8 @@ export default {
           .then(() => {
             document.getElementById("nptPassword").value = "";
             document.getElementById("nptPasswordConfirm").value = "";
-            this.successFunction("Constraseña cambiada");
+            this.$data.passShow=false;
+            this.$data.messageShow=true;
           })
           .catch((err) => {
             if (err.response.status == 400) {
@@ -164,14 +159,8 @@ export default {
 
       return true;
     },
-    successFunction(messageText) {
-      this.$data.errorShow = false;
-      this.$data.successShow = true;
-      let errorNotification = document.getElementById("successNotification");
-      errorNotification.innerHTML = messageText;
-      setTimeout(() => {
-        this.$data.successShow = false;
-      }, 5000);
+    goToLogin(){
+      this.$router.push("/login");
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
