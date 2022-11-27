@@ -26,6 +26,21 @@
       <!-- End deleteWindow -->
 
       <div id="roomContainer" class="mx-auto">
+        <div class="row mt-4">
+          <div class="form-group needs-validation" id="form">
+            <div class="ml-auto">
+              <select
+                ref="place"
+                class="form-select mx-auto"
+                required
+                id="slcBuilding"
+                @change="getRooms"
+              >
+                <option selected disabled value="">Edificio</option>
+              </select>
+              
+            </div>
+          </div>
         <!-- ======= buildingsTable ======= -->
         <div class="TableContainer">
           <table id="tblRooms">
@@ -44,27 +59,6 @@
         </div>
 
         <!-- End buildingsTable -->
-        <div class="row mt-4">
-          <div class="form-group needs-validation" id="form">
-            <div class="ml-auto">
-              <select
-                ref="place"
-                class="form-select mx-auto"
-                required
-                id="slcBuilding"
-              >
-                <option selected disabled value="">Edificio</option>
-              </select>
-              <input
-                class="form-control"
-                type="text"
-                name="name"
-                placeholder="Nombre o número del consultorio"
-                id="nptName"
-                required
-              />
-            </div>
-          </div>
 
           <div class="row">
             <div class="col-4 mx-auto mt-3 mb-1">
@@ -94,6 +88,14 @@
           </div>
 
           <div class="row">
+            <input
+              class="form-control"
+              type="text"
+              name="name"
+              placeholder="Nombre o número del consultorio"
+              id="nptName"
+              required
+            />
             <div class="col-4 mx-auto">
               <button
                 class="btn btn-block mx-auto mb-4"
@@ -159,35 +161,38 @@ export default {
           }
         });
     },
-    putRoomsInTable(rooms) {
+    putRoomsInTable(rooms, buildingId) {
       let table = document.getElementById("tblRooms");
       while (table.children[1].firstChild != table.children[1].lastChild) {
         var child = table.children[1].lastChild;
         child.remove();
       }
-
+      console.log(buildingId);
       for (var i in rooms) {
-        var row = table.insertRow();
-        var cell1 = row.insertCell();
-        var cell2 = row.insertCell();
-        var cell3 = row.insertCell();
-        var buttonCell = row.insertCell();
-        cell1.appendChild(document.createTextNode(rooms[i].roomDTO.id));
-        cell2.appendChild(document.createTextNode(rooms[i].buildingDTO.name));
-        cell3.appendChild(document.createTextNode(rooms[i].roomDTO.name));
+        if(rooms[i].buildingDTO.id == buildingId || buildingId == ""){
+          var row = table.insertRow();
+          var cell1 = row.insertCell();
+          var cell2 = row.insertCell();
+          var cell3 = row.insertCell();
+          var buttonCell = row.insertCell();
+          cell1.appendChild(document.createTextNode(rooms[i].roomDTO.id));
+          cell2.appendChild(document.createTextNode(rooms[i].buildingDTO.name));
+          cell3.appendChild(document.createTextNode(rooms[i].roomDTO.name));
 
-        // button delete
-        let newButtonDelete = document.createElement("button");
-        newButtonDelete.innerHTML = "Eliminar";
-        newButtonDelete.addEventListener(
-          "click",
-          function () {
-            this.$data.deleteWindowShow = true;
-            this.$data.IDtoDelete =
-              newButtonDelete.parentElement.parentElement.children[0].innerHTML;
-          }.bind(this)
-        );
-        buttonCell.appendChild(newButtonDelete);
+          // button delete
+          let newButtonDelete = document.createElement("button");
+          newButtonDelete.innerHTML = "Eliminar";
+          newButtonDelete.addEventListener(
+            "click",
+            function () {
+              this.$data.deleteWindowShow = true;
+              this.$data.IDtoDelete =
+                newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+            }.bind(this)
+          );
+          buttonCell.appendChild(newButtonDelete);
+        }
+        
       }
     },
     getRooms() {
@@ -201,7 +206,8 @@ export default {
         })
         .then((response) => {
           let rooms = response.data.message;
-          this.putRoomsInTable(rooms);
+          let buildingId = document.getElementById("slcBuilding").value;
+          this.putRoomsInTable(rooms, buildingId);
         })
         .catch((err) => {
           if (err.response.status == 403) {

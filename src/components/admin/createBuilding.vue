@@ -27,77 +27,82 @@
       </transition>
       <!-- End deleteWindow -->
 
-      <div id="buildingContainer" class="mx-auto">
-        <!-- ======= buildingsTable ======= -->
-        <div class="TableContainer">
-          <table id="tblBuildings">
-            <thead>
-              <tr>
-                <td>ID</td>
-                <td>Edificio</td>
-                <td>Eliminar</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr></tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- End buildingsTable -->
-
-        <div class="row mt-4">
-          <div class="form-group needs-validation" id="form">
-            <div class="">
-              <input
-                class="form-control"
-                type="text"
-                name="name"
-                placeholder="Nombre del edificio"
-                id="nptName"
-                required
-              />
+      <div class="row mt-4">
+          <div id="buildingContainer" class="mx-auto">
+            <!-- ======= buildingsTable ======= -->
+            <div class="TableContainer">
+              <table id="tblBuildings">
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>Edificio</td>
+                    <td>Eliminar</td>
+                    <td>Salas</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr></tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-        </div>
+            <!-- End buildingsTable -->
 
-        <div class="row">
-          <div class="col-4 mx-auto mt-3 mb-1">
-            <section v-show="errorShow">
-              <div class="alertBar error">
-                <span title="error" class="alertBar-message">
-                  <i class="fa fa-exclamation-circle"></i>
-                  <span id="errorNotification"></span>
-                </span>
-                <span class="alertBar-dismiss">
-                  <a class="cta"></a>
-                </span>
+            <div class="row mt-4">
+              <div class="form-group needs-validation" id="form">
+                <div class="">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    placeholder="Nombre del edificio"
+                    id="nptName"
+                    required
+                  />
+                </div>
               </div>
-            </section>
-            <section v-show="successShow">
-              <div class="success_green">
-                <span title="success" class="alertBar-message">
-                  <i class="fa fa-exclamation-circle"></i>
-                  <span id="successNotification"></span>
-                </span>
-                <span class="alertBar-dismiss">
-                  <a class="cta"></a>
-                </span>
-              </div>
-            </section>
-          </div>
-        </div>
+            </div>
 
-        <div class="row">
-          <div class="col-4 mx-auto">
-            <button
-              class="btn btn-block mx-auto mb-4"
-              v-on:click="createBuilding"
-            >
-              Crear nuevo edificio
-            </button>
-          </div>
-        </div>
-      </div>
+            <div class="row">
+              <div class="col-4 mx-auto mt-3 mb-1">
+                <section v-show="errorShow">
+                  <div class="alertBar error">
+                    <span title="error" class="alertBar-message">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <span id="errorNotification"></span>
+                    </span>
+                    <span class="alertBar-dismiss">
+                      <a class="cta"></a>
+                    </span>
+                  </div>
+                </section>
+                <section v-show="successShow">
+                  <div class="success_green">
+                    <span title="success" class="alertBar-message">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <span id="successNotification"></span>
+                    </span>
+                    <span class="alertBar-dismiss">
+                      <a class="cta"></a>
+                    </span>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4 mx-auto">
+                <button
+                  class="btn btn-block mx-auto mb-4"
+                  v-on:click="createBuilding"
+                  >
+                    Crear nuevo edificio
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>   
+        
+
     </div>
   </div>
 </template>
@@ -130,6 +135,7 @@ export default {
         var cell1 = row.insertCell();
         var cell2 = row.insertCell();
         var buttonCell = row.insertCell();
+        var button2Cell = row.insertCell();
         cell1.appendChild(document.createTextNode(buildings[i].id));
         cell2.appendChild(document.createTextNode(buildings[i].name));
 
@@ -145,6 +151,34 @@ export default {
           }.bind(this)
         );
         buttonCell.appendChild(newButtonDelete);
+
+        //button rooms
+        let newButtonRooms = document.createElement("button");
+        newButtonRooms.innerHTML = "Ver Salas";
+        newButtonRooms.addEventListener(
+          "click",
+          function () {
+            axios
+            .get(App.methods.getBackUrl() + "/room/all", {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.RefreshToken,
+              },
+            })
+            .then((response) => {
+              let rooms = response.data.message;
+              let buildingId = newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+              console.log(rooms);
+              for (var i in rooms){
+                if(rooms[i].buildingDTO.id == buildingId){
+                  console.log(rooms[i].roomDTO);
+                }
+              }
+            })
+          }
+        );
+        button2Cell.appendChild(newButtonRooms);
       }
     },
     getBuildings() {
