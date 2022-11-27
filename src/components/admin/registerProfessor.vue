@@ -262,7 +262,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -271,7 +271,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);

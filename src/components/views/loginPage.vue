@@ -151,7 +151,7 @@ export default {
     },
     errorFunction(messageText) {
       let errorNotification = document.getElementById("spnErrorNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

@@ -273,7 +273,7 @@ export default {
 
         // button detail
         let newButtonDetail = document.createElement("button");
-        newButtonDetail.innerHTML = "Detalles";
+        newButtonDetail.textContent = "Detalles";
         newButtonDetail.addEventListener(
           "click",
           function () {
@@ -286,7 +286,7 @@ export default {
 
         // button delete
         let newButtonDelete = document.createElement("button");
-        newButtonDelete.innerHTML = "Cancelar";
+        newButtonDelete.textContent = "Cancelar";
         newButtonDelete.addEventListener(
           "click",
           function () {

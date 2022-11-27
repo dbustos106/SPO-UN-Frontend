@@ -166,7 +166,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorNotification = document.getElementById("errorNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

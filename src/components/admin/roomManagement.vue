@@ -172,7 +172,7 @@ export default {
           for (var i in rooms) {
             let newOption = document.createElement("option");
             newOption.value = rooms[i].roomDTO.id;
-            newOption.innerHTML =
+            newOption.textContent =
               rooms[i].buildingDTO.name + " " + rooms[i].roomDTO.name;
             tablaRoom.append(newOption);
             this.$data.rooms[
@@ -243,7 +243,7 @@ export default {
 
             // button delete
             let newButtonDelete = document.createElement("button");
-            newButtonDelete.innerHTML = "Eliminar";
+            newButtonDelete.textContent= "Eliminar";
             newButtonDelete.addEventListener(
               "click",
               function () {
@@ -342,7 +342,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);

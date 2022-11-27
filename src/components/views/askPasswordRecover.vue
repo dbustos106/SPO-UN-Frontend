@@ -118,7 +118,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorNotification = document.getElementById("successNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -127,7 +127,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorNotification = document.getElementById("errorNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

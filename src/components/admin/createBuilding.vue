@@ -133,13 +133,13 @@ export default {
 
         // button delete
         let newButtonDelete = document.createElement("button");
-        newButtonDelete.innerHTML = "Eliminar";
+        newButtonDelete.textContent = "Eliminar";
         newButtonDelete.addEventListener(
           "click",
           function () {
             this.$data.deleteWindowShow = true;
             this.$data.IDtoDelete =
-              newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+              newButtonDelete.parentElement.parentElement.children[0].textContent;
           }.bind(this)
         );
         buttonCell.appendChild(newButtonDelete);
@@ -221,7 +221,7 @@ export default {
             document.getElementById("tblBuildings").children[1].children;
           for (var i = 1; i < buildingsTableChildren.length; i++) {
             if (
-              buildingsTableChildren[i].children[0].innerHTML ==
+              buildingsTableChildren[i].children[0].textContent ==
               this.$data.IDtoDelete
             ) {
               buildingsTableChildren[i].remove();
@@ -250,7 +250,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -259,7 +259,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);

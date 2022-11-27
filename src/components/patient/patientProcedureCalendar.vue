@@ -78,7 +78,7 @@ export default {
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
 
-          document.getElementById("spnModalAppointmentTitle").innerHTML =
+          document.getElementById("spnModalAppointmentTitle").textContent =
             "Cita para el día " +
             this.formatDate(
               this.$data.selectedInitialDate,
