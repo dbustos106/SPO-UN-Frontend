@@ -253,7 +253,6 @@ export default {
       }
     },
     verifyPasswords(pass, pass2){
-
       const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
 
       if(pass!=pass2){
