@@ -162,7 +162,7 @@ export default {
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-        if (this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
+        if (this.verifyDocument(documentNumber) && this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
           let datos = {
             password: password,
             name: name,
@@ -184,7 +184,7 @@ export default {
               this.successFunction("Registro Exitoso");
             })
             .catch((err) => {
-              this.errorFunction("Error, correo o documento ya registrado");
+              this.errorFunction("Error! Correo o documento ya registrado");
               if (err.response.status == 403) {
                 if (App.methods.requestRefreshToken()) {
                   this.register();
@@ -196,11 +196,26 @@ export default {
         }
       }
     },
+    verifyDocument(document){
+      console.log(document.length);
+      if(document.length<6){
+
+        this.errorFunction("La cédula es muy corta");
+        return false;
+      }
+
+      if(document.length>10){
+
+        this.errorFunction("La cédula es muy larga")
+        return false;
+      }
+
+      return true;
+    },
     verifyEmail(email){
       var validRegex = /^\w+([\.-]?\w+)*@unal.edu.co/; //eslint-disable-line
 
       if (email.match(validRegex)) {
-        console.log("verdad")
 
         return true;
       } else {

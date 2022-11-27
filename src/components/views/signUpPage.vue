@@ -222,7 +222,7 @@ export default {
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-          if (this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
+          if (this.verifyDocument(documentNumber) && this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
             let datos = {
               password: password,
               name: name,
@@ -252,6 +252,22 @@ export default {
               });
           } 
       }
+    },
+    verifyDocument(document){
+      console.log(document.length);
+      if(document.length<6){
+
+        this.errorFunction("La cédula es muy corta");
+        return false;
+      }
+
+      if(document.length>10){
+
+        this.errorFunction("La cédula es muy larga")
+        return false;
+      }
+
+      return true;
     },
     verifyPasswords(pass, pass2){
       const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
@@ -287,7 +303,6 @@ export default {
       var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //eslint-disable-line
 
       if (email.match(validRegex)) {
-        console.log("verdad")
 
         return true;
       } else {
