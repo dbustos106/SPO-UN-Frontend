@@ -101,7 +101,7 @@ export default {
       var passwordConfirmation =
         document.getElementById("nptPasswordConfirm").value;
       console.log(password);
-      if (password == passwordConfirmation) {
+      if (this.verifyPasswords(password,passwordConfirmation)) {
         let datos = {
           password: password,
         };
@@ -132,9 +132,37 @@ export default {
               this.errorFunction(err.response.data.message);
             }
           });
-      } else {
-        this.errorFunction("Las contraseñas son distintas");
+      } 
+    },
+    verifyPasswords(pass, pass2){
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
+
+      if(pass!=pass2){
+        this.errorFunction("Las contraseñas no coinciden");
+        return false;
       }
+
+      if(pass.length<8){
+        this.errorFunction("La contraseña debe contener al menos 8 caracteres");
+        return false;
+      }
+
+      if(!specialChars.test(pass)){
+        this.errorFunction("La contraseña debe contener al menos un caracter especial");
+        return false;
+      }
+
+      if(!/[A-Z]/.test(pass)){
+        this.errorFunction("La contraseña debe contener al menos una mayúscula");
+        return false;
+      }
+
+      if(!/\d/.test(pass)){
+        this.errorFunction("La contraseña debe contener al menos un número");
+        return false;
+      }
+
+      return true;
     },
     successFunction(messageText) {
       this.$data.errorShow = false;
