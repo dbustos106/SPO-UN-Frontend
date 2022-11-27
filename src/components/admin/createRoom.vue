@@ -1,7 +1,7 @@
 <template>
   <div class="container marco">
     <div class="card mt-5 mb-3">
-      <h2 class="card-description mt-5 mb-5">Administrar salas</h2>
+      <h2 class="card-description mt-5 mb-3">Administrar salas</h2>
 
       <!-- ======= Overlay ======= -->
       <transition name="fade">
@@ -26,21 +26,19 @@
       <!-- End deleteWindow -->
 
       <div id="roomContainer" class="mx-auto">
-        <div class="row mt-4">
-          <div class="form-group needs-validation" id="form">
-            <div class="ml-auto">
-              <select
-                ref="place"
-                class="form-select mx-auto"
-                required
-                id="slcBuilding"
-                @change="getRooms"
-              >
-                <option selected disabled value="">Edificio</option>
-              </select>
-              
-            </div>
+        <div class="form-group needs-validation" id="form">
+          <div class="ml-auto">
+            <select
+              ref="place"
+              class="form-select mx-auto"
+              required
+              id="slcBuilding"
+              @change="getRooms"
+            >
+              <option selected value="">Edificio</option>
+            </select>
           </div>
+        </div>
         <!-- ======= buildingsTable ======= -->
         <div class="TableContainer">
           <table id="tblRooms">
@@ -60,34 +58,35 @@
 
         <!-- End buildingsTable -->
 
-          <div class="row">
-            <div class="col-4 mx-auto mt-3 mb-1">
-              <section v-show="errorShow">
-                <div class="alertBar error">
-                  <span title="error" class="alertBar-message">
-                    <i class="fa fa-exclamation-circle"></i>
-                    <span id="errorNotification"></span>
-                  </span>
-                  <span class="alertBar-dismiss">
-                    <a class="cta"></a>
-                  </span>
-                </div>
-              </section>
-              <section v-show="successShow">
-                <div class="success_green">
-                  <span title="success" class="alertBar-message">
-                    <i class="fa fa-exclamation-circle"></i>
-                    <span id="successNotification"></span>
-                  </span>
-                  <span class="alertBar-dismiss">
-                    <a class="cta"></a>
-                  </span>
-                </div>
-              </section>
-            </div>
+        <div class="row">
+          <div class="col-4 mx-auto mt-3 mb-1">
+            <section v-show="errorShow">
+              <div class="alertBar error">
+                <span title="error" class="alertBar-message">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <span id="errorNotification"></span>
+                </span>
+                <span class="alertBar-dismiss">
+                  <a class="cta"></a>
+                </span>
+              </div>
+            </section>
+            <section v-show="successShow">
+              <div class="success_green">
+                <span title="success" class="alertBar-message">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <span id="successNotification"></span>
+                </span>
+                <span class="alertBar-dismiss">
+                  <a class="cta"></a>
+                </span>
+              </div>
+            </section>
           </div>
+        </div>
 
-          <div class="row">
+        <div class="row">
+          <div class="col-12 mx-auto">
             <input
               class="form-control"
               type="text"
@@ -96,14 +95,11 @@
               id="nptName"
               required
             />
-            <div class="col-4 mx-auto">
-              <button
-                class="btn btn-block mx-auto mb-4"
-                v-on:click="createRoom"
-              >
-                Crear salón
-              </button>
-            </div>
+          </div>
+          <div class="col-4 mx-auto">
+            <button class="btn btn-block mx-auto mb-4" v-on:click="createRoom">
+              Crear salón
+            </button>
           </div>
         </div>
       </div>
@@ -167,9 +163,9 @@ export default {
         var child = table.children[1].lastChild;
         child.remove();
       }
-      console.log(buildingId);
+
       for (var i in rooms) {
-        if(rooms[i].buildingDTO.id == buildingId || buildingId == ""){
+        if (rooms[i].buildingDTO.id == buildingId || buildingId == "") {
           var row = table.insertRow();
           var cell1 = row.insertCell();
           var cell2 = row.insertCell();
@@ -192,7 +188,6 @@ export default {
           );
           buttonCell.appendChild(newButtonDelete);
         }
-        
       }
     },
     getRooms() {
