@@ -213,6 +213,7 @@ export default {
         lastName == "" ||
         email == "" ||
         password == "" ||
+        documentType == "" ||
         confirmPassword == "" ||
         documentNumber == "" ||
         gender == "" ||
@@ -221,7 +222,7 @@ export default {
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-          if (this.verifyPasswords(password,confirmPassword)) {
+          if (this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
             let datos = {
               password: password,
               name: name,
@@ -247,7 +248,7 @@ export default {
                 this.successFunction("Registro Exitoso, revise su correo");
               })
               .catch(() => {
-                this.errorFunction("Error, correo o documento ya registrado");
+                this.errorFunction("Error! Correo o documento ya registrado");
               });
           } 
       }
@@ -281,6 +282,19 @@ export default {
       }
 
       return true;
+    },
+    verifyEmail(email){
+      var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //eslint-disable-line
+
+      if (email.match(validRegex)) {
+        console.log("verdad")
+
+        return true;
+      } else {
+
+        this.errorFunction("El email ingresado no tiene el formato correcto");
+        return false;
+      }
     },
     successFunction(messageText) {
       this.$data.errorShow = false;

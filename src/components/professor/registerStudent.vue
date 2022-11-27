@@ -156,11 +156,12 @@ export default {
         email == "" ||
         password == "" ||
         confirmPassword == "" ||
+        documentType == "" ||
         documentNumber == ""
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-        if (this.verifyPasswords(password,confirmPassword)) {
+        if (this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
           let datos = {
             password: password,
             name: name,
@@ -226,6 +227,23 @@ export default {
       }
 
       return true;
+    },
+    verifyEmail(email){
+      var validRegex = /^\w+([\.-]?\w+)*@unal.edu.co/; //eslint-disable-line
+
+      if (email.match(validRegex)) {
+        console.log("verdad")
+
+        return true;
+      } else {
+        if(!email.includes("@unal.edu.co")){
+          this.errorFunction("El email ingresado no tiene el dominio unal.edu.co");
+          return false;
+        }else{
+          this.errorFunction("El email ingresado no tiene el formato correcto");
+          return false;
+        }
+      }
     },
     successFunction(messageText) {
       this.$data.errorShow = false;
