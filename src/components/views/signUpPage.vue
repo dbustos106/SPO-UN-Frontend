@@ -253,7 +253,8 @@ export default {
       }
     },
     verifyPasswords(pass, pass2){
-      //const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
 
       if(pass!=pass2){
         this.errorFunction("Las contraseñas no coinciden");
@@ -264,11 +265,11 @@ export default {
         this.errorFunction("La contraseña debe contener al menos 8 caracteres");
         return false;
       }
-      /*
+      
       if(!specialChars.test(pass)){
         this.errorFunction("La contraseña debe contener al menos un caracter especial");
         return false;
-      }*/
+      }
 
       if(!/[A-Z]/.test(pass)){
         this.errorFunction("La contraseña debe contener al menos una mayúscula");
