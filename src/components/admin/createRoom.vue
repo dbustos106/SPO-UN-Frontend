@@ -141,7 +141,7 @@ export default {
           for (var i in buildings) {
             let newOption = document.createElement("option");
             newOption.value = buildings[i].id;
-            newOption.innerHTML = buildings[i].id + " " + buildings[i].name;
+            newOption.textContent = buildings[i].id + " " + buildings[i].name;
             slcBuildings.append(newOption);
             this.$data.buildings[buildings[i].id + " " + buildings[i].name] =
               buildings[i].id;
@@ -177,13 +177,13 @@ export default {
 
           // button delete
           let newButtonDelete = document.createElement("button");
-          newButtonDelete.innerHTML = "Eliminar";
+          newButtonDelete.textContent = "Eliminar";
           newButtonDelete.addEventListener(
             "click",
             function () {
               this.$data.deleteWindowShow = true;
               this.$data.IDtoDelete =
-                newButtonDelete.parentElement.parentElement.children[0].innerHTML;
+                newButtonDelete.parentElement.parentElement.children[0].textContent;
             }.bind(this)
           );
           buttonCell.appendChild(newButtonDelete);
@@ -235,7 +235,7 @@ export default {
           })
           .then(() => {
             this.getRooms();
-            this.successFunction("Cuarto añadito con exitoso");
+            this.successFunction("Cuarto añadido con exitoso");
           })
           .catch((err) => {
             this.errorFunction("Error");
@@ -269,7 +269,7 @@ export default {
             document.getElementById("tblRooms").children[1].children;
           for (var i = 1; i < roomsTableChildren.length; i++) {
             if (
-              roomsTableChildren[i].children[0].innerHTML ==
+              roomsTableChildren[i].children[0].textContent ==
               this.$data.IDtoDelete
             ) {
               roomsTableChildren[i].remove();
@@ -298,7 +298,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -307,7 +307,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);

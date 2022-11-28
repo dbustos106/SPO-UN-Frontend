@@ -1,38 +1,41 @@
 <template>
-  <!-- ======= Overlay ======= -->
-  <transition name="fade">
-    <div class="modal-overlay" v-show="showModal"></div>
-  </transition>
-  <!-- End Overlay -->
+  <div>
+    <!-- ======= Overlay ======= -->
+    <transition name="fade">
+      <div class="modal-overlay" v-show="showModal"></div>
+    </transition>
+    <!-- End Overlay -->
 
-  <!-- ======= confirmWindow ======= -->
-  <transition name="fade">
-    <div class="modal-mask confirmWindow" v-show="showModal">
-      <div class="row">
-        <span id="spnModalAppointmentTitle">Hola</span>
-        <span> ¿Desea reservar esta cita? </span>
+    <!-- ======= confirmWindow ======= -->
+    <transition name="fade">
+      <div class="modal-mask confirmWindow" v-show="showModal">
+        <div class="row">
+          <span id="spnModalAppointmentTitle">Hola</span>
+          <span> ¿Desea reservar esta cita? </span>
+        </div>
+        <div class="row-10 mx-auto">
+          <button class="btnGreen mr-3" v-on:click="reserveAppointment()">
+            Si
+          </button>
+          <button class="btnRed" v-on:click="showModal = false">No</button>
+        </div>
       </div>
-      <div class="row-10 mx-auto">
-        <button class="btnGreen mr-3" v-on:click="reserveAppointment()">
-          Si
-        </button>
-        <button class="btnRed" v-on:click="showModal = false">No</button>
-      </div>
+    </transition>
+    <!-- End confirmWindow -->
+
+    <!-- ======= ProcedureSearchCalendarContainer ======= -->
+    <div class="row-sm-12 mb-5">
+      <span id="spnAppointmetReserveSuccessMessage" v-if="showConfirmMessage">
+        Cita reservada con éxito. Revise su cronograma
+      </span>
     </div>
-  </transition>
-  <!-- End confirmWindow -->
 
-  <!-- ======= ProcedureSearchCalendarContainer ======= -->
-  <div class="row-sm-12 mb-5">
-    <span id="spnAppointmetReserveSuccessMessage" v-if="showConfirmMessage">
-      Cita reservada con éxito. Revise su cronograma
-    </span>
+    <div class="row mb-5">
+      <FullCalendar ref="procedureCalendar" :options="calendarOptions" />
+    </div>
+    <!-- End ProcedureSearchCalendarContainer -->
   </div>
-
-  <div class="row mb-5">
-    <FullCalendar ref="procedureCalendar" :options="calendarOptions" />
-  </div>
-  <!-- End ProcedureSearchCalendarContainer -->
+  
 </template>
 
 <script>
@@ -78,7 +81,7 @@ export default {
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
 
-          document.getElementById("spnModalAppointmentTitle").innerHTML =
+          document.getElementById("spnModalAppointmentTitle").textContent =
             "Cita para el día " +
             this.formatDate(
               this.$data.selectedInitialDate,

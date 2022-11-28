@@ -217,7 +217,7 @@ export default {
   },
   mounted() {
     this.isOpened = this.isMenuOpen;
-    this.$refs.userEmail.innerHTML = this.userEmail;
+    this.$refs.userEmail.textContent = this.userEmail;
   },
 };
 </script>

@@ -186,6 +186,7 @@
 <script>
 import axios from "axios";
 import App from "../../App.vue";
+import DOMPurify from "dompurify";
 
 export default {
   name: "signUpPage",
@@ -198,16 +199,16 @@ export default {
   },
   methods: {
     register() {
-      var name = document.getElementById("nptName").value;
-      var lastName = document.getElementById("nptLastName").value;
-      var email = document.getElementById("nptEmail").value;
-      var password = document.getElementById("nptPassword").value;
-      var confirmPassword = document.getElementById("nptConfirmPassword").value;
-      var documentType = document.getElementById("slcDocumentType").value;
-      var documentNumber = document.getElementById("nptDocumentNumber").value;
-      var gender = document.getElementById("slcGender").value;
-      var age = document.getElementById("nptAge").value;
-      var bloodType = document.getElementById("slcBloodType").value;
+      var name = DOMPurify.sanitize(document.getElementById("nptName").value);
+      var lastName = DOMPurify.sanitize(document.getElementById("nptLastName").value);
+      var email = DOMPurify.sanitize(document.getElementById("nptEmail").value);
+      var password = DOMPurify.sanitize(document.getElementById("nptPassword").value);
+      var confirmPassword = DOMPurify.sanitize(document.getElementById("nptConfirmPassword").value);
+      var documentType = DOMPurify.sanitize(document.getElementById("slcDocumentType").value);
+      var documentNumber = DOMPurify.sanitize(document.getElementById("nptDocumentNumber").value);
+      var gender = DOMPurify.sanitize(document.getElementById("slcGender").value);
+      var age = DOMPurify.sanitize(document.getElementById("nptAge").value);
+      var bloodType = DOMPurify.sanitize(document.getElementById("slcBloodType").value);
       if (
         name == "" ||
         lastName == "" ||
@@ -318,7 +319,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -327,7 +328,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);

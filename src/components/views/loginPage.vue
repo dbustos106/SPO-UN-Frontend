@@ -95,6 +95,7 @@
 <script>
 import axios from "axios";
 import App from "../../App.vue";
+import DOMPurify from "dompurify";
 
 export default {
   name: "loginPage",
@@ -106,8 +107,8 @@ export default {
   },
   methods: {
     sendLogin() {
-      var email = document.getElementById("nptEmail").value;
-      var password = document.getElementById("nptPassword").value;
+      var email = DOMPurify.sanitize(document.getElementById("nptEmail").value);
+      var password = DOMPurify.sanitize(document.getElementById("nptPassword").value);
       if (email == "" || password == "") {
         this.errorFunction(" No ha ingresado los datos");
       } else {
@@ -132,6 +133,8 @@ export default {
             sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
             sessionStorage.setItem("Email", userInfo[0]);
             this.openUserPage(sessionStorage.Role);
+            document.getElementById("nptEmail").value="";
+            document.getElementById("nptPassword").value="";
           })
           .catch(() => {
             this.errorFunction(" Usuario o contraseña incorrectos");
@@ -194,7 +197,7 @@ export default {
     },
     errorFunction(messageText) {
       let errorNotification = document.getElementById("spnErrorNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

@@ -242,7 +242,7 @@ export default {
 
         // button detail
         let newButtonDetail = document.createElement("button");
-        newButtonDetail.innerHTML = "Detalles";
+        newButtonDetail.textContent = "Detalles";
         newButtonDetail.addEventListener(
           "click",
           function () {

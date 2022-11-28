@@ -7,7 +7,7 @@
             <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
 
-          <div class="col">
+          <div class="col" v-show="nptPasswordShow">
             <p class="card-description mt-5 mb-3">Cambiar Contraseña</p>
             <div class="form-group needs-validation">
               <div class="col-sm-8 mx-auto">
@@ -16,17 +16,6 @@
                     <span title="error" class="alertBar-message">
                       <i class="fa fa-exclamation-circle"></i>
                       <span id="errorNotification"></span>
-                    </span>
-                    <span class="alertBar-dismiss">
-                      <a class="cta"></a>
-                    </span>
-                  </div>
-                </section>
-                <section v-show="successShow">
-                  <div class="success_green">
-                    <span title="success" class="alertBar-message">
-                      <i class="fa fa-exclamation-circle"></i>
-                      <span id="successNotification"></span>
                     </span>
                     <span class="alertBar-dismiss">
                       <a class="cta"></a>
@@ -75,6 +64,12 @@
               </div>
             </div>
           </div>
+          <div class="col" v-show="messageShow">
+            <p class="card-description mt-5 mb-3">Contraseña cambiada</p>
+            <button class="btn btn-block" v-on:click="goToLogin()">
+              Ir a login
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -90,7 +85,8 @@ export default {
   data() {
     return {
       errorShow: false,
-      successShow: false,
+      nptPasswordShow: true,
+      messageShow: false,
       role: "",
       code: "",
     };
@@ -101,7 +97,7 @@ export default {
       var passwordConfirmation =
         document.getElementById("nptPasswordConfirm").value;
       console.log(password);
-      if (password == passwordConfirmation) {
+      if (this.verifyPasswords(password, passwordConfirmation)) {
         let datos = {
           password: password,
         };
@@ -125,31 +121,58 @@ export default {
           .then(() => {
             document.getElementById("nptPassword").value = "";
             document.getElementById("nptPasswordConfirm").value = "";
-            this.successFunction("Constraseña cambiada");
+            this.$data.nptPasswordShow = false;
+            this.$data.messageShow = true;
           })
           .catch((err) => {
             if (err.response.status == 400) {
               this.errorFunction(err.response.data.message);
             }
           });
-      } else {
-        this.errorFunction("Las contraseñas son distintas");
       }
     },
-    successFunction(messageText) {
-      this.$data.errorShow = false;
-      this.$data.successShow = true;
-      let errorNotification = document.getElementById("successNotification");
-      errorNotification.innerHTML = messageText;
-      setTimeout(() => {
-        this.$data.successShow = false;
-      }, 5000);
+    verifyPasswords(pass, pass2) {
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
+
+      if (pass != pass2) {
+        this.errorFunction("Las contraseñas no coinciden");
+        return false;
+      }
+
+      if (pass.length < 8) {
+        this.errorFunction("La contraseña debe contener al menos 8 caracteres");
+        return false;
+      }
+
+      if (!specialChars.test(pass)) {
+        this.errorFunction(
+          "La contraseña debe contener al menos un caracter especial"
+        );
+        return false;
+      }
+
+      if (!/[A-Z]/.test(pass)) {
+        this.errorFunction(
+          "La contraseña debe contener al menos una mayúscula"
+        );
+        return false;
+      }
+
+      if (!/\d/.test(pass)) {
+        this.errorFunction("La contraseña debe contener al menos un número");
+        return false;
+      }
+
+      return true;
+    },
+    goToLogin() {
+      this.$router.push("/login");
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorNotification = document.getElementById("errorNotification");
-      errorNotification.innerHTML = messageText;
+      errorNotification.textContent = messageText;
       this.$data.errorShow = true;
       setTimeout(() => {
         this.$data.errorShow = false;

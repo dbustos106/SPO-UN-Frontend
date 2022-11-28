@@ -284,7 +284,7 @@ export default {
             let newOption = document.createElement("option");
             newOption.value =
               roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
-            newOption.innerHTML =
+            newOption.textContent =
               roomInfo[i].buildingDTO.name + " " + roomInfo[i].roomDTO.name;
             tablaRoom.append(newOption);
             this.$data.rooms[
@@ -323,8 +323,8 @@ export default {
         let tentativeSchedules = [];
         for (var element of schedulesTable.childNodes) {
           if (schedulesTable.firstChild != element) {
-            let startTime = element.firstChild.innerHTML;
-            let endTime = element.lastChild.innerHTML;
+            let startTime = element.firstChild.textContent;
+            let endTime = element.lastChild.textContent;
             tentativeSchedules.push({
               start_time: startTime.replace("T", " "),
               end_time: endTime.replace("T", " "),
@@ -380,8 +380,8 @@ export default {
         let tentativeSchedules = [];
         for (var element of schedulesTable.childNodes) {
           if (schedulesTable.firstChild != element) {
-            let startTime = element.firstChild.innerHTML;
-            let endTime = element.lastChild.innerHTML;
+            let startTime = element.firstChild.textContent;
+            let endTime = element.lastChild.textContent;
             tentativeSchedules.push({
               start_time: startTime.replace("T", " "),
               end_time: endTime.replace("T", " "),
@@ -498,7 +498,7 @@ export default {
       this.$data.errorShow = false;
       this.$data.successShow = true;
       let errorDiv = document.getElementById("successNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.successShow = false;
       }, 5000);
@@ -507,7 +507,7 @@ export default {
       this.$data.errorShow = true;
       this.$data.successShow = false;
       let errorDiv = document.getElementById("errorNotification");
-      errorDiv.innerHTML = messageText;
+      errorDiv.textContent = messageText;
       setTimeout(() => {
         this.$data.errorShow = false;
       }, 5000);
@@ -520,12 +520,12 @@ export default {
     this.getRoomOptions();
     if (this.idAppointment != -1) {
       this.getStudentAppointmentById(this.idAppointment);
-      document.getElementById("btnCreateAppointment").innerHTML = "Guardar";
+      document.getElementById("btnCreateAppointment").textContent = "Guardar";
     } else {
       this.$data.patientShow = false;
-      document.getElementById("btnCreateAppointment").innerHTML = "Crear cita";
+      document.getElementById("btnCreateAppointment").textContent = "Crear cita";
     }
-    document.getElementById("titleAppointmentWindow").innerHTML = this.title;
+    document.getElementById("titleAppointmentWindow").textContent = this.title;
   },
 };
 </script>
