@@ -67,7 +67,7 @@
               <div class="col-sm-8 mx-auto mb-5">
                 <GoogleLogin
                   :callback="sendLoginGoogle"
-                  cookiePolicy="single-host-origin"
+                  cookiePolicy="same-origin-allow-popups"
                 />
               </div>
 
@@ -108,7 +108,9 @@ export default {
   methods: {
     sendLogin() {
       var email = DOMPurify.sanitize(document.getElementById("nptEmail").value);
-      var password = DOMPurify.sanitize(document.getElementById("nptPassword").value);
+      var password = DOMPurify.sanitize(
+        document.getElementById("nptPassword").value
+      );
       if (email == "" || password == "") {
         this.errorFunction(" No ha ingresado los datos");
       } else {
@@ -133,8 +135,8 @@ export default {
             sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
             sessionStorage.setItem("Email", userInfo[0]);
             this.openUserPage(sessionStorage.Role);
-            document.getElementById("nptEmail").value="";
-            document.getElementById("nptPassword").value="";
+            document.getElementById("nptEmail").value = "";
+            document.getElementById("nptPassword").value = "";
           })
           .catch(() => {
             this.errorFunction(" Usuario o contraseña incorrectos");
@@ -155,7 +157,6 @@ export default {
           },
         })
         .then((requestResponse) => {
-          console.log(requestResponse);
           let loginInfo = App.methods.jwtDecode(
             requestResponse.data.access_token
           );
@@ -174,7 +175,6 @@ export default {
           this.openUserPage(sessionStorage.Role);
         })
         .catch((err) => {
-          console.log(err);
           this.errorFunction(err.response.data.error);
         });
     },

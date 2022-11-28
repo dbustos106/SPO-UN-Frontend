@@ -35,7 +35,6 @@
     </div>
     <!-- End ProcedureSearchCalendarContainer -->
   </div>
-  
 </template>
 
 <script>
@@ -76,8 +75,6 @@ export default {
           this.$data.showModal = true;
           this.$data.selectedInitialDate = info.event.start;
           this.$data.selectedEndDate = info.event.end;
-          console.log("11:", this.$data.selectedInitialDate);
-          console.log("22:", this.$data.selectedEndDate);
           this.$data.selectedAppointmentId = info.event.id;
           this.$data.selectedAppointmentType = info.event.title;
 
@@ -113,8 +110,6 @@ export default {
           .replace("AM", ":00")
           .replace("PM", ":00"),
       };
-      console.log("inicial", this.$data.selectedInitialDate);
-      console.log("final", this.$data.selectedEndDate);
       let reserveDataBody = JSON.stringify(reserveData);
 
       axios

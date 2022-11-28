@@ -162,7 +162,11 @@ export default {
       ) {
         this.errorFunction("Faltan datos por llenar");
       } else {
-        if (this.verifyDocument(documentNumber) && this.verifyEmail(email) && this.verifyPasswords(password,confirmPassword)) {
+        if (
+          this.verifyDocument(documentNumber) &&
+          this.verifyEmail(email) &&
+          this.verifyPasswords(password, confirmPassword)
+        ) {
           let datos = {
             password: password,
             name: name,
@@ -196,62 +200,64 @@ export default {
         }
       }
     },
-    verifyDocument(document){
-      console.log(document.length);
-      if(document.length<6){
-
+    verifyDocument(document) {
+      if (document.length < 6) {
         this.errorFunction("La cédula es muy corta");
         return false;
       }
 
-      if(document.length>10){
-
-        this.errorFunction("La cédula es muy larga")
+      if (document.length > 10) {
+        this.errorFunction("La cédula es muy larga");
         return false;
       }
 
       return true;
     },
-    verifyEmail(email){
+    verifyEmail(email) {
       var validRegex = /^\w+([\.-]?\w+)*@unal.edu.co/; //eslint-disable-line
 
       if (email.match(validRegex)) {
-
         return true;
       } else {
-        if(!email.includes("@unal.edu.co")){
-          this.errorFunction("El email ingresado no tiene el dominio unal.edu.co");
+        if (!email.includes("@unal.edu.co")) {
+          this.errorFunction(
+            "El email ingresado no tiene el dominio unal.edu.co"
+          );
           return false;
-        }else{
+        } else {
           this.errorFunction("El email ingresado no tiene el formato correcto");
           return false;
         }
       }
     },
-    verifyPasswords(pass, pass2){
+    verifyPasswords(pass, pass2) {
       const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; //eslint-disable-line
 
-      if(pass!=pass2){
+      if (pass != pass2) {
         this.errorFunction("Las contraseñas no coinciden");
         return false;
       }
 
-      if(pass.length<8){
+      if (pass.length < 8) {
         this.errorFunction("La contraseña debe contener al menos 8 caracteres");
         return false;
       }
 
-      if(!specialChars.test(pass)){
-        this.errorFunction("La contraseña debe contener al menos un caracter especial");
+      if (!specialChars.test(pass)) {
+        this.errorFunction(
+          "La contraseña debe contener al menos un caracter especial"
+        );
         return false;
       }
 
-      if(!/[A-Z]/.test(pass)){
-        this.errorFunction("La contraseña debe contener al menos una mayúscula");
+      if (!/[A-Z]/.test(pass)) {
+        this.errorFunction(
+          "La contraseña debe contener al menos una mayúscula"
+        );
         return false;
       }
 
-      if(!/\d/.test(pass)){
+      if (!/\d/.test(pass)) {
         this.errorFunction("La contraseña debe contener al menos un número");
         return false;
       }
