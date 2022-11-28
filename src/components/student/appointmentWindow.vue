@@ -365,6 +365,9 @@ export default {
                 this.$router.push("/login");
               }
             }
+            if (err.response.status == 400) {
+              this.errorFunction(err.response.data.localizedMessage);
+            }
           });
       } else {
         this.errorFunction("Faltan datos por llenar");
@@ -523,7 +526,8 @@ export default {
       document.getElementById("btnCreateAppointment").textContent = "Guardar";
     } else {
       this.$data.patientShow = false;
-      document.getElementById("btnCreateAppointment").textContent = "Crear cita";
+      document.getElementById("btnCreateAppointment").textContent =
+        "Crear cita";
     }
     document.getElementById("titleAppointmentWindow").textContent = this.title;
   },

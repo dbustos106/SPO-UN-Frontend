@@ -117,7 +117,7 @@
                 </div>
               </div>
 
-              <div class="row mx-auto mb-3">
+              <div class="row mx-auto mb-1">
                 <div class="col-sm-5 ml-auto">
                   <select class="form-select mx-auto" required id="slcGender">
                     <option selected disabled value="">Género</option>
@@ -158,7 +158,7 @@
                   </div>
                 </section>
                 <section v-show="successShow">
-                  <div class="success_green">
+                  <div class="success_green mb-3">
                     <span title="success" class="alertBar-message">
                       <i class="fa fa-exclamation-circle"></i>
                       <span id="successNotification"></span>
@@ -170,7 +170,7 @@
                 </section>
               </div>
 
-              <div class="col-sm-5 mx-auto">
+              <div class="col-sm-5 mx-auto mt-1">
                 <button class="btn btn-block" v-on:click="register">
                   Registrar
                 </button>
@@ -200,15 +200,29 @@ export default {
   methods: {
     register() {
       var name = DOMPurify.sanitize(document.getElementById("nptName").value);
-      var lastName = DOMPurify.sanitize(document.getElementById("nptLastName").value);
+      var lastName = DOMPurify.sanitize(
+        document.getElementById("nptLastName").value
+      );
       var email = DOMPurify.sanitize(document.getElementById("nptEmail").value);
-      var password = DOMPurify.sanitize(document.getElementById("nptPassword").value);
-      var confirmPassword = DOMPurify.sanitize(document.getElementById("nptConfirmPassword").value);
-      var documentType = DOMPurify.sanitize(document.getElementById("slcDocumentType").value);
-      var documentNumber = DOMPurify.sanitize(document.getElementById("nptDocumentNumber").value);
-      var gender = DOMPurify.sanitize(document.getElementById("slcGender").value);
+      var password = DOMPurify.sanitize(
+        document.getElementById("nptPassword").value
+      );
+      var confirmPassword = DOMPurify.sanitize(
+        document.getElementById("nptConfirmPassword").value
+      );
+      var documentType = DOMPurify.sanitize(
+        document.getElementById("slcDocumentType").value
+      );
+      var documentNumber = DOMPurify.sanitize(
+        document.getElementById("nptDocumentNumber").value
+      );
+      var gender = DOMPurify.sanitize(
+        document.getElementById("slcGender").value
+      );
       var age = DOMPurify.sanitize(document.getElementById("nptAge").value);
-      var bloodType = DOMPurify.sanitize(document.getElementById("slcBloodType").value);
+      var bloodType = DOMPurify.sanitize(
+        document.getElementById("slcBloodType").value
+      );
       if (
         name == "" ||
         lastName == "" ||

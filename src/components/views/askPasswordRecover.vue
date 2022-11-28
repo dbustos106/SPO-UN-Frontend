@@ -8,7 +8,7 @@
           </div>
 
           <div class="col">
-            <p class="card-description mt-5 mb-3">Recuperar Contraseña</p>
+            <p class="card-description mt-5 mb-4">Recuperar Contraseña</p>
             <div class="form-group needs-validation">
               <div class="col-sm-8 mx-auto">
                 <section v-show="errorShow">
@@ -94,17 +94,15 @@ export default {
     };
   },
   methods: {
-    sendEmail() {
+    async sendEmail() {
       var email = document.getElementById("nptEmail").value;
       var emailConfirmation = document.getElementById("nptEmailConfirm").value;
       if (email == emailConfirmation) {
+        this.successFunction("Revise su correo");
         axios
           .get(
             App.methods.getBackUrl() + "/changePassword/email?email=" + email
           )
-          .then(() => {
-            this.successFunction("Revise su correo");
-          })
           .catch((err) => {
             if (err.response.status == 400) {
               this.errorFunction(err.response.data.message);

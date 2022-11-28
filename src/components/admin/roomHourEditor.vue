@@ -131,6 +131,9 @@ export default {
                 this.$router.push("/login");
               }
             }
+            if (err.response.status == 400) {
+              this.errorFunction(err.response.data.localizedMessage);
+            }
           });
       } else if (
         new Date(this.startDate).getTime() > new Date(this.endDate).getTime()

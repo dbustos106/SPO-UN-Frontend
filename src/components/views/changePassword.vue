@@ -7,8 +7,8 @@
             <img src="../../assets/img/login.jpg" class="card-img" />
           </div>
 
-          <div class="col" v-show="nptPasswordShow">
-            <p class="card-description mt-5 mb-3">Cambiar Contraseña</p>
+          <div class="col">
+            <p class="card-description mt-5 mb-4">Cambiar Contraseña</p>
             <div class="form-group needs-validation">
               <div class="col-sm-8 mx-auto">
                 <section v-show="errorShow">
@@ -22,7 +22,19 @@
                     </span>
                   </div>
                 </section>
+                <section v-show="successShow">
+                  <div class="success_green mb-3">
+                    <span title="success" class="alertBar-message">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <span id="successNotification"></span>
+                    </span>
+                    <span class="alertBar-dismiss">
+                      <a class="cta"></a>
+                    </span>
+                  </div>
+                </section>
               </div>
+
               <div class="col-sm-8 mx-auto mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -64,12 +76,6 @@
               </div>
             </div>
           </div>
-          <div class="col" v-show="messageShow">
-            <p class="card-description mt-5 mb-3">Contraseña cambiada</p>
-            <button class="btn btn-block" v-on:click="goToLogin()">
-              Ir a login
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -85,8 +91,7 @@ export default {
   data() {
     return {
       errorShow: false,
-      nptPasswordShow: true,
-      messageShow: false,
+      successShow: false,
       role: "",
       code: "",
     };
@@ -96,13 +101,13 @@ export default {
       var password = document.getElementById("nptPassword").value;
       var passwordConfirmation =
         document.getElementById("nptPasswordConfirm").value;
-      console.log(password);
+
       if (this.verifyPasswords(password, passwordConfirmation)) {
         let datos = {
           password: password,
         };
         let formBody = App.methods.toUrlEncoded(datos);
-        console.log(formBody);
+
         axios
           .put(
             App.methods.getBackUrl() +
@@ -121,8 +126,10 @@ export default {
           .then(() => {
             document.getElementById("nptPassword").value = "";
             document.getElementById("nptPasswordConfirm").value = "";
-            this.$data.nptPasswordShow = false;
-            this.$data.messageShow = true;
+            this.successFunction("Contraseña cambiada");
+            setTimeout(() => {
+              this.$router.push("/login");
+            }, 1000);
           })
           .catch((err) => {
             if (err.response.status == 400) {
@@ -165,8 +172,14 @@ export default {
 
       return true;
     },
-    goToLogin() {
-      this.$router.push("/login");
+    successFunction(messageText) {
+      this.$data.errorShow = false;
+      this.$data.successShow = true;
+      let errorDiv = document.getElementById("successNotification");
+      errorDiv.textContent = messageText;
+      setTimeout(() => {
+        this.$data.successShow = false;
+      }, 5000);
     },
     errorFunction(messageText) {
       this.$data.errorShow = true;
