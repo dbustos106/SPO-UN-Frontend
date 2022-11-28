@@ -58,10 +58,17 @@
                 </div>
               </div>
 
-              <div class="col-sm-8 mx-auto mb-5">
+              <div class="col-sm-8 mx-auto">
                 <button class="btn btn-block" v-on:click="sendLogin">
                   Aceptar
                 </button>
+              </div>
+
+              <div class="col-sm-8 mx-auto mb-5">
+                <GoogleLogin
+                  :callback="sendLoginGoogle"
+                  cookiePolicy="single-host-origin"
+                />
               </div>
 
               <div class="col-sm-8 mx-auto mb-4">
@@ -126,11 +133,47 @@ export default {
             sessionStorage.setItem("Email", userInfo[0]);
             this.openUserPage(sessionStorage.Role);
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
             this.errorFunction(" Usuario o contraseña incorrectos");
           });
       }
+    },
+    sendLoginGoogle(response) {
+      let datos = {
+        value: response.credential,
+      };
+      let formBody = JSON.stringify(datos);
+
+      axios
+        .post(App.methods.getBackUrl() + "/auth/loginWithGoogle", formBody, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((requestResponse) => {
+          console.log(requestResponse);
+          let loginInfo = App.methods.jwtDecode(
+            requestResponse.data.access_token
+          );
+          let userInfo = loginInfo.payload.sub.split(",");
+          sessionStorage.setItem(
+            "AccessToken",
+            requestResponse.data.access_token
+          );
+          sessionStorage.setItem(
+            "RefreshToken",
+            requestResponse.data.refresh_token
+          );
+          sessionStorage.setItem("Id", userInfo[1]);
+          sessionStorage.setItem("Role", loginInfo.payload.roles[0]);
+          sessionStorage.setItem("Email", userInfo[0]);
+          this.openUserPage(sessionStorage.Role);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.errorFunction(err.response.data.error);
+        });
     },
     openSignUpPage() {
       this.$router.push("/signUp");
