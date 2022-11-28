@@ -86,7 +86,7 @@ export default {
       return str;
     },
     getBackUrl() {
-      return "http://Spoun-env.eba-iykbrjzb.us-east-1.elasticbeanstalk.com";
+      return "http://Spoun-env.eba-mxmp3g4z.us-east-1.elasticbeanstalk.com";
       //return "http://localhost:5000";
       //return "http://localhost:8081";
     },
