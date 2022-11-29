@@ -144,7 +144,7 @@
                   </select>
                 </div>
               </div>
-
+              
               <div class="col-sm-10 mx-auto">
                 <section v-show="errorShow">
                   <div class="alertBar error">
@@ -170,11 +170,25 @@
                 </section>
               </div>
 
-              <div class="col-sm-5 mx-auto mt-1">
-                <button class="btn btn-block" v-on:click="register">
-                  Registrar
-                </button>
+              <div class="row mx-auto mb-1">
+                <div class="col-sm-6 mx-auto mt-1">
+                  <VueRecaptcha
+                  ref="recaptcha"
+                  sitekey="6LeyREAjAAAAAOHBo970bRhGH6r1sMpHyrK7DUDk"
+                  :load-recaptcha-script="true"
+                  @verify="handleSuccess"
+                  @error="handleError"
+                  @expired="onCaptchaExpired"
+                  ></VueRecaptcha>
+                </div>
+
               </div>
+              <div class="col-sm-5 mx-auto mt-1">
+                  <button class="btn btn-block" id="register" disabled v-on:click="register">
+                    Registrar
+                  </button>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -187,6 +201,7 @@
 import axios from "axios";
 import App from "../../App.vue";
 import DOMPurify from "dompurify";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: "signUpPage",
@@ -197,6 +212,10 @@ export default {
       successShow: false,
     };
   },
+  components:{
+    VueRecaptcha
+  },
+  
   methods: {
     register() {
       var name = DOMPurify.sanitize(document.getElementById("nptName").value);
@@ -328,6 +347,16 @@ export default {
         this.errorFunction("El email ingresado no tiene el formato correcto");
         return false;
       }
+    },
+    handleSuccess(){
+      document.getElementById("register").disabled = false;
+    },
+    handleError(){
+      this.successFunction("Hubo un error al realizar la verficación");
+    },
+    onCaptchaExpired(){
+      document.getElementById("register").disabled = true;
+      this.$refs.recaptcha.reset();
     },
     successFunction(messageText) {
       this.$data.errorShow = false;

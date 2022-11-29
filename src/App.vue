@@ -86,9 +86,9 @@ export default {
       return str;
     },
     getBackUrl() {
-      return "https://d2dkdu2p34yy4l.cloudfront.net";
+      //return "https://d2dkdu2p34yy4l.cloudfront.net";
       //return "http://localhost:5000";
-      //return "http://localhost:8081";
+      return "http://localhost:8081";
     },
   },
 };
