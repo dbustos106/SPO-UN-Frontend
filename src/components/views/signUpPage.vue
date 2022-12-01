@@ -117,7 +117,7 @@
                 </div>
               </div>
 
-              <div class="row mx-auto mb-1">
+              <div class="row mx-auto">
                 <div class="col-sm-5 ml-auto">
                   <select class="form-select mx-auto" required id="slcGender">
                     <option selected disabled value="">Género</option>
@@ -144,7 +144,7 @@
                   </select>
                 </div>
               </div>
-              
+
               <div class="col-sm-10 mx-auto">
                 <section v-show="errorShow">
                   <div class="alertBar error">
@@ -158,7 +158,7 @@
                   </div>
                 </section>
                 <section v-show="successShow">
-                  <div class="success_green mb-3">
+                  <div class="success_green mb-2">
                     <span title="success" class="alertBar-message">
                       <i class="fa fa-exclamation-circle"></i>
                       <span id="successNotification"></span>
@@ -170,25 +170,28 @@
                 </section>
               </div>
 
-              <div class="row mx-auto mb-1">
-                <div class="col-sm-6 mx-auto mt-1">
+              <div class="row mx-auto mb-2 mt-1">
+                <div class="col-sm-6 mx-auto">
                   <VueRecaptcha
-                  ref="recaptcha"
-                  sitekey="6LeyREAjAAAAAOHBo970bRhGH6r1sMpHyrK7DUDk"
-                  :load-recaptcha-script="true"
-                  @verify="handleSuccess"
-                  @error="handleError"
-                  @expired="onCaptchaExpired"
+                    ref="recaptcha"
+                    sitekey="6LeyREAjAAAAAOHBo970bRhGH6r1sMpHyrK7DUDk"
+                    :load-recaptcha-script="true"
+                    @verify="handleSuccess"
+                    @error="handleError"
+                    @expired="onCaptchaExpired"
                   ></VueRecaptcha>
                 </div>
-
               </div>
-              <div class="col-sm-5 mx-auto mt-1">
-                  <button class="btn btn-block" id="register" disabled v-on:click="register">
-                    Registrar
-                  </button>
+              <div class="col-sm-5 mx-auto mt-2">
+                <button
+                  class="btn btn-block"
+                  id="register"
+                  disabled
+                  v-on:click="register"
+                >
+                  Registrar
+                </button>
               </div>
-              
             </div>
           </div>
         </div>
@@ -201,7 +204,7 @@
 import axios from "axios";
 import App from "../../App.vue";
 import DOMPurify from "dompurify";
-import { VueRecaptcha } from 'vue-recaptcha';
+import { VueRecaptcha } from "vue-recaptcha";
 
 export default {
   name: "signUpPage",
@@ -212,10 +215,10 @@ export default {
       successShow: false,
     };
   },
-  components:{
-    VueRecaptcha
+  components: {
+    VueRecaptcha,
   },
-  
+
   methods: {
     register() {
       var name = DOMPurify.sanitize(document.getElementById("nptName").value);
@@ -348,13 +351,13 @@ export default {
         return false;
       }
     },
-    handleSuccess(){
+    handleSuccess() {
       document.getElementById("register").disabled = false;
     },
-    handleError(){
+    handleError() {
       this.successFunction("Hubo un error al realizar la verficación");
     },
-    onCaptchaExpired(){
+    onCaptchaExpired() {
       document.getElementById("register").disabled = true;
       this.$refs.recaptcha.reset();
     },
