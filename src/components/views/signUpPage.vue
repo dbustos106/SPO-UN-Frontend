@@ -174,7 +174,7 @@
                 <div class="col-sm-6 mx-auto">
                   <VueRecaptcha
                     ref="recaptcha"
-                    sitekey="6LeyREAjAAAAAOHBo970bRhGH6r1sMpHyrK7DUDk"
+                    sitekey="6LdkN0kjAAAAAGfe3rhczJhR3t_EvnAgNTxS9Rcm"
                     :load-recaptcha-script="true"
                     @verify="handleSuccess"
                     @error="handleError"
