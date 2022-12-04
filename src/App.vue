@@ -602,7 +602,7 @@ label {
 .sidebar .open .logo-details #btn {
   text-align: right;
 }
-.sidebar i {
+.sidebar em {
   color: var(--icons-color);
   height: 60px;
   min-width: 50px;
@@ -703,11 +703,11 @@ label {
   pointer-events: auto;
 }
 .sidebar li a:hover .links_name,
-.sidebar li a:hover i {
+.sidebar li a:hover em {
   transition: all 0.5s ease;
   color: var(--bg-color);
 }
-.sidebar li i {
+.sidebar li em {
   height: 50px;
   line-height: 50px;
   font-size: 18px;
