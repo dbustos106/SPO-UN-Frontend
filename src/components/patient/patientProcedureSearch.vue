@@ -21,7 +21,7 @@
         <!-- ======= NoAppointmensMessage ======= -->
         <div class="row-sm-12 ml-2" v-if="noAppointmentsShow">
           <span title="error" id="spnNoAppointmensMessage">
-            <i class="fa fa-exclamation-circle"></i>
+            <em class="fa fa-exclamation-circle"></em>
             <span
               >No hay citas disponibles para lo especificado. Intente buscar más
               tarde</span

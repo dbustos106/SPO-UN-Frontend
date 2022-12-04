@@ -17,7 +17,7 @@
               >Inicio</router-link
             >
           </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
+          <em class="bi bi-list mobile-nav-toggle"></em>
         </nav>
       </div>
     </header>

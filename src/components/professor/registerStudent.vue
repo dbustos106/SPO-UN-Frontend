@@ -94,7 +94,7 @@
             <section v-show="errorShow">
               <div class="alertBar error">
                 <span title="error" class="alertBar-message">
-                  <i class="fa fa-exclamation-circle"></i>
+                  <em class="fa fa-exclamation-circle"></em>
                   <span id="errorNotification"></span>
                 </span>
                 <span class="alertBar-dismiss">
@@ -105,7 +105,7 @@
             <section v-show="successShow">
               <div class="success_green">
                 <span title="success" class="alertBar-message">
-                  <i class="fa fa-exclamation-circle"></i>
+                  <em class="fa fa-exclamation-circle"></em>
                   <span id="successNotification"></span>
                 </span>
                 <span class="alertBar-dismiss">
