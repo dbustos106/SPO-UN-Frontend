@@ -7,11 +7,11 @@
         alt="menu-logo"
         class="menu-logo icon"
       />
-      <i v-else class="bx icon" :class="menuIcon" />
+      <em v-else class="bx icon" :class="menuIcon" />
       <div class="logo_name">
         {{ menuTitle }}
       </div>
-      <i
+      <em
         class="bx"
         :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'"
         id="btn"
@@ -36,7 +36,7 @@
                 class="box-hover"
                 v-on:click="openStudentCalendar()"
               >
-                <i class="bx" :class="'bx-task' || 'bx-square-rounded'" />
+                <em class="bx" :class="'bx-task' || 'bx-square-rounded'" />
                 <span class="links_name">Ver Citas</span>
               </a>
               <span class="tooltip"> menuItem.tooltip || Ver Horarios </span>
@@ -45,7 +45,7 @@
                 id="listItem2"
                 v-on:click="openStudentSetting()"
               >
-                <i class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
+                <em class="bx" :class="'bx-cog' || 'bx-square-rounded'" />
                 <span class="links_name">Ajustes</span>
               </a>
               <span class="tooltip"> menuItem.tooltip || Ajustes </span>
@@ -54,12 +54,16 @@
         </ul>
         <div class="profile" id="profile">
           <div class="profile-details">
-            <i class="bx bx-user-circle"></i>
+            <em class="bx bx-user-circle"></em>
             <div class="name">
               <div class="email" ref="userEmail"></div>
             </div>
           </div>
-          <i id="log_out" class="bx bx-log-out" v-on:click="closeSession()"></i>
+          <em
+            id="log_out"
+            class="bx bx-log-out"
+            v-on:click="closeSession()"
+          ></em>
         </div>
       </div>
     </div>

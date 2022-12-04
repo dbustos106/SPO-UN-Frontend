@@ -7,11 +7,11 @@
         alt="menu-logo"
         class="menu-logo icon"
       />
-      <i v-else class="bx icon" :class="menuIcon" />
+      <em v-else class="bx icon" :class="menuIcon" />
       <div class="logo_name">
         {{ menuTitle }}
       </div>
-      <i
+      <em
         class="bx"
         :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'"
         id="btn"
@@ -36,21 +36,24 @@
                 id="listItem1"
                 v-on:click="openRegisterProfessor()"
               >
-                <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
+                <em class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
                 <span class="links_name">Registrar Profesores</span>
               </a>
               <span class="tooltip">
                 menuItem.tooltip || Registrar Profesores
               </span>
               <a class="box-hover" id="listItem2" v-on:click="createBuilding()">
-                <i class="bx" :class="'bxs-buildings' || 'bx-square-rounded'" />
+                <em
+                  class="bx"
+                  :class="'bxs-buildings' || 'bx-square-rounded'"
+                />
                 <span class="links_name">Administrar edificios</span>
               </a>
               <span class="tooltip">
                 menuItem.tooltip || Administrar Edificios
               </span>
               <a class="box-hover" id="listItem3" v-on:click="createRoom()">
-                <i
+                <em
                   class="bx"
                   :class="'bx-add-to-queue' || 'bx-square-rounded'"
                 />
@@ -64,7 +67,7 @@
                 id="listItem5"
                 v-on:click="openRoomSchedule()"
               >
-                <i class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
+                <em class="bx" :class="'bx-grid-alt' || 'bx-square-rounded'" />
                 <span class="links_name">Horarios de salas</span>
               </a>
               <span class="tooltip">
@@ -75,16 +78,16 @@
         </ul>
         <div class="profile" id="profile">
           <div class="profile-details">
-            <i class="bx bx-user-circle"></i>
+            <em class="bx bx-user-circle"></em>
             <div class="name">
               <div class="name" ref="userEmail"></div>
             </div>
           </div>
-          <i
+          <em
             id="log_out"
             class="bx bx-log-out"
             v-on:click="closeSessionAdmin()"
-          ></i>
+          ></em>
         </div>
       </div>
     </div>
@@ -258,7 +261,7 @@ export default {
   },
   mounted() {
     this.isOpened = this.isMenuOpen;
-    this.$refs.userEmail.textContent  = this.userEmail;
+    this.$refs.userEmail.textContent = this.userEmail;
   },
 };
 </script>
